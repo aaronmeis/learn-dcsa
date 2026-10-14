@@ -26,6 +26,7 @@ const GROUPS = {
 };
 /* New content that lives in the Library, surfaced in nav, sheets, home and search. */
 const NEW_CONTENT = [
+  {label:"Start here: Block 0, introductory basics",href:"#/curriculum/0",sub:"Learn · what DCSA is, its history, why we vet",kw:"block 0 start here intro introduction basics history dis dss nbib eo 12829 eo 13869 why socratic orientation beginner"},
   {label:"Example project plan: the DCSA journey",href:"library/project-plan.html",sub:"Plan · sponsorship to grant to ongoing vetting",kw:"plan project plan journey roadmap steps timeline sponsorship fcl eapp diss daag emass example"},
   {label:"Videos and resources",href:"library/video-resources.html",sub:"Resources · DCSA, CDSE and YouTube",kw:"video videos youtube resources links training cdse dcsa official watch"},
   {label:"Deck and deep-dive cut (video)",href:"#/deck",sub:"Learn · silent captioned deck video",kw:"deck video slides cut remotion watch deep dive"},
@@ -34,7 +35,7 @@ const NEW_CONTENT = [
   {label:"Journey infographic",href:"assets/diagrams/journey-infographic.svg",sub:"Infographic · the DCSA journey on one page",kw:"infographic journey diagram plan steps"},
   {label:"DISS transition 2026 infographic",href:"assets/diagrams/diss-transition-2026.svg",sub:"Infographic · eApp moves to DISS, NBIS Agency off Nov 30 2026",kw:"infographic diss eapp nbis transition 2026 diagram"}
 ];
-const EXTRA_LINKS = { learn:[{label:"Plan (example journey)",href:"library/project-plan.html"},{label:"Resources and videos",href:"library/video-resources.html"}] };
+const EXTRA_LINKS = { learn:[{label:"Start here: Block 0",href:"#/curriculum/0"},{label:"Plan (example journey)",href:"library/project-plan.html"},{label:"Resources and videos",href:"library/video-resources.html"}] };
 const GROUP_OF = {};
 Object.keys(GROUPS).forEach(g=>GROUPS[g].forEach(v=>GROUP_OF[v]=g));
 const PILLARS = ["NISP","Personnel","Systems","CI"];
@@ -173,6 +174,7 @@ function show(v,sub){
       else if(/^map/.test(next)&&typeof termMapApi!=="undefined"&&termMapApi) termMapApi.focus(next.replace(/^map\/?/,"")||null);
     }
   }
+  if(v==="curriculum"&&sub!=null){window.CURRIC_SUB=sub;}
   if(!VIEWS[v]||!document.getElementById("v-"+v)) v="today";
   const changed = v!==currentView;
   currentView=v;
@@ -192,6 +194,7 @@ function show(v,sub){
   if(v==="shorts"){ if(sub) selectShortById(sub,false); renderShorts(); }
   const paint={glossary:renderGlossary,quiz:renderQuiz,views:renderViews,refs:renderReferences,flash:renderFlash,library:renderLibrary,cheat:renderCheat,failures:renderCounsel,prompts:renderPrompts,ea:renderEA,debates:renderDebates,map:renderMap,dashboard:renderDashboard,curriculum:renderCurriculum,deck:renderDeck};
   if(changed && paint[v]) paint[v]();
+  if(v==="curriculum"&&window.CURRIC_SUB!=null&&typeof renderCurriculum==="function") renderCurriculum();
   if(changed){
     const main=$("#main"); if(main) main.scrollTop=0;
     window.scrollTo(0,0);
@@ -555,7 +558,7 @@ function renderToday(){
       <p class="lead">${chDone(ch)?"Today's challenge is done. Anything more is a bonus.":"Three rounds, about three minutes. Keep the streak going."}</p></div>
     <div class="streak ${st?"on":""}" title="Days in a row with the daily challenge completed"><b>${st}</b><span>day streak</span></div>
   </div>
-  <section class="whatsnew" aria-labelledby="wnH"><h3 id="wnH">What's new: start here</h3><p>New this month: an example journey plan, a videos and resources page, the deck video, the expanded EA mapping, Block 14 on the 2026 rules, and two infographics.</p>
+  <section class="whatsnew" aria-labelledby="wnH"><h3 id="wnH">What's new: start here</h3><p>New: start with Block 0 for the basics. Also new this month: an example journey plan, a videos and resources page, the deck video, the expanded EA mapping, Block 14 on the 2026 rules, and two infographics.</p>
     <div class="wn-grid">${NEW_CONTENT.map(x=>`<a class="wn-item" href="${x.href}"><b>${esc(x.label)}</b><span>${esc(x.sub)}</span></a>`).join("")}</div></section>
   ${challengeHTML()}
   <div class="today-grid">

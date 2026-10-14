@@ -90,6 +90,7 @@ function renderDashboard(){
 /* ---- Curriculum ---- */
 function moduleKey(w,i){return KEY+"mod:"+w+":"+i;}
 function allModules(){let a=[];DATA.weeks.forEach(w=>w.mods.forEach((m,i)=>a.push({w:w.n,i,rung:(m.rl.match(/\b(100|200|300)\b/)||[])[1]||"200"})));return a;}
+function trackOf(n){return n===0?"Start here":n<=7?"One-day mastery":n<=11?"Tech deep dive":n===14?"Current rules":n===12?"Extension":"Capstone";}
 function renderCurriculum(){
   const el=$("#v-curriculum");
   let h=`<h2 class="vh">${DATA.weeks.length}-block curriculum</h2>
@@ -99,7 +100,7 @@ function renderCurriculum(){
   DATA.weeks.forEach(w=>{
     const total=w.mods.length, done=w.mods.filter((_,i)=>LS.get(moduleKey(w.n,i),false)).length;
     h+=`<div class="card">
-      <div class="weekhead" data-wk="${w.n}"><span class="wk">Block ${w.n}</span><h3>${esc(w.title)} <span class="pill">${w.rungs}</span> <span class="pill">${esc(w.time)}</span></h3><span class="pct">${done}/${total}</span></div>
+      <div class="weekhead" data-wk="${w.n}" role="button" tabindex="0" aria-controls="wb-${w.n}"><span class="wk">Block ${w.n}</span><span class="pill trk">${esc(trackOf(w.n))}</span><h3>${esc(w.title)} <span class="pill">${w.rungs}</span> <span class="pill">${esc(w.time)}</span></h3><span class="pct">${done}/${total}</span></div>
       <div class="weekbody" id="wb-${w.n}">
         <div class="week-opener"><b>Architect context:</b> ${ec(w.opener)}</div>
         <div class="obj">${ec(w.obj)}</div>
@@ -110,13 +111,16 @@ function renderCurriculum(){
             ${(DATA.looks&&DATA.looks[w.n+":"+i])||m.lookLike?`<details class="look-box"><summary>What does this look like in practice?</summary><div style="margin-top:.4rem">${(DATA.looks&&DATA.looks[w.n+":"+i])||cite(m.lookLike)}</div></details>`:""}
             ${m.whyMatters?`<details class="why-matters"><summary>Why this matters to an architect</summary><p style="margin-top:.4rem">${ec(m.whyMatters)}</p></details>`:""}
           </div>`;}).join("")}
+        ${w.intro&&typeof block0HTML==="function"?block0HTML():""}
         <div class="deliv"><b>Exit criteria:</b> ${esc(w.deliv)} · ${lib(w.lib,"Full block / view note")}</div>
         <div class="vidlist"><b>Primary sources:</b>${w.vids.map(v=>{const s=SRC[v.s];return `<a href="${esc(s.u)}" target="_blank" rel="noopener">• ${esc(s.t)} <span class="meta">S${s.n} · ${esc(s.type)}</span></a>`;}).join("")}</div>
       </div></div>`;
   });
   el.innerHTML=h;
-  $$(".weekhead",el).forEach(hd=>hd.onclick=()=>$("#wb-"+hd.dataset.wk).classList.toggle("open"));
-  if(!LS.get(KEY+"seenCurric",false)){const first=$("#wb-1");if(first){first.classList.add("open");LS.set(KEY+"seenCurric",true);}}
+  $$(".weekhead",el).forEach(hd=>{hd.onclick=()=>$("#wb-"+hd.dataset.wk).classList.toggle("open");hd.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();hd.click();}};});
+  if(typeof bindBlock0==="function") bindBlock0(el);
+  if(window.CURRIC_SUB!=null&&$("#wb-"+window.CURRIC_SUB)){const b=$("#wb-"+window.CURRIC_SUB);b.classList.add("open");window.CURRIC_SUB=null;setTimeout(()=>b.parentElement.scrollIntoView({block:"start"}),0);}
+  if(!LS.get(KEY+"seenCurric",false)){const first=$("#wb-0");if(first){first.classList.add("open");LS.set(KEY+"seenCurric",true);}}
   $$("input[data-mk]",el).forEach(cb=>cb.onchange=()=>{
     const [wk,i]=cb.dataset.mk.split(":"); LS.set(moduleKey(wk,i),cb.checked);
     renderCurriculum(); $("#wb-"+wk).classList.add("open"); renderDashboard();

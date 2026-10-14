@@ -27,5 +27,10 @@ window.SOURCE_NOTES = {
   32:"FAR clause implementing Section 889 of the FY2019 NDAA: it prohibits providing or using covered telecommunications and video surveillance equipment or services in federal contracts.",
   33:"DISA's Security Technical Implementation Guides: configuration baselines for operating systems, network devices and applications used in DoD systems.",
   34:"NIST guidance on media sanitization (clear, purge, destroy), which supports the MP-6 media sanitization control.",
-  35:"NIST's definition of zero trust architecture: no implicit trust based on network location, with per-request authentication and authorization."
+  35:"NIST's definition of zero trust architecture: no implicit trust based on network location, with per-request authentication and authorization.",
+  36:"DCSA's own summary: it protects America's trusted workforce, trusted workspaces and classified information through two core missions, personnel vetting and industrial security, supported by counterintelligence, insider threat and security training. It cites figures such as background investigations for 95% of the federal government and 12,500 cleared facilities under the NISP.",
+  37:"DCSA's history: the Defense Investigative Service (1971), industrial security joining DIS (1980), NISP by EO 12829 (1993), the rename to DSS (1999), investigations moving to OPM (2005), NBIB (2016), and EO 13869 moving NBIB to DoD effective Oct 1 2019.",
+  38:"EO 13869 amended EO 13467. It directed the Secretary of Defense to rename DSS as DCSA and made DCSA the primary federal provider of background investigations.",
+  39:"EO 12829 created the National Industrial Security Program to safeguard classified information released to contractors, licensees and grantees, protected in a manner equivalent to inside the executive branch.",
+  40:"DCSA page on Adjudication and Vetting Services, formerly the DoD CAF. The DoD CAF transfer to DCSA was completed on Oct 1 2019; select DISA and DMDC functions were directed to follow by Oct 1 2020."
 };

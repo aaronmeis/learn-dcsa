@@ -378,3 +378,19 @@ button.b:focus-visible,.ea-tab-btn:focus-visible,.deck-btn:focus-visible,.ax-nod
 .tl-bar i{position:absolute;top:2px;bottom:2px;background:var(--sel-bg);border:1px solid var(--sel-bd);border-radius:4px}
 .tl-bar em{position:absolute;top:2px;font-style:normal;font-weight:700;color:#000;padding-left:.35rem;line-height:18px;font-size:.72rem}
 .tl-axis{position:relative;height:16px;margin-left:138px;color:var(--text-dim);font-size:.68rem}.tl-axis span{position:absolute;transform:translateX(-50%)}
+
+/* Block 0 */
+.trk{margin-left:.4rem;font-size:.66rem}
+.b0{margin:.6rem 0 1rem}.b0 h4{margin:1.1rem 0 .4rem;font-size:.95rem}
+.b0-tl{display:flex;flex-wrap:wrap;gap:.3rem}
+.b0-y{min-height:36px;min-width:52px;border:1px solid var(--border-color);background:var(--card-bg2);color:var(--text-primary);border-radius:8px;cursor:pointer;font:inherit;font-weight:700}
+.b0-y.on{background:var(--sel-bg);color:#000;border-color:var(--sel-bd)}.b0-y:focus-visible{outline:3px solid var(--text-primary);outline-offset:2px}
+.b0-card{border:1px solid var(--border-color);border-left:4px solid var(--sel-bg);border-radius:0 10px 10px 0;padding:.7rem .9rem;margin:.5rem 0;background:var(--card-bg)}
+[data-theme$="-light"] .b0-card{border-left-color:#000}
+.b0-card p{margin:.3rem 0 .5rem;font-size:.9rem}.b0-nav{display:flex;gap:.4rem}
+.b0-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:.55rem}
+.b0-tile{border:1px solid var(--border-color);border-radius:10px;padding:.6rem .7rem;background:var(--card-bg2)}.b0-tile p{margin:.25rem 0 0;font-size:.84rem;color:var(--text-secondary)}
+.b0-q{border:1px solid var(--border-color);border-radius:10px;padding:.55rem .8rem;margin:.45rem 0;background:var(--card-bg)}
+.b0-q summary{cursor:pointer;font-weight:700;min-height:28px}.b0-q p{margin:.45rem 0 0;font-size:.88rem}
+.b0-map{margin:.2rem 0 .4rem 1.2rem;font-size:.88rem}
+.b0-qa{border-top:1px solid var(--border-color);padding:.45rem 0}.b0-qa p{margin:.2rem 0}.b0-ans{color:var(--text-secondary);font-size:.88rem}

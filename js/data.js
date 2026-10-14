@@ -33,7 +33,12 @@ const SOURCES = [
   {n:32,g:"Primary regs",t:"FAR 52.204-25: Prohibition on contracting for certain telecommunications and video surveillance services or equipment (Section 889, FY2019 NDAA)",u:"https://www.acquisition.gov/far/52.204-25",type:"primary-reg",trust:"high",b:"10"},
   {n:33,g:"Primary",t:"DISA Security Technical Implementation Guides (STIGs), DoD Cyber Exchange",u:"https://public.cyber.mil/stigs/",type:"primary",trust:"high",b:"10"},
   {n:34,g:"Primary standards",t:"NIST SP 800-88 Rev 1: Guidelines for Media Sanitization",u:"https://csrc.nist.gov/pubs/sp/800/88/r1/final",type:"primary-std",trust:"high",b:"10"},
-  {n:35,g:"Primary standards",t:"NIST SP 800-207: Zero Trust Architecture",u:"https://csrc.nist.gov/pubs/sp/800/207/final",type:"primary-std",trust:"high",b:"9,11"}
+  {n:35,g:"Primary standards",t:"NIST SP 800-207: Zero Trust Architecture",u:"https://csrc.nist.gov/pubs/sp/800/207/final",type:"primary-std",trust:"high",b:"9,11"},
+  {n:36,g:"Primary",t:"DCSA, About Us (mission, missions, who DCSA serves)",u:"https://www.dcsa.mil/About-Us/",type:"primary",trust:"high",b:"0"},
+  {n:37,g:"Primary",t:"DCSA, History",u:"https://www.dcsa.mil/About-Us/History/",type:"primary",trust:"high",b:"0"},
+  {n:38,g:"Primary",t:"EO 13869 (Apr 24 2019): Transferring Responsibility for Background Investigations to the Department of Defense",u:"https://www.federalregister.gov/documents/2019/04/29/2019-08797/transferring-responsibility-for-background-investigations-to-the-department-of-defense",type:"primary",trust:"high",b:"0"},
+  {n:39,g:"Primary",t:"EO 12829 (Jan 6 1993): National Industrial Security Program",u:"https://www.archives.gov/files/isoo/policy-documents/eo-12829.html",type:"primary",trust:"high",b:"0"},
+  {n:40,g:"Primary",t:"DCSA, About Adjudication and Vetting Services (formerly DoD CAF)",u:"https://www.dcsa.mil/Personnel-Security/Adjudications/About-Adjudication-and-Vetting-Services-AVS/",type:"primary",trust:"high",b:"0"}
 ];
 
 /* Quotes credited to the FCL Orientation Handbook [S2] were checked against a mirrored copy whose PDF metadata reads
@@ -43,6 +48,15 @@ const HANDBOOK_VERIFY_NOTE="To verify: handbook [S2] quotes were checked against
 const DATA = {
   checked:"Checked against ODM+TDD packs, vault glossaries/quiz banks, and NotebookLM reports (mental models, edge-case catalog, integration inventory, failure modes) on 2026-10-13. Ledger [S1]–[S26] remains primary; NLM is secondary. Accuracy pass 2026-10-13: DISS eApp initiation, DAAG, sponsorship wording, Day 45 removed.",
   weeks:[
+    {n:0,title:"Introductory basics",time:"25 min",rungs:"100",lib:"odm-block-00-intro",intro:true,
+     opener:"DCSA is the Defense Department agency that vets people and oversees cleared companies. Its two core missions are personnel vetting and industrial security, backed by counterintelligence, insider threat work and security training [S36]. Plain English: before a company or a person gets near classified work, DCSA checks them, and it keeps checking. Analogy: a building with a vault. The company gets a permit to have the vault, and each employee gets their own key. You need both.",
+     obj:"Say what DCSA is, why NISP exists, and why both the company and the person get cleared, in your own words.",
+     deliv:"Three sentences: what DCSA does, what NISP protects, and why one clearance isn't enough.",
+     mods:[
+       {t:"What DCSA is and where it came from [S36][S37][S38]",rl:"scope · 100",action:"Write the name chain on one line: DIS (1971), DSS (1999), DCSA (2019).",whyMatters:"Old documents say DIS or DSS. They mean the same agency line."},
+       {t:"Why NISP exists [S39][S1]",rl:"scope · 100",action:"In one sentence: what the government gets from letting contractors hold classified information, and what it demands in return.",whyMatters:"Every later block is that bargain being enforced."},
+       {t:"Why do we even do this? [S39][S36][S9]",rl:"scope · 100",action:"Answer the three Socratic questions below before opening the guided answers.",whyMatters:"If you can say why, the rules stop feeling arbitrary."}
+     ],vids:[{s:36},{s:37},{s:5},{s:6}]},
     {n:1,title:"Dual-track core",time:"60 min",rungs:"100",lib:"odm-block-01-core-concepts",
      opener:"DCSA runs an interlocking operating model: Facility Clearance (FCL) under NISPOM 32 CFR 117 via NISS, and Personnel Clearance (PCL) via the SF-86 in eApp (initiated in DISS) with SEAD 4 adjudication [S1][S2][S16]. Plain English: the facility and the people unlock each other. Analogy: a locked vault and the keys — neither works alone.",
      obj:"State the dual-track lock and the no-self-sponsor rule without notes.",
@@ -70,15 +84,6 @@ const DATA = {
        {t:"KMP investigations [S2][S16]",rl:"pcl · 200", action:"Initial FCL: DCSA initiates; KMP completes the SF-86 in eApp by the due date in DCSA's email; prints via SWFT. Upgrade: the FSO initiates (in DISS since Jul 31 2026).", whyMatters:"FCL grant waits on KMP eligibility."}
      ],
      vids:[{s:2},{s:10}]},
-    {n:4,title:"Teach-back",time:"30 min",rungs:"200",lib:"odm-block-04-teach-it",
-     opener:"Teach the dual-track swimlane in ~10 minutes and kill one falsifier: self-sponsor or GCC High = FCL [S2][S10]. Plain English: if you can teach it, you own it.",
-     obj:"Deliver a 10-minute teach without reading slides.",
-     deliv:"Spoken outline + one falsifier kill line.",
-     mods:[
-       {t:"Swimlane teach [S2]",rl:"fcl · 200", action:"Narrate sponsor→NISS→Day 20 package→KMP investigations by DCSA due date→grant.", whyMatters:"Mission success test."},
-       {t:"Falsifier kill",rl:"cui · 200", action:"Say support ≠ confer for CMMC/GCC High/FedRAMP.", whyMatters:"Pack falsifier."}
-     ],
-     vids:[{s:10},{s:11}]},
     {n:5,title:"FOCI, CV, possessing",time:"45 min",rungs:"300",lib:"odm-block-05-edge-cases",
      opener:"The May 2025 SF 328 lowered the Q7b reporting threshold to 15% (approved May 1 2025; required in NISS for packages on or after May 12 2025). Under continuous vetting, all NISP contractor national security personnel submit a PVQ every five years; possessing vs non-possessing changes on-site storage, not the need for KMPs [S3][S4][S9].",
      obj:"State the 15% change and possessing vs non-possessing in one line each.",
@@ -88,6 +93,15 @@ const DATA = {
        {t:"Possessing vs non-possessing [S2]",rl:"fcl · 200", action:"Non-possessing still needs sponsorship, KMPs, FSO.", whyMatters:"Common myth that non-possessing skips the dual-track."}
      ],
      vids:[{s:3},{s:4},{s:9}]},
+    {n:4,title:"Teach-back",time:"30 min",rungs:"200",lib:"odm-block-04-teach-it",
+     opener:"Teach the dual-track swimlane in ~10 minutes and kill one falsifier: self-sponsor or GCC High = FCL [S2][S10]. Plain English: if you can teach it, you own it.",
+     obj:"Deliver a 10-minute teach without reading slides.",
+     deliv:"Spoken outline + one falsifier kill line.",
+     mods:[
+       {t:"Swimlane teach [S2]",rl:"fcl · 200", action:"Narrate sponsor→NISS→Day 20 package→KMP investigations by DCSA due date→grant.", whyMatters:"Mission success test."},
+       {t:"Falsifier kill",rl:"cui · 200", action:"Say support ≠ confer for CMMC/GCC High/FedRAMP.", whyMatters:"Pack falsifier."}
+     ],
+     vids:[{s:10},{s:11}]},
     {n:6,title:"Spaced review",time:"20 min",rungs:"200",lib:"odm-block-06-spaced-review",
      opener:"Closed-book retrieval on clocks, tiers, SEAD 4, SF 328, and the falsifier [S2][S4][S6]. Plain English: if you cannot recall it cold, you do not have it yet.",
      obj:"Answer quiz bank Q1–Q12 without notes.",
@@ -116,7 +130,7 @@ const DATA = {
      ],
      vids:[{s:1},{s:13}]},
     {n:9,title:"Logical architecture",time:"45 min",rungs:"300",lib:"tdd-view-02-logical",
-     opener:"Logical components realize capabilities: sponsorship gate → NISS; personnel eligibility → NBIS/SEAD 4; training → STEPP; classified IS auth → DAAG/RMF via NISP eMASS. The KMP roster is the hinge between FCL and PCL tracks.",
+     opener:"Logical components realize capabilities: sponsorship gate → NISS; personnel eligibility → eApp in DISS/SEAD 4; training → STEPP; classified IS auth → DAAG/RMF via NISP eMASS. The KMP roster is the hinge between FCL and PCL tracks.",
      obj:"Name the logical component for sponsorship intake and where the KMP roster connects tracks.",
      deliv:"Capability→component table with KMP hinge called out.",
      mods:[
@@ -138,11 +152,24 @@ const DATA = {
      obj:"Name three externals, the AI hard-block, and two catalog traps.",
      deliv:"Third-party inventory rows + two failure-mode cards from the NLM catalog.",
      mods:[
-       {t:"External inventory",rl:"arch · 300", action:"List NISS, NBIS, STEPP, eMASS, DD 254 roles.", whyMatters:"TDD third-party requirement."},
+       {t:"External inventory",rl:"arch · 300", action:"List NISS, DISS (eApp), SWFT, STEPP, NISP eMASS, DD 254 roles. Industry starts eApp cases in DISS from Jul 31 2026; NBIS Agency turns off Nov 30 2026 [S16].", whyMatters:"TDD third-party requirement."},
        {t:"AI default-deny",rl:"trust · 300", action:"SF-86/FOCI PII never enter consumer AI; FSO owns submissions.", whyMatters:"Integration view guardrail."},
        {t:"Trap drill",rl:"fcl · 300", action:"Pick Clock Theater and Two Walls — symptom, root, fix.", whyMatters:"Edge-case catalog fluency."}
      ],
      vids:[{s:2},{s:13}]},
+    {n:14,title:"2026 rules and post-grant duties",time:"40 min",rungs:"200",lib:"source-ledger",
+     opener:"Five things changed or were missing: (1) industry initiates and reviews eApp cases in DISS since Jul 31 2026, and NBIS Agency turns off Nov 30 2026 [S16]; (2) continuous vetting replaced periodic reinvestigation for NISP contractor national security personnel, with a PVQ every five years [S9]; (3) CMMC covers FCI/CUI on unclassified systems and never confers an FCL [S18][S19]; (4) FOCI is decided under 32 CFR 117.11 using the SF 328 [S24][S4]; (5) reporting duties run from 32 CFR 117.8 and SEAD 3 [S20][S21]. Some non-possessing facilities are overseen by the NAESOC instead of an ISR [S23].",
+     obj:"Say which system a 2026 SF-86 starts in, when a PVQ is due, why CMMC ≠ FCL, what makes an entity 'under FOCI', and what 117.8 makes you report.",
+     deliv:"One index card per topic, each with a ledger chip.",
+     mods:[
+       {t:"eApp in DISS [S16][S17]",rl:"pcl · 200", action:"SF-86 via eApp, initiated and reviewed by industry in DISS since Jul 31 2026. NBIS Agency: no new initiations after Sep 30 2026; turned off Nov 30 2026. Fingerprints via SWFT. Legacy name: e-QIP (retired Oct 1 2023).", whyMatters:"Old guides still say e-QIP or NBIS; both send people to a dead path."},
+       {t:"Continuous vetting and the PVQ [S9]",rl:"pcl · 300", action:"Periodic reinvestigations are no longer required for NISP contractor national security personnel. Everyone submits an updated PVQ (or SF-86 eApp and releases) every five years, timed by the DISS PVQ Date. Use the DISS Subject Report to find who is due and submit to PSMO-I.", whyMatters:"People wait for a PR letter that will not come."},
+       {t:"CMMC vs facility clearance [S18][S19]",rl:"cui · 200", action:"32 CFR 170 applies to contractors that process, store, or transmit FCI or CUI on unclassified contractor information systems. The DFARS rule (90 FR 43560) took effect Nov 10 2025. An FCL is entity eligibility for classified access under 32 CFR 117. FCI ≠ FCL.", whyMatters:"One letter apart; completely different programs."},
+       {t:"SF 328 and FOCI [S24][S3][S4]",rl:"foci · 300", action:"Under 117.11, an entity is under FOCI when a foreign interest has the power to direct or decide matters in a way that could result in unauthorized access or adversely affect classified performance. An entity in process that is found under FOCI is ineligible until security measures are in place. The May 2025 SF 328 has nine questions and a 15% Q7b reporting threshold.", whyMatters:"FOCI mitigation is the long pole in many timelines."},
+       {t:"Reporting: 117.8 and SEAD 3 [S20][S21]",rl:"fcl · 200", action:"Contractors and cleared employees report events that affect eligibility, indicate an insider threat, affect safeguarding, or indicate loss or compromise. The contractor sets internal procedures so cleared employees know to report to the FSO.", whyMatters:"Reporting starts the day the FCL is granted."},
+       {t:"NAESOC [S23]",rl:"fcl · 200", action:"The National Access Elsewhere Security Oversight Center gives centralized oversight to select access-elsewhere (non-possessing) facilities. Assigned companies are not assigned an ISR; they work with the NAESOC team through NISS messages, phone, or email.", whyMatters:"Non-possessing FSOs need to know who their DCSA contact is."}
+     ],
+     vids:[]},
     {n:12,title:"FOCI mitigations and CV ops",time:"40 min",rungs:"300",lib:"nblm-odm-edge-cases",
      opener:"When FOCI exists, mitigation instruments (SCA, SSA, Voting Trust, Proxy Agreement) add months. Periodic reinvestigations are no longer required for NISP contractor national security personnel; all submit an updated PVQ (SF-86 in eApp) every five years, timed by the DISS PVQ Date, and organizations submit to PSMO-I [S9]. University/research FOCI blind spots (grants, talent programs) are first-class traps.",
      obj:"Name two FOCI instruments and the CV vs PR shift in one line each.",
@@ -161,20 +188,7 @@ const DATA = {
        {t:"Design-review quiz",rl:"all · 300", action:"Run `#/quiz` closed-book (all sections).", whyMatters:"TDD block 8 exit."},
        {t:"Warrant check",rl:"scope · 300", action:"Pick one debate; write If X then Y.", whyMatters:"Research-craft layer."}
      ],
-     vids:[{s:2},{s:4}]},
-    {n:14,title:"2026 rules and post-grant duties",time:"40 min",rungs:"200",lib:"source-ledger",
-     opener:"Five things changed or were missing: (1) industry initiates and reviews eApp cases in DISS since Jul 31 2026, and NBIS Agency turns off Nov 30 2026 [S16]; (2) continuous vetting replaced periodic reinvestigation for NISP contractor national security personnel, with a PVQ every five years [S9]; (3) CMMC covers FCI/CUI on unclassified systems and never confers an FCL [S18][S19]; (4) FOCI is decided under 32 CFR 117.11 using the SF 328 [S24][S4]; (5) reporting duties run from 32 CFR 117.8 and SEAD 3 [S20][S21]. Some non-possessing facilities are overseen by the NAESOC instead of an ISR [S23].",
-     obj:"Say which system a 2026 SF-86 starts in, when a PVQ is due, why CMMC ≠ FCL, what makes an entity 'under FOCI', and what 117.8 makes you report.",
-     deliv:"One index card per topic, each with a ledger chip.",
-     mods:[
-       {t:"eApp in DISS [S16][S17]",rl:"pcl · 200", action:"SF-86 via eApp, initiated and reviewed by industry in DISS since Jul 31 2026. NBIS Agency: no new initiations after Sep 30 2026; turned off Nov 30 2026. Fingerprints via SWFT. Legacy name: e-QIP (retired Oct 1 2023).", whyMatters:"Old guides still say e-QIP or NBIS; both send people to a dead path."},
-       {t:"Continuous vetting and the PVQ [S9]",rl:"pcl · 300", action:"Periodic reinvestigations are no longer required for NISP contractor national security personnel. Everyone submits an updated PVQ (or SF-86 eApp and releases) every five years, timed by the DISS PVQ Date. Use the DISS Subject Report to find who is due and submit to PSMO-I.", whyMatters:"People wait for a PR letter that will not come."},
-       {t:"CMMC vs facility clearance [S18][S19]",rl:"cui · 200", action:"32 CFR 170 applies to contractors that process, store, or transmit FCI or CUI on unclassified contractor information systems. The DFARS rule (90 FR 43560) took effect Nov 10 2025. An FCL is entity eligibility for classified access under 32 CFR 117. FCI ≠ FCL.", whyMatters:"One letter apart; completely different programs."},
-       {t:"SF 328 and FOCI [S24][S3][S4]",rl:"foci · 300", action:"Under 117.11, an entity is under FOCI when a foreign interest has the power to direct or decide matters in a way that could result in unauthorized access or adversely affect classified performance. An entity in process that is found under FOCI is ineligible until security measures are in place. The May 2025 SF 328 has nine questions and a 15% Q7b reporting threshold.", whyMatters:"FOCI mitigation is the long pole in many timelines."},
-       {t:"Reporting: 117.8 and SEAD 3 [S20][S21]",rl:"fcl · 200", action:"Contractors and cleared employees report events that affect eligibility, indicate an insider threat, affect safeguarding, or indicate loss or compromise. The contractor sets internal procedures so cleared employees know to report to the FSO.", whyMatters:"Reporting starts the day the FCL is granted."},
-       {t:"NAESOC [S23]",rl:"fcl · 200", action:"The National Access Elsewhere Security Oversight Center gives centralized oversight to select access-elsewhere (non-possessing) facilities. Assigned companies are not assigned an ISR; they work with the NAESOC team through NISS messages, phone, or email.", whyMatters:"Non-possessing FSOs need to know who their DCSA contact is."}
-     ],
-     vids:[]}
+     vids:[{s:2},{s:4}]}
   ],
   ladder:[
     {key:"fcl",name:"Facility track",img:"100",r:[{n:100,t:"No self-sponsor; GCA or currently cleared contractor sponsors in NISS."},{n:200,t:"Day 20 package and the DCSA-set KMP investigation due date (SMO/FSO/ITPSO)."},{n:300,t:"Possessing vs non-possessing; FOCI instruments (SCA/SSA/Proxy/VTA) as schedule risk."}]},
@@ -269,8 +283,13 @@ const DATA = {
     {t:"AI hard-block",d:"No SF-86 or FOCI PII in consumer AI; assistive checklists only; FSO owns submissions."}
   ],
   falsifier:"Ending the day still believing a company can self-sponsor an FCL, or that GCC High / CMMC / FedRAMP equals FCL (or authorizes Secret/TS).",
-  quizSections:{1:"Sponsorship and clocks",2:"Personnel and SEAD 4",3:"FOCI and walls",4:"Architecture and systems",5:"Failures and warrants"},
+  quizSections:{0:"Introductory basics",1:"Sponsorship and clocks",2:"Personnel and SEAD 4",3:"FOCI and walls",4:"Architecture and systems",5:"Failures and warrants"},
   quiz:[
+    {section:0,question:"What does DCSA stand for, and what are its two core missions?",answer:"Defense Counterintelligence and Security Agency. Personnel vetting and industrial security [S36].",src:"S36"},
+    {section:0,question:"What was DCSA called before 2019?",answer:"The Defense Security Service (DSS), and before 1999 the Defense Investigative Service (DIS) [S37][S38].",src:"S37"},
+    {section:0,question:"Which executive order created NISP, and what does NISP protect?",answer:"EO 12829 (1993). It protects classified information released to contractors, licensees and grantees [S39].",src:"S39"},
+    {section:0,question:"True or false: a company can apply for its own facility clearance.",answer:"False. A GCA or a currently cleared contractor has to sponsor it [S15].",src:"S15"},
+    {section:0,question:"In one sentence, why clear both the company and the person?",answer:"Each check covers a risk the other can't: the organization's ability to protect, and the individual's trustworthiness [S2].",src:"S2"},
     {section:1,question:"Can a company self-sponsor an FCL in NISS? Who initiates?",answer:"No. A GCA or a currently cleared contractor may sponsor (32 CFR 117.9(a)(10)); the handbook also lists a foreign government [S15][S2].",src:"S15"},
     {section:1,question:"Welcome email is Day 1. What is due by Day 20? What is the second deadline?",answer:"Day 20: the initial FCL package in NISS. Second: the due date in DCSA's investigation email for KMP SF-86 (eApp) submission and fingerprints. For an initial FCL, DCSA initiates; for an upgrade, the FSO does [S2].",src:"S2"},
     {section:1,question:"Name the five core FCL package items (the Five-Pack).",answer:"Formation/legal docs · ownership chart · DD 441 · SF 328 · KMP list.",src:"S2"},
@@ -306,6 +325,10 @@ const DATA = {
     {section:5,question:"Draw (or narrate) the dual-track swimlane: where does the KMP roster connect FCL to PCL?",answer:"FCL package produces the KMP roster → each KMP initiates PCL investigation → KMP eligibility feeds back into FCL grant.",src:"S2"}
   ],
   glossary:[
+    {category:"Agency",term:"DIS / DSS (former names)",rung:100,definition:"DCSA's earlier names: the Defense Investigative Service (DIS, from 1971) and the Defense Security Service (DSS, from 1999). EO 13869 directed the rename of DSS to DCSA in 2019. [S37][S38]",source:"ledger"},
+    {category:"Agency",term:"NBIB",rung:200,definition:"National Background Investigations Bureau. Set up under OPM in 2016, it moved to DoD and into DCSA effective Oct 1 2019 under EO 13869. [S37][S38]",source:"ledger"},
+    {category:"Agency",term:"EO 12829",rung:100,definition:"The 1993 executive order that created the National Industrial Security Program to safeguard classified information released to contractors, licensees and grantees. [S39]",source:"ledger"},
+    {category:"Study guide",term:"Block 0",rung:100,essential:true,definition:"Introductory basics: what DCSA is, where it came from, who it serves, NISP, FCL and PCL in plain language, and the Socratic 'why do we do this?' questions.",source:"site",link:{href:"#/curriculum/0",label:"Start Block 0"}},
     {category:"Study guide",term:"DCSA journey",rung:100,essential:true,definition:"Our shorthand for the end-to-end path a company and its people take: GCA or cleared-contractor sponsorship, the FCL package, KMP clearances through eApp in DISS, DAAG/RMF in NISP eMASS when classified systems apply, the grant, then ongoing duties like continuous vetting and reporting. [S15][S2][S16][S13]",source:"site",link:{href:"assets/diagrams/journey-infographic.svg",label:"Journey infographic"}},
     {category:"Study guide",term:"Project plan (example journey)",rung:100,definition:"A mock project plan that walks the DCSA journey step by step, with an owner and a decision point for each step. Only timings the sources support are filled in; it is an example, not official guidance.",source:"site",link:{href:"library/project-plan.html",label:"Open the example project plan"}},
     {category:"Study guide",term:"Resources / videos",rung:100,definition:"A curated page of official DCSA and CDSE resources first, then YouTube videos. Older videos are marked as out of date where the rules have changed.",source:"site",link:{href:"library/video-resources.html",label:"Open videos and resources"}},
@@ -620,6 +643,10 @@ DATA.glossaryLinks = {
     "Five-Pack":["SF-328","DD-441","KMP"],
     "Second deadline":["KMP","eApp","SWFT","Day 20"],
     "eApp":["DISS","SF-86","NBIS"],
+    "Block 0":["DCSA","NISP","FCL","PCL","EO 12829","DIS / DSS (former names)","DCSA journey"],
+    "DIS / DSS (former names)":["DCSA","NBIB"],
+    "NBIB":["DCSA","DISS"],
+    "EO 12829":["NISP","NISPOM","DCSA"],
     "DCSA journey":["Project plan (example journey)","Sponsorship","FCL","KMP","eApp","DISS","DAAG","Continuous vetting","Resources / videos"],
     "Project plan (example journey)":["DCSA journey","Five-Pack","Second deadline","Block 14"],
     "Resources / videos":["Deck video","DCSA","DCSA journey"],

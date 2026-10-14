@@ -77,6 +77,13 @@
     "nblm": false
   },
   {
+    "slug": "odm-block-00-intro",
+    "title": "Block 0: Introductory basics",
+    "section": "ODM day blocks",
+    "desc": "What DCSA is, where it came from (DIS, DSS, NBIB, EO 13869), why NISP exists, and Socratic why-questions.",
+    "nblm": false
+  },
+  {
     "slug": "odm-block-01-core-concepts",
     "title": "Block 1: Core concepts",
     "section": "ODM day blocks",
