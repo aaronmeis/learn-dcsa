@@ -69,20 +69,21 @@ function renderDashboard(){
   </div>
   <div class="note"><b>Mission.</b> By the end you can walk the facility-clearance track and the personnel-clearance track, and say what does not count as either. ${lib("odm-mission","Mission note")} · ${lib("odm-day-plan","Timed day plan")} · ${lib("tdd-mission","TDD mission")}</div>
   <div class="grid">
-    <div class="card"><h3>Curriculum</h3><p style="color:var(--text-secondary);font-size:.86rem">${DATA.weeks.length} blocks from the one-day mastery and tech deep-dive packs.</p><div class="btnrow" style="margin:.8rem 0 0"><button class="b" onclick="go('curriculum')">Open curriculum →</button></div></div>
-    <div class="card"><h3>Views</h3><p style="color:var(--text-secondary);font-size:.86rem">Conceptual, logical, and physical views for the two tracks.</p><div class="btnrow" style="margin:.8rem 0 0"><button class="b" onclick="go('views')">Open views →</button></div></div>
-    <div class="card"><h3>Progress map</h3><p style="color:var(--text-secondary);font-size:.86rem">The 100 / 200 / 300 ladder across the packs.</p><div class="btnrow" style="margin:.8rem 0 0"><button class="b" onclick="go('map')">Open map →</button></div></div>
-    <div class="card"><h3>Flashcards and quiz</h3><p style="color:var(--text-secondary);font-size:.86rem">${DATA.glossary.length} spaced-repetition cards and the ${DATA.quiz.length}-question quiz bank.</p><div class="btnrow" style="margin:.8rem 0 0"><button class="b" onclick="go('flash')">Flashcards →</button><button class="b" onclick="go('quiz')">Quiz →</button></div></div>
-    <div class="card"><h3>Shorts and media</h3><p style="color:var(--text-secondary);font-size:.86rem">NotebookLM shorts and the narrated deep-dive video (AI-generated narration).</p><div class="btnrow" style="margin:.8rem 0 0"><button class="b" onclick="go('shorts')">Open media →</button><button class="b" onclick="go('deck')">Slide deck →</button></div></div>
-    <div class="card"><h3>Failure modes</h3><p style="color:var(--text-secondary);font-size:.86rem">${DATA.checklist.length} failure modes: the tell, the fix, and the source.</p><div class="btnrow" style="margin:.8rem 0 0"><button class="b" onclick="go('failures')">Failure modes →</button><button class="b" onclick="go('cheat')">Decision rules →</button></div></div>
-    <div class="card"><h3>Neighbors</h3><p style="color:var(--text-secondary);font-size:.86rem">What sits beside FCL and PCL, and what does not replace them.</p><div class="btnrow" style="margin:.8rem 0 0"><button class="b" onclick="go('ea')">Open the map →</button></div></div>
-    <div class="card"><h3>On the phone</h3><p style="color:var(--text-secondary);font-size:.86rem">Talks and the O'Reilly shelf, above the source ledger.</p><div class="btnrow" style="margin:.8rem 0 0"><button class="b" onclick="go('refs')">Open references →</button></div></div>
-    <div class="card"><h3>Library</h3><p style="color:var(--text-secondary);font-size:.86rem">${libCount} vault notes and NotebookLM reports rendered as web pages, with live source links.</p><div class="btnrow" style="margin:.8rem 0 0"><button class="b" onclick="go('library')">Open library →</button><button class="b" onclick="go('refs')">Source ledger →</button></div></div>
+    <div class="card"><h3>Curriculum</h3><p style="color:var(--text-secondary);font-size:.86rem">${DATA.weeks.length} blocks from the one-day mastery and tech deep-dive packs.</p><div class="btnrow" style="margin:.8rem 0 0"><button class="b" type="button" data-go="curriculum">Open curriculum →</button></div></div>
+    <div class="card"><h3>Views</h3><p style="color:var(--text-secondary);font-size:.86rem">Conceptual, logical, and physical views for the two tracks.</p><div class="btnrow" style="margin:.8rem 0 0"><button class="b" type="button" data-go="views">Open views →</button></div></div>
+    <div class="card"><h3>Progress map</h3><p style="color:var(--text-secondary);font-size:.86rem">The 100 / 200 / 300 ladder across the packs.</p><div class="btnrow" style="margin:.8rem 0 0"><button class="b" type="button" data-go="map">Open map →</button></div></div>
+    <div class="card"><h3>Flashcards and quiz</h3><p style="color:var(--text-secondary);font-size:.86rem">${DATA.glossary.length} spaced-repetition cards and the ${DATA.quiz.length}-question quiz bank.</p><div class="btnrow" style="margin:.8rem 0 0"><button class="b" type="button" data-go="flash">Flashcards →</button><button class="b" type="button" data-go="quiz">Quiz →</button></div></div>
+    <div class="card"><h3>Shorts and media</h3><p style="color:var(--text-secondary);font-size:.86rem">NotebookLM shorts and the narrated deep-dive video (AI-generated narration).</p><div class="btnrow" style="margin:.8rem 0 0"><button class="b" type="button" data-go="shorts">Open media →</button><button class="b" type="button" data-go="deck">Slide deck →</button></div></div>
+    <div class="card"><h3>Failure modes</h3><p style="color:var(--text-secondary);font-size:.86rem">${DATA.checklist.length} failure modes: the tell, the fix, and the source.</p><div class="btnrow" style="margin:.8rem 0 0"><button class="b" type="button" data-go="failures">Failure modes →</button><button class="b" type="button" data-go="cheat">Decision rules →</button></div></div>
+    <div class="card"><h3>Neighbors</h3><p style="color:var(--text-secondary);font-size:.86rem">What sits beside FCL and PCL, and what does not replace them.</p><div class="btnrow" style="margin:.8rem 0 0"><button class="b" type="button" data-go="ea">Open the map →</button></div></div>
+    <div class="card"><h3>On the phone</h3><p style="color:var(--text-secondary);font-size:.86rem">Talks and the O'Reilly shelf, above the source ledger.</p><div class="btnrow" style="margin:.8rem 0 0"><button class="b" type="button" data-go="refs">Open references →</button></div></div>
+    <div class="card"><h3>Library</h3><p style="color:var(--text-secondary);font-size:.86rem">${libCount} vault notes and NotebookLM reports rendered as web pages, with live source links.</p><div class="btnrow" style="margin:.8rem 0 0"><button class="b" type="button" data-go="library">Open library →</button><button class="b" type="button" data-go="refs">Source ledger →</button></div></div>
   </div>
   <h3 style="margin:1.6rem 0 .6rem;font-size:1rem">From the pack</h3>
   <p class="lead">The NotebookLM exports and the reference notes, as pages you can open here.</p>
   <div class="libgrid">${(DATA.packPages||[]).map(p=>`<a class="libcard" href="library/${p.slug}.html"><b>${esc(p.t)}</b><span>Open the full note</span></a>`).join("")}</div>`;
   el.innerHTML=h;
+  $$("[data-go]",el).forEach(b=>b.onclick=()=>go(b.dataset.go));
   const by={100:0,200:0,300:0}; mods.forEach(m=>{if(LS.get(moduleKey(m.w,m.i),false))by[m.rung]++;});
   const p=$("#dProg"); if(p){["100","200","300"].forEach((r,i)=>p.children[i].style.width=(mods.length?by[r]/mods.length*100:0)+"%");}
 }
@@ -179,9 +180,9 @@ function renderMap(){
       const st=LS.get(KEY+"self:"+l.key+":"+r.n,"none");
       h+=`<div class="rung l${r.n}"><b>${r.n} level</b>${esc(r.t)}
         <div class="self" data-k="${l.key}:${r.n}">
-          <button data-s="none" class="${st==="none"?"on":""}">not yet</button>
-          <button data-s="shaky" class="${st==="shaky"?"on":""}">shaky</button>
-          <button data-s="solid" class="${st==="solid"?"on":""}">solid</button>
+          <button type="button" data-s="none" class="${st==="none"?"on":""}" aria-pressed="${st==="none"}">not yet</button>
+          <button type="button" data-s="shaky" class="${st==="shaky"?"on":""}" aria-pressed="${st==="shaky"}">shaky</button>
+          <button type="button" data-s="solid" class="${st==="solid"?"on":""}" aria-pressed="${st==="solid"}">solid</button>
         </div></div>`;
     });
     h+=`</div>`;
@@ -318,7 +319,8 @@ function renderQuiz(){
     h+=`<div class="qcard" data-qi="${qi}"><div class="qq">${esc(q.question)}${q.rung?` <span class="pill r${q.rung}">${q.rung}</span>`:""}${q.src?` <span class="pill">${esc(q.src)}</span>`:""}</div>`;
     if(q.type==="mc") h+=`<div class="qopts">${q.options.map((o,oi)=>`<label data-o="${oi}"><input type="radio" name="q${qi}" style="margin-right:8px">${esc(o)}</label>`).join("")}</div>`;
     else h+=`<button class="reveal">Show model answer</button>`;
-    h+=`<div class="qexp"><b>Answer:</b> ${ec(q.answer)}<br><br><b>Why / source:</b> ${ec(q.explanation)}</div></div>`;
+    const why=(q.explanation||"").trim(), srcOnly=!why&&/^S\d+$/.test(q.src||"")?ec("["+q.src+"]"):"";
+    h+=`<div class="qexp"><b>Answer:</b> ${ec(q.answer)}${why||srcOnly?`<p class="qwhy"><b>Why / source:</b> ${why?ec(why):srcOnly}</p>`:""}</div></div>`;
   });
   el.innerHTML=h;
   $$("[data-qs]",el).forEach(b=>b.onclick=()=>{LS.set(KEY+"quizSec",+b.dataset.qs);renderQuiz();});
@@ -415,7 +417,7 @@ function renderPrompts(){
   h+=`<h3 style="margin:1.8rem 0 .6rem;font-size:1rem">NotebookLM prompt notes</h3><div class="libgrid">${pl.map(p=>`<a class="libcard" href="library/${p.slug}.html"><b>${esc(p.title)}</b><span>${esc(p.desc)}</span></a>`).join("")}</div>`;
   el.innerHTML=h;
   bindSourceChips(el);
-  $$(".copybtn",el).forEach(b=>b.onclick=()=>{const box=b.closest(".promptbox"),inc=$(".incsrc",box);const txt=promptCopyText(decodeURIComponent(b.dataset.c),inc&&inc.checked);const pv=$(".copyprev",box);if(pv){pv.textContent=txt;pv.hidden=false;}try{navigator.clipboard.writeText(txt);b.textContent="Copied";b.classList.add("copied");setTimeout(()=>{b.textContent="Copy";b.classList.remove("copied");},1200);}catch(e){}});
+  $$(".copybtn",el).forEach(b=>b.onclick=()=>{const box=b.closest(".promptbox"),inc=$(".incsrc",box);const txt=promptCopyText(decodeURIComponent(b.dataset.c),inc&&inc.checked);const pv=$(".copyprev",box);if(pv){pv.textContent=txt;pv.hidden=false;}const ok=()=>{b.textContent="Copied";b.classList.add("copied");setTimeout(()=>{b.textContent="Copy";b.classList.remove("copied");},1200);};const fail=()=>{if(pv){pv.hidden=false;const r=document.createRange();r.selectNodeContents(pv);const sel=getSelection();sel.removeAllRanges();sel.addRange(r);}b.textContent="Select and copy";setTimeout(()=>{b.textContent="Copy";},2000);};try{const pr=navigator.clipboard&&navigator.clipboard.writeText(txt);if(pr&&pr.then)pr.then(ok,fail);else fail();}catch(e){fail();}});
 }
 
 /* ---- Failure modes (practice checklist) ---- */

@@ -339,7 +339,8 @@ function checkHTML(it){
     out+=`<div class="qcard sx-q" data-qidx="${idx}"><div class="qq">${esc(q.question)}</div>`;
     if(q.type==="mc"&&q.options) out+=`<div class="qopts">`+q.options.map(o=>`<button type="button" class="sx-opt" data-o="${esc(o)}">${esc(o)}</button>`).join("")+`</div>`;
     else out+=`<button type="button" class="b sx-reveal">Show model answer</button>`;
-    out+=`<div class="qexp"><b>Answer:</b> ${ec(q.answer)}<br><br><b>Why / source:</b> ${ec(q.explanation)}</div></div>`;
+    const why=(q.explanation||"").trim(), so=!why&&/^S\d+$/.test(q.src||"")?ec("["+q.src+"]"):"";
+    out+=`<div class="qexp"><b>Answer:</b> ${ec(q.answer)}${why||so?`<p class="qwhy"><b>Why / source:</b> ${why?ec(why):so}</p>`:""}</div></div>`;
   });
   if(terms.length){
     out+=`<div class="sx-terms"><div class="sx-terms-h">Key terms</div>`+terms.map(g=>`<details class="sx-term"><summary>${esc(g.term)}</summary><p>${ec(g.definition)}</p></details>`).join("")+

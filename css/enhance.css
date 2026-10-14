@@ -411,3 +411,9 @@ button.b:focus-visible,.ea-tab-btn:focus-visible,.deck-btn:focus-visible,.ax-nod
 .schip.ctl.wd{text-decoration:line-through;text-decoration-thickness:1px}
 .stip .ctl-fam{display:block;font-size:.72rem;opacity:.75;margin:.1rem 0 .3rem}
 .sx-desc{font-size:.85rem;color:var(--text-secondary);margin:.3rem 0 .5rem;line-height:1.4}
+
+/* Disclaimer (sidebar bottom + footer) */
+.nav-disclaimer,.foot-disclaimer{margin:.7rem 0 0;font-size:.72rem;line-height:1.45;color:var(--text-secondary)}
+.nav-disclaimer b,.foot-disclaimer b{color:var(--text-primary)}
+.foot-disclaimer a{color:var(--text-primary);text-decoration:underline}
+.qwhy{margin:.6rem 0 0}
