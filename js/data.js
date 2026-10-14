@@ -235,13 +235,13 @@ const DATA = {
     {category:"Training",term:"CS250",rung:200,definition:"Applying Assessment and Authorization in the NISP. [S14]",source:"ledger"}
   ],
   views:{
-    conceptual:{rule:"Capabilities without product logos. Dual-track + four domains. CMMC is adjacent CUI floor.",lib:"tdd-view-01-conceptual",img:["assets/diagrams/01-conceptual-1.png"],
+    conceptual:{rule:"Capabilities without product logos. Dual-track + four domains. CMMC is adjacent CUI floor.",lib:"tdd-view-01-conceptual",img:["01-conceptual-1.png"],
       tables:[{caption:"Three walls",headers:["Wall","Decides"],rows:[["CMMC floor","Uncleared CUI cybersecurity maturity"],["FCL","Facility eligibility under NISP"],["Classified ATO","System authorization (DAAPM/RMF)"]]}]},
-    logical:{rule:"Components realize capabilities: NISS, NBIS, STEPP, eMASS, FOCI casework.",lib:"tdd-view-02-logical",img:["assets/diagrams/02-logical-1.png"],
+    logical:{rule:"Components realize capabilities: NISS, NBIS, STEPP, eMASS, FOCI casework.",lib:"tdd-view-02-logical",img:["02-logical-1.png"],
       tables:[{caption:"Capability → component",headers:["Capability","Logical component"],rows:[["Sponsorship intake","NISS case"],["Personnel eligibility","NBIS / investigation + SEAD 4"],["Training","STEPP / CDSE"],["Classified IS auth","DAAPM / eMASS"]]}]},
-    physical:{rule:"Physical services and forms that host the logical model.",lib:"tdd-view-03-physical",img:["assets/diagrams/03-physical-1.png"],
+    physical:{rule:"Physical services and forms that host the logical model.",lib:"tdd-view-03-physical",img:["03-physical-1.png"],
       tables:[{caption:"Physical cues",headers:["Item","Role"],rows:[["NISS web package","FCL package submission"],["SF-86 in NBIS","PCL investigation UI"],["DD 441 / SF 328","Agreement + FOCI disclosure"],["eMASS","RMF package for classified IS"]]}]},
-    integration:{rule:"Externals and AI boundary. Default-deny investigative PII.",lib:"tdd-view-04-integration-ai",img:["assets/diagrams/04-integration-ai-1.png"],
+    integration:{rule:"Externals and AI boundary. Default-deny investigative PII.",lib:"tdd-view-04-integration-ai",img:["04-integration-ai-1.png"],
       tables:[{caption:"Externals",headers:["System","Mechanism"],rows:[["NISS","Web package / casework"],["NBIS / e-QIP","Investigation intake"],["STEPP","LMS"],["eMASS","RMF A&A"],["DD 254","GCA contract security requirements"]]}]},
     govcloud:{rule:"Cloud and CMMC support CUI architectures; they do not confer FCL or Secret ATO.",lib:"nblm-tdd-failure-modes",img:[],
       tables:[{caption:"Support ≠ confer",headers:["Claim heard","Correct reading"],rows:[["GCC High = cleared","Cloud support for CUI / gov workloads"],["CMMC L2 = FCL","CUI floor only"],["FedRAMP High = Secret ATO","Separate from DAAPM classified ATO"]]}]}
