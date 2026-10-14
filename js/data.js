@@ -297,6 +297,13 @@ const DATA = {
     {section:5,question:"Draw (or narrate) the dual-track swimlane: where does the KMP roster connect FCL to PCL?",answer:"FCL package produces the KMP roster → each KMP initiates PCL investigation → KMP eligibility feeds back into FCL grant.",src:"S2"}
   ],
   glossary:[
+    {category:"Study guide",term:"DCSA journey",rung:100,essential:true,definition:"Our shorthand for the end-to-end path a company and its people take: GCA or cleared-contractor sponsorship, the FCL package, KMP clearances through eApp in DISS, DAAG/RMF in NISP eMASS when classified systems apply, the grant, then ongoing duties like continuous vetting and reporting. [S15][S2][S16][S13]",source:"site",link:{href:"assets/diagrams/journey-infographic.svg",label:"Journey infographic"}},
+    {category:"Study guide",term:"Project plan (example journey)",rung:100,definition:"A mock project plan that walks the DCSA journey step by step, with an owner and a decision point for each step. Only timings the sources support are filled in; it is an example, not official guidance.",source:"site",link:{href:"library/project-plan.html",label:"Open the example project plan"}},
+    {category:"Study guide",term:"Resources / videos",rung:100,definition:"A curated page of official DCSA and CDSE resources first, then YouTube videos. Older videos are marked as out of date where the rules have changed.",source:"site",link:{href:"library/video-resources.html",label:"Open videos and resources"}},
+    {category:"Study guide",term:"Deck video",rung:100,definition:"A silent, captioned cut of the 15-slide deck. Yellow correction strips cover slide text that predates the 2026 changes.",source:"site",link:{href:"#/deck",label:"Watch the deck video"}},
+    {category:"Study guide",term:"DISS transition 2026",rung:200,definition:"Contractors start eApp cases in DISS from Jul 31 2026; NBIS Agency turns off Nov 30 2026. [S16]",source:"ledger",link:{href:"assets/diagrams/diss-transition-2026.svg",label:"DISS transition infographic"}},
+    {category:"Study guide",term:"EA mapping",rung:200,definition:"The site's enterprise architecture view of DCSA: layers, capabilities mapped to rule, system and source, a worked example and a yes/no decision guide.",source:"site",link:{href:"#/ea",label:"Open EA mapping"}},
+    {category:"Study guide",term:"Block 14",rung:200,definition:"Curriculum block on the 2026 rules and post-grant duties: eApp in DISS, continuous vetting and the PVQ, CMMC versus FCL, FOCI and reporting.",source:"site",link:{href:"#/curriculum",label:"Open the curriculum"}},
     {category:"Agency",term:"DCSA",rung:100,essential:true,definition:"Defense Counterintelligence and Security Agency — administers NISP for industry, personnel vetting, industrial security, CI support, and related IS authorization oversight.",source:"ledger"},
     {category:"Agency",term:"NISP",rung:100,essential:true,definition:"National Industrial Security Program — framework for protecting classified information in industry.",source:"ledger"},
     {category:"Agency",term:"NISPOM",rung:100,essential:true,definition:"National Industrial Security Program Operating Manual — codified as 32 CFR Part 117. [S1]",source:"ledger"},
@@ -604,6 +611,13 @@ DATA.glossaryLinks = {
     "Five-Pack":["SF-328","DD-441","KMP"],
     "Second deadline":["KMP","eApp","SWFT","Day 20"],
     "eApp":["DISS","SF-86","NBIS"],
+    "DCSA journey":["Project plan (example journey)","Sponsorship","FCL","KMP","eApp","DISS","DAAG","Continuous vetting","Resources / videos"],
+    "Project plan (example journey)":["DCSA journey","Five-Pack","Second deadline","Block 14"],
+    "Resources / videos":["Deck video","DCSA","DCSA journey"],
+    "Deck video":["DCSA journey","Resources / videos"],
+    "DISS transition 2026":["eApp","DISS","NBIS","Block 14"],
+    "EA mapping":["DAAG","DISS","Four domains","DCSA journey"],
+    "Block 14":["Continuous vetting","CMMC (contrast)","FOCI","Reporting","NAESOC"],
     "PVQ":["DISS","Continuous vetting"],
     "FCI":["CMMC (contrast)","CUI"],
     "Reporting":["FSO","ITPSO"]

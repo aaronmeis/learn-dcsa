@@ -24,7 +24,7 @@ function go(v){
   if(location.hash!=="#/"+v) history.replaceState(null,"","#/"+v);
   window.scrollTo(0,0); const mc=$(".main-content"); if(mc) mc.scrollTop=0;
 }
-$$("#nav .nav-item").forEach(el=>el.onclick=()=>go(el.dataset.v));
+$$("#nav .nav-item[data-v]").forEach(el=>el.onclick=()=>go(el.dataset.v));
 
 function lib(slug,label){return `<a href="library/${slug}.html">${esc(label||"Open full note")} ↗</a>`;}
 
@@ -336,7 +336,7 @@ function renderGlossary(){
     const items=DATA.glossary.filter(g=>g.category===c&&(!q||(g.term+g.definition+(g.see_also||"")).toLowerCase().includes(q)));
     if(!items.length)return;
     h+=`<h3 style="margin:1.1rem 0 .5rem;font-size:.95rem">${esc(c)} <span style="color:var(--text-dim);font-weight:400">· ${items.length}</span></h3>`;
-    items.forEach(g=>h+=`<div class="gterm"><h4>${esc(g.term)} <span class="pill r${g.rung}">${g.rung}</span> ${g.essential?'<span class="pill r100">Essential</span>':''} ${g.source==="nblm-gap"?'<span class="pill" title="Drafted by a NotebookLM data table, checked against the source ledger">gap pass</span>':''}</h4><p>${ec(g.definition)}</p>${g.see_also?`<div class="sa">see also: ${esc(g.see_also)}</div>`:""}</div>`);
+    items.forEach(g=>h+=`<div class="gterm"><h4>${esc(g.term)} <span class="pill r${g.rung}">${g.rung}</span> ${g.essential?'<span class="pill r100">Essential</span>':''} ${g.source==="nblm-gap"?'<span class="pill" title="Drafted by a NotebookLM data table, checked against the source ledger">gap pass</span>':''}</h4><p>${ec(g.definition)}</p>${g.link?`<div class="glink"><a href="${esc(g.link.href)}">${esc(g.link.label)} →</a></div>`:""}${g.see_also?`<div class="sa">see also: ${esc(g.see_also)}</div>`:""}</div>`);
   });
   el.innerHTML=h;
   const s=$("#gSearch");
@@ -354,9 +354,34 @@ function renderGlossaryMap(el,head,slug){
     listFirst:window.matchMedia&&window.matchMedia("(max-width:599px)").matches,
     items:DATA.glossary.map(g=>({id:TermMap.slugify(g.term),label:g.term,group:g.category,weight:g.essential?3:(g.rung>=300?1:2),
       aliases:L.aliases[g.term]||[],related:L.related[g.term]||[],
-      body:`<p>${ec(g.definition)}</p><p style="margin-top:.5rem"><span class="pill r${g.rung}">${g.rung}</span>${g.essential?' <span class="pill r100">Essential</span>':''}</p>`})),
+      body:`<p>${ec(g.definition)}</p>${g.link?`<div class="glink"><a href="${esc(g.link.href)}">${esc(g.link.label)} →</a></div>`:""}<p style="margin-top:.5rem"><span class="pill r${g.rung}">${g.rung}</span>${g.essential?' <span class="pill r100">Essential</span>':''}</p>`})),
     slug:slug,
     onFocus:id=>{const h=id?"#/glossary/map/"+encodeURIComponent(id):"#/glossary/map"; if(location.hash!==h) history.replaceState(null,"",h); window.GLOSS_SUB=h.replace("#/glossary/","");}});
+}
+
+/* ---- Prompts: source chips, panel and optional copy block (notes from js/source-notes.js) ---- */
+function citedIn(t){const o=[];(t.match(/\[(S\d+(?:\s*,\s*S\d+)*)\]/g)||[]).forEach(m=>(m.match(/S(\d+)/g)||[]).forEach(x=>{const n=+x.slice(1);if(SRC[n]&&!o.includes(n))o.push(n);}));return o;}
+function srcNote(n){return (window.SOURCE_NOTES||{})[n]||"";}
+function promptBody(t,pi){
+  const ns=citedIn(t);
+  const body=esc(t).replace(/\[(S\d+(?:\s*,\s*S\d+)*)\]/g,(m,inner)=>"["+inner.replace(/S(\d+)/g,(x,n)=>{const s=SRC[+n];if(!s)return x;const id=`stip-${pi}-${n}`;
+    return `<span class="schip-wrap"><button type="button" class="schip" aria-expanded="false" aria-controls="${id}" aria-label="Source S${n}: ${esc(s.t)}. Show summary">S${n}</button><span class="stip" id="${id}" role="tooltip" hidden><b>S${n} · ${esc(s.t)}</b>${esc(srcNote(n))}<br><a href="${esc(s.u)}" target="_blank" rel="noopener">Open source ↗</a></span></span>`;})+"]");
+  const panel=ns.length?`<aside class="spanel" aria-label="Sources cited"><h5>Sources cited</h5><ul>${ns.map(n=>`<li><b>S${n} · ${esc(SRC[n].t)}</b><br>${esc(srcNote(n))} <a href="${esc(SRC[n].u)}" target="_blank" rel="noopener">Source ↗</a></li>`).join("")}</ul></aside>`:"";
+  return `<div class="p-wrap"><pre>${body}</pre>${panel}</div><div class="copyrow"><button class="copybtn" data-c="${encodeURIComponent(t)}">Copy</button>${ns.length?`<label><input type="checkbox" class="incsrc"> Include source notes (optional)</label>`:""}</div><pre class="copyprev" aria-live="polite" hidden></pre>`;
+}
+function promptCopyText(t,inc){const ns=citedIn(t);if(!inc||!ns.length)return t;
+  return t+"\n\nOptional context - sources\n"+ns.map(n=>`[S${n}] ${SRC[n].t}. ${srcNote(n)} ${SRC[n].u}`).join("\n");}
+function bindSourceChips(root){
+  const close=except=>$$(".schip[aria-expanded=true]",root).forEach(c=>{if(c!==except){c.setAttribute("aria-expanded","false");c.nextElementSibling.hidden=true;}});
+  $$(".schip",root).forEach(c=>{const tip=c.nextElementSibling,w=c.parentElement;
+    const open=()=>{close(c);c.setAttribute("aria-expanded","true");tip.hidden=false;};
+    const shut=()=>{c.setAttribute("aria-expanded","false");tip.hidden=true;};
+    c.onclick=e=>{e.preventDefault();c.getAttribute("aria-expanded")==="true"?shut():open();};
+    c.addEventListener("focus",open);
+    w.addEventListener("mouseenter",open);w.addEventListener("mouseleave",()=>{if(document.activeElement!==c)shut();});
+    w.addEventListener("focusout",e=>{if(!w.contains(e.relatedTarget))shut();});
+    c.addEventListener("keydown",e=>{if(e.key==="Escape"){shut();e.stopPropagation();}});
+  });
 }
 
 /* ---- Prompts ---- */
@@ -366,15 +391,16 @@ function renderPrompts(){
   let h=`<h2 class="vh">Prompt library</h2>
   <p class="lead">Study prompts for any LLM, plus the NotebookLM prompts that generated this pack's reports and media.</p>
   <div class="note danger"><b>Data hygiene.</b> No secrets, credentials, classified information, or private data in any model. Use public DCSA and CDSE material and synthetic examples.</div>`;
-  DATA.prompts.forEach(p=>{
+  DATA.prompts.forEach((p,pi)=>{
     h+=`<div class="promptcat"><h3>${esc(p.cat)} <span class="pill">${esc(p.model)}</span></h3>
       <div class="obj" style="margin:.15rem 0 .4rem">${esc(p.desc)}</div>
       <div style="font-size:.8rem;color:var(--text-dim);margin-bottom:.4rem">Variants: ${p.items.map(esc).join(" · ")}</div>
-      <details class="promptbox"><summary>Flagship prompt</summary><pre>${esc(p.flagship)}</pre><button class="copybtn" data-c="${encodeURIComponent(p.flagship)}">Copy</button></details></div>`;
+      <details class="promptbox" data-pi="${pi}"><summary>Flagship prompt</summary>${promptBody(p.flagship,pi)}</details></div>`;
   });
   h+=`<h3 style="margin:1.8rem 0 .6rem;font-size:1rem">NotebookLM prompt notes</h3><div class="libgrid">${pl.map(p=>`<a class="libcard" href="library/${p.slug}.html"><b>${esc(p.title)}</b><span>${esc(p.desc)}</span></a>`).join("")}</div>`;
   el.innerHTML=h;
-  $$(".copybtn",el).forEach(b=>b.onclick=()=>{try{navigator.clipboard.writeText(decodeURIComponent(b.dataset.c));b.textContent="Copied";b.classList.add("copied");setTimeout(()=>{b.textContent="Copy";b.classList.remove("copied");},1200);}catch(e){}});
+  bindSourceChips(el);
+  $$(".copybtn",el).forEach(b=>b.onclick=()=>{const box=b.closest(".promptbox"),inc=$(".incsrc",box);const txt=promptCopyText(decodeURIComponent(b.dataset.c),inc&&inc.checked);const pv=$(".copyprev",box);if(pv){pv.textContent=txt;pv.hidden=false;}try{navigator.clipboard.writeText(txt);b.textContent="Copied";b.classList.add("copied");setTimeout(()=>{b.textContent="Copy";b.classList.remove("copied");},1200);}catch(e){}});
 }
 
 /* ---- Failure modes (practice checklist) ---- */
