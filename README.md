@@ -10,4 +10,15 @@ Study console for the Defense Counterintelligence and Security Agency — dual-t
 
 Storage prefix `ldc:` (shared `aaronmeis.github.io` origin). Theme keys `appMode` / `appPalette` stay shared.
 
-No Python, operator scripts, or credentials in this public repo. Finish holes: see `AGENT-HANDOFF.md`.
+No operator scripts or credentials in this public repo. The only Python is the two publish checks in `tools/`. Finish holes: see `AGENT-HANDOFF.md`.
+
+## Publish checks
+
+Run both from the repo root before every push. Each must report 0.
+
+```
+python3 tools/linkcheck.py .              # broken internal links
+python3 tools/check_no_local_paths.py .   # machine paths and private workstation details
+```
+
+The published site must not contain local machine paths (drive-letter, home-folder, or user-profile paths). Describe offline material as "stored outside the repo".

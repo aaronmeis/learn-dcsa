@@ -1,8 +1,8 @@
 # Claude finish handoff — learn-dcsa
 
-**Site:** `C:\projects\claude\learn-dcsa`  
+**Site:** this repository (`aaronmeis/learn-dcsa`)  
 **Live (after Pages):** https://aaronmeis.github.io/learn-dcsa/  
-**Prefix:** `ldc:` · **SW cache:** `learn-dcsa-v5`  
+**Prefix:** `ldc:` · **SW cache:** see `sw.js`  
 **Packs (source of truth):**  
 - `Learning/one-day-mastery/dcsa/` (odm-dcsa)  
 - `Learning/tech-deep-dive/dcsa/` (tdd-dcsa)
@@ -19,7 +19,7 @@ Vault wins over NotebookLM. Do not teach self-sponsorship. Do not treat GCC High
 | 8 architecture diagram PNGs in `assets/diagrams/` | Done |
 | 6 ODM shorts MP4 + posters in `media/shorts/` and `media/posters/` | Done |
 | `shorts-catalog.js` / `.json` (pillars NISP / Personnel / Systems / CI) | Done |
-| Library HTML: ~69 pages + `library/manifest.js` via private `C:\projects\grok\one_day_mastery\learn_console\build_library.py` | Done |
+| Library HTML: ~69 pages + `library/manifest.js` via a private library generator (kept offline) | Done |
 | GitHub Pages repo `aaronmeis/learn-dcsa` | Done — https://aaronmeis.github.io/learn-dcsa/ |
 | Deck empty-file guard (no 404 on missing deep-dive MP4) | Done (`learn-dcsa-v4`) |
 | View diagram paths + DCSA shorts caveat (no DuckDB 10x line) | Done |
@@ -47,7 +47,7 @@ Watch each short once. If content ≠ title, rename file + catalog entry. Extra 
 `DATA.debates` mirrors ODM `CLAIMS-AND-DEBATES.md` with all statuses `unrun`. Job ticket pattern: `{pack}/AGENT-HANDOFF - Evidence sittings.md` (create if missing). Desk-first tests: E1A/E1B/E1W, E2A/E2B, E3A/E3B/E3W. Do not flip a pill to `run YYYY-MM-DD` without a sitting note. Open silence: DISS SoR name, exact resubmit counts, PVQ detail after May 2026 CV update, DAAPM newer than v2.2, DCSA AI tooling inventory.
 
 ### 4. UTF-8 library titles
-Some library titles show mojibake (`â€"`) from Windows encoding on em dashes. Re-run `build_library.py` after ensuring vault notes and the generator read/write UTF-8. Prefer fixing the generator `write_text(..., encoding="utf-8")` path over hand-editing HTML.
+Some library titles show mojibake (`â€"`) from Windows encoding on em dashes. Re-run the private library generator after ensuring vault notes and the generator read/write UTF-8. Prefer fixing the generator `write_text(..., encoding="utf-8")` path over hand-editing HTML.
 
 ### 5. Hero / ladder art (optional)
 `assets/hero.jpg` and `100.jpg`/`200.jpg`/`300.jpg` are placeholders copied from learn-duckdb. Replace with DCSA-themed stills when convenient; bump SW cache.
@@ -56,8 +56,9 @@ Some library titles show mojibake (`â€"`) from Windows encoding on em dashes.
 Today challenge needs `DATA.drills` (`where`, `auth`, `altitude`) if you want the purview-style three-round challenge. Until then the shell keeps the placeholder. Cut cards already feed question-of-the-day when drills exist.
 
 ### 7. QA (Playwright or local static)
-```powershell
-cd C:\projects\claude\learn-dcsa
+From the repo root:
+
+```
 python -m http.server 8010
 ```
 Open http://localhost:8010/ and hard-refresh. Check `#/today` `#/curriculum` `#/views` `#/shorts` `#/deck` `#/quiz` `#/glossary` `#/debates` `#/library` `#/failures` `#/prompts` `#/refs` `#/ea`. Confirm `localStorage` keys use `ldc:`. No console exceptions. Empty deep-dive file is OK; script exceptions are not.
@@ -71,10 +72,7 @@ Open http://localhost:8010/ and hard-refresh. Check `#/today` `#/curriculum` `#/
 
 ## Rebuild library after vault edits
 
-```powershell
-cd C:\projects\grok\one_day_mastery\learn_console
-py -3.11 build_library.py
-```
+Run the private library generator (stored outside the repo).
 
 Then bump SW cache, `node --check js/data.js js/app.js js/enhance.js`, commit, push `main`.
 
@@ -83,4 +81,4 @@ Then bump SW cache, `node --check js/data.js js/app.js js/enhance.js`, commit, p
 - Pattern: vault `NEXUS/67 - Learn Study Console Pattern.md`
 - Skill: `learn-console`
 - Sibling sites: learn-duckdb, learn-dominoai
-- Heavy media originals: `C:\output\obsidian\notebooklm\odm-dcsa\` and `tdd-dcsa\`
+- Heavy media originals: stored outside the repo
