@@ -2,22 +2,22 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; font-src 'self'; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Block 5: Edge cases | Learn DCSA</title>
 <meta name="description" content="">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="../assets/icons/icon-192.png" type="image/png">
 <link rel="stylesheet" href="library.css">
 <script>try{var p=JSON.parse(localStorage.getItem("appPalette"))||"github",m=JSON.parse(localStorage.getItem("appMode"))||"dark";document.documentElement.setAttribute("data-theme",p+"-"+m);}catch(e){document.documentElement.setAttribute("data-theme","github-dark");}</script>
 </head>
 <body>
 <header class="topbar">
   <a href="../index.html" class="home">&larr; Learn DCSA</a>
-  <span class="crumb">Library Â· ODM day blocks</span>
+  <span class="crumb">Library · ODM day blocks</span>
   <a href="index.html" class="home">All pages</a>
 </header>
 <main class="doc">
+  <aside class="corrections" role="note"><b>Archived study note. Corrections as of Oct 13 2026:</b> industry now initiates and reviews SF-86 cases (eApp) in DISS, and NBIS Agency turns off Nov 30 2026 (<a href="https://www.dcsa.mil/About-Us/News/Article/Article/4563691/industry-transition-to-diss-for-initiate-and-review-ir-functionality/">DCSA, Aug 4 2026</a>). The FCL handbook sets no fixed day count for the second deadline: it is the due date in DCSA’s investigation email. Cleared contractors follow the DAAG via NISP eMASS (<a href="https://www.dcsa.mil/Industrial-Security/NISP-Cybersecurity-Office-NCSO/">DCSA NCSO</a>). A GCA or a currently cleared contractor may sponsor (<a href="https://www.ecfr.gov/current/title-32/subtitle-A/chapter-I/subchapter-D/part-117/section-117.9">32 CFR 117.9(a)(10)</a>). The pre-2025 SF 328 threshold and “foreign proceeds” wording are unverified and were removed. The <a href="../index.html#/refs">source ledger</a> wins over this note.</aside>
   <div class="kicker">ODM day blocks</div>
   <h1 class="doctitle">Block 5: Edge cases</h1>
   
@@ -35,14 +35,14 @@
 <li>Non-possessing vs possessing FCL obligations</li>
 <li>FOCI mitigation timeline risk (SCA / SSA / Proxy, etc.)</li>
 <li>Continuous vetting vs old periodic reinvestigation mental model [<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4496039/dcsa-updates-nisp-contractor-continuous-vetting-process/" target="_blank" rel="noopener" title="DCSA Continuous Vetting update May 2026">S9</a>]</li>
-<li>Classified IS: DAAPM/RMF ≠ CMMC [<a class="cite" href="https://rmf.org/wp-content/uploads/2022/02/DCSA-Assessment-and-Authorization-Process-Manual-Version-2.2.pdf" target="_blank" rel="noopener" title="DAAPM v2.2 (RMF for NISP contractors)">S13</a>][<a class="cite" href="https://www.cdse.edu/Training/eLearning/CS250/" target="_blank" rel="noopener" title="CDSE Applying A&amp;A in the NISP CS250.16">S14</a>]</li>
+<li>Classified IS: DAAG/RMF ≠ CMMC [<a class="cite" href="https://www.dcsa.mil/Industrial-Security/NISP-Cybersecurity-Office-NCSO/" target="_blank" rel="noopener" title="DAAPM v2.2 (historical; now the DAAG) (RMF for NISP contractors)">S13</a>][<a class="cite" href="https://www.cdse.edu/Training/eLearning/CS250/" target="_blank" rel="noopener" title="CDSE Applying A&amp;A in the NISP CS250.16">S14</a>]</li>
 </ul>
 <h2>Sources</h2>
 <ul>
 <li>[<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4180585/dcsa-announces-approval-of-the-updated-form-328-certificate-pertaining-to-forei/" target="_blank" rel="noopener" title="DCSA SF 328 update announcement May 2025">S3</a>][<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/FOCI/Updated%20SF328%20-%20Industry%20Information%20Paper%20(final).pdf" target="_blank" rel="noopener" title="DCSA SF 328 Industry Information Paper May 2025">S4</a>] SF 328 May 2025 announcement + industry paper</li>
 <li>[<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4496039/dcsa-updates-nisp-contractor-continuous-vetting-process/" target="_blank" rel="noopener" title="DCSA Continuous Vetting update May 2026">S9</a>] DCSA continuous vetting update (May 2026)</li>
 <li>[<a class="cite" href="https://www.youtube.com/watch?v=CrifvnX3o5M" target="_blank" rel="noopener" title="FOCI and Supply Chain Risk Management webinar">S12</a>] FOCI and Supply Chain Risk Management webinar</li>
-<li>[<a class="cite" href="https://rmf.org/wp-content/uploads/2022/02/DCSA-Assessment-and-Authorization-Process-Manual-Version-2.2.pdf" target="_blank" rel="noopener" title="DAAPM v2.2 (RMF for NISP contractors)">S13</a>] DAAPM v2.2</li>
+<li>[<a class="cite" href="https://www.dcsa.mil/Industrial-Security/NISP-Cybersecurity-Office-NCSO/" target="_blank" rel="noopener" title="DAAPM v2.2 (historical; now the DAAG) (RMF for NISP contractors)">S13</a>] DAAPM v2.2 (historical; now the DAAG)</li>
 <li>[<a class="cite" href="https://www.cdse.edu/Training/eLearning/CS250/" target="_blank" rel="noopener" title="CDSE Applying A&amp;A in the NISP CS250.16">S14</a>] CDSE CS250 — Applying A&amp;A in the NISP</li>
 <li>Sibling: <a href="cheatsheet.html">CMMC cheatsheet</a> (contrast)</li>
 </ul>
@@ -64,13 +64,13 @@
 <td>Self-sponsor</td>
 <td>NISS filing with no GCA/prime</td>
 <td>Myth that company can initiate</td>
-<td>Get sponsorship from GCA or cleared prime</td>
+<td>Get sponsorship from GCA or currently cleared contractor</td>
 </tr>
 <tr>
 <td>Clock theater</td>
 <td>Fast incomplete package</td>
 <td>Clock vs quality inverted</td>
-<td>Complete Day 20 package; queue Day 45 KMPs</td>
+<td>Complete Day 20 package; queue DCSA due-date KMPs</td>
 </tr>
 <tr>
 <td>CMMC = FCL</td>
@@ -97,10 +97,10 @@
 <td>Still need FCL governance + PCL pipeline</td>
 </tr>
 <tr>
-<td>Possessing without DAAPM</td>
+<td>Possessing without DAAG</td>
 <td>CMMC cert waved at classified IS</td>
 <td>Equating cyber floors</td>
-<td>DAAPM/RMF A&amp;A for NISP systems</td>
+<td>DAAG/RMF A&amp;A for NISP systems</td>
 </tr>
 <tr>
 <td>CV lag</td>
@@ -127,14 +127,9 @@
 <li class="task"><input type="checkbox" disabled> FOCI leadership paragraph written</li>
 </ul></article>
   <footer class="docfoot">
-    Rendered from <code>Learning\one-day-mastery\dcsa\blocks\05-edge-cases.md</code>. The Obsidian vault is the source of truth. Study material only. Citations <span class="cite">S#</span> link to the DCSA source ledger [S1]â€“[S14].
+    Rendered from <code>Learning\one-day-mastery\dcsa\blocks\05-edge-cases.md</code>. The Obsidian vault is the source of truth. Study material only. Citations <span class="cite">S#</span> link to the DCSA source ledger [S1]–[S14].
     <div class="prevnext"><a href="odm-block-04-teach-it.html">&larr; Previous</a><a href="odm-block-06-spaced-review.html">Next &rarr;</a></div>
   </footer>
 </main>
-<script type="module">
-import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
-const dark=(document.documentElement.getAttribute("data-theme")||"").endsWith("dark");
-mermaid.initialize({startOnLoad:true,theme:dark?"dark":"default",securityLevel:"strict"});
-</script>
 </body>
 </html>

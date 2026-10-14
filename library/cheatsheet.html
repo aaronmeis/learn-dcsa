@@ -2,22 +2,22 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; font-src 'self'; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cheatsheet — DCSA dual-track (FCL / PCL) | Learn DCSA</title>
 <meta name="description" content="One-page cheatsheet — clocks, package, SEAD 4, SF 328 15%, CDSE map.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="../assets/icons/icon-192.png" type="image/png">
 <link rel="stylesheet" href="library.css">
 <script>try{var p=JSON.parse(localStorage.getItem("appPalette"))||"github",m=JSON.parse(localStorage.getItem("appMode"))||"dark";document.documentElement.setAttribute("data-theme",p+"-"+m);}catch(e){document.documentElement.setAttribute("data-theme","github-dark");}</script>
 </head>
 <body>
 <header class="topbar">
   <a href="../index.html" class="home">&larr; Learn DCSA</a>
-  <span class="crumb">Library Â· Reference</span>
+  <span class="crumb">Library · Reference</span>
   <a href="index.html" class="home">All pages</a>
 </header>
 <main class="doc">
+  <aside class="corrections" role="note"><b>Archived study note. Corrections as of Oct 13 2026:</b> industry now initiates and reviews SF-86 cases (eApp) in DISS, and NBIS Agency turns off Nov 30 2026 (<a href="https://www.dcsa.mil/About-Us/News/Article/Article/4563691/industry-transition-to-diss-for-initiate-and-review-ir-functionality/">DCSA, Aug 4 2026</a>). The FCL handbook sets no fixed day count for the second deadline: it is the due date in DCSA’s investigation email. Cleared contractors follow the DAAG via NISP eMASS (<a href="https://www.dcsa.mil/Industrial-Security/NISP-Cybersecurity-Office-NCSO/">DCSA NCSO</a>). A GCA or a currently cleared contractor may sponsor (<a href="https://www.ecfr.gov/current/title-32/subtitle-A/chapter-I/subchapter-D/part-117/section-117.9">32 CFR 117.9(a)(10)</a>). The pre-2025 SF 328 threshold and “foreign proceeds” wording are unverified and were removed. The <a href="../index.html#/refs">source ledger</a> wins over this note.</aside>
   <div class="kicker">Reference</div>
   <h1 class="doctitle">Cheatsheet — DCSA dual-track (FCL / PCL)</h1>
   <p class="lead">One-page cheatsheet — clocks, package, SEAD 4, SF 328 15%, CDSE map.</p>
@@ -49,7 +49,7 @@
 </tbody>
 </table>
 <p>No useful PCL pipeline without an eligible facility sponsor; no usable FCL without cleared KMPs / need-to-know population.</p>
-<h2>Day 20 / Day 45 clocks</h2>
+<h2>Day 20 and DCSA due-date clocks</h2>
 <p>Welcome email = <strong>Day 1</strong>.</p>
 <table>
 <thead>
@@ -66,7 +66,7 @@
 <td>Formation/legal docs · ownership chart · <strong>DD-441</strong> · <strong>SF-328</strong> · KMP list</td>
 </tr>
 <tr>
-<td><strong>Day 45</strong></td>
+<td><strong>DCSA due-date</strong></td>
 <td>KMP investigation requests + fingerprints</td>
 <td>Uncleared KMPs queued for PCL processing</td>
 </tr>
@@ -80,13 +80,13 @@
 <li class="task"><input type="checkbox" disabled> DD Form 441 — Security Agreement</li>
 <li class="task"><input type="checkbox" disabled> SF 328 — Foreign interests (FOCI)</li>
 <li class="task"><input type="checkbox" disabled> KMP list — minimum <strong>SMO</strong>, <strong>FSO</strong>, <strong>ITPSO</strong> (security-affecting authority, not titles alone)</li>
-<li class="task"><input type="checkbox" disabled> Fingerprint / investigation-request readiness for KMPs (Day 45)</li>
+<li class="task"><input type="checkbox" disabled> Fingerprint / investigation-request readiness for KMPs (DCSA due-date)</li>
 <li class="task"><input type="checkbox" disabled> DD Form 254 need-to-know evidence from GCA/prime (sponsorship context)</li>
 </ul>
 <h2>SF 328 — May 2025</h2>
 <ul>
 <li>Form approved ~<strong>1 May 2025</strong>; NISS live ~<strong>12 May 2025</strong> [<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4180585/dcsa-announces-approval-of-the-updated-form-328-certificate-pertaining-to-forei/" target="_blank" rel="noopener" title="DCSA SF 328 update announcement May 2025">S3</a>]</li>
-<li>Foreign revenue / proceeds disclosure threshold (<strong>Q7b</strong>) lowered to <strong>15%</strong> (from 30%) [<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/FOCI/Updated%20SF328%20-%20Industry%20Information%20Paper%20(final).pdf" target="_blank" rel="noopener" title="DCSA SF 328 Industry Information Paper May 2025">S4</a>]</li>
+<li>Foreign revenue / foreign-interest amounts disclosure threshold (<strong>Q7b</strong>) lowered to <strong>15%</strong> [<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/FOCI/Updated%20SF328%20-%20Industry%20Information%20Paper%20(final).pdf" target="_blank" rel="noopener" title="DCSA SF 328 Industry Information Paper May 2025">S4</a>]</li>
 <li>Material changes → update; “no FOCI” is not permanent</li>
 <li>If mitigation is required: <strong>SCA · SSA · Voting Trust · Proxy Agreement</strong> — plan <strong>months</strong> (exact calendar windows are silence in primary sources)</li>
 </ul>
@@ -124,11 +124,11 @@
 <tr>
 <td><strong>5</strong></td>
 <td>Top Secret</td>
-<td>Full field, ~10 years, interviews</td>
+<td>Full field, interviews</td>
 </tr>
 </tbody>
 </table>
-<p>After grant: <strong>continuous vetting</strong> (automated checks + <strong>PVQ</strong> ~every 5 years; legacy periodic reinvestigation eliminated for many NISP contractors) [<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4496039/dcsa-updates-nisp-contractor-continuous-vetting-process/" target="_blank" rel="noopener" title="DCSA Continuous Vetting update May 2026">S9</a>]. Do not wait for old PR notices.</p>
+<p>After grant: <strong>continuous vetting</strong> (automated checks + <strong>PVQ</strong> ~every 5 years; legacy periodic reinvestigation eliminated for NISP contractor national security personnel) [<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4496039/dcsa-updates-nisp-contractor-continuous-vetting-process/" target="_blank" rel="noopener" title="DCSA Continuous Vetting update May 2026">S9</a>]. Do not wait for old PR notices.</p>
 <h2>Four domains → CDSE map</h2>
 <table>
 <thead>
@@ -152,7 +152,7 @@
 <tr>
 <td>IS authorization</td>
 <td><strong>CS250</strong> A&amp;A in the NISP</td>
-<td><strong>DAAPM</strong> v2.2 [<a class="cite" href="https://rmf.org/wp-content/uploads/2022/02/DCSA-Assessment-and-Authorization-Process-Manual-Version-2.2.pdf" target="_blank" rel="noopener" title="DAAPM v2.2 (RMF for NISP contractors)">S13</a>]</td>
+<td><strong>DAAG</strong> v2.2 [<a class="cite" href="https://www.dcsa.mil/Industrial-Security/NISP-Cybersecurity-Office-NCSO/" target="_blank" rel="noopener" title="DAAPM v2.2 (historical; now the DAAG) (RMF for NISP contractors)">S13</a>]</td>
 </tr>
 <tr>
 <td>Counterintelligence</td>
@@ -169,11 +169,11 @@
 <p>Portal: <strong>STEPP</strong> via <strong>CDSE</strong>.</p>
 <h2>Decision rules</h2>
 <ol>
-<li>When someone says “we’ll sponsor ourselves,” answer: <strong>GCA or cleared prime in NISS</strong>.</li>
+<li>When someone says “we’ll sponsor ourselves,” answer: <strong>GCA or currently cleared contractor in NISS</strong>.</li>
 <li>When cloud/CMMC comes up, answer: <strong>CMMC / GCC High / FedRAMP ≠ FCL</strong> (and ≠ Secret/TS ATO).</li>
 <li>When foreign revenue ~15%+, answer: <strong>revisit SF 328 Q7</strong> before Day 20 and on material change.</li>
 <li>When “we’re non-possessing so light touch,” answer: still need sponsorship, KMPs, FSO program.</li>
-<li>When classified systems are in scope, answer: <strong>DAAPM/RMF</strong>, not CMMC alone.</li>
+<li>When classified systems are in scope, answer: <strong>DAAG/RMF</strong>, not CMMC alone.</li>
 </ol>
 <h2>Top traps</h2>
 <table>
@@ -201,7 +201,7 @@
 <td>Complete five-pack before submit</td>
 </tr>
 <tr>
-<td>Skip KMP fingerprints past Day 45</td>
+<td>Skip KMP fingerprints past DCSA due-date</td>
 <td>Queue investigations early</td>
 </tr>
 </tbody>
@@ -209,14 +209,9 @@
 <h2>Sibling contrast</h2>
 <p><em>CMMC lab-floor pack</em> — uncleared/CUI floor around a classified lab; not an FCL how-to.</p></article>
   <footer class="docfoot">
-    Rendered from <code>Learning\one-day-mastery\dcsa\reference\cheatsheet.md</code>. The Obsidian vault is the source of truth. Study material only. Citations <span class="cite">S#</span> link to the DCSA source ledger [S1]â€“[S14].
+    Rendered from <code>Learning\one-day-mastery\dcsa\reference\cheatsheet.md</code>. The Obsidian vault is the source of truth. Study material only. Citations <span class="cite">S#</span> link to the DCSA source ledger [S1]–[S14].
     <div class="prevnext"><a href="glossary.html">&larr; Previous</a><a href="quiz-bank.html">Next &rarr;</a></div>
   </footer>
 </main>
-<script type="module">
-import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
-const dark=(document.documentElement.getAttribute("data-theme")||"").endsWith("dark");
-mermaid.initialize({startOnLoad:true,theme:dark?"dark":"default",securityLevel:"strict"});
-</script>
 </body>
 </html>

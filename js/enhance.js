@@ -151,6 +151,17 @@ function parseHash(){
   return m?{v:m[1],sub:m[2]?decodeURIComponent(m[2]):null}:null;
 }
 function show(v,sub){
+  /* Old Term map links (#/termmap/<slug>) open the Map toggle inside Glossary. */
+  if(v==="termmap"){ sub="map"+(sub?"/"+sub:""); v="glossary"; history.replaceState(null,"","#/glossary/"+sub); }
+  if(v==="glossary"){
+    const prev=window.GLOSS_SUB||"", next=sub||"";
+    const modeChanged=/^map/.test(prev)!==/^map/.test(next);
+    window.GLOSS_SUB=next;
+    if(v===currentView){
+      if(modeChanged) renderGlossary();
+      else if(/^map/.test(next)&&typeof termMapApi!=="undefined"&&termMapApi) termMapApi.focus(next.replace(/^map\/?/,"")||null);
+    }
+  }
   if(!VIEWS[v]||!document.getElementById("v-"+v)) v="today";
   const changed = v!==currentView;
   currentView=v;

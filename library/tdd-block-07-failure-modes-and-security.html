@@ -2,22 +2,22 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; font-src 'self'; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Block 7: Failure modes and security | Learn DCSA</title>
 <meta name="description" content="Block 7 — failure modes across four views: package clocks, FOCI, cloud≠FCL, KMP, HR traps, AI oversharing.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="../assets/icons/icon-192.png" type="image/png">
 <link rel="stylesheet" href="library.css">
 <script>try{var p=JSON.parse(localStorage.getItem("appPalette"))||"github",m=JSON.parse(localStorage.getItem("appMode"))||"dark";document.documentElement.setAttribute("data-theme",p+"-"+m);}catch(e){document.documentElement.setAttribute("data-theme","github-dark");}</script>
 </head>
 <body>
 <header class="topbar">
   <a href="../index.html" class="home">&larr; Learn DCSA</a>
-  <span class="crumb">Library Â· TDD day blocks</span>
+  <span class="crumb">Library · TDD day blocks</span>
   <a href="index.html" class="home">All pages</a>
 </header>
 <main class="doc">
+  <aside class="corrections" role="note"><b>Archived study note. Corrections as of Oct 13 2026:</b> industry now initiates and reviews SF-86 cases (eApp) in DISS, and NBIS Agency turns off Nov 30 2026 (<a href="https://www.dcsa.mil/About-Us/News/Article/Article/4563691/industry-transition-to-diss-for-initiate-and-review-ir-functionality/">DCSA, Aug 4 2026</a>). The FCL handbook sets no fixed day count for the second deadline: it is the due date in DCSA’s investigation email. Cleared contractors follow the DAAG via NISP eMASS (<a href="https://www.dcsa.mil/Industrial-Security/NISP-Cybersecurity-Office-NCSO/">DCSA NCSO</a>). A GCA or a currently cleared contractor may sponsor (<a href="https://www.ecfr.gov/current/title-32/subtitle-A/chapter-I/subchapter-D/part-117/section-117.9">32 CFR 117.9(a)(10)</a>). The pre-2025 SF 328 threshold and “foreign proceeds” wording are unverified and were removed. The <a href="../index.html#/refs">source ledger</a> wins over this note.</aside>
   <div class="kicker">TDD day blocks</div>
   <h1 class="doctitle">Block 7: Failure modes and security</h1>
   <p class="lead">Block 7 — failure modes across four views: package clocks, FOCI, cloud≠FCL, KMP, HR traps, AI oversharing.</p>
@@ -31,7 +31,7 @@
 <li>Confusing cloud IL / CMMC with FCL or classified ATO</li>
 <li>Wrong KMP list</li>
 <li>Adverse information trapped in HR</li>
-<li>International partnerships under old 30% mindset</li>
+<li>International partnerships under pre-2025 SF 328 mindset</li>
 <li>Continuous vetting gaps after grant</li>
 <li>AI oversharing of SF-86/FOCI PII</li>
 </ul>
@@ -65,7 +65,7 @@
 </tr>
 <tr>
 <td>Logical</td>
-<td>Miss Day 20 / Day 45</td>
+<td>Miss Day 20 and DCSA due-date</td>
 <td>Welcome email + empty package tracker</td>
 <td>Clock owner + limited-resubmit discipline [<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/fc/DCSA%20FCL_Orientation_Handbook_20260828.pdf" target="_blank" rel="noopener" title="DCSA FCL Orientation Handbook (2026)">S2</a>]</td>
 </tr>
@@ -77,7 +77,7 @@
 </tr>
 <tr>
 <td>Physical</td>
-<td>Old 30% foreign-proceeds model</td>
+<td>Old 30% foreign-foreign-interest amounts model</td>
 <td>Finance reports “under 30%” after May 2025</td>
 <td>Q7(b) <strong>15%</strong> monitoring [<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/FOCI/Updated%20SF328%20-%20Industry%20Information%20Paper%20(final).pdf" target="_blank" rel="noopener" title="DCSA SF 328 Industry Information Paper May 2025">S4</a>]</td>
 </tr>
@@ -108,7 +108,7 @@
 <tr>
 <td>Integration</td>
 <td>Fingerprint lag</td>
-<td>Day 45 expires, KMP not initiated</td>
+<td>DCSA due-date expires, KMP not initiated</td>
 <td>Early channeler scheduling [<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/fc/DCSA%20FCL_Orientation_Handbook_20260828.pdf" target="_blank" rel="noopener" title="DCSA FCL Orientation Handbook (2026)">S2</a>]</td>
 </tr>
 </tbody>
@@ -123,14 +123,9 @@
 <li class="task"><input type="checkbox" disabled> Failure-mode table covers all four views; AI and HR traps included; 15% vs 30% called out.</li>
 </ul></article>
   <footer class="docfoot">
-    Rendered from <code>Learning\tech-deep-dive\dcsa\blocks\07-failure-modes-and-security.md</code>. The Obsidian vault is the source of truth. Study material only. Citations <span class="cite">S#</span> link to the DCSA source ledger [S1]â€“[S14].
+    Rendered from <code>Learning\tech-deep-dive\dcsa\blocks\07-failure-modes-and-security.md</code>. The Obsidian vault is the source of truth. Study material only. Citations <span class="cite">S#</span> link to the DCSA source ledger [S1]–[S14].
     <div class="prevnext"><a href="tdd-block-06-hands-on-lab.html">&larr; Previous</a><a href="tdd-block-08-design-review.html">Next &rarr;</a></div>
   </footer>
 </main>
-<script type="module">
-import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
-const dark=(document.documentElement.getAttribute("data-theme")||"").endsWith("dark");
-mermaid.initialize({startOnLoad:true,theme:dark?"dark":"default",securityLevel:"strict"});
-</script>
 </body>
 </html>

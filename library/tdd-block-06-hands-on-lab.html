@@ -2,22 +2,22 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; font-src 'self'; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Block 6: Hands-on lab | Learn DCSA</title>
 <meta name="description" content="Block 6 — hands-on tabletop lab: Day-20 package, SF 328 Q7 near 15%, scenario sort, SEAD 4 mini, CDSE map.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="../assets/icons/icon-192.png" type="image/png">
 <link rel="stylesheet" href="library.css">
 <script>try{var p=JSON.parse(localStorage.getItem("appPalette"))||"github",m=JSON.parse(localStorage.getItem("appMode"))||"dark";document.documentElement.setAttribute("data-theme",p+"-"+m);}catch(e){document.documentElement.setAttribute("data-theme","github-dark");}</script>
 </head>
 <body>
 <header class="topbar">
   <a href="../index.html" class="home">&larr; Learn DCSA</a>
-  <span class="crumb">Library Â· TDD day blocks</span>
+  <span class="crumb">Library · TDD day blocks</span>
   <a href="index.html" class="home">All pages</a>
 </header>
 <main class="doc">
+  <aside class="corrections" role="note"><b>Archived study note. Corrections as of Oct 13 2026:</b> industry now initiates and reviews SF-86 cases (eApp) in DISS, and NBIS Agency turns off Nov 30 2026 (<a href="https://www.dcsa.mil/About-Us/News/Article/Article/4563691/industry-transition-to-diss-for-initiate-and-review-ir-functionality/">DCSA, Aug 4 2026</a>). The FCL handbook sets no fixed day count for the second deadline: it is the due date in DCSA’s investigation email. Cleared contractors follow the DAAG via NISP eMASS (<a href="https://www.dcsa.mil/Industrial-Security/NISP-Cybersecurity-Office-NCSO/">DCSA NCSO</a>). A GCA or a currently cleared contractor may sponsor (<a href="https://www.ecfr.gov/current/title-32/subtitle-A/chapter-I/subchapter-D/part-117/section-117.9">32 CFR 117.9(a)(10)</a>). The pre-2025 SF 328 threshold and “foreign proceeds” wording are unverified and were removed. The <a href="../index.html#/refs">source ledger</a> wins over this note.</aside>
   <div class="kicker">TDD day blocks</div>
   <h1 class="doctitle">Block 6: Hands-on lab</h1>
   <p class="lead">Block 6 — hands-on tabletop lab: Day-20 package, SF 328 Q7 near 15%, scenario sort, SEAD 4 mini, CDSE map.</p>
@@ -39,8 +39,8 @@
 </ul>
 <h2>Actions (tied to views)</h2>
 <ul>
-<li class="task"><input type="checkbox" disabled> <strong>Lab A — Day-20 checklist:</strong> Using <a href="tdd-view-02-logical.html">logical entities</a> and <a href="tdd-view-03-physical.html">forms</a>, list every artifact for a fictional US LLC, Secret, <strong>non-possessing</strong>, sponsored by a cleared prime. Include DD 441, SF 328, ownership, KMP, formation docs.</li>
-<li class="task"><input type="checkbox" disabled> <strong>Lab B — FOCI near 15%:</strong> For a fictional university lab with foreign grants/gifts, compute whether Q7(b) <strong>aggregate foreign proceeds</strong> approach the <strong>15%</strong> line; note gifts/tuition/endowments expanded in 2025. [<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/FOCI/Updated%20SF328%20-%20Industry%20Information%20Paper%20(final).pdf" target="_blank" rel="noopener" title="DCSA SF 328 Industry Information Paper May 2025">S4</a>] Do <strong>not</strong> use real institutional financials.</li>
+<li class="task"><input type="checkbox" disabled> <strong>Lab A — Day-20 checklist:</strong> Using <a href="tdd-view-02-logical.html">logical entities</a> and <a href="tdd-view-03-physical.html">forms</a>, list every artifact for a fictional US LLC, Secret, <strong>non-possessing</strong>, sponsored by a currently cleared contractor. Include DD 441, SF 328, ownership, KMP, formation docs.</li>
+<li class="task"><input type="checkbox" disabled> <strong>Lab B — FOCI near 15%:</strong> For a fictional university lab with foreign grants/gifts, compute whether <strong>Q7(b) reporting</strong> approach the <strong>15%</strong> line; note gifts/tuition/endowments expanded in 2025. [<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/FOCI/Updated%20SF328%20-%20Industry%20Information%20Paper%20(final).pdf" target="_blank" rel="noopener" title="DCSA SF 328 Industry Information Paper May 2025">S4</a>] Do <strong>not</strong> use real institutional financials.</li>
 <li class="task"><input type="checkbox" disabled> <strong>Lab C — Scenario sort:</strong> Label each card: (1) CMMC-only CUI feeder system, (2) NISP possessing facility, (3) visiting researcher under sponsor FCL. State which clocks and systems apply.</li>
 <li class="task"><input type="checkbox" disabled> <strong>Lab D — SEAD 4 tabletop:</strong> One open-source vignette; map to two or three of the thirteen guidelines; conclude whole-person — not a real case.</li>
 <li class="task"><input type="checkbox" disabled> <strong>Lab E — CDSE map:</strong> Place IS140, IS142, IS020.CU, CS250 (and optional IS011/IS065/IS130) onto the four domains.</li>
@@ -48,21 +48,16 @@
 <h2>Retrieval check</h2>
 <div class="callout question" markdown="0"><div class="callout-title">Question</div><p>What did the lab show that the documentation alone did not?</p></div>
 
-<div class="callout success" markdown="0"><div class="callout-title">Answer cues</div><p>Expect: (1) KMP list is harder than titles — security-affecting authority drives who enters Day 45; (2) university foreign-grant math under <strong>15%</strong> forces finance + FSO collaboration; (3) CMMC-only scenario has <strong>no</strong> NISS sponsorship clock; (4) SEAD 4 resists single-issue thinking. Record your actual board photos or checklist file path here after the lab.</p></div>
+<div class="callout success" markdown="0"><div class="callout-title">Answer cues</div><p>Expect: (1) KMP list is harder than titles — security-affecting authority drives who enters DCSA due-date; (2) university foreign-grant math under <strong>15%</strong> forces finance + FSO collaboration; (3) CMMC-only scenario has <strong>no</strong> NISS sponsorship clock; (4) SEAD 4 resists single-issue thinking. Record your actual board photos or checklist file path here after the lab.</p></div>
 
 <h2>Exit criteria</h2>
 <ul>
 <li class="task"><input type="checkbox" disabled> Labs A–E completed with fictional data only; at least one artifact saved or photographed under <code>assets/</code>.</li>
 </ul></article>
   <footer class="docfoot">
-    Rendered from <code>Learning\tech-deep-dive\dcsa\blocks\06-hands-on-lab.md</code>. The Obsidian vault is the source of truth. Study material only. Citations <span class="cite">S#</span> link to the DCSA source ledger [S1]â€“[S14].
+    Rendered from <code>Learning\tech-deep-dive\dcsa\blocks\06-hands-on-lab.md</code>. The Obsidian vault is the source of truth. Study material only. Citations <span class="cite">S#</span> link to the DCSA source ledger [S1]–[S14].
     <div class="prevnext"><a href="tdd-block-05-integration-and-ai.html">&larr; Previous</a><a href="tdd-block-07-failure-modes-and-security.html">Next &rarr;</a></div>
   </footer>
 </main>
-<script type="module">
-import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
-const dark=(document.documentElement.getAttribute("data-theme")||"").endsWith("dark");
-mermaid.initialize({startOnLoad:true,theme:dark?"dark":"default",securityLevel:"strict"});
-</script>
 </body>
 </html>
