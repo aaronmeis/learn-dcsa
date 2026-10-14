@@ -1,4 +1,4 @@
-﻿/* ============================================================
+/* ============================================================
    Engagement layer: hash routing, Today + daily architecture
    challenge, Shorts feed, mobile tab bar and sheets, search
    palette, streaks. Ported from learn-ai-law; loads after
@@ -366,7 +366,7 @@ window.renderShorts = function(){
   const w=Store.watched(); const nW=shortItems.filter(s=>w[s.id]).length;
   const list=filteredShorts();
   el.innerHTML=h`<h2 class="vh">Shorts <span class="vh-sub">${nW} of ${shortItems.length} watched</span></h2>
-  <div class="note danger" style="margin-bottom:1rem"><b>Secondary source.</b> NotebookLM can overstate speed. The 10x line and the billion-row timing are slide claims. The concurrency contract is the official concurrency page.</div>
+  <div class="note danger" style="margin-bottom:1rem"><b>Secondary source.</b> NotebookLM reports and shorts can overclaim. Vault views and the source ledger win. Do not treat CMMC, GCC High, or FedRAMP as an FCL or Secret ATO.</div>
   <div class="sx-layout">
     <div class="sx-main">
       <div class="sx-player" id="sxPlayer"></div>
