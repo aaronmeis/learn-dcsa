@@ -1,0 +1,22 @@
+/* Source notes for prompt citations. Written once from the source ledger (library/source-ledger.html,
+   SOURCES in js/data.js) and the audited primary-source facts already on this site. Reused by the
+   prompt chips, the "Sources cited" panel and the optional copy block. Title and URL come from SOURCES. */
+window.SOURCE_NOTES = {
+  1:"The governing NISP rule: the NISPOM codified as federal regulation in 32 CFR Part 117.",
+  2:"DCSA's facility clearance orientation handbook. Source for the Day 20 package and the second deadline, which is the due date in DCSA's investigation email for KMP clearances. Quotes here were checked against a mirrored draft copy and still need a check against the final dcsa.mil file.",
+  3:"DCSA news announcing the updated SF 328 (Certificate Pertaining to Foreign Interests): form approved May 1, 2025 and deployed in NISS on May 12, 2025.",
+  4:"DCSA industry information paper on the updated SF 328. Its key change: the Question 7b threshold was lowered to 15%.",
+  5:"CDSE eLearning course IS140.16 on facility clearances in the NISP (about two hours).",
+  6:"CDSE course IS142.16 on the personnel clearance process in the NISP.",
+  7:"CDSE FSO Orientation for Non-Possessing Facilities curriculum (IS020.CU), about 26.5 hours, which includes IS140 and IS142.",
+  8:"CDSE FSO Toolkit: a hub of resources for Facility Security Officers, including STEPP.",
+  9:"DCSA news, May 2026, on NISP contractor continuous vetting: the PVQ is completed every 5 years and periodic reinvestigations are eliminated for NISP contractors.",
+  13:"DCSA NISP Cybersecurity Office (NCSO) page. Cleared contractors follow the DAAG (which replaced the older DAAPM) for RMF authorization of classified systems, submitted through NISP eMASS.",
+  14:"CDSE course CS250.16 on applying assessment and authorization (A&A) in the NISP: the DAAG/RMF phases.",
+  15:"32 CFR 117.9, entity eligibility determination. Under 117.9(a)(10), a GCA or a currently cleared contractor may sponsor a facility clearance; a company cannot sponsor itself.",
+  16:"DCSA news, Aug 4, 2026: industry moved to DISS for Initiate and Review. Contractors start eApp cases in DISS from Jul 31, 2026, and NBIS Agency turns off Nov 30, 2026.",
+  17:"DCSA FIN 23-02 on the transition to NBIS eApp: e-QIP was retired on Oct 1, 2023 and replaced by eApp.",
+  18:"32 CFR Part 170, the CMMC Program rule: the cybersecurity floor for contractors handling FCI and CUI. It is separate from a facility clearance.",
+  20:"32 CFR 117.8, reporting requirements for cleared contractors.",
+  25:"DCSA resources for Secure Web Fingerprint Transmission (SWFT), the system that sends electronic fingerprints to DCSA."
+};

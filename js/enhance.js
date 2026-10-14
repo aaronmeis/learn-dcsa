@@ -24,6 +24,17 @@ const GROUPS = {
   practice:["flash","quiz","failures","prompts"],
   reference:["cheat","map","glossary","ea","debates","refs","dashboard"]
 };
+/* New content that lives in the Library, surfaced in nav, sheets, home and search. */
+const NEW_CONTENT = [
+  {label:"Example project plan: the DCSA journey",href:"library/project-plan.html",sub:"Plan · sponsorship to grant to ongoing vetting",kw:"plan project plan journey roadmap steps timeline sponsorship fcl eapp diss daag emass example"},
+  {label:"Videos and resources",href:"library/video-resources.html",sub:"Resources · DCSA, CDSE and YouTube",kw:"video videos youtube resources links training cdse dcsa official watch"},
+  {label:"Deck and deep-dive cut (video)",href:"#/deck",sub:"Learn · silent captioned deck video",kw:"deck video slides cut remotion watch deep dive"},
+  {label:"EA mapping (expanded)",href:"#/ea",sub:"Reference · layers, capabilities, worked example",kw:"ea enterprise architecture mapping layers capability daag emass diss eapp"},
+  {label:"Curriculum Block 14: 2026 rules and post-grant duties",href:"#/curriculum",sub:"Learn · eApp in DISS, CV, CMMC, FOCI, reporting",kw:"block 14 curriculum 2026 eapp diss continuous vetting cmmc foci reporting naesoc"},
+  {label:"Journey infographic",href:"assets/diagrams/journey-infographic.svg",sub:"Infographic · the DCSA journey on one page",kw:"infographic journey diagram plan steps"},
+  {label:"DISS transition 2026 infographic",href:"assets/diagrams/diss-transition-2026.svg",sub:"Infographic · eApp moves to DISS, NBIS Agency off Nov 30 2026",kw:"infographic diss eapp nbis transition 2026 diagram"}
+];
+const EXTRA_LINKS = { learn:[{label:"Plan (example journey)",href:"library/project-plan.html"},{label:"Resources and videos",href:"library/video-resources.html"}] };
 const GROUP_OF = {};
 Object.keys(GROUPS).forEach(g=>GROUPS[g].forEach(v=>GROUP_OF[v]=g));
 const PILLARS = ["NISP","Personnel","Systems","CI"];
@@ -544,6 +555,8 @@ function renderToday(){
       <p class="lead">${chDone(ch)?"Today's challenge is done. Anything more is a bonus.":"Three rounds, about three minutes. Keep the streak going."}</p></div>
     <div class="streak ${st?"on":""}" title="Days in a row with the daily challenge completed"><b>${st}</b><span>day streak</span></div>
   </div>
+  <section class="whatsnew" aria-labelledby="wnH"><h3 id="wnH">What's new: start here</h3><p>New this month: an example journey plan, a videos and resources page, the deck video, the expanded EA mapping, Block 14 on the 2026 rules, and two infographics.</p>
+    <div class="wn-grid">${NEW_CONTENT.map(x=>`<a class="wn-item" href="${x.href}"><b>${esc(x.label)}</b><span>${esc(x.sub)}</span></a>`).join("")}</div></section>
   ${challengeHTML()}
   <div class="today-grid">
     ${cs?h`<a class="hero-card" href="#/shorts/${encodeURIComponent(cs.id)}">
@@ -614,7 +627,7 @@ function closeSheet(){
 }
 function navSheet(group){
   const title={learn:"Learn",practice:"Practice",reference:"More"}[group];
-  let html=`<ul class="sheet-list">`+GROUPS[group].map(v=>`<li><a href="#/${v}" class="${currentView===v?"active":""}">${esc(VIEWS[v])}<span aria-hidden="true">›</span></a></li>`).join("")+`</ul>`;
+  let html=`<ul class="sheet-list">`+GROUPS[group].map(v=>`<li><a href="#/${v}" class="${currentView===v?"active":""}">${esc(VIEWS[v])}<span aria-hidden="true">›</span></a></li>`).join("")+(EXTRA_LINKS[group]||[]).map(x=>`<li><a href="${x.href}">${esc(x.label)}<span aria-hidden="true">›</span></a></li>`).join("")+`</ul>`;
   if(group==="reference"){
     const mode=LS.get("appMode",defaultMode()), pal=LS.get("appPalette","github");
     html+=h`<div class="sheet-section"><h3>Appearance</h3><div class="seg" role="group" aria-label="Mode">
@@ -645,7 +658,7 @@ $("#sheetBody").addEventListener("click",e=>{
 /* ---------- Search palette (Ctrl/Cmd K) ---------- */
 let palIndex=[], palSel=0, palItems=[];
 function buildPaletteIndex(){
-  palIndex=Object.keys(VIEWS).map(v=>({kind:"View",label:VIEWS[v],sub:(GROUP_OF[v]||"").replace(/^./,c=>c.toUpperCase()),go:()=>go(v)}))
+  palIndex=NEW_CONTENT.map(x=>({kind:"New",label:x.label,sub:x.sub,kw:x.kw,go:()=>{if(x.href[0]==="#")location.hash=x.href;else location.href=x.href;}})).concat(Object.keys(VIEWS).map(v=>({kind:"View",label:VIEWS[v],sub:(GROUP_OF[v]||"").replace(/^./,c=>c.toUpperCase()),go:()=>go(v)})))
     .concat(shortItems.map(s=>({kind:"Short",label:s.title,sub:s.pillar+" · "+fmtDur(s.duration),go:()=>{location.hash="#/shorts/"+encodeURIComponent(s.id);}})))
     .concat(DATA.glossary.map(g=>({kind:"Term",label:g.term,sub:g.category,go:()=>{LS.set(KEY+"gq",g.term);LS.set(KEY+"gcat","all");renderGlossary();go("glossary");}})))
     .concat(DATA.checklist.map((c,i)=>({kind:"Failure",label:c.title,sub:c.view,go:()=>{LS.set(KEY+"cl-open:"+i,true);LS.set(KEY+"fmView","all");renderCounsel();go("failures");}})))
@@ -660,7 +673,8 @@ function openPalette(){
 function closePalette(){ $("#palette").hidden=true; if(lastFocus&&lastFocus.focus) lastFocus.focus({preventScroll:true}); }
 function filterPalette(){
   const q=norm($("#paletteInput").value.trim());
-  palItems=(q?palIndex.filter(x=>norm(x.label).includes(q)||norm(x.sub).includes(q)).sort((a,b)=>norm(a.label).indexOf(q)-norm(b.label).indexOf(q)):palIndex.filter(x=>x.kind==="View")).slice(0,40);
+  const rk=x=>{const l=norm(x.label),i=l.indexOf(q);if(x.kw&&(" "+norm(x.kw)+" ").includes(" "+q+" "))return -1;if(i===0||l.includes(" "+q))return 0;return i<0?500:100+i;};
+  palItems=(q?palIndex.filter(x=>norm(x.label).includes(q)||norm(x.sub).includes(q)||(x.kw&&norm(x.kw).includes(q))).sort((a,b)=>rk(a)-rk(b)):palIndex.filter(x=>x.kind==="View"||x.kind==="New")).slice(0,40);
   palSel=0; drawPalette();
 }
 function drawPalette(){
