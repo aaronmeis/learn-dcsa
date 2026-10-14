@@ -269,11 +269,11 @@ function renderDeck(){
     :(deepFile?`<video class="wide-player" controls preload="metadata" poster="assets/slides/slide-01.jpg" src="${esc(deepFile)}"></video>`
       :`<div class="note"><b>Deep-dive cut.</b> Long-form MP4 is not on the site yet. Study the slide deck and question cards below. ${lib("media-cut-script","Cut script")}</div>`);
   let h=`<h2 class="vh">Deck and deep-dive cut</h2>
-  <p class="lead">NotebookLM slides and the narrated cut. Each slide has its narration line and the question the cut asks before it. Amber outlines mark claims the source ledger does not support.</p>
+  <p class="lead">NotebookLM slides and a silent, captioned cut of them. Each slide has its narration line and the question the cut asks before it. Amber outlines mark claims the source ledger does not support.</p>
   ${video}
-  ${DEEP.youtube?`<p class="obj" style="margin-top:.4rem"><a href="https://www.youtube.com/watch?v=${DEEP.youtube}" target="_blank" rel="noopener">Open the deep-dive cut on YouTube ↗</a></p>`:(deepFile?`<p class="obj" style="margin-top:.4rem">The cut plays from this site. ${lib("media-cut-script","Cut script")}</p>`:"")}
+  ${DEEP.youtube?`<p class="obj" style="margin-top:.4rem"><a href="https://www.youtube.com/watch?v=${DEEP.youtube}" target="_blank" rel="noopener">Open the deep-dive cut on YouTube ↗</a></p>`:(deepFile?`<p class="obj" style="margin-top:.4rem">Silent 2:26 cut of the 15 slides, with on-screen captions. Yellow strips correct slides that show older terms (Day 45, DAAPM, NBIS/e-QIP). ${lib("media-cut-script","Cut script")}</p>`:"")}
   <div class="note" style="margin-top:1rem"><b>Opening line.</b> ${esc(C.open||"")}<br><b>Recap.</b> ${esc(C.recap||"")}</div>
-  <p class="obj" style="margin-top:1rem"><b>Downloads:</b> Blueprint and deck files land in <code>assets/downloads/</code> with the pack. ${lib("media-cut-script","Cut script: narration and question cards")} · ${lib("media-shorts-plan","Shorts plan")} · ${lib("tdd-view-01-conceptual","Conceptual view")}</p>
+  <p class="obj" style="margin-top:1rem"><b>Downloads:</b> Blueprint and deck files land in <code>assets/downloads/</code> with the pack. ${lib("media-cut-script","Cut script: narration and question cards")} · ${lib("media-shorts-plan","Shorts plan")} · ${lib("project-plan","Example journey plan")} · ${lib("video-resources","Videos and resources")} · ${lib("tdd-view-01-conceptual","Conceptual view")}</p>
   <h3 style="margin:1.6rem 0 .6rem;font-size:1.05rem">Slides</h3>
   <div class="deckrows">`;
   for(let i=1;i<=n;i++){
