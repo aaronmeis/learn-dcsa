@@ -1,0 +1,2173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; font-src 'self'; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="assets/icons/icon-192.png" type="image/png" />
+<title>ARGON-1 // Learn DCSA 3D Interactive Flight Deck (Console V2.0)</title>
+<style>
+  :root {
+    --bg-deep: #060913;
+    --bg-panel: rgba(11, 17, 30, 0.86);
+    --bg-card: rgba(17, 25, 43, 0.92);
+    --border-dim: rgba(148, 163, 184, 0.22);
+    --border-bright: rgba(250, 204, 21, 0.65);
+    --text-main: #f1f5f9;
+    --text-muted: #94a3b8;
+    --gold-100: #facc15;     /* 100 NISP / FCL Track */
+    --cyan-200: #38bdf8;     /* 200 Personnel / PCL Track */
+    --emerald-300: #34d399;  /* 300 Systems / Lab ATO Track */
+    --crimson-ci: #f43f5e;   /* CI / Failure Modes / Hazards */
+    --violet-ea: #a78bfa;    /* Enterprise Architecture / Reference */
+    --font-mono: 'JetBrains Mono', 'Fira Code', 'SFMono-Regular', Consolas, monospace;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+  }
+
+  html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: var(--bg-deep);
+    color: var(--text-main);
+    font-family: var(--font-sans);
+  }
+
+  #flightCanvas {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    z-index: 1;
+    cursor: crosshair;
+  }
+
+  /* Subtle Cockpit Vignette & Scanlines */
+  .cockpit-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    background:
+      radial-gradient(circle at 50% 50%, transparent 58%, rgba(3, 6, 14, 0.72) 100%),
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 1px, transparent 1px, transparent 3px);
+  }
+
+  /* Top Command Bar */
+  .top-hud {
+    position: fixed;
+    top: 12px;
+    left: 16px;
+    right: 16px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 16px;
+    background: var(--bg-panel);
+    border: 1px solid var(--border-dim);
+    border-radius: 12px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  .brand-cluster {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .key-badge {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, rgba(250, 204, 21, 0.22), rgba(250, 204, 21, 0.05));
+    border: 1px solid var(--gold-100);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: var(--gold-100);
+    box-shadow: 0 0 14px rgba(250, 204, 21, 0.25);
+  }
+
+  .brand-title {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .version-pill {
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 999px;
+    background: rgba(250, 204, 21, 0.16);
+    color: var(--gold-100);
+    border: 1px solid rgba(250, 204, 21, 0.4);
+    font-weight: 700;
+  }
+
+  .brand-sub {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  /* Track Filter Pills */
+  .track-switcher {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .track-btn {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 6px 11px;
+    border-radius: 8px;
+    border: 1px solid var(--border-dim);
+    background: rgba(15, 23, 42, 0.75);
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.18s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .track-btn:hover {
+    color: #fff;
+    border-color: rgba(255,255,255,0.35);
+    transform: translateY(-1px);
+  }
+
+  .track-btn.active[data-track="ALL"] {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    border-color: #fff;
+  }
+  .track-btn.active[data-track="FCL"] {
+    background: rgba(250, 204, 21, 0.16);
+    color: var(--gold-100);
+    border-color: var(--gold-100);
+    box-shadow: 0 0 12px rgba(250, 204, 21, 0.25);
+  }
+  .track-btn.active[data-track="PCL"] {
+    background: rgba(56, 189, 248, 0.16);
+    color: var(--cyan-200);
+    border-color: var(--cyan-200);
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
+  }
+  .track-btn.active[data-track="ATO"] {
+    background: rgba(52, 211, 153, 0.16);
+    color: var(--emerald-300);
+    border-color: var(--emerald-300);
+    box-shadow: 0 0 12px rgba(52, 211, 153, 0.25);
+  }
+  .track-btn.active[data-track="OPS"] {
+    background: rgba(244, 63, 94, 0.16);
+    color: var(--crimson-ci);
+    border-color: var(--crimson-ci);
+    box-shadow: 0 0 12px rgba(244, 63, 94, 0.25);
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  /* Telemetry & Status Cluster */
+  .telemetry-cluster {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .stat-box {
+    background: rgba(15, 23, 42, 0.85);
+    border: 1px solid var(--border-dim);
+    border-radius: 8px;
+    padding: 4px 10px;
+    text-align: right;
+  }
+
+  .stat-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  .stat-val {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gold-100);
+  }
+
+  .hud-action-btn {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 7px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(56, 189, 248, 0.45);
+    background: rgba(56, 189, 248, 0.14);
+    color: var(--cyan-200);
+    cursor: pointer;
+    transition: all 0.18s ease;
+  }
+
+  .hud-action-btn:hover {
+    background: rgba(56, 189, 248, 0.28);
+    color: #fff;
+  }
+
+  .hud-action-btn.active-pilot {
+    background: rgba(52, 211, 153, 0.22);
+    border-color: var(--emerald-300);
+    color: var(--emerald-300);
+    box-shadow: 0 0 12px rgba(52, 211, 153, 0.3);
+  }
+
+  /* Left Waypoint Navigator / Sector Map */
+  .left-nav {
+    position: fixed;
+    top: 76px;
+    left: 16px;
+    bottom: 86px;
+    width: 280px;
+    z-index: 10;
+    background: var(--bg-panel);
+    border: 1px solid var(--border-dim);
+    border-radius: 12px;
+    backdrop-filter: blur(12px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .panel-header {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border-dim);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    background: rgba(15, 23, 42, 0.6);
+  }
+
+  /* Dual-Track Lock Status Indicator */
+  .lock-status-bar {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border-dim);
+    background: rgba(15, 23, 42, 0.45);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+
+  .pillar-chip {
+    padding: 6px;
+    border-radius: 6px;
+    border: 1px solid var(--border-dim);
+    background: rgba(9, 13, 24, 0.7);
+    text-align: center;
+    font-family: var(--font-mono);
+  }
+
+  .pillar-chip .p-code {
+    font-size: 10px;
+    font-weight: 700;
+  }
+
+  .pillar-chip .p-prog {
+    font-size: 11px;
+    margin-top: 2px;
+    color: #fff;
+  }
+
+  .waypoint-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .waypoint-list::-webkit-scrollbar {
+    width: 5px;
+  }
+  .waypoint-list::-webkit-scrollbar-thumb {
+    background: rgba(148, 163, 184, 0.3);
+    border-radius: 4px;
+  }
+
+  .wp-item {
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(148, 163, 184, 0.14);
+    background: rgba(15, 23, 42, 0.55);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+  }
+
+  .wp-item:hover {
+    background: rgba(30, 41, 59, 0.8);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateX(2px);
+  }
+
+  .wp-item.active {
+    background: rgba(30, 41, 59, 0.95);
+    border-color: var(--gold-100);
+    box-shadow: inset 3px 0 0 var(--gold-100);
+  }
+
+  .wp-badge {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .wp-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .wp-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: #f8fafc;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .wp-sub {
+    font-size: 10px;
+    color: var(--text-muted);
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .wp-check {
+    font-size: 11px;
+    color: var(--emerald-300);
+    font-weight: 700;
+  }
+
+  /* Right Tactical Briefing & Inspection Drawer */
+  .right-inspector {
+    position: fixed;
+    top: 76px;
+    right: 16px;
+    bottom: 86px;
+    width: 390px;
+    z-index: 10;
+    background: var(--bg-panel);
+    border: 1px solid var(--border-dim);
+    border-radius: 12px;
+    backdrop-filter: blur(12px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
+  }
+
+  .inspector-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 14px 16px;
+    user-select: text;
+  }
+
+  .inspector-body::-webkit-scrollbar {
+    width: 5px;
+  }
+  .inspector-body::-webkit-scrollbar-thumb {
+    background: rgba(148, 163, 184, 0.3);
+    border-radius: 4px;
+  }
+
+  .sector-tag-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .sector-pill {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .source-cite {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text-muted);
+    background: rgba(255, 255, 255, 0.06);
+    padding: 2px 7px;
+    border-radius: 4px;
+    border: 1px solid var(--border-dim);
+  }
+
+  .inspector-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.25;
+    margin-bottom: 6px;
+  }
+
+  .inspector-summary {
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: #cbd5e1;
+    margin-bottom: 12px;
+  }
+
+  .live-link-bar {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+
+  .live-site-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 11px;
+    border-radius: 7px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    text-decoration: none;
+    background: rgba(250, 204, 21, 0.15);
+    color: var(--gold-100);
+    border: 1px solid rgba(250, 204, 21, 0.45);
+    transition: all 0.15s ease;
+  }
+
+  .live-site-btn:hover {
+    background: rgba(250, 204, 21, 0.28);
+    color: #fff;
+    transform: translateY(-1px);
+  }
+
+  .live-site-btn.secondary {
+    background: rgba(56, 189, 248, 0.12);
+    color: var(--cyan-200);
+    border-color: rgba(56, 189, 248, 0.35);
+  }
+
+  .section-subhead {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin: 12px 0 7px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .key-specs-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+
+  .key-specs-list li {
+    font-size: 12px;
+    line-height: 1.45;
+    color: #e2e8f0;
+    background: rgba(15, 23, 42, 0.65);
+    border: 1px solid rgba(148, 163, 184, 0.16);
+    border-left: 3px solid var(--cyan-200);
+    padding: 7px 10px;
+    border-radius: 6px;
+  }
+
+  .key-specs-list li strong {
+    color: #fff;
+  }
+
+  /* Interactive Clearance Gate Challenge Card */
+  .gate-challenge-box {
+    background: linear-gradient(180deg, rgba(17, 24, 39, 0.95), rgba(9, 13, 24, 0.95));
+    border: 1px solid rgba(250, 204, 21, 0.35);
+    border-radius: 10px;
+    padding: 12px;
+    margin-top: 8px;
+  }
+
+  .challenge-q {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.4;
+    margin-bottom: 9px;
+  }
+
+  .challenge-opts {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .opt-btn {
+    text-align: left;
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid rgba(148, 163, 184, 0.24);
+    background: rgba(30, 41, 59, 0.65);
+    color: #e2e8f0;
+    font-size: 11.5px;
+    line-height: 1.35;
+    cursor: pointer;
+    transition: all 0.14s ease;
+  }
+
+  .opt-btn:hover {
+    background: rgba(51, 65, 85, 0.85);
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+
+  .opt-btn.correct {
+    background: rgba(16, 185, 129, 0.22);
+    border-color: var(--emerald-300);
+    color: #ecfdf5;
+    font-weight: 600;
+  }
+
+  .opt-btn.wrong {
+    background: rgba(244, 63, 94, 0.22);
+    border-color: var(--crimson-ci);
+    color: #ffe4e6;
+  }
+
+  .challenge-feedback {
+    margin-top: 8px;
+    font-size: 11.5px;
+    line-height: 1.4;
+    padding: 7px 9px;
+    border-radius: 6px;
+    display: none;
+  }
+
+  /* Bottom Flight Deck Controls Bar */
+  .bottom-deck {
+    position: fixed;
+    bottom: 12px;
+    left: 16px;
+    right: 16px;
+    height: 62px;
+    z-index: 10;
+    background: var(--bg-panel);
+    border: 1px solid var(--border-dim);
+    border-radius: 12px;
+    backdrop-filter: blur(12px);
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+  }
+
+  .controls-hint {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    font-size: 11.5px;
+    color: var(--text-muted);
+  }
+
+  .kbd {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 6px;
+    border-radius: 4px;
+    background: rgba(30, 41, 59, 0.9);
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    color: #f8fafc;
+    margin-right: 4px;
+  }
+
+  .flight-nav-btns {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .deck-btn {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 8px 13px;
+    border-radius: 8px;
+    border: 1px solid var(--border-dim);
+    background: rgba(30, 41, 59, 0.85);
+    color: #f8fafc;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .deck-btn:hover {
+    border-color: var(--gold-100);
+    color: var(--gold-100);
+    transform: translateY(-1px);
+  }
+
+  .deck-btn.primary {
+    background: linear-gradient(135deg, rgba(250, 204, 21, 0.25), rgba(234, 179, 8, 0.1));
+    border-color: var(--gold-100);
+    color: var(--gold-100);
+  }
+
+  /* Center HUD Reticle & Toast Notification */
+  .hud-toast {
+    position: fixed;
+    top: 84px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9;
+    pointer-events: none;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 7px 16px;
+    border-radius: 999px;
+    background: rgba(15, 23, 42, 0.9);
+    border: 1px solid var(--gold-100);
+    color: var(--gold-100);
+    box-shadow: 0 0 20px rgba(250, 204, 21, 0.3);
+    opacity: 0;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+
+  .hud-toast.visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(4px);
+  }
+
+  /* Full-Screen Architecture Matrix / Site Map Modal */
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 30;
+    background: rgba(3, 6, 14, 0.84);
+    backdrop-filter: blur(8px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  .modal-backdrop.open {
+    display: flex;
+  }
+
+  .modal-window {
+    width: min(1060px, 95vw);
+    max-height: 88vh;
+    background: #0b111e;
+    border: 1px solid rgba(250, 204, 21, 0.45);
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75);
+  }
+
+  .modal-head {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border-dim);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(15, 23, 42, 0.8);
+  }
+
+  .modal-head h2 {
+    font-family: var(--font-mono);
+    font-size: 15px;
+    color: var(--gold-100);
+    letter-spacing: 0.05em;
+  }
+
+  .modal-close {
+    background: transparent;
+    border: 1px solid var(--border-dim);
+    color: var(--text-muted);
+    border-radius: 6px;
+    padding: 5px 10px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    cursor: pointer;
+  }
+
+  .modal-close:hover {
+    color: #fff;
+    border-color: #fff;
+  }
+
+  .modal-content {
+    padding: 18px 20px;
+    overflow-y: auto;
+    user-select: text;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 14px;
+  }
+
+  .matrix-card {
+    background: rgba(15, 23, 42, 0.75);
+    border: 1px solid var(--border-dim);
+    border-radius: 10px;
+    padding: 14px;
+  }
+
+  .matrix-card h3 {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .matrix-links {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 8px;
+  }
+
+  .matrix-link-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 9px;
+    border-radius: 6px;
+    background: rgba(9, 13, 24, 0.75);
+    border: 1px solid rgba(148, 163, 184, 0.14);
+    font-size: 11.5px;
+    color: #e2e8f0;
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+
+  .matrix-link-item:hover {
+    border-color: var(--gold-100);
+    color: var(--gold-100);
+  }
+
+  @media (max-width: 1100px) {
+    .left-nav { width: 220px; }
+    .right-inspector { width: 320px; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="flightCanvas"></canvas>
+<div class="cockpit-overlay"></div>
+<div id="hudToast" class="hud-toast">WARP DRIVE ENGAGED // LOCKING ON PORTAL</div>
+
+<!-- TOP COMMAND HUD -->
+<header class="top-hud">
+  <div class="brand-cluster">
+    <div class="key-badge" title="Learn DCSA Dual-Track Key">🔑</div>
+    <div>
+      <div class="brand-title">
+        ARGON-1 // LEARN DCSA FLIGHT DECK
+        <span class="version-pill">CONSOLE V2.0</span>
+      </div>
+      <div class="brand-sub">3D Interactive Fly-Through: FCL (32 CFR 117) • PCL (SEAD 4) • Lab ATO (DAAG / RMF)</div>
+    </div>
+  </div>
+
+  <div class="track-switcher" role="group" aria-label="Filter Flight Corridor Track">
+    <button class="track-btn active" data-track="ALL" onclick="setTrackFilter('ALL')">
+      <span class="dot" style="background:#fff"></span> ALL TRACKS (12)
+    </button>
+    <button class="track-btn" data-track="FCL" onclick="setTrackFilter('FCL')">
+      <span class="dot" style="background:var(--gold-100)"></span> [100] DCSA / FCL
+    </button>
+    <button class="track-btn" data-track="PCL" onclick="setTrackFilter('PCL')">
+      <span class="dot" style="background:var(--cyan-200)"></span> [200] PERSONAL (PCL)
+    </button>
+    <button class="track-btn" data-track="ATO" onclick="setTrackFilter('ATO')">
+      <span class="dot" style="background:var(--emerald-300)"></span> [300] LAB ATO / RMF
+    </button>
+    <button class="track-btn" data-track="OPS" onclick="setTrackFilter('OPS')">
+      <span class="dot" style="background:var(--crimson-ci)"></span> [CI] OPS & PRACTICE
+    </button>
+  </div>
+
+  <div class="telemetry-cluster">
+    <div class="stat-box">
+      <div class="stat-label">CLEARANCE XP</div>
+      <div class="stat-val" id="xpValue">0 / 1200</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">NISP RANK</div>
+      <div class="stat-val" id="rankValue" style="color:var(--cyan-200)">APPLICANT</div>
+    </div>
+    <button id="autopilotBtn" class="hud-action-btn" onclick="toggleAutopilot()">
+      ✈ AUTOPILOT: OFF
+    </button>
+    <button class="hud-action-btn" onclick="toggleSiteMapModal()">
+      🗺 SITE MATRIX
+    </button>
+    <button id="audioBtn" class="hud-action-btn" onclick="toggleAudio()" title="Toggle Cockpit Synth Audio">
+      🔊 SFX
+    </button>
+  </div>
+</header>
+
+<!-- LEFT WAYPOINT CORRIDOR NAVIGATOR -->
+<aside class="left-nav">
+  <div class="panel-header">
+    <span>FLIGHT CORRIDOR SECTORS</span>
+    <span id="sectorCounter">01 / 12</span>
+  </div>
+  <div class="lock-status-bar">
+    <div class="pillar-chip" style="border-color:rgba(250,204,21,0.35)">
+      <div class="p-code" style="color:var(--gold-100)">100 FCL</div>
+      <div class="p-prog" id="fclProg">0/4</div>
+    </div>
+    <div class="pillar-chip" style="border-color:rgba(56,189,248,0.35)">
+      <div class="p-code" style="color:var(--cyan-200)">200 PCL</div>
+      <div class="p-prog" id="pclProg">0/3</div>
+    </div>
+    <div class="pillar-chip" style="border-color:rgba(52,211,153,0.35)">
+      <div class="p-code" style="color:var(--emerald-300)">300 LAB</div>
+      <div class="p-prog" id="atoProg">0/3</div>
+    </div>
+  </div>
+  <div class="waypoint-list" id="waypointList"></div>
+</aside>
+
+<!-- RIGHT TACTICAL BRIEFING & LIVE LINK DRAWER -->
+<aside class="right-inspector">
+  <div class="panel-header">
+    <span>TACTICAL PORTAL TELEMETRY</span>
+    <span id="activeTrackCode" style="color:var(--gold-100)">[100 NISP CORE]</span>
+  </div>
+  <div class="inspector-body" id="inspectorBody">
+    <!-- Dynamically populated on portal approach or selection -->
+  </div>
+</aside>
+
+<!-- BOTTOM FLIGHT CONTROLS -->
+<footer class="bottom-deck">
+  <div class="controls-hint">
+    <span><span class="kbd">W</span><span class="kbd">S</span> Thrust / Brake</span>
+    <span><span class="kbd">A</span><span class="kbd">D</span> or <span class="kbd">Drag</span> Steer Ship</span>
+    <span><span class="kbd">SHIFT</span> Hyper-Boost</span>
+    <span><span class="kbd">SPACE</span> or <span class="kbd">CLICK</span> Fire Compliance Scanner (Blast Failure-Mode Asteroids)</span>
+  </div>
+  <div class="flight-nav-btns">
+    <button class="deck-btn" onclick="stepPortal(-1)">◀ PREV PORTAL</button>
+    <button class="deck-btn primary" onclick="warpToCurrentPortal()">⚡ LOCK & CENTER ON PORTAL</button>
+    <button class="deck-btn" onclick="stepPortal(1)">NEXT PORTAL ▶</button>
+  </div>
+</footer>
+
+<!-- FULL SITE MATRIX & ARCHITECTURE MODAL -->
+<div id="siteMapModal" class="modal-backdrop" onclick="if(event.target===this) toggleSiteMapModal()">
+  <div class="modal-window">
+    <div class="modal-head">
+      <h2>🔑 LEARN DCSA CONSOLE V2.0 // COMPLETE SITE DIRECTORY & DUAL-TRACK MATRIX</h2>
+      <button class="modal-close" onclick="toggleSiteMapModal()">ESC / CLOSE ✕</button>
+    </div>
+    <div class="modal-content">
+      <div class="matrix-card">
+        <h3 style="color:var(--gold-100)"><span>1. LEARN HUB & CURRICULUM</span> <span>[BLOCKS 0–14]</span></h3>
+        <p style="font-size:11.5px;color:var(--text-muted);line-height:1.4">
+          15-block structured learning path from DCSA origins (EO 13869) and the Day-20 "Five-Pack" drill to FOCI mitigations and 2026 DISS rules.
+        </p>
+        <div class="matrix-links">
+          <a class="matrix-link-item" href="index.html#/today" target="_blank" rel="noopener"><span>Today Hub & Daily Streak</span> <span>#/today ↗</span></a>
+          <a class="matrix-link-item" href="index.html#/curriculum/0" target="_blank" rel="noopener"><span>Block 0: Start Here (DCSA Basics)</span> <span>#/curriculum/0 ↗</span></a>
+          <a class="matrix-link-item" href="index.html#/curriculum" target="_blank" rel="noopener"><span>Full 15-Block Curriculum</span> <span>#/curriculum ↗</span></a>
+          <a class="matrix-link-item" href="library/project-plan.html" target="_blank" rel="noopener"><span>6-Phase Operational Project Plan</span> <span>project-plan.html ↗</span></a>
+          <a class="matrix-link-item" href="index.html#/shorts" target="_blank" rel="noopener"><span>6 Vertical Video Shorts + Transcripts</span> <span>#/shorts ↗</span></a>
+          <a class="matrix-link-item" href="index.html#/deck" target="_blank" rel="noopener"><span>NotebookLM Deck & Deep-Dive Cut</span> <span>#/deck ↗</span></a>
+        </div>
+      </div>
+
+      <div class="matrix-card">
+        <h3 style="color:var(--emerald-300)"><span>2. ARCHITECTURE & LAB ATO</span> <span>[DAAG / RMF]</span></h3>
+        <p style="font-size:11.5px;color:var(--text-muted);line-height:1.4">
+          Conceptual, logical, physical, and integration views covering NISS, DISS, eApp, SWFT, NISP eMASS, On-Prem Closed Areas vs. IL6 Cloud Labs.
+        </p>
+        <div class="matrix-links">
+          <a class="matrix-link-item" href="index.html#/views" target="_blank" rel="noopener"><span>Interactive Architecture Explorer</span> <span>#/views ↗</span></a>
+          <a class="matrix-link-item" href="index.html#/ea" target="_blank" rel="noopener"><span>EA Layer Mapping & 40-Person Lab Scenario</span> <span>#/ea-mapping ↗</span></a>
+          <a class="matrix-link-item" href="index.html#/map" target="_blank" rel="noopener"><span>100 / 200 / 300 Skill Progress Map</span> <span>#/progress-map ↗</span></a>
+          <a class="matrix-link-item" href="index.html#/library" target="_blank" rel="noopener"><span>72 Deep-Dive Vault Notes & Mind Maps</span> <span>#/library ↗</span></a>
+          <a class="matrix-link-item" href="library/video-resources.html" target="_blank" rel="noopener"><span>DCSA & CDSE Primary Video Resources</span> <span>video-resources.html ↗</span></a>
+        </div>
+      </div>
+
+      <div class="matrix-card">
+        <h3 style="color:var(--cyan-200)"><span>3. PRACTICE & REFERENCE</span> <span>[ACTIVE RECALL]</span></h3>
+        <p style="font-size:11.5px;color:var(--text-muted);line-height:1.4">
+          Leitner flashcards (44 quick / 85 full), 38-question quiz bank, 12 failure modes checklist, 9 structural debates, and 40 primary sources.
+        </p>
+        <div class="matrix-links">
+          <a class="matrix-link-item" href="index.html#/flash" target="_blank" rel="noopener"><span>Leitner Flashcards (44 Quick / 85 Full)</span> <span>#/flashcards ↗</span></a>
+          <a class="matrix-link-item" href="index.html#/quiz" target="_blank" rel="noopener"><span>38 Short-Answer Quiz Bank (6 Domains)</span> <span>#/quiz ↗</span></a>
+          <a class="matrix-link-item" href="index.html#/failures" target="_blank" rel="noopener"><span>12 Critical Compliance Failure Modes</span> <span>#/failure-modes ↗</span></a>
+          <a class="matrix-link-item" href="index.html#/cheat" target="_blank" rel="noopener"><span>Decision Rules & Regulatory Cheat Sheet</span> <span>#/cheat ↗</span></a>
+          <a class="matrix-link-item" href="index.html#/glossary" target="_blank" rel="noopener"><span>85-Term Searchable NISP Glossary</span> <span>#/glossary ↗</span></a>
+          <a class="matrix-link-item" href="index.html#/debates" target="_blank" rel="noopener"><span>9 Structural Claims & Evidence Tests</span> <span>#/debates ↗</span></a>
+          <a class="matrix-link-item" href="index.html#/refs" target="_blank" rel="noopener"><span>Primary Source Ledger ([S1]–[S40])</span> <span>#/sources ↗</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================================
+// 1. COMPLETE LEARN-DCSA PORTAL DATA (GROUNDED IN https://aaronmeis.github.io/learn-dcsa/)
+// ============================================================================
+const PORTALS = [
+  {
+    id: 0,
+    code: "SECTOR 00",
+    track: "FCL",
+    trackLabel: "[100] DCSA & NISP ORIGINS",
+    color: "#facc15",
+    laneX: 0,
+    laneY: 0,
+    z: 900,
+    title: "Block 0: Start Here & DCSA Evolution",
+    subtitle: "EO 13869 • 32 CFR Part 117 (NISPOM) • Console V2.0 Overview",
+    sources: "[S1] [S2] [S15]",
+    primaryUrl: "index.html#/curriculum/0",
+    primaryLabel: "Open Block 0: Start Here ↗",
+    secondaryUrl: "index.html#/dashboard",
+    secondaryLabel: "Console Overview ↗",
+    summary: "Welcome to the Learn DCSA Console V2.0 flight corridor! DCSA (established in 2019 via EO 13869 from DSS [1999] and DIS [1971]) oversees the National Industrial Security Program (NISP) under 32 CFR Part 117, uniting Facility Clearances (FCL), Personnel Clearances (PCL), and Classified System ATOs.",
+    specs: [
+      "<strong>Dual-Track Core:</strong> Facility Security Clearance (<strong>FCL</strong>, entity eligibility) and Personnel Security Clearance (<strong>PCL</strong>, individual eligibility) run in parallel and lock together at the KMP Hinge.",
+      "<strong>Regulatory Anchor:</strong> <strong>32 CFR Part 117</strong> (codified NISPOM rule) governs cleared defense contractors and labs.",
+      "<strong>15-Block Mastery Path:</strong> Structured into 100-level (NISP/FCL), 200-level (Personnel/PCL), 300-level (Systems/DAAG/RMF), and Counterintelligence (CI)."
+    ],
+    quiz: {
+      q: "Which Executive Order consolidated background investigations and industrial security into the modern DCSA in 2019?",
+      options: [
+        "EO 13869 (forming DCSA from DSS/NBIB under 32 CFR Part 117 oversight)",
+        "EO 12829 (allowing contractors to self-sponsor their own FCL)",
+        "32 CFR Part 170 (automatically granting Secret FCLs to CMMC Level 2 labs)"
+      ],
+      correct: 0,
+      explanation: "Correct! EO 13869 established DCSA in 2019, combining DSS industrial security oversight with federal background investigations."
+    }
+  },
+  {
+    id: 1,
+    code: "SECTOR 01",
+    track: "FCL",
+    trackLabel: "[100] PHASE 1: SPONSORSHIP",
+    color: "#facc15",
+    laneX: -240,
+    laneY: -40,
+    z: 2100,
+    title: "Phase 1: FCL Sponsorship & DD Form 254",
+    subtitle: "NISS Sponsorship • GCA / Cleared Prime • No Self-Sponsorship",
+    sources: "[S3] [S6] [S12]",
+    primaryUrl: "index.html#/curriculum/1",
+    primaryLabel: "Open Block 1: Dual-Track Core ↗",
+    secondaryUrl: "library/project-plan.html",
+    secondaryLabel: "6-Phase Project Plan ↗",
+    summary: "Phase 1 of the Facility Clearance journey begins with legitimate sponsorship. A company or defense lab can NEVER sponsor itself for an FCL—it must be sponsored by a Government Contracting Activity (GCA) or a cleared prime contractor for a bona fide classified procurement need.",
+    specs: [
+      "<strong>System of Record:</strong> Sponsorship request is initiated in <strong>NISS</strong> (National Industrial Security System).",
+      "<strong>Contractual Specification:</strong> Anchored by a <strong>DD Form 254</strong> (Contract Security Classification Specification) defining clearance level and safeguarding needs.",
+      "<strong>Critical Failure Mode #1:</strong> Believing you can 'apply for an FCL preemptively' without a GCA or cleared prime sponsor."
+    ],
+    quiz: {
+      q: "How can an uncleared research lab initiate a Facility Security Clearance (FCL)?",
+      options: [
+        "Pay a filing fee directly to DCSA to self-sponsor an FCL before bidding",
+        "Be sponsored in NISS by a Government Contracting Activity (GCA) or cleared prime contractor backed by a DD Form 254",
+        "Deploy workloads into AWS GovCloud or FedRAMP High to inherit an automatic FCL"
+      ],
+      correct: 1,
+      explanation: "Spot on! Under 32 CFR 117.7, a contractor cannot sponsor itself; a GCA or cleared prime must submit a sponsorship request in NISS."
+    }
+  },
+  {
+    id: 2,
+    code: "SECTOR 02",
+    track: "FCL",
+    trackLabel: "[100] PHASE 2: DAY-20 CLOCK",
+    color: "#facc15",
+    laneX: -280,
+    laneY: 50,
+    z: 3300,
+    title: "Phase 2: The Day-20 Clock & 'Five-Pack' Drill",
+    subtitle: "SF 328 (May 2025 Rev) • DD Form 441 • KMP List • Ownership Chart",
+    sources: "[S7] [S14] [S19]",
+    primaryUrl: "index.html#/curriculum/3",
+    primaryLabel: "Open Block 3: Package & Clocks ↗",
+    secondaryUrl: "index.html#/curriculum/7",
+    secondaryLabel: "Block 7: Artifacts ↗",
+    summary: "Day 1 of the FCL clock starts when DCSA sends the official sponsorship welcome email. You have a strict 20-day window (Day 20 Clock) to assemble and submit the complete initial FCL package ('The Five-Pack') in NISS before risking administrative discontinuation.",
+    specs: [
+      "<strong>The NISS 'Five-Pack':</strong> (1) <strong>SF 328</strong> Certificate Pertaining to Foreign Interests (use the <strong>May 2025 revision</strong>!), (2) <strong>DD Form 441</strong> Security Agreement, (3) <strong>KMP List</strong>, (4) <strong>Organization/Ownership Chart</strong>, and (5) Corporate Governance Documents (Articles/Bylaws/LLC Operating Agreement).",
+      "<strong>Clock vs. Quality Mental Model:</strong> Submitting an incomplete package on Day 19 or using an outdated pre-2025 SF 328 triggers rework or package rejection."
+    ],
+    quiz: {
+      q: "When does the Day-20 FCL package submission clock begin, and what happens if you submit a pre-2025 SF 328?",
+      options: [
+        "Day 1 starts on receipt of the DCSA welcome email; using an obsolete pre-May 2025 SF 328 is a critical failure mode requiring resubmission",
+        "Day 1 starts when the company incorporates; any version of SF 328 from the 1990s is accepted",
+        "There is no deadline for submitting the initial FCL package in NISS"
+      ],
+      correct: 0,
+      explanation: "Exact match! Day 1 starts upon DCSA's welcome email, and the May 2025 SF 328 revision is mandatory."
+    }
+  },
+  {
+    id: 3,
+    code: "SECTOR 03",
+    track: "FCL",
+    trackLabel: "[100] KMP HINGE & FOCI",
+    color: "#facc15",
+    laneX: 0,
+    laneY: -20,
+    z: 4500,
+    title: "The KMP Hinge ('Dual-Track Lock') & FOCI Mitigation",
+    subtitle: "SMO • FSO • ITPSO • Exclusion Resolutions • SCA / SSA / Proxy / VTA",
+    sources: "[S8] [S16] [S22]",
+    primaryUrl: "index.html#/curriculum/5",
+    primaryLabel: "Open Block 5: FOCI & CV ↗",
+    secondaryUrl: "index.html#/curriculum/12",
+    secondaryLabel: "Block 12: FOCI Mitigations ↗",
+    summary: "The Facility Clearance (FCL) and Personnel Clearance (PCL) tracks are locked together by the Key Management Personnel (KMP) Hinge: the entity's FCL cannot be granted until its required KMPs are cleared at the facility's clearance level (or formally excluded by corporate resolution) and any Foreign Ownership, Control, or Influence (FOCI) is mitigated.",
+    specs: [
+      "<strong>Mandatory KMP Roles:</strong> <strong>SMO</strong> (Senior Management Official), <strong>FSO</strong> (Facility Security Officer), and <strong>ITPSO</strong> (Insider Threat Program Senior Official) must hold PCLs at the FCL level.",
+      "<strong>FOCI Thresholds & Mitigations:</strong> Foreign ownership/voting interest (e.g., ≥5% disclosure, 15% thresholds) requires DCSA mitigation instruments: <strong>Board Resolution</strong>, <strong>Security Control Agreement (SCA)</strong>, <strong>Special Security Agreement (SSA)</strong> (requires NID for proscribed info), <strong>Proxy Agreement</strong>, or <strong>Voting Trust (VTA)</strong>."
+    ],
+    quiz: {
+      q: "Which three Key Management Personnel (KMP) roles form the core 'Dual-Track Lock' that must be cleared before an FCL is granted?",
+      options: [
+        "CFO, Head of Marketing, and External Auditor",
+        "Senior Management Official (SMO), Facility Security Officer (FSO), and Insider Threat Program Senior Official (ITPSO)",
+        "Only the IT Helpdesk Administrator"
+      ],
+      correct: 1,
+      explanation: "Locked in! The SMO, FSO, and ITPSO must be cleared in lockstep with the facility before DCSA grants the FCL."
+    }
+  },
+  {
+    id: 4,
+    code: "SECTOR 04",
+    track: "PCL",
+    trackLabel: "[200] PERSONAL CERT: DISS & eApp",
+    color: "#38bdf8",
+    laneX: -320,
+    laneY: -70,
+    z: 5700,
+    title: "Personal Certification (PCL): 2026 DISS eApp & SWFT",
+    subtitle: "SF-86 via eApp • July 31, 2026 DISS Cutover • SWFT Electronic Fingerprints",
+    sources: "[S24] [S28] [S35]",
+    primaryUrl: "index.html#/curriculum/14",
+    primaryLabel: "Open Block 14: 2026 Rules ↗",
+    secondaryUrl: "index.html#/cheat",
+    secondaryLabel: "Decision Rules Cheat Sheet ↗",
+    summary: "Personal Certification (Personnel Security Clearance / PCL) vets individuals (KMPs and employees with need-to-know) via the SF-86 questionnaire in eApp and electronic fingerprints in SWFT. Under the landmark 2026 DCSA transition, industry initiates and reviews eApp directly inside DISS!",
+    specs: [
+      "<strong>2026 System Cutover Dates:</strong> Effective <strong>July 31, 2026</strong>, industry initiates and reviews <strong>eApp (SF-86)</strong> directly in <strong>DISS</strong> (Defense Information System for Security). Legacy NBIS Agency onboarding ends <strong>November 30, 2026</strong>.",
+      "<strong>Biometrics Coupling:</strong> Electronic fingerprints must be captured and transmitted via <strong>SWFT</strong> (Secure Web Fingerprint Transmission) in tandem with the eApp submission to <strong>PSMO-I</strong>.",
+      "<strong>AI Data Hygiene Rule:</strong> Never paste SF-86 responses, SSNs, or personal vetting data into public LLMs."
+    ],
+    quiz: {
+      q: "Under the 2026 DCSA transition rules highlighted on Learn-DCSA, where does industry initiate and review the SF-86 (eApp) starting July 31, 2026?",
+      options: [
+        "Directly inside DISS (Defense Information System for Security), with legacy NBIS Agency onboarding ending Nov 30, 2026",
+        "Via paper forms mailed to the local post office",
+        "Inside NISP eMASS"
+      ],
+      correct: 0,
+      explanation: "Correct! Effective July 31, 2026, eApp initiation and review move directly into DISS, and legacy NBIS onboarding sunsets Nov 30, 2026."
+    }
+  },
+  {
+    id: 5,
+    code: "SECTOR 05",
+    track: "PCL",
+    trackLabel: "[200] PERSONAL CERT: SEAD 4",
+    color: "#38bdf8",
+    laneX: -300,
+    laneY: 60,
+    z: 6900,
+    title: "SEAD 4 Adjudication & The 'Whole-Person' Concept",
+    subtitle: "13 Adjudicative Guidelines • Mitigating Factors • Need-to-Know + NDA (SF-312)",
+    sources: "[S10] [S11] [S25]",
+    primaryUrl: "index.html#/curriculum/2",
+    primaryLabel: "Open Block 2: Mental Models ↗",
+    secondaryUrl: "index.html#/glossary",
+    secondaryLabel: "85-Term NISP Glossary ↗",
+    summary: "Individual national security eligibility is adjudicated under Security Executive Agent Directive 4 (SEAD 4) across 13 Adjudicative Guidelines. Adjudicators apply the 'Whole-Person' mental model—weighing recency, candor, voluntary self-reporting, and rehabilitation rather than automatic mechanical disqualification.",
+    specs: [
+      "<strong>13 SEAD 4 Guidelines:</strong> Allegiance, Foreign Influence, Foreign Preference, Sexual Behavior, Personal Conduct (Candor!), Financial Considerations, Alcohol, Drug Involvement, Psychological Conditions, Criminal Conduct, Handling Protected Info, Outside Activities, Use of IT Systems.",
+      "<strong>Access Requires 3 Keys:</strong> (1) Favorable <strong>PCL eligibility</strong> in DISS, (2) Signed <strong>SF-312</strong> Classified Information Nondisclosure Agreement, and (3) Verified <strong>Need-to-Know</strong>."
+    ],
+    quiz: {
+      q: "Once PSMO-I records favorable PCL eligibility in DISS, what else is required before an individual can actually access classified information?",
+      options: [
+        "Nothing—eligibility alone allows unrestricted browsing of all classified programs",
+        "An executed SF-312 Nondisclosure Agreement, a security briefing, and a verified Need-to-Know for the specific program",
+        "A personal FedRAMP High certificate"
+      ],
+      correct: 1,
+      explanation: "Right on target! Eligibility in DISS must be paired with a signed SF-312, initial briefing, and strict Need-to-Know."
+    }
+  },
+  {
+    id: 6,
+    code: "SECTOR 06",
+    track: "PCL",
+    trackLabel: "[200] CONTINUOUS VETTING & STEPP",
+    color: "#38bdf8",
+    laneX: -200,
+    laneY: -30,
+    z: 8100,
+    title: "Continuous Vetting (CV), 5-Year PVQ & SEAD 3 Reporting",
+    subtitle: "DISS PVQ Date • 32 CFR 117.8 • SEAD 3 Foreign Travel • CDSE STEPP Courses",
+    sources: "[S17] [S26] [S36]",
+    primaryUrl: "index.html#/curriculum/6",
+    primaryLabel: "Open Block 6: Spaced Review ↗",
+    secondaryUrl: "library/video-resources.html",
+    secondaryLabel: "CDSE & STEPP Resources ↗",
+    summary: "Legacy 5/10-year periodic reinvestigations have been replaced by Continuous Vetting (CV) under Trusted Workforce 2.0. Cleared personnel remain subject to automated record checks, a 5-year Personnel Vetting Questionnaire (PVQ / SF-86) refresh tied to their DISS PVQ Date, and ongoing SEAD 3 / 32 CFR 117.8 reporting.",
+    specs: [
+      "<strong>5-Year PVQ Cycle:</strong> Tracked via the <strong>DISS PVQ Date</strong>; personnel submit an updated SF-86/PVQ every 5 years to maintain active CV compliance.",
+      "<strong>Mandatory Reporting (SEAD 3 & 32 CFR 117.8):</strong> Pre-approval/reporting of foreign travel, close/continuing foreign contacts, reportable financial anomalies, and adverse information.",
+      "<strong>CDSE STEPP Training:</strong> Role-based certification courses for FSOs (IS140/IS142) and ISSMs (CS250)."
+    ],
+    quiz: {
+      q: "How is ongoing personnel clearance maintenance handled under Continuous Vetting (CV)?",
+      options: [
+        "Clearances are permanent for life with zero reporting or updates required",
+        "Automated Continuous Vetting paired with a 5-year PVQ/SF-86 update tracked by the DISS PVQ Date, plus ongoing SEAD 3 / 32 CFR 117.8 reporting",
+        "Every cleared employee must re-take fingerprinting every Monday"
+      ],
+      correct: 1,
+      explanation: "Nailed it! Continuous Vetting pairs automated checks with a 5-year PVQ refresh in DISS and SEAD 3 / 117.8 reporting."
+    }
+  },
+  {
+    id: 7,
+    code: "SECTOR 07",
+    track: "ATO",
+    trackLabel: "[300] LAB CERT: THE THREE WALLS",
+    color: "#34d399",
+    laneX: 240,
+    laneY: -50,
+    z: 9300,
+    title: "Lab Certification: The 'Three Walls' Architecture Rule",
+    subtitle: "Wall 1: CMMC (32 CFR 170) • Wall 2: FCL (32 CFR 117) • Wall 3: Classified ATO (DAAG)",
+    sources: "[S4] [S18] [S29]",
+    primaryUrl: "index.html#/views",
+    primaryLabel: "Open Architecture Explorer ↗",
+    secondaryUrl: "index.html#/curriculum/8",
+    secondaryLabel: "Block 8: Conceptual Arch ↗",
+    summary: "One of the most important architectural insights on Learn-DCSA is the 'Three Walls' model separating Controlled Unclassified Information (CUI), Facility Clearance eligibility, and Classified Lab/System Authority to Operate (ATO).",
+    specs: [
+      "<strong>Wall 1 — CMMC (32 CFR Part 170):</strong> Protects FCI/CUI on corporate networks (NIST SP 800-171). <em>Does NOT grant an FCL or allow classified processing.</em>",
+      "<strong>Wall 2 — FCL (32 CFR Part 117):</strong> Grants legal entity clearance to hold classified contracts. <em>Buying AWS GovCloud or FedRAMP High does NOT confer an FCL.</em>",
+      "<strong>Wall 3 — Classified Lab ATO (DAAG / RMF):</strong> Required before a Possessing facility can store or process classified data in a Closed Area or IL6 enclave."
+    ],
+    quiz: {
+      q: "If your defense lab achieves CMMC Level 2 (32 CFR 170) and hosts workloads in FedRAMP High, can you process Secret classified information in your lab?",
+      options: [
+        "Yes, CMMC Level 2 plus FedRAMP High automatically equals a Secret FCL and Classified ATO",
+        "No! Because of the 'Three Walls': CMMC covers CUI only, cloud products don't grant an FCL, and possessing classified systems requires a DCSA Classified ATO under DAAG/RMF",
+        "Yes, as long as the lab door has a keypad"
+      ],
+      correct: 1,
+      explanation: "Brilliant! CMMC (Wall 1), FCL (Wall 2), and Classified Lab ATO (Wall 3) are distinct regulatory walls."
+    }
+  },
+  {
+    id: 8,
+    code: "SECTOR 08",
+    track: "ATO",
+    trackLabel: "[300] LAB CERT: POSSESSING VS NON-POSSESSING",
+    color: "#34d399",
+    laneX: 310,
+    laneY: 45,
+    z: 10500,
+    title: "Possessing vs. Non-Possessing Labs: Closed Area vs. IL6 Cloud",
+    subtitle: "NAE SOC Oversight • Physical Closed Area (32 CFR 117.15) • IL6 Cloud Enclave",
+    sources: "[S20] [S30] [S31]",
+    primaryUrl: "index.html#/curriculum/10",
+    primaryLabel: "Open Block 10: Physical Arch ↗",
+    secondaryUrl: "index.html#/views",
+    secondaryLabel: "Compare On-Prem vs IL6 ↗",
+    summary: "When designing your lab certification strategy, you must choose between Non-Possessing status (cleared personnel perform classified work at a Government or Prime site under NAE SOC oversight) and Possessing status (accrediting an on-premise Closed Area or Impact Level 6 [IL6] cloud enclave).",
+    specs: [
+      "<strong>Non-Possessing Facility:</strong> Holds an FCL and cleared personnel, but zero classified material/systems on-site; assigned to DCSA's <strong>NAE SOC</strong> (National Access Elsewhere Security Oversight Center).",
+      "<strong>Possessing Option A — On-Premise Closed Area:</strong> Physical construction under 32 CFR 117.15, GSA-approved security containers, IDS alarms, and standalone/accredited classified IS.",
+      "<strong>Possessing Option B — IL6 Cloud Enclave:</strong> Classified Secret cloud environment with a dedicated <strong>ISSM</strong>, accredited Thin Client / SIPR / enclave room, and shared control inheritance."
+    ],
+    quiz: {
+      q: "Which DCSA oversight center manages a 'Non-Possessing' cleared contractor whose personnel only access classified data at government/customer facilities?",
+      options: [
+        "NAE SOC (National Access Elsewhere Security Oversight Center)",
+        "The local fire department",
+        "FedRAMP PMO"
+      ],
+      correct: 0,
+      explanation: "Spot on! Non-possessing facilities are overseen by the National Access Elsewhere Security Oversight Center (NAE SOC)."
+    }
+  },
+  {
+    id: 9,
+    code: "SECTOR 09",
+    track: "ATO",
+    trackLabel: "[300] LAB CERT: DAAG, RMF & NISP eMASS",
+    color: "#34d399",
+    laneX: 220,
+    laneY: -20,
+    z: 11700,
+    title: "Lab System ATO: DAAG, RMF & 11 Core NIST 800-53 Controls",
+    subtitle: "NISP eMASS • ISSM Role • AC-2, PL-8, SA-9, IA-2, AU-2, SI-4, CA-3, CM-7, PE-3, SC-28, MP-6",
+    sources: "[S21] [S32] [S34]",
+    primaryUrl: "index.html#/ea",
+    primaryLabel: "Open EA Mapping & 40-Person Lab ↗",
+    secondaryUrl: "index.html#/curriculum/9",
+    secondaryLabel: "Block 9: Logical Arch ↗",
+    summary: "To certify a possessing classified lab system, the Information System Security Manager (ISSM) builds and submits a Risk Management Framework (RMF) authorization package in NISP eMASS following the DCSA Authorization Process Guide (DAAG).",
+    specs: [
+      "<strong>System of Record for Lab ATO:</strong> <strong>NISP eMASS</strong> is used to manage the System Security Plan (SSP), SAR, POA&M, and continuous monitoring artifacts.",
+      "<strong>11 High-Priority NIST SP 800-53 Controls Highlighted on Site:</strong> <code>AC-2</code> (Account Mgmt), <code>PL-8</code> (Security Architecture), <code>SA-9</code> (External System Services), <code>IA-2</code> (Identification & Auth), <code>AU-2</code> (Event Logging), <code>SI-4</code> (System Monitoring), <code>CA-3</code> (System Interconnections), <code>CM-7</code> (Least Functionality), <code>PE-3</code> (Physical Access Control), <code>SC-28</code> (Protection of Info at Rest), and <code>MP-6</code> (Media Sanitization).",
+      "<strong>Worked 40-Person Lab EA Scenario:</strong> Maps Business, Data, Application, and Technology architecture layers from sponsorship through ATO grant."
+    ],
+    quiz: {
+      q: "Which system of record and DCSA guide govern the RMF Authority to Operate (ATO) package for a classified contractor lab information system?",
+      options: [
+        "NISP eMASS under the DCSA Authorization Process Guide (DAAG), led by the ISSM",
+        "SWFT under the SEAD 3 travel guide",
+        "A self-signed README file in GitHub"
+      ],
+      correct: 0,
+      explanation: "100% accurate! Classified contractor information systems are authorized via NISP eMASS under the DAAG."
+    }
+  },
+  {
+    id: 10,
+    code: "SECTOR 10",
+    track: "OPS",
+    trackLabel: "[CI] 12 FAILURE MODES & AI HYGIENE",
+    color: "#f43f5e",
+    laneX: -120,
+    laneY: 55,
+    z: 12900,
+    title: "The 12 Critical Compliance Failure Modes & AI Hygiene",
+    subtitle: "Asteroid Hazard Zone • Self-Sponsor Myth • Day-20 Miss • LLM PII Ban",
+    sources: "[S27] [S37] [S39]",
+    primaryUrl: "index.html#/failures",
+    primaryLabel: "Open 12 Failure Modes Checklist ↗",
+    secondaryUrl: "index.html#/curriculum/11",
+    secondaryLabel: "Block 11: AI & Failures ↗",
+    summary: "Watch out for red Failure-Mode Asteroids in this sector! Learn-DCSA catalogs 12 high-impact compliance failure modes that derail FCL, PCL, and Lab ATO timelines—plus strict AI data-hygiene guardrails.",
+    specs: [
+      "<strong>Top Compliance Pitfalls:</strong> (1) Self-sponsor myth, (2) Blowing the Day-20 NISS package clock, (3) Using pre-May 2025 SF 328 forms, (4) Leaving KMP exclusions unsigned, (5) Undisclosed FOCI / foreign cap-table investors, (6) Confusing CMMC or commercial GovCloud with an FCL/Classified ATO.",
+      "<strong>Post-Grant & AI Pitfalls:</strong> Missing the 30-day DISS account setup window after FCL grant, ignoring 5-year DISS PVQ dates, or pasting SF-86 / FOCI / CUI data into public LLMs."
+    ],
+    quiz: {
+      q: "Within how many days after FCL grant must a newly cleared facility establish its operational DISS account and post-grant procedures?",
+      options: [
+        "Within 30 days of FCL grant (and maintain ongoing 117.8 & SEAD 3 reporting)",
+        "Within 5 years of FCL grant",
+        "DISS accounts are optional for cleared facilities"
+      ],
+      correct: 0,
+      explanation: "Direct hit! Operational DISS account setup within 30 days of FCL grant is a core Phase 6 post-grant requirement."
+    }
+  },
+  {
+    id: 11,
+    code: "SECTOR 11",
+    track: "OPS",
+    trackLabel: "[MASTERY] PRACTICE, DEBATES & SOURCES",
+    color: "#a78bfa",
+    laneX: 0,
+    laneY: 0,
+    z: 14100,
+    title: "Mastery Nexus: Flashcards, 38-Q Quiz, 9 Debates & 40 Sources",
+    subtitle: "Leitner Engine (44/85 Cards) • 38 Quiz Prompts • 9 Structural Debates • [S1]–[S40]",
+    sources: "[S1]–[S40]",
+    primaryUrl: "index.html#/flash",
+    primaryLabel: "Launch Leitner Flashcards ↗",
+    secondaryUrl: "index.html#/quiz",
+    secondaryLabel: "Open 38-Q Quiz Bank ↗",
+    summary: "You have reached the Learn-DCSA Mastery Nexus! This sector links the active-recall engines (Leitner Flashcards, 38-question Short-Answer Quiz Bank, Prompt Library) with the 9 Structural Debates (Claim / Warrant / Hidden Assumption / Evidence Test) and the 40-source Primary Ledger.",
+    specs: [
+      "<strong>Active Recall Suite:</strong> <strong>44 Quick Essential</strong> & <strong>85 Full Mastery</strong> flashcards (`#/flashcards`), plus <strong>38 short-answer questions</strong> across 6 domains (`#/quiz`).",
+      "<strong>9 Structural Debates (`#/debates`):</strong> Rigorous analytical claims testing assumptions around FOCI schedule risk, cloud vs. closed area economics, and continuous vetting.",
+      "<strong>72 Vault Notes & 40 Primary Sources (`#/library`, `#/sources`):</strong> Every claim traced to 32 CFR 117, SEAD 3/4, EO 13869, DAAG, and official DCSA/CDSE advisories."
+    ],
+    quiz: {
+      q: "How does the Learn-DCSA Console V2.0 structure its active-recall Flashcard Deck and Primary Source Ledger?",
+      options: [
+        "44 Quick Essential / 85 Full Mastery Leitner flashcards, backed by 38 Quiz questions and 40 primary regulatory sources ([S1]–[S40])",
+        "A single static PDF with no interactive quizzes or source citations",
+        "Only 3 flashcards with unverified rumors"
+      ],
+      correct: 0,
+      explanation: "Mission Accomplished! You've mastered the full Learn-DCSA Dual-Track & Lab ATO Flight Corridor!"
+    }
+  }
+];
+
+// ============================================================================
+// 2. FAILURE-MODE ASTEROIDS (SHOOTABLE IN 3D SPACE FOR BONUS XP)
+// ============================================================================
+const HAZARD_LABELS = [
+  "MYTH: Self-Sponsor FCL",
+  "TRAP: Day-20 Clock Miss",
+  "ERR: Pre-2025 SF 328 Form",
+  "MYTH: CMMC = Secret FCL",
+  "RISK: SF-86 in Public LLM",
+  "TRAP: Unmitigated 15% FOCI",
+  "MYTH: FedRAMP = Lab ATO",
+  "ERR: Unsigned KMP Exclusion",
+  "TRAP: Missed 5-Yr DISS PVQ",
+  "ERR: Unreported SEAD 3 Travel",
+  "TRAP: No DD 254 Sponsor",
+  "ERR: 30-Day DISS Setup Miss"
+];
+
+const asteroids = [];
+for (let i = 0; i < 24; i++) {
+  asteroids.push({
+    id: i,
+    label: HAZARD_LABELS[i % HAZARD_LABELS.length],
+    x: (Math.random() - 0.5) * 950,
+    y: (Math.random() - 0.5) * 360,
+    z: 1400 + i * 560 + Math.random() * 220,
+    radius: 36 + Math.random() * 16,
+    rot: Math.random() * Math.PI * 2,
+    rotSpeed: (Math.random() - 0.5) * 0.03,
+    alive: true,
+    explodeTimer: 0
+  });
+}
+
+// ============================================================================
+// 3. GAME STATE, SHIP PHYSICS & SYNTHESIZED AUDIO
+// ============================================================================
+const canvas = document.getElementById("flightCanvas");
+const ctx = canvas.getContext("2d");
+
+let W = window.innerWidth;
+let H = window.innerHeight;
+window.addEventListener("resize", () => {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+});
+canvas.width = W;
+canvas.height = H;
+
+const ship = {
+  x: 0,
+  y: 0,
+  z: 150,
+  vx: 0,
+  vy: 0,
+  vz: 6.5,
+  targetX: null,
+  targetY: null,
+  targetZ: null,
+  roll: 0,
+  pitch: 0
+};
+
+let activePortalIndex = 0;
+let trackFilter = "ALL";
+let autopilot = false;
+let xp = 0;
+const completedQuizzes = new Set();
+const visitedPortals = new Set([0]);
+const lasers = [];
+const stars = [];
+const particles = [];
+
+// Generate 3D Starfield & Data Particles
+for (let i = 0; i < 320; i++) {
+  stars.push({
+    x: (Math.random() - 0.5) * 3200,
+    y: (Math.random() - 0.5) * 1800,
+    z: Math.random() * 15500,
+    size: 1 + Math.random() * 2,
+    hue: Math.random() > 0.7 ? "#38bdf8" : (Math.random() > 0.5 ? "#facc15" : "#e2e8f0")
+  });
+}
+
+// Web Audio Synthesizer (Zero External Assets)
+let audioEnabled = true;
+let audioCtx = null;
+
+function playTone(freq, type = "sine", duration = 0.14, gainVal = 0.08) {
+  if (!audioEnabled) return;
+  try {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === "suspended") audioCtx.resume();
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+    gain.gain.setValueAtTime(gainVal, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start();
+    osc.stop(audioCtx.currentTime + duration);
+  } catch (e) {}
+}
+
+function toggleAudio() {
+  audioEnabled = !audioEnabled;
+  document.getElementById("audioBtn").textContent = audioEnabled ? "🔊 SFX" : "🔇 MUTE";
+  if (audioEnabled) playTone(660, "triangle", 0.15, 0.08);
+}
+
+function showToast(msg) {
+  const t = document.getElementById("hudToast");
+  t.textContent = msg;
+  t.classList.add("visible");
+  clearTimeout(window._toastTimer);
+  window._toastTimer = setTimeout(() => t.classList.remove("visible"), 2300);
+}
+
+// ============================================================================
+// 4. UI RENDERING: LEFT WAYPOINT LIST & RIGHT INSPECTOR DRAWER
+// ============================================================================
+function renderWaypointList() {
+  const container = document.getElementById("waypointList");
+  container.innerHTML = "";
+  PORTALS.forEach((p, idx) => {
+    if (trackFilter !== "ALL" && p.track !== trackFilter) return;
+    const item = document.createElement("div");
+    item.className = "wp-item" + (idx === activePortalIndex ? " active" : "");
+    item.onclick = () => selectAndWarpToPortal(idx);
+
+    const badgeBg = p.color + "22";
+    const isCleared = completedQuizzes.has(p.id);
+    item.innerHTML = `
+      <span class="wp-badge" style="background:${badgeBg};color:${p.color};border:1px solid ${p.color}66">
+        ${String(idx).padStart(2, "0")}
+      </span>
+      <div class="wp-info">
+        <div class="wp-title">${p.title}</div>
+        <div class="wp-sub">
+          <span>${p.trackLabel.split(" ")[0]} • ${p.sources.split(" ")[0]}</span>
+          <span class="wp-check">${isCleared ? "✓ CLEARED" : (visitedPortals.has(idx) ? "● VISITED" : "")}</span>
+        </div>
+      </div>
+    `;
+    container.appendChild(item);
+  });
+
+  // Update Pillar Progress Counters
+  const fclDone = PORTALS.filter(p => p.track === "FCL" && completedQuizzes.has(p.id)).length;
+  const pclDone = PORTALS.filter(p => p.track === "PCL" && completedQuizzes.has(p.id)).length;
+  const atoDone = PORTALS.filter(p => p.track === "ATO" && completedQuizzes.has(p.id)).length;
+  document.getElementById("fclProg").textContent = `${fclDone}/4`;
+  document.getElementById("pclProg").textContent = `${pclDone}/3`;
+  document.getElementById("atoProg").textContent = `${atoDone}/3`;
+  document.getElementById("sectorCounter").textContent = `${String(activePortalIndex + 1).padStart(2, "0")} / ${PORTALS.length}`;
+}
+
+function renderInspector(idx) {
+  const p = PORTALS[idx];
+  if (!p) return;
+  document.getElementById("activeTrackCode").textContent = p.trackLabel;
+  document.getElementById("activeTrackCode").style.color = p.color;
+
+  const isAnswered = completedQuizzes.has(p.id);
+  const body = document.getElementById("inspectorBody");
+
+  const specsHtml = p.specs.map(s => `<li style="border-left-color:${p.color}">${s}</li>`).join("");
+  const optsHtml = p.quiz.options.map((opt, oIdx) => {
+    let cls = "opt-btn";
+    if (isAnswered && oIdx === p.quiz.correct) cls += " correct";
+    return `<button class="${cls}" onclick="answerQuiz(${p.id}, ${oIdx}, this)">${String.fromCharCode(65 + oIdx)}. ${opt}</button>`;
+  }).join("");
+
+  body.innerHTML = `
+    <div class="sector-tag-row">
+      <span class="sector-pill" style="background:${p.color}22;color:${p.color};border:1px solid ${p.color}66">
+        ${p.code} // ${p.trackLabel}
+      </span>
+      <span class="source-cite" title="Primary Source Ledger Citations">${p.sources}</span>
+    </div>
+    <div class="inspector-title">${p.title}</div>
+    <div style="font-family:var(--font-mono);font-size:11px;color:${p.color};margin-bottom:8px">${p.subtitle}</div>
+    <p class="inspector-summary">${p.summary}</p>
+
+    <div class="live-link-bar">
+      <a class="live-site-btn" href="${p.primaryUrl}" target="_blank" rel="noopener">
+        🔑 ${p.primaryLabel}
+      </a>
+      <a class="live-site-btn secondary" href="${p.secondaryUrl}" target="_blank" rel="noopener">
+        ${p.secondaryLabel}
+      </a>
+    </div>
+
+    <div class="section-subhead">⚡ KEY ARCHITECTURE & COMPLIANCE RULES</div>
+    <ul class="key-specs-list">
+      ${specsHtml}
+    </ul>
+
+    <div class="gate-challenge-box">
+      <div class="section-subhead" style="margin-top:0;color:var(--gold-100)">
+        🛡️ CLEARANCE GATE CHECKPOINT ${isAnswered ? "(+100 XP EARNED ✓)" : "(+100 XP)"}
+      </div>
+      <div class="challenge-q">${p.quiz.q}</div>
+      <div class="challenge-opts">
+        ${optsHtml}
+      </div>
+      <div id="quizFeedback_${p.id}" class="challenge-feedback" style="${isAnswered ? 'display:block;background:rgba(16,185,129,0.16);color:#a7f3d0;border:1px solid #34d399' : ''}">
+        ${isAnswered ? p.quiz.explanation : ""}
+      </div>
+    </div>
+  `;
+}
+
+window.answerQuiz = function(portalId, optionIdx, btnEl) {
+  const p = PORTALS.find(x => x.id === portalId);
+  const fb = document.getElementById(`quizFeedback_${portalId}`);
+  if (!p || !fb) return;
+
+  if (optionIdx === p.quiz.correct) {
+    btnEl.classList.add("correct");
+    fb.style.display = "block";
+    fb.style.background = "rgba(16, 185, 129, 0.16)";
+    fb.style.color = "#a7f3d0";
+    fb.style.border = "1px solid #34d399";
+    fb.textContent = p.quiz.explanation;
+    if (!completedQuizzes.has(portalId)) {
+      completedQuizzes.add(portalId);
+      addXp(100, `SECTOR ${String(portalId).padStart(2, "0")} CLEARED! +100 XP`);
+      playTone(587.33, "triangle", 0.12, 0.1);
+      setTimeout(() => playTone(880, "triangle", 0.22, 0.12), 110);
+      renderWaypointList();
+    }
+  } else {
+    btnEl.classList.add("wrong");
+    fb.style.display = "block";
+    fb.style.background = "rgba(244, 63, 94, 0.16)";
+    fb.style.color = "#fecdd3";
+    fb.style.border = "1px solid #f43f5e";
+    fb.textContent = "Not quite — review the Tactical Telemetry rules above and try again!";
+    playTone(190, "sawtooth", 0.18, 0.08);
+  }
+};
+
+function addXp(amount, toastText) {
+  xp += amount;
+  document.getElementById("xpValue").textContent = `${xp} / 1200`;
+  const rankEl = document.getElementById("rankValue");
+  if (xp >= 1000) {
+    rankEl.textContent = "DCSA NISP MASTER";
+    rankEl.style.color = "#facc15";
+  } else if (xp >= 600) {
+    rankEl.textContent = "FSO / ISSM ARCHITECT";
+    rankEl.style.color = "#34d399";
+  } else if (xp >= 300) {
+    rankEl.textContent = "CLEARED KMP";
+    rankEl.style.color = "#38bdf8";
+  }
+  if (toastText) showToast(toastText);
+}
+
+// ============================================================================
+// 5. NAVIGATION, AUTOPILOT & TRACK FILTERING
+// ============================================================================
+function selectAndWarpToPortal(idx) {
+  activePortalIndex = (idx + PORTALS.length) % PORTALS.length;
+  visitedPortals.add(activePortalIndex);
+  const target = PORTALS[activePortalIndex];
+  ship.targetX = target.laneX;
+  ship.targetY = target.laneY;
+  ship.targetZ = target.z - 420;
+  renderWaypointList();
+  renderInspector(activePortalIndex);
+  playTone(440, "sine", 0.12, 0.07);
+  showToast(`LOCKED ON ${target.code}: ${target.title.toUpperCase()}`);
+}
+
+function warpToCurrentPortal() {
+  selectAndWarpToPortal(activePortalIndex);
+}
+
+function stepPortal(dir) {
+  const filtered = PORTALS.map((p, i) => i).filter(i => trackFilter === "ALL" || PORTALS[i].track === trackFilter);
+  const curPos = filtered.indexOf(activePortalIndex);
+  const nextPos = (curPos + dir + filtered.length) % filtered.length;
+  selectAndWarpToPortal(filtered[nextPos]);
+}
+
+function setTrackFilter(track) {
+  trackFilter = track;
+  document.querySelectorAll(".track-btn").forEach(btn => {
+    btn.classList.toggle("active", btn.getAttribute("data-track") === track);
+  });
+  const firstMatch = PORTALS.findIndex(p => track === "ALL" || p.track === track);
+  if (firstMatch !== -1) {
+    selectAndWarpToPortal(firstMatch);
+  } else {
+    renderWaypointList();
+  }
+}
+
+function toggleAutopilot() {
+  autopilot = !autopilot;
+  const btn = document.getElementById("autopilotBtn");
+  btn.textContent = autopilot ? "✈ AUTOPILOT: ON" : "✈ AUTOPILOT: OFF";
+  btn.classList.toggle("active-pilot", autopilot);
+  if (autopilot) {
+    ship.targetX = null;
+    ship.targetY = null;
+    ship.targetZ = null;
+    showToast("AUTOPILOT ENGAGED // GUIDED CORRIDOR TOUR ACTIVE");
+  } else {
+    showToast("MANUAL FLIGHT CONTROL RESTORED");
+  }
+}
+
+function toggleSiteMapModal() {
+  document.getElementById("siteMapModal").classList.toggle("open");
+}
+
+// ============================================================================
+// 6. INPUT CONTROLS (KEYBOARD + MOUSE DRAG + LASER SCANNER)
+// ============================================================================
+const keys = {};
+window.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    document.getElementById("siteMapModal").classList.remove("open");
+    return;
+  }
+  keys[e.code] = true;
+  if (e.code === "Space") {
+    e.preventDefault();
+    fireScannerLaser();
+  }
+  if (["ArrowLeft", "ArrowRight", "KeyA", "KeyD", "KeyW", "KeyS", "ArrowUp", "ArrowDown"].includes(e.code)) {
+    ship.targetX = null;
+    ship.targetY = null;
+    ship.targetZ = null;
+  }
+});
+
+window.addEventListener("keyup", (e) => {
+  keys[e.code] = false;
+});
+
+let isDragging = false;
+let lastMouseX = 0;
+let lastMouseY = 0;
+
+canvas.addEventListener("mousedown", (e) => {
+  isDragging = true;
+  lastMouseX = e.clientX;
+  lastMouseY = e.clientY;
+  fireScannerLaser(e.clientX, e.clientY);
+});
+
+window.addEventListener("mousemove", (e) => {
+  if (!isDragging) return;
+  const dx = e.clientX - lastMouseX;
+  const dy = e.clientY - lastMouseY;
+  lastMouseX = e.clientX;
+  lastMouseY = e.clientY;
+  ship.targetX = null;
+  ship.targetY = null;
+  ship.vx += dx * 0.18;
+  ship.vy += dy * 0.14;
+});
+
+window.addEventListener("mouseup", () => {
+  isDragging = false;
+});
+
+function fireScannerLaser(screenX = W / 2, screenY = H / 2) {
+  lasers.push({
+    x: ship.x,
+    y: ship.y + 25,
+    z: ship.z + 40,
+    vz: 95,
+    life: 45
+  });
+  playTone(780, "sawtooth", 0.08, 0.05);
+
+  // Check immediate hit against visible Failure-Mode Asteroids
+  for (const ast of asteroids) {
+    if (!ast.alive) continue;
+    const dz = ast.z - ship.z;
+    if (dz > 50 && dz < 2200) {
+      const distSq = Math.pow(ast.x - ship.x, 2) + Math.pow(ast.y - ship.y, 2);
+      if (distSq < Math.pow(ast.radius + 95, 2)) {
+        ast.alive = false;
+        ast.explodeTimer = 28;
+        for (let k = 0; k < 18; k++) {
+          particles.push({
+            x: ast.x,
+            y: ast.y,
+            z: ast.z,
+            vx: (Math.random() - 0.5) * 16,
+            vy: (Math.random() - 0.5) * 16,
+            vz: (Math.random() - 0.5) * 16,
+            life: 30,
+            color: "#f43f5e"
+          });
+        }
+        addXp(25, `MITIGATED FAILURE MODE (${ast.label}) +25 XP`);
+        playTone(320, "square", 0.16, 0.09);
+        break;
+      }
+    }
+  }
+}
+
+// ============================================================================
+// 7. 3D PROJECTION & COCKPIT RENDERING LOOP
+// ============================================================================
+const FOV = 520;
+
+function project3D(wx, wy, wz) {
+  const rx = wx - ship.x;
+  const ry = wy - ship.y;
+  const rz = wz - ship.z;
+  if (rz <= 10) return null;
+  const scale = FOV / rz;
+  return {
+    sx: W * 0.46 + rx * scale,
+    sy: H * 0.50 + ry * scale,
+    scale,
+    rz
+  };
+}
+
+function updatePhysics() {
+  // Warp-to-portal smooth interpolation
+  if (ship.targetZ !== null) {
+    ship.x += (ship.targetX - ship.x) * 0.09;
+    ship.y += (ship.targetY - ship.y) * 0.09;
+    ship.z += (ship.targetZ - ship.z) * 0.09;
+    ship.roll = (ship.targetX - ship.x) * 0.0015;
+    if (Math.abs(ship.targetZ - ship.z) < 12) {
+      ship.targetZ = null;
+    }
+  } else if (autopilot) {
+    const targetPortal = PORTALS[activePortalIndex];
+    const desiredX = targetPortal.laneX;
+    const desiredY = targetPortal.laneY;
+    ship.x += (desiredX - ship.x) * 0.04;
+    ship.y += (desiredY - ship.y) * 0.04;
+    ship.z += 9.5;
+    ship.roll = (desiredX - ship.x) * 0.0012;
+
+    if (ship.z > targetPortal.z + 120) {
+      const nextIdx = (activePortalIndex + 1) % PORTALS.length;
+      activePortalIndex = nextIdx;
+      visitedPortals.add(activePortalIndex);
+      if (nextIdx === 0) {
+        ship.z = 100;
+      }
+      renderWaypointList();
+      renderInspector(activePortalIndex);
+      showToast(`AUTOPILOT ENTERING ${PORTALS[activePortalIndex].code}`);
+    }
+  } else {
+    // Manual Flight Controls
+    const boost = (keys["ShiftLeft"] || keys["ShiftRight"]) ? 2.1 : 1.0;
+    if (keys["KeyA"] || keys["ArrowLeft"]) ship.vx -= 1.15 * boost;
+    if (keys["KeyD"] || keys["ArrowRight"]) ship.vx += 1.15 * boost;
+    if (keys["KeyW"] || keys["ArrowUp"]) ship.vz = Math.min(24 * boost, ship.vz + 0.65);
+    else if (keys["KeyS"] || keys["ArrowDown"]) ship.vz = Math.max(-14, ship.vz - 0.75);
+    else ship.vz += (5.2 - ship.vz) * 0.05;
+
+    if (keys["KeyQ"]) ship.vy -= 0.9;
+    if (keys["KeyE"]) ship.vy += 0.9;
+
+    ship.x += ship.vx;
+    ship.y += ship.vy;
+    ship.z += ship.vz;
+
+    ship.vx *= 0.88;
+    ship.vy *= 0.88;
+    ship.x = Math.max(-620, Math.min(620, ship.x));
+    ship.y = Math.max(-260, Math.min(260, ship.y));
+    ship.roll = ship.vx * 0.012;
+
+    // Loop corridor seamlessly
+    if (ship.z > 14800) ship.z = 120;
+    if (ship.z < 50) ship.z = 50;
+
+    // Auto-detect closest portal in front of the ship
+    let closestIdx = activePortalIndex;
+    let bestDist = Infinity;
+    PORTALS.forEach((p, idx) => {
+      if (trackFilter !== "ALL" && p.track !== trackFilter) return;
+      const dz = Math.abs(p.z - (ship.z + 380));
+      if (dz < bestDist && dz < 480) {
+        bestDist = dz;
+        closestIdx = idx;
+      }
+    });
+    if (closestIdx !== activePortalIndex) {
+      activePortalIndex = closestIdx;
+      visitedPortals.add(activePortalIndex);
+      renderWaypointList();
+      renderInspector(activePortalIndex);
+      playTone(520, "sine", 0.08, 0.05);
+    }
+  }
+
+  // Update Lasers
+  for (let i = lasers.length - 1; i >= 0; i--) {
+    lasers[i].z += lasers[i].vz;
+    lasers[i].life--;
+    if (lasers[i].life <= 0) lasers.splice(i, 1);
+  }
+
+  // Update Explosion Particles
+  for (let i = particles.length - 1; i >= 0; i--) {
+    const pt = particles[i];
+    pt.x += pt.vx;
+    pt.y += pt.vy;
+    pt.z += pt.vz;
+    pt.life--;
+    if (pt.life <= 0) particles.splice(i, 1);
+  }
+}
+
+function drawScene() {
+  ctx.fillStyle = "#060913";
+  ctx.fillRect(0, 0, W, H);
+
+  const cx = W * 0.46;
+  const cy = H * 0.50;
+
+  // 1. Cyber Horizon Glow
+  const grad = ctx.createRadialGradient(cx, cy, 10, cx, cy, W * 0.55);
+  grad.addColorStop(0, "rgba(30, 58, 138, 0.24)");
+  grad.addColorStop(0.5, "rgba(15, 23, 42, 0.12)");
+  grad.addColorStop(1, "rgba(6, 9, 19, 0)");
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, W, H);
+
+  // 2. 3-Track Corridor Floor Guide Rails (FCL Gold, PCL Cyan, ATO Emerald)
+  const lanes = [
+    { x: -280, color: "rgba(56, 189, 248, 0.26)", name: "200 PCL TRACK" },
+    { x: 0,    color: "rgba(250, 204, 21, 0.30)", name: "100 FCL / NISP CORE" },
+    { x: 260,  color: "rgba(52, 211, 153, 0.26)", name: "300 LAB ATO TRACK" }
+  ];
+
+  lanes.forEach(lane => {
+    ctx.strokeStyle = lane.color;
+    ctx.lineWidth = 1.5;
+    for (let offset of [-70, 70]) {
+      const pNear = project3D(lane.x + offset, 150, ship.z + 40);
+      const pFar = project3D(lane.x + offset, 150, ship.z + 4500);
+      if (pNear && pFar) {
+        ctx.beginPath();
+        ctx.moveTo(pNear.sx, pNear.sy);
+        ctx.lineTo(pFar.sx, pFar.sy);
+        ctx.stroke();
+      }
+    }
+  });
+
+  // Transverse depth grid rungs
+  const startGridZ = Math.floor(ship.z / 300) * 300;
+  ctx.strokeStyle = "rgba(148, 163, 184, 0.10)";
+  ctx.lineWidth = 1;
+  for (let gz = startGridZ + 300; gz < ship.z + 4200; gz += 300) {
+    const pL = project3D(-550, 150, gz);
+    const pR = project3D(550, 150, gz);
+    if (pL && pR) {
+      ctx.beginPath();
+      ctx.moveTo(pL.sx, pL.sy);
+      ctx.lineTo(pR.sx, pR.sy);
+      ctx.stroke();
+    }
+  }
+
+  // 3. Stars
+  for (const st of stars) {
+    let rz = st.z - ship.z;
+    if (rz < 15) {
+      st.z += 15000;
+      rz = st.z - ship.z;
+    }
+    if (rz > 5000) continue;
+    const proj = project3D(st.x, st.y, st.z);
+    if (!proj) continue;
+    const alpha = Math.min(1, (5000 - rz) / 3000);
+    ctx.fillStyle = st.hue;
+    ctx.globalAlpha = alpha * 0.8;
+    const r = Math.max(1, st.size * proj.scale * 2.5);
+    ctx.fillRect(proj.sx, proj.sy, r, r);
+  }
+  ctx.globalAlpha = 1;
+
+  // 4. Failure-Mode Asteroids (Back-to-Front)
+  for (const ast of asteroids) {
+    if (!ast.alive) continue;
+    const rz = ast.z - ship.z;
+    if (rz < 30 || rz > 3800) continue;
+    const proj = project3D(ast.x, ast.y, ast.z);
+    if (!proj) continue;
+    ast.rot += ast.rotSpeed;
+    const rad = ast.radius * proj.scale;
+    if (rad < 3) continue;
+
+    ctx.save();
+    ctx.translate(proj.sx, proj.sy);
+    ctx.rotate(ast.rot);
+    ctx.strokeStyle = "#f43f5e";
+    ctx.fillStyle = "rgba(244, 63, 94, 0.18)";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    for (let v = 0; v < 7; v++) {
+      const ang = (v / 7) * Math.PI * 2;
+      const rr = rad * (v % 2 === 0 ? 1 : 0.78);
+      if (v === 0) ctx.moveTo(Math.cos(ang) * rr, Math.sin(ang) * rr);
+      else ctx.lineTo(Math.cos(ang) * rr, Math.sin(ang) * rr);
+    }
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+    ctx.restore();
+
+    if (rz < 1900) {
+      ctx.font = `700 ${Math.max(9, Math.min(13, Math.round(12 * proj.scale * 2.2)))}px 'JetBrains Mono', monospace`;
+      ctx.fillStyle = "#fda4af";
+      ctx.textAlign = "center";
+      ctx.fillText(`⚠ ${ast.label}`, proj.sx, proj.sy - rad - 6);
+    }
+  }
+
+  // 5. Explosion Particles
+  for (const pt of particles) {
+    const proj = project3D(pt.x, pt.y, pt.z);
+    if (!proj) continue;
+    ctx.fillStyle = pt.color;
+    ctx.beginPath();
+    ctx.arc(proj.sx, proj.sy, Math.max(2, 6 * proj.scale), 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // 6. Scanner Laser Beams
+  for (const l of lasers) {
+    const p1 = project3D(l.x - 45, l.y, l.z);
+    const p2 = project3D(l.x - 10, l.y, l.z + 240);
+    const p3 = project3D(l.x + 45, l.y, l.z);
+    const p4 = project3D(l.x + 10, l.y, l.z + 240);
+    ctx.strokeStyle = "#38bdf8";
+    ctx.lineWidth = 2.5;
+    if (p1 && p2) {
+      ctx.beginPath();
+      ctx.moveTo(p1.sx, p1.sy);
+      ctx.lineTo(p2.sx, p2.sy);
+      ctx.stroke();
+    }
+    if (p3 && p4) {
+      ctx.beginPath();
+      ctx.moveTo(p3.sx, p3.sy);
+      ctx.lineTo(p4.sx, p4.sy);
+      ctx.stroke();
+    }
+  }
+
+  // 7. 3D Portals (Sorted far-to-near so nearer portals render on top)
+  const visiblePortals = PORTALS
+    .filter(p => trackFilter === "ALL" || p.track === trackFilter)
+    .map(p => ({ p, rz: p.z - ship.z }))
+    .filter(item => item.rz > 25 && item.rz < 5200)
+    .sort((a, b) => b.rz - a.rz);
+
+  for (const { p, rz } of visiblePortals) {
+    const proj = project3D(p.laneX, p.laneY, p.z);
+    if (!proj) continue;
+
+    const gateW = 310 * proj.scale;
+    const gateH = 190 * proj.scale;
+    const isCurrent = p.id === activePortalIndex;
+    const isCleared = completedQuizzes.has(p.id);
+
+    ctx.save();
+    ctx.translate(proj.sx, proj.sy);
+
+    // Outer hexagonal/octagonal portal ring
+    ctx.strokeStyle = isCleared ? "#34d399" : p.color;
+    ctx.lineWidth = isCurrent ? 3.5 : 2;
+    ctx.fillStyle = isCurrent ? `${p.color}24` : `${p.color}12`;
+
+    const hw = gateW / 2;
+    const hh = gateH / 2;
+    const cut = Math.min(hw, hh) * 0.28;
+
+    ctx.beginPath();
+    ctx.moveTo(-hw + cut, -hh);
+    ctx.lineTo(hw - cut, -hh);
+    ctx.lineTo(hw, -hh + cut);
+    ctx.lineTo(hw, hh - cut);
+    ctx.lineTo(hw - cut, hh);
+    ctx.lineTo(-hw + cut, hh);
+    ctx.lineTo(-hw, hh - cut);
+    ctx.lineTo(-hw, -hh + cut);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+
+    // Inner energy frame
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.25)";
+    ctx.lineWidth = 1;
+    ctx.strokeRect(-hw * 0.86, -hh * 0.82, hw * 1.72, hh * 1.64);
+
+    // Portal Billboard Text when reasonably close
+    if (rz < 3400 && gateW > 48) {
+      const titleFont = Math.max(10, Math.min(20, Math.round(gateW * 0.068)));
+      const subFont = Math.max(8, Math.min(13, Math.round(gateW * 0.045)));
+
+      ctx.fillStyle = p.color;
+      ctx.font = `700 ${subFont}px 'JetBrains Mono', monospace`;
+      ctx.textAlign = "center";
+      ctx.fillText(`${p.code} // ${p.trackLabel} ${isCleared ? "✓" : ""}`, 0, -hh * 0.45);
+
+      ctx.fillStyle = "#ffffff";
+      ctx.font = `700 ${titleFont}px 'Inter', sans-serif`;
+      ctx.fillText(p.title, 0, -hh * 0.08);
+
+      ctx.fillStyle = "#cbd5e1";
+      ctx.font = `500 ${subFont}px 'Inter', sans-serif`;
+      ctx.fillText(p.subtitle, 0, hh * 0.26);
+
+      ctx.fillStyle = isCleared ? "#34d399" : "#facc15";
+      ctx.font = `700 ${subFont}px 'JetBrains Mono', monospace`;
+      ctx.fillText(
+        isCleared ? "[ CLEARANCE VERIFIED • FLY THROUGH OR CLICK LINK ]" : `[ DIST: ${Math.round(rz)}m • ${p.sources} ]`,
+        0,
+        hh * 0.60
+      );
+    }
+    ctx.restore();
+  }
+
+  // 8. ARGON-1 Forefront Cockpit Reticle & Ship Nose Vector
+  ctx.save();
+  ctx.translate(cx, cy + 55);
+  ctx.rotate(ship.roll);
+
+  // Sleek futuristic HUD wings
+  ctx.strokeStyle = "rgba(56, 189, 248, 0.55)";
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(-68, 18);
+  ctx.lineTo(-18, 0);
+  ctx.lineTo(0, -14);
+  ctx.lineTo(18, 0);
+  ctx.lineTo(68, 18);
+  ctx.stroke();
+
+  // Thruster core glow
+  ctx.fillStyle = "rgba(250, 204, 21, 0.75)";
+  ctx.beginPath();
+  ctx.arc(0, 6, 5, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+
+  // Center Aiming Reticle
+  ctx.strokeStyle = "rgba(250, 204, 21, 0.42)";
+  ctx.lineWidth = 1.2;
+  ctx.beginPath();
+  ctx.arc(cx, cy, 22, 0, Math.PI * 2);
+  ctx.moveTo(cx - 32, cy);
+  ctx.lineTo(cx - 14, cy);
+  ctx.moveTo(cx + 14, cy);
+  ctx.lineTo(cx + 32, cy);
+  ctx.moveTo(cx, cy - 32);
+  ctx.lineTo(cx, cy - 14);
+  ctx.moveTo(cx, cy + 14);
+  ctx.lineTo(cx, cy + 32);
+  ctx.stroke();
+}
+
+function animate() {
+  updatePhysics();
+  drawScene();
+  requestAnimationFrame(animate);
+}
+
+// Initialize UI & Launch Flight Loop
+renderWaypointList();
+selectAndWarpToPortal(0);
+animate();
+</script>
+</body>
+</html>
