@@ -1,7 +1,7 @@
 window.SHORTS = {
   "notebook_alias": "odm-dcsa",
   "title": "Learn DCSA - NotebookLM shorts",
-  "deep_dive": { "file": "media/deep-dive-cut.mp4", "youtube": "" },
+  "deep_dive": { "file": "media/deep-dive-cut.mp4", "youtube": "Qx7Cdx2aha4" },
   "total": 6,
   "ready": 6,
   "items": [
@@ -15,7 +15,7 @@ window.SHORTS = {
       "duration": 81,
       "poster": "media/posters/01-dual-track-lock.jpg",
       "file": "media/shorts/01-dual-track-lock.mp4",
-      "youtube": "",
+      "youtube": "rJ_I-xyzOtw",
       "status": "ready"
     },
     {
@@ -28,7 +28,7 @@ window.SHORTS = {
       "duration": 76,
       "poster": "media/posters/02-no-self-sponsor.jpg",
       "file": "media/shorts/02-no-self-sponsor.mp4",
-      "youtube": "",
+      "youtube": "2Lr79by5A_A",
       "status": "ready"
     },
     {
@@ -41,7 +41,7 @@ window.SHORTS = {
       "duration": 78,
       "poster": "media/posters/03-day-20-clock.jpg",
       "file": "media/shorts/03-day-20-clock.mp4",
-      "youtube": "",
+      "youtube": "raRS4QbwfGI",
       "status": "ready"
     },
     {
@@ -54,7 +54,7 @@ window.SHORTS = {
       "duration": 72,
       "poster": "media/posters/04-package-quality.jpg",
       "file": "media/shorts/04-package-quality.mp4",
-      "youtube": "",
+      "youtube": "MK6iVKnU6_0",
       "status": "ready"
     },
     {
@@ -67,7 +67,7 @@ window.SHORTS = {
       "duration": 67,
       "poster": "media/posters/05-sf328-fifteen.jpg",
       "file": "media/shorts/05-sf328-fifteen.mp4",
-      "youtube": "",
+      "youtube": "4Lyox8vU3Iw",
       "status": "ready"
     },
     {
@@ -80,7 +80,7 @@ window.SHORTS = {
       "duration": 78,
       "poster": "media/posters/06-sead4-whole-person.jpg",
       "file": "media/shorts/06-sead4-whole-person.mp4",
-      "youtube": "",
+      "youtube": "kPi1MEZBTag",
       "status": "ready"
     }
   ]

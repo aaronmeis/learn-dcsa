@@ -523,7 +523,7 @@ const DATA = {
       {question:"Name two FOCI instruments.",detail:"SCA, SSA, Voting Trust, or Proxy Agreement.",why:"Schedule risk.",example:"Foreign PE LP may force mitigation."},
       {question:"What is DD 254?",detail:"Contract Security Classification Specification from GCA/prime.",why:"Need-to-know evidence.",example:"Sponsorship without classified need fails."}
     ],
-    deepDive:{file:"",youtube:""}
+    deepDive:{file:"media/deep-dive-cut.mp4",youtube:"Qx7Cdx2aha4"}
   }
 };
 
