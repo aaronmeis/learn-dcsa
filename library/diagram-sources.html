@@ -2,29 +2,29 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; font-src 'self'; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diagram sources (draw.io and Mermaid) | Learn DCSA</title>
 <meta name="description" content="Rendered diagrams with their editable draw.io and Mermaid sources.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="../assets/icons/icon-192.png" type="image/png">
 <link rel="stylesheet" href="library.css">
 <script>try{var p=JSON.parse(localStorage.getItem("appPalette"))||"github",m=JSON.parse(localStorage.getItem("appMode"))||"dark";document.documentElement.setAttribute("data-theme",p+"-"+m);}catch(e){document.documentElement.setAttribute("data-theme","github-dark");}</script>
 </head>
 <body>
 <header class="topbar">
   <a href="../index.html" class="home">&larr; Learn DCSA</a>
-  <span class="crumb">Library Â· Architecture views</span>
+  <span class="crumb">Library · Architecture views</span>
   <a href="index.html" class="home">All pages</a>
 </header>
 <main class="doc">
+  <aside class="corrections" role="note"><b>Archived study note. Corrections as of Oct 13 2026:</b> industry now initiates and reviews SF-86 cases (eApp) in DISS, and NBIS Agency turns off Nov 30 2026 (<a href="https://www.dcsa.mil/About-Us/News/Article/Article/4563691/industry-transition-to-diss-for-initiate-and-review-ir-functionality/">DCSA, Aug 4 2026</a>). The FCL handbook sets no fixed day count for the second deadline: it is the due date in DCSA’s investigation email. Cleared contractors follow the DAAG via NISP eMASS (<a href="https://www.dcsa.mil/Industrial-Security/NISP-Cybersecurity-Office-NCSO/">DCSA NCSO</a>). A GCA or a currently cleared contractor may sponsor (<a href="https://www.ecfr.gov/current/title-32/subtitle-A/chapter-I/subchapter-D/part-117/section-117.9">32 CFR 117.9(a)(10)</a>). The pre-2025 SF 328 threshold and “foreign proceeds” wording are unverified and were removed. The <a href="../index.html#/refs">source ledger</a> wins over this note.</aside>
   <div class="kicker">Architecture views</div>
   <h1 class="doctitle">Diagram sources (draw.io and Mermaid)</h1>
   <p class="lead">Rendered diagrams with their editable draw.io and Mermaid sources.</p>
   
-  <article><p>Each diagram as the rendered PNG, the editable draw.io file, and the Mermaid source where one exists. Open .drawio files in draw.io (desktop, or app.diagrams.net).</p><h2>00-mindmap</h2><p><a href="../assets/diagrams/00-mindmap.png" target="_blank">PNG</a> Â· <a href="../assets/diagrams/00-mindmap.drawio" download>draw.io</a></p><a href="../assets/diagrams/00-mindmap.png" target="_blank"><img class="embed" src="../assets/diagrams/00-mindmap.png" alt="00-mindmap" loading="lazy"></a><h2>01-conceptual-1</h2><p><a href="../assets/diagrams/01-conceptual-1.png" target="_blank">PNG</a> Â· <a href="../assets/diagrams/01-conceptual-1.drawio" download>draw.io</a> Â· <a href="../assets/diagrams/01-conceptual-1.mmd" download>Mermaid (.mmd)</a></p><a href="../assets/diagrams/01-conceptual-1.png" target="_blank"><img class="embed" src="../assets/diagrams/01-conceptual-1.png" alt="01-conceptual-1" loading="lazy"></a><details><summary>Mermaid source</summary><pre>flowchart TB
+  <article><p>Each diagram as the rendered PNG, with the Mermaid source shown inline where one exists. The editable .drawio files are not published on this site.</p><h2>00-mindmap</h2><p><a href="../assets/diagrams/00-mindmap.png" target="_blank">PNG</a></p><a href="../assets/diagrams/00-mindmap.png" target="_blank"><img class="embed" src="../assets/diagrams/00-mindmap.png" alt="00-mindmap" loading="lazy"></a><h2>01-conceptual-1</h2><p><a href="../assets/diagrams/01-conceptual-1.png" target="_blank">PNG</a></p><a href="../assets/diagrams/01-conceptual-1.png" target="_blank"><img class="embed" src="../assets/diagrams/01-conceptual-1.png" alt="01-conceptual-1" loading="lazy"></a><details><summary>Mermaid source</summary><pre>flowchart TB
   subgraph Need[&quot;Legitimate classified need&quot;]
-    GCA[&quot;GCA or cleared prime&quot;]
+    GCA[&quot;GCA or currently cleared contractor&quot;]
   end
   GCA --&gt;|&quot;sponsors&quot;| FCLTRACK[&quot;Facility track capabilities&quot;]
   FCLTRACK --&gt;|&quot;KMP roster drives&quot;| PCLTRACK[&quot;Personnel track capabilities&quot;]
@@ -39,7 +39,7 @@
   ACCESS --&gt; CI[&quot;CI and insider-threat reporting&quot;]
   FOREIGN[&quot;Foreign interest&quot;] -.disclosure and risk.-&gt; FOCI
   UNCLEARED[&quot;Uncleared staff and partners&quot;] -.boundary.-&gt; ACCESS
-</pre></details><h2>02-logical-1</h2><p><a href="../assets/diagrams/02-logical-1.png" target="_blank">PNG</a> Â· <a href="../assets/diagrams/02-logical-1.drawio" download>draw.io</a> Â· <a href="../assets/diagrams/02-logical-1.mmd" download>Mermaid (.mmd)</a></p><a href="../assets/diagrams/02-logical-1.png" target="_blank"><img class="embed" src="../assets/diagrams/02-logical-1.png" alt="02-logical-1" loading="lazy"></a><details><summary>Mermaid source</summary><pre>erDiagram
+</pre></details><h2>02-logical-1</h2><p><a href="../assets/diagrams/02-logical-1.png" target="_blank">PNG</a></p><a href="../assets/diagrams/02-logical-1.png" target="_blank"><img class="embed" src="../assets/diagrams/02-logical-1.png" alt="02-logical-1" loading="lazy"></a><details><summary>Mermaid source</summary><pre>erDiagram
   FACILITY_RECORD ||--|| DD441 : &quot;bound by&quot;
   FACILITY_RECORD ||--|| SF328 : &quot;certifies FOCI&quot;
   FACILITY_RECORD ||--o{ OWNERSHIP_NODE : &quot;shows&quot;
@@ -50,27 +50,27 @@
   FACILITY_RECORD ||--o| FOCI_INSTRUMENT : &quot;mitigated by&quot;
   FACILITY_RECORD ||--o{ SYS_AUTH_PKG : &quot;may require&quot;
   PCL_CASE ||--o{ TRAINING_RECORD : &quot;supported by&quot;
-</pre></details><h2>02-logical-2</h2><p><a href="../assets/diagrams/02-logical-2.png" target="_blank">PNG</a> Â· <a href="../assets/diagrams/02-logical-2.drawio" download>draw.io</a> Â· <a href="../assets/diagrams/02-logical-2.mmd" download>Mermaid (.mmd)</a></p><a href="../assets/diagrams/02-logical-2.png" target="_blank"><img class="embed" src="../assets/diagrams/02-logical-2.png" alt="02-logical-2" loading="lazy"></a><details><summary>Mermaid source</summary><pre>flowchart LR
+</pre></details><h2>02-logical-2</h2><p><a href="../assets/diagrams/02-logical-2.png" target="_blank">PNG</a></p><a href="../assets/diagrams/02-logical-2.png" target="_blank"><img class="embed" src="../assets/diagrams/02-logical-2.png" alt="02-logical-2" loading="lazy"></a><details><summary>Mermaid source</summary><pre>flowchart LR
   SPON[&quot;Sponsorship accepted\nDay 1&quot;] --&gt; D20[&quot;Day-20 package\nSF328 DD441 ownership KMP&quot;]
   D20 --&gt; COMP{&quot;Completeness\ncycles&quot;}
   COMP --&gt;|&quot;incomplete&quot;| D20
   COMP --&gt;|&quot;complete&quot;| FOCI{&quot;FOCI\ndetermination&quot;}
   FOCI --&gt;|&quot;mitigate&quot;| MIT[&quot;Mitigation instrument&quot;]
   FOCI --&gt;|&quot;clear&quot;| D45
-  MIT --&gt; D45[&quot;Day-45 KMP\ninvestigation initiation&quot;]
+  MIT --&gt; D45[&quot;DCSA due-date KMP\ninvestigation initiation&quot;]
   D45 --&gt; GRANT[&quot;FCL issued&quot;]
   GRANT --&gt; SUSTAIN[&quot;ISR review +\nself-inspection&quot;]
-</pre></details><h2>02-logical-3</h2><p><a href="../assets/diagrams/02-logical-3.png" target="_blank">PNG</a> Â· <a href="../assets/diagrams/02-logical-3.drawio" download>draw.io</a> Â· <a href="../assets/diagrams/02-logical-3.mmd" download>Mermaid (.mmd)</a></p><a href="../assets/diagrams/02-logical-3.png" target="_blank"><img class="embed" src="../assets/diagrams/02-logical-3.png" alt="02-logical-3" loading="lazy"></a><details><summary>Mermaid source</summary><pre>flowchart LR
+</pre></details><h2>02-logical-3</h2><p><a href="../assets/diagrams/02-logical-3.png" target="_blank">PNG</a></p><a href="../assets/diagrams/02-logical-3.png" target="_blank"><img class="embed" src="../assets/diagrams/02-logical-3.png" alt="02-logical-3" loading="lazy"></a><details><summary>Mermaid source</summary><pre>flowchart LR
   NEED[&quot;Access need +\neligibility request&quot;] --&gt; Q[&quot;SF-86-class\nquestionnaire&quot;]
   Q --&gt; INV[&quot;Investigation\nTier 3 or Tier 5&quot;]
   INV --&gt; SEAD[&quot;SEAD 4\nadjudication&quot;]
   SEAD --&gt; ELIG[&quot;Personnel eligibility&quot;]
   ELIG --&gt; CV[&quot;Continuous vetting&quot;]
   CV --&gt;|&quot;issue&quot;| SEAD
-</pre></details><h2>03-physical-1</h2><p><a href="../assets/diagrams/03-physical-1.png" target="_blank">PNG</a> Â· <a href="../assets/diagrams/03-physical-1.drawio" download>draw.io</a> Â· <a href="../assets/diagrams/03-physical-1.mmd" download>Mermaid (.mmd)</a></p><a href="../assets/diagrams/03-physical-1.png" target="_blank"><img class="embed" src="../assets/diagrams/03-physical-1.png" alt="03-physical-1" loading="lazy"></a><details><summary>Mermaid source</summary><pre>flowchart TB
+</pre></details><h2>03-physical-1</h2><p><a href="../assets/diagrams/03-physical-1.png" target="_blank">PNG</a></p><a href="../assets/diagrams/03-physical-1.png" target="_blank"><img class="embed" src="../assets/diagrams/03-physical-1.png" alt="03-physical-1" loading="lazy"></a><details><summary>Mermaid source</summary><pre>flowchart TB
   subgraph USG[&quot;USG / DCSA plane&quot;]
     NISS[&quot;NISS — facility sponsorship and FCL record&quot;]
-    NBIS[&quot;NBIS / e-QIP — investigations&quot;]
+    NBIS[&quot;eApp (DISS) — investigations&quot;]
     DISS[&quot;Personnel eligibility SoR\n(DISS — verify current)&quot;]
     STEPP[&quot;STEPP / CDSE training&quot;]
     EMASS[&quot;eMASS / A&amp;A repository&quot;]
@@ -83,7 +83,7 @@
     SITE[&quot;Possessing site controls\nor non-possessing access path&quot;]
   end
   subgraph Sponsor[&quot;Sponsor&quot;]
-    GCA[&quot;GCA or cleared prime&quot;]
+    GCA[&quot;GCA or currently cleared contractor&quot;]
   end
   GCA --&gt;|&quot;sponsorship&quot;| NISS
   FSO --&gt; NISS
@@ -95,15 +95,15 @@
   ISR --&gt; NISS
   HR --&gt; FSO
   SITE --&gt; FSO
-</pre></details><h2>04-integration-ai-1</h2><p><a href="../assets/diagrams/04-integration-ai-1.png" target="_blank">PNG</a> Â· <a href="../assets/diagrams/04-integration-ai-1.drawio" download>draw.io</a> Â· <a href="../assets/diagrams/04-integration-ai-1.mmd" download>Mermaid (.mmd)</a></p><a href="../assets/diagrams/04-integration-ai-1.png" target="_blank"><img class="embed" src="../assets/diagrams/04-integration-ai-1.png" alt="04-integration-ai-1" loading="lazy"></a><details><summary>Mermaid source</summary><pre>flowchart LR
+</pre></details><h2>04-integration-ai-1</h2><p><a href="../assets/diagrams/04-integration-ai-1.png" target="_blank">PNG</a></p><a href="../assets/diagrams/04-integration-ai-1.png" target="_blank"><img class="embed" src="../assets/diagrams/04-integration-ai-1.png" alt="04-integration-ai-1" loading="lazy"></a><details><summary>Mermaid source</summary><pre>flowchart LR
   subgraph Co[&quot;Cleared company boundary&quot;]
     FSO[&quot;FSO / ISSM workflows&quot;]
     HR[&quot;HR adverse-info&quot;]
     LEG[&quot;Legal / ownership&quot;]
   end
-  GCA[&quot;GCA or cleared prime&quot;] --&gt;|&quot;sponsorship + DD254&quot;| NISS[&quot;NISS&quot;]
+  GCA[&quot;GCA or currently cleared contractor&quot;] --&gt;|&quot;sponsorship + DD254&quot;| NISS[&quot;NISS&quot;]
   FSO &lt;--&gt; NISS
-  FSO &lt;--&gt; NBIS[&quot;NBIS / e-QIP&quot;]
+  FSO &lt;--&gt; NBIS[&quot;eApp (DISS)&quot;]
   NBIS --&gt; DISS[&quot;Personnel eligibility SoR&quot;]
   NISS --&gt; DISS
   FSO --&gt; STEPP[&quot;STEPP / CDSE&quot;]
@@ -112,7 +112,7 @@
   LEG --&gt; FSO
   CLOUD[&quot;Cloud / hosting vendor&quot;] &lt;--&gt; FSO
   AI[&quot;Assistive AI\nnon-PII only&quot;] -.policy-gated.-&gt; FSO
-</pre></details><h2>04-integration-ai-2</h2><p><a href="../assets/diagrams/04-integration-ai-2.png" target="_blank">PNG</a> Â· <a href="../assets/diagrams/04-integration-ai-2.drawio" download>draw.io</a> Â· <a href="../assets/diagrams/04-integration-ai-2.mmd" download>Mermaid (.mmd)</a></p><a href="../assets/diagrams/04-integration-ai-2.png" target="_blank"><img class="embed" src="../assets/diagrams/04-integration-ai-2.png" alt="04-integration-ai-2" loading="lazy"></a><details><summary>Mermaid source</summary><pre>flowchart LR
+</pre></details><h2>04-integration-ai-2</h2><p><a href="../assets/diagrams/04-integration-ai-2.png" target="_blank">PNG</a></p><a href="../assets/diagrams/04-integration-ai-2.png" target="_blank"><img class="embed" src="../assets/diagrams/04-integration-ai-2.png" alt="04-integration-ai-2" loading="lazy"></a><details><summary>Mermaid source</summary><pre>flowchart LR
   DOC[&quot;Non-PII checklist / public handbook text&quot;] --&gt; AI[&quot;Assistive AI&quot;]
   AI --&gt; DRAFT[&quot;Draft reminder or study aid&quot;]
   DRAFT --&gt; HUM{&quot;FSO / counsel review&quot;}
@@ -122,14 +122,9 @@
   BLOCK --&gt; USG[&quot;USG systems only\nNISS NBIS personnel SoR&quot;]
 </pre></details></article>
   <footer class="docfoot">
-    Rendered from <code>Learning\tech-deep-dive\dcsa\assets\diagrams</code>. The Obsidian vault is the source of truth. Study material only. Citations <span class="cite">S#</span> link to the DCSA source ledger [S1]â€“[S14].
+    Rendered from <code>Learning\tech-deep-dive\dcsa\assets\diagrams</code>. The Obsidian vault is the source of truth. Study material only. Citations <span class="cite">S#</span> link to the DCSA source ledger [S1]–[S14].
     <div class="prevnext"><a href="diagram-index.html">&larr; Previous</a><span></span></div>
   </footer>
 </main>
-<script type="module">
-import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
-const dark=(document.documentElement.getAttribute("data-theme")||"").endsWith("dark");
-mermaid.initialize({startOnLoad:true,theme:dark?"dark":"default",securityLevel:"strict"});
-</script>
 </body>
 </html>

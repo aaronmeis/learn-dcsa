@@ -32,15 +32,15 @@ window.SHORTS = {
       "status": "ready"
     },
     {
-      "id": "03-day-20-45",
-      "name": "03-day-20-45",
-      "title": "Day 20 and Day 45 clocks",
+      "id": "03-day-20-clock",
+      "name": "03-day-20-clock",
+      "title": "The Day 20 clock and the KMP due date",
       "tag": "Block 3",
       "pillar": "NISP",
-      "keywords": ["Day 20", "Day 45", "package", "clock"],
+      "keywords": ["Day 20", "KMP due date", "package", "clock"],
       "duration": 78,
-      "poster": "media/posters/03-day-20-45.jpg",
-      "file": "media/shorts/03-day-20-45.mp4",
+      "poster": "media/posters/03-day-20-clock.jpg",
+      "file": "media/shorts/03-day-20-clock.mp4",
       "youtube": "",
       "status": "ready"
     },

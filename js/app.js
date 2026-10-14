@@ -49,7 +49,7 @@ function renderDashboard(){
   const fmDone=DATA.checklist.filter((_,i)=>LS.get(KEY+"cl:"+i,false)).length;
   const libCount=(window.LIBRARY||[]).length;
   const pillar=(img,title,sub,color)=>`<div style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:.9rem 1.1rem;display:flex;align-items:center;gap:12px">
-      <img src="assets/${img}.jpg" alt="" style="width:48px;height:48px;border-radius:10px;border:1px solid ${color};object-fit:cover;flex-shrink:0">
+      <img src="assets/${img}.svg" alt="" width="48" height="48" style="width:48px;height:48px;border-radius:10px;border:1px solid ${color};object-fit:cover;flex-shrink:0">
       <div><div style="font-weight:700;font-size:.88rem;color:var(--text-primary)">${title}</div><div style="font-size:.74rem;color:var(--text-dim)">${sub}</div></div></div>`;
   let h=`<span class="badge">STUDY CONSOLE</span>
   <h1 style="margin-top:.9rem">DCSA: dual-track FCL and PCL</h1>
@@ -58,7 +58,7 @@ function renderDashboard(){
     ${pillar("100","NISP","Facility clearance under the NISP","var(--r100)")}
     ${pillar("200","Personnel","PCL, the SF-86 path, and adjudication","var(--r200)")}
     ${pillar("300","Systems","System authorization beside the clearances","var(--r300)")}
-    ${pillar("hero","CI","Counterintelligence boundary","var(--warn)")}
+    ${pillar("mark","CI","Counterintelligence boundary","var(--warn)")}
   </div>
   <div class="grid" style="margin-bottom:1.5rem;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
     <div class="statcard"><div class="num">${pct}%</div><div class="lbl">curriculum complete (${done}/${mods.length} modules)</div>
@@ -95,7 +95,7 @@ function renderCurriculum(){
   let h=`<h2 class="vh">${DATA.weeks.length}-block curriculum</h2>
   <p class="lead">${DATA.weeks.length} blocks from the packs. Each block has an action and a reason. ${lib("odm-day-plan","Timed day plan")}</p>
   <div class="timeline" style="margin-bottom:1.2rem">${DATA.weeks.map(w=>`<span class="t">Block ${w.n}</span><span class="b">${esc(w.title)}</span><span class="m">${esc(w.time)}</span>`).join("")}</div>
-  <details class="look-box" style="margin:0 0 1.4rem"><summary>Scope mind map</summary><p style="font-size:.8rem;color:var(--text-dim)">${lib("mindmap","Mind map as text")} · ${lib("intake-record","Intake record")}</p></details>`;
+  <details class="look-box" style="margin:0 0 1.4rem"><summary>Scope mind map</summary><p style="font-size:.8rem;color:var(--text-dim)">${lib("odm-mindmap","Mind map as text")} · ${lib("tdd-mindmap","Tech deep-dive mind map")}</p></details>`;
   DATA.weeks.forEach(w=>{
     const total=w.mods.length, done=w.mods.filter((_,i)=>LS.get(moduleKey(w.n,i),false)).length;
     h+=`<div class="card">
@@ -161,7 +161,7 @@ function renderMap(){
   <p class="lead">Self-rate each rung. The dashboard counts your "solid" ratings.</p><div class="lanes">`;
   DATA.ladder.forEach(l=>{
     h+=`<div class="lane"><div style="display:flex;align-items:center;gap:10px;margin-bottom:.8rem">
-        <img src="assets/${l.img}.jpg" alt="" style="width:32px;height:32px;border-radius:6px;object-fit:cover;border:1px solid var(--border-color)">
+        <img src="assets/${l.img}.svg" alt="" width="32" height="32" style="width:32px;height:32px;border-radius:6px;object-fit:cover;border:1px solid var(--border-color)">
         <h3 style="margin-bottom:0">${esc(l.name)}</h3></div>`;
     l.r.forEach(r=>{
       const st=LS.get(KEY+"self:"+l.key+":"+r.n,"none");
@@ -255,7 +255,7 @@ document.addEventListener("keydown",e=>{
 
 /* ---- Shorts globals (player, feed, and gallery live in enhance.js) ---- */
 let shortItems=[],shortI=0;
-const DEEP=(window.SHORTS&&window.SHORTS.deep_dive)||{file:"media/deep-dive-cut.mp4",youtube:""};
+const DEEP=(window.SHORTS&&window.SHORTS.deep_dive)||{file:"",youtube:""};
 const ytSrc=id=>`https://www.youtube-nocookie.com/embed/${id}?rel=0&playsinline=1&modestbranding=1`;
 
 /* ---- Deck and deep-dive cut ---- */
@@ -296,7 +296,7 @@ function renderQuiz(){
   const secs=Object.keys(DATA.quizSections).map(Number);
   const sel=LS.get(KEY+"quizSec",secs[0]);
   let h=`<h2 class="vh">Quiz</h2>
-  <p class="lead">${DATA.quiz.length} questions. The NotebookLM set is multiple choice. The others are short answers. ${lib("quiz-bank","Quiz bank")} · ${lib("nblm-gap-quiz","Full NotebookLM quiz")}</p>
+  <p class="lead">${DATA.quiz.length} questions. All items are short answer: think first, then reveal the model answer. ${lib("quiz-bank","Quiz bank")} · ${lib("tdd-quiz-bank","Tech deep-dive quiz bank")}</p>
   <div class="btnrow">${secs.map(s=>`<button class="b ${s==sel?"on":""}" data-qs="${s}">${esc(DATA.quizSections[s])} (${DATA.quiz.filter(q=>q.section==s).length})</button>`).join("")}</div>`;
   const qs=DATA.quiz.filter(q=>q.section==sel);
   qs.forEach((q,qi)=>{
@@ -324,8 +324,12 @@ function renderGlossary(){
   const el=$("#v-glossary");
   const q=(LS.get(KEY+"gq","")||"").toLowerCase(), cat=LS.get(KEY+"gcat","all");
   const cats=[...new Set(DATA.glossary.map(g=>g.category))];
-  let h=`<h2 class="vh">Glossary <span style="font-size:1rem;color:var(--text-dim)">${DATA.glossary.length} terms</span></h2>
-  <p class="lead">Study definitions. Rows marked gap pass still need a ledger check. ${lib("glossary","Glossary note")} · ${lib("nblm-gap-table","Data table")} · ${lib("source-ledger","Source ledger")}</p>
+  const gsub=window.GLOSS_SUB||"", gmap=/^map(\/|$)/.test(gsub);
+  const gHead=`<h2 class="vh">Glossary <span style="font-size:1rem;color:var(--text-dim)">${DATA.glossary.length} terms</span></h2>
+  <div class="gmode" role="group" aria-label="Glossary view"><a class="b ${gmap?"":"on"}" href="#/glossary" ${gmap?"":'aria-current="page"'}>List</a><a class="b ${gmap?"on":""}" href="#/glossary/map" ${gmap?'aria-current="page"':""}>Map</a></div>`;
+  if(gmap){ renderGlossaryMap(el,gHead,gsub.replace(/^map\/?/,"")||null); return; }
+  let h=gHead+`
+  <p class="lead">Study definitions. Rows marked gap pass still need a ledger check. ${lib("glossary","Glossary note")} · ${lib("source-ledger","Source ledger")}</p>
   <input class="search" id="gSearch" placeholder="filter terms…" value="${esc(q)}">
   <div class="gfilters"><button class="b ${cat==="all"?"on":""}" data-gc="all">All (${DATA.glossary.length})</button>${cats.map(c=>`<button class="b ${cat===c?"on":""}" data-gc="${esc(c)}">${esc(c)} (${DATA.glossary.filter(g=>g.category===c).length})</button>`).join("")}</div>`;
   cats.filter(c=>cat==="all"||c===cat).forEach(c=>{
@@ -338,6 +342,21 @@ function renderGlossary(){
   const s=$("#gSearch");
   s.oninput=()=>{LS.set(KEY+"gq",s.value);const p=s.selectionStart;renderGlossary();const ns=$("#gSearch");ns.focus();ns.setSelectionRange(p,p);};
   $$("[data-gc]",el).forEach(b=>b.onclick=()=>{LS.set(KEY+"gcat",b.dataset.gc);renderGlossary();});
+}
+
+/* ---- Glossary map (js/termmap.js), shown as the "Map" toggle inside Glossary ---- */
+let termMapApi=null;
+function renderGlossaryMap(el,head,slug){
+  if(!window.TermMap){el.innerHTML=head+`<p class="lead">The map could not load. Use the list view.</p>`;return;}
+  el.innerHTML=head+`<p class="lead">Every glossary term, grouped by category. Pick a term to read its definition and related terms. On a phone the list opens first; tap “Show map” to see the web.</p><div id="tmRoot"></div>`;
+  const L=DATA.glossaryLinks||{aliases:{},related:{}};
+  termMapApi=TermMap.mount($("#tmRoot"),{title:"DCSA glossary map",
+    listFirst:window.matchMedia&&window.matchMedia("(max-width:599px)").matches,
+    items:DATA.glossary.map(g=>({id:TermMap.slugify(g.term),label:g.term,group:g.category,weight:g.essential?3:(g.rung>=300?1:2),
+      aliases:L.aliases[g.term]||[],related:L.related[g.term]||[],
+      body:`<p>${ec(g.definition)}</p><p style="margin-top:.5rem"><span class="pill r${g.rung}">${g.rung}</span>${g.essential?' <span class="pill r100">Essential</span>':''}</p>`})),
+    slug:slug,
+    onFocus:id=>{const h=id?"#/glossary/map/"+encodeURIComponent(id):"#/glossary/map"; if(location.hash!==h) history.replaceState(null,"",h); window.GLOSS_SUB=h.replace("#/glossary/","");}});
 }
 
 /* ---- Prompts ---- */
@@ -365,7 +384,7 @@ function renderCounsel(){
   const views=[...new Set(DATA.checklist.map(c=>c.view))];
   const done=DATA.checklist.filter((_,i)=>LS.get(KEY+"cl:"+i,false)).length;
   let h=`<h2 class="vh">Failure modes</h2>
-  <p class="lead">What breaks in the engine and at the trust boundary. Check an item once you can name its tell and its fix without looking. ${lib("block-05-edge-cases","Edge cases")} · ${lib("nblm-failure-modes","NotebookLM failure catalog")}</p>
+  <p class="lead">What breaks on the facility track, the personnel track, and at the system boundary. Check an item once you can name its tell and its fix without looking. ${lib("odm-block-05-edge-cases","Edge cases")} · ${lib("nblm-tdd-failure-modes","NotebookLM failure catalog")}</p>
   <div class="card" style="margin-bottom:1rem"><div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><h3>Failure-mode review</h3><span class="pct" style="font-weight:700;color:var(--accent-color)">${done} / ${DATA.checklist.length} reviewed</span></div></div>
   <div class="gfilters"><button class="b ${f==="all"?"on":""}" data-fv="all">All views</button>${views.map(v=>`<button class="b ${f===v?"on":""}" data-fv="${esc(v)}">${esc(v)}</button>`).join("")}</div>`;
   DATA.checklist.forEach((item,i)=>{
@@ -495,6 +514,7 @@ function renderReferences(){
   });
   h+=`<h2 class="vh" style="margin-top:1.6rem">Source ledger <span style="font-size:1rem;color:var(--text-dim)">${SOURCES.length} sources</span></h2>
   <p class="lead">${SOURCES.length} sources. The vault ledger wins over a NotebookLM report. ${lib("source-ledger","Ledger note")} · ${lib("resources","Reading order")}</p>
+  ${typeof HANDBOOK_VERIFY_NOTE!=="undefined"?`<div class="note"><b>To verify.</b> ${esc(HANDBOOK_VERIFY_NOTE.replace(/^To verify: /,""))}</div>`:""}
   <input class="search" id="refSearch" placeholder="filter by title, URL, or type…" value="${esc(q)}">
   <div class="gfilters"><button class="b ${sel==="all"?"on":""}" data-rcat="all">All (${SOURCES.length})</button>${cats.map(c=>`<button class="b ${sel===c?"on":""}" data-rcat="${esc(c)}">${esc(c)} (${SOURCES.filter(s=>s.g===c).length})</button>`).join("")}</div>`;
   cats.filter(c=>sel==="all"||sel===c).forEach(c=>{

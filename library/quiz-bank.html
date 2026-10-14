@@ -2,22 +2,22 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; font-src 'self'; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ODM quiz bank | Learn DCSA</title>
 <meta name="description" content="Closed-book quiz bank for DCSA dual-track spaced review — expanded from pack + NLM reports.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="../assets/icons/icon-192.png" type="image/png">
 <link rel="stylesheet" href="library.css">
 <script>try{var p=JSON.parse(localStorage.getItem("appPalette"))||"github",m=JSON.parse(localStorage.getItem("appMode"))||"dark";document.documentElement.setAttribute("data-theme",p+"-"+m);}catch(e){document.documentElement.setAttribute("data-theme","github-dark");}</script>
 </head>
 <body>
 <header class="topbar">
   <a href="../index.html" class="home">&larr; Learn DCSA</a>
-  <span class="crumb">Library Â· Reference</span>
+  <span class="crumb">Library · Reference</span>
   <a href="index.html" class="home">All pages</a>
 </header>
 <main class="doc">
+  <aside class="corrections" role="note"><b>Archived study note. Corrections as of Oct 13 2026:</b> industry now initiates and reviews SF-86 cases (eApp) in DISS, and NBIS Agency turns off Nov 30 2026 (<a href="https://www.dcsa.mil/About-Us/News/Article/Article/4563691/industry-transition-to-diss-for-initiate-and-review-ir-functionality/">DCSA, Aug 4 2026</a>). The FCL handbook sets no fixed day count for the second deadline: it is the due date in DCSA’s investigation email. Cleared contractors follow the DAAG via NISP eMASS (<a href="https://www.dcsa.mil/Industrial-Security/NISP-Cybersecurity-Office-NCSO/">DCSA NCSO</a>). A GCA or a currently cleared contractor may sponsor (<a href="https://www.ecfr.gov/current/title-32/subtitle-A/chapter-I/subchapter-D/part-117/section-117.9">32 CFR 117.9(a)(10)</a>). The pre-2025 SF 328 threshold and “foreign proceeds” wording are unverified and were removed. The <a href="../index.html#/refs">source ledger</a> wins over this note.</aside>
   <div class="kicker">Reference</div>
   <h1 class="doctitle">ODM quiz bank</h1>
   <p class="lead">Closed-book quiz bank for DCSA dual-track spaced review — expanded from pack + NLM reports.</p>
@@ -26,11 +26,11 @@
 <p>Answer closed-book. Check cues only after attempting. Site <code>#/quiz</code> mirrors this bank.</p>
 <h2>Q1</h2>
 <p>Can a company self-sponsor an FCL in NISS? Who initiates sponsorship?</p>
-<div class="callout success" markdown="0"><div class="callout-title">Cue</div><p>No. A Government Contracting Activity (GCA) or a cleared prime initiates sponsorship in NISS [<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/fc/DCSA%20FCL_Orientation_Handbook_20260828.pdf" target="_blank" rel="noopener" title="DCSA FCL Orientation Handbook (2026)">S2</a>][<a class="cite" href="https://www.youtube.com/watch?v=Jf-SDX2WE8k" target="_blank" rel="noopener" title="How to Get a Facility Clearance (Bennett FSO talk)">S10</a>].</p></div>
+<div class="callout success" markdown="0"><div class="callout-title">Cue</div><p>No. A Government Contracting Activity (GCA) or a currently cleared contractor initiates sponsorship in NISS [<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/fc/DCSA%20FCL_Orientation_Handbook_20260828.pdf" target="_blank" rel="noopener" title="DCSA FCL Orientation Handbook (2026)">S2</a>][<a class="cite" href="https://www.youtube.com/watch?v=Jf-SDX2WE8k" target="_blank" rel="noopener" title="How to Get a Facility Clearance (Bennett FSO talk)">S10</a>].</p></div>
 
 <h2>Q2</h2>
-<p>Welcome email is Day 1. What is due by Day 20? By Day 45?</p>
-<div class="callout success" markdown="0"><div class="callout-title">Cue</div><p>Day 20: Five-Pack in NISS (formation docs, ownership chart, DD-441, SF-328, KMP list). Day 45: KMP investigation requests + fingerprints [<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/fc/DCSA%20FCL_Orientation_Handbook_20260828.pdf" target="_blank" rel="noopener" title="DCSA FCL Orientation Handbook (2026)">S2</a>].</p></div>
+<p>Welcome email is Day 1. What is due by Day 20? By DCSA due-date?</p>
+<div class="callout success" markdown="0"><div class="callout-title">Cue</div><p>Day 20: Five-Pack in NISS (formation docs, ownership chart, DD-441, SF-328, KMP list). DCSA due-date: KMP investigation requests + fingerprints [<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/fc/DCSA%20FCL_Orientation_Handbook_20260828.pdf" target="_blank" rel="noopener" title="DCSA FCL Orientation Handbook (2026)">S2</a>].</p></div>
 
 <h2>Q3</h2>
 <p>Name the five core items in a typical FCL package (Five-Pack).</p>
@@ -42,7 +42,7 @@
 
 <h2>Q5</h2>
 <p>What investigation tiers typically support Secret vs Top Secret, and what is one depth difference?</p>
-<div class="callout success" markdown="0"><div class="callout-title">Cue</div><p>Tier 3 → Secret/Confidential (~5 years, NAC/credit). Tier 5 → Top Secret (full field, ~10 years, subject interviews).</p></div>
+<div class="callout success" markdown="0"><div class="callout-title">Cue</div><p>Tier 3 → Secret/Confidential(NAC/credit). Tier 5 → Top Secret (full field, subject interviews).</p></div>
 
 <h2>Q6</h2>
 <p>What is SEAD 4, and how many adjudicative guidelines does it define? Is it a checklist?</p>
@@ -50,15 +50,15 @@
 
 <h2>Q7</h2>
 <p>What May 2025 SF 328 change matters for labs with foreign research revenue? Approximate NISS deploy date?</p>
-<div class="callout success" markdown="0"><div class="callout-title">Cue</div><p>Q7b foreign revenue/proceeds disclosure threshold lowered to 15% (from 30%). Form ~1 May 2025; NISS ~12 May 2025 [<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4180585/dcsa-announces-approval-of-the-updated-form-328-certificate-pertaining-to-forei/" target="_blank" rel="noopener" title="DCSA SF 328 update announcement May 2025">S3</a>][<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/FOCI/Updated%20SF328%20-%20Industry%20Information%20Paper%20(final).pdf" target="_blank" rel="noopener" title="DCSA SF 328 Industry Information Paper May 2025">S4</a>].</p></div>
+<div class="callout success" markdown="0"><div class="callout-title">Cue</div><p>Q7b Q7(b) reporting threshold lowered to 15%. Form ~1 May 2025; NISS ~12 May 2025 [<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4180585/dcsa-announces-approval-of-the-updated-form-328-certificate-pertaining-to-forei/" target="_blank" rel="noopener" title="DCSA SF 328 update announcement May 2025">S3</a>][<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/FOCI/Updated%20SF328%20-%20Industry%20Information%20Paper%20(final).pdf" target="_blank" rel="noopener" title="DCSA SF 328 Industry Information Paper May 2025">S4</a>].</p></div>
 
 <h2>Q8</h2>
 <p>True or false: Achieving CMMC Level 2 or moving to Microsoft 365 GCC High confers an FCL (or Secret ATO).</p>
-<div class="callout success" markdown="0"><div class="callout-title">Cue</div><p>False. CMMC/GCC High are the uncleared/CUI wall (or cloud support). FCL/NISP and DAAPM/RMF are separate. Sibling: CMMC lab-floor pack.</p></div>
+<div class="callout success" markdown="0"><div class="callout-title">Cue</div><p>False. CMMC/GCC High are the uncleared/CUI wall (or cloud support). FCL/NISP and DAAG/RMF are separate. Sibling: CMMC lab-floor pack.</p></div>
 
 <h2>Q9</h2>
 <p>Name the four DCSA learning domains used in this pack.</p>
-<div class="callout success" markdown="0"><div class="callout-title">Cue</div><p>Industrial security/NISP · personnel vetting · information systems authorization (DAAPM/RMF) · counterintelligence.</p></div>
+<div class="callout success" markdown="0"><div class="callout-title">Cue</div><p>Industrial security/NISP · personnel vetting · information systems authorization (DAAG/RMF) · counterintelligence.</p></div>
 
 <h2>Q10</h2>
 <p>Map one CDSE course ID to FCL and one to PCL. What portal hosts them?</p>
@@ -70,7 +70,7 @@
 
 <h2>Q12</h2>
 <p>What manual governs RMF-aligned authorization of classified contractor information systems under DCSA?</p>
-<div class="callout success" markdown="0"><div class="callout-title">Cue</div><p>DAAPM (DCSA Assessment and Authorization Process Manual); CDSE CS250 covers applying A&amp;A in the NISP [<a class="cite" href="https://rmf.org/wp-content/uploads/2022/02/DCSA-Assessment-and-Authorization-Process-Manual-Version-2.2.pdf" target="_blank" rel="noopener" title="DAAPM v2.2 (RMF for NISP contractors)">S13</a>][<a class="cite" href="https://www.cdse.edu/Training/eLearning/CS250/" target="_blank" rel="noopener" title="CDSE Applying A&amp;A in the NISP CS250.16">S14</a>].</p></div>
+<div class="callout success" markdown="0"><div class="callout-title">Cue</div><p>DAAG (DCSA Assessment and Authorization Process Manual); CDSE CS250 covers applying A&amp;A in the NISP [<a class="cite" href="https://www.dcsa.mil/Industrial-Security/NISP-Cybersecurity-Office-NCSO/" target="_blank" rel="noopener" title="DAAPM v2.2 (historical; now the DAAG) (RMF for NISP contractors)">S13</a>][<a class="cite" href="https://www.cdse.edu/Training/eLearning/CS250/" target="_blank" rel="noopener" title="CDSE Applying A&amp;A in the NISP CS250.16">S14</a>].</p></div>
 
 <h2>Q13</h2>
 <p>In one sentence, state today’s falsifier (what would make the day a waste).</p>
@@ -78,7 +78,7 @@
 
 <h2>Q14</h2>
 <p>What is DD Form 254, and who issues the need it documents?</p>
-<div class="callout success" markdown="0"><div class="callout-title">Cue</div><p>Contract Security Classification Specification — GCA or cleared prime defines classified need-to-know, level, and scope.</p></div>
+<div class="callout success" markdown="0"><div class="callout-title">Cue</div><p>Contract Security Classification Specification — GCA or currently cleared contractor defines classified need-to-know, level, and scope.</p></div>
 
 <h2>Q15</h2>
 <p>What failure does uploading draft/placeholder forms before Day 20 signal?</p>
@@ -86,10 +86,10 @@
 
 <h2>Q16</h2>
 <p>Continuous vetting vs legacy periodic reinvestigation for NISP contractors?</p>
-<div class="callout success" markdown="0"><div class="callout-title">Cue</div><p>CV: ongoing automated checks + PVQ about every five years. Legacy PR calendar cycles eliminated for many NISP contractors [<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4496039/dcsa-updates-nisp-contractor-continuous-vetting-process/" target="_blank" rel="noopener" title="DCSA Continuous Vetting update May 2026">S9</a>].</p></div>
+<div class="callout success" markdown="0"><div class="callout-title">Cue</div><p>CV: ongoing automated checks + PVQ about every five years. Legacy PR calendar cycles eliminated for NISP contractor national security personnel [<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4496039/dcsa-updates-nisp-contractor-continuous-vetting-process/" target="_blank" rel="noopener" title="DCSA Continuous Vetting update May 2026">S9</a>].</p></div>
 
 <h2>Q17</h2>
-<p>Finance says “we’re under 30% foreign proceeds” after May 2025 — what does that signal?</p>
+<p>Finance says “we’re under 30% Q7(b) reporting” after May 2025 — what does that signal?</p>
 <div class="callout success" markdown="0"><div class="callout-title">Cue</div><p>Team still on the old threshold; remodel to the 15% Q7b line [<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/FOCI/Updated%20SF328%20-%20Industry%20Information%20Paper%20(final).pdf" target="_blank" rel="noopener" title="DCSA SF 328 Industry Information Paper May 2025">S4</a>].</p></div>
 
 <h2>Q18</h2>
@@ -102,16 +102,11 @@
 
 <h2>Q20</h2>
 <p>Distinguish in one sentence each: CMMC floor, FCL, classified system ATO.</p>
-<div class="callout success" markdown="0"><div class="callout-title">Cue</div><p>CMMC = CUI cybersecurity maturity; FCL = facility eligibility under NISP; ATO = system authorization under DAAPM/RMF.</p></div></article>
+<div class="callout success" markdown="0"><div class="callout-title">Cue</div><p>CMMC = CUI cybersecurity maturity; FCL = facility eligibility under NISP; ATO = system authorization under DAAG/RMF.</p></div></article>
   <footer class="docfoot">
-    Rendered from <code>Learning\one-day-mastery\dcsa\reference\quiz-bank.md</code>. The Obsidian vault is the source of truth. Study material only. Citations <span class="cite">S#</span> link to the DCSA source ledger [S1]â€“[S14].
+    Rendered from <code>Learning\one-day-mastery\dcsa\reference\quiz-bank.md</code>. The Obsidian vault is the source of truth. Study material only. Citations <span class="cite">S#</span> link to the DCSA source ledger [S1]–[S14].
     <div class="prevnext"><a href="cheatsheet.html">&larr; Previous</a><a href="tdd-quiz-bank.html">Next &rarr;</a></div>
   </footer>
 </main>
-<script type="module">
-import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
-const dark=(document.documentElement.getAttribute("data-theme")||"").endsWith("dark");
-mermaid.initialize({startOnLoad:true,theme:dark?"dark":"default",securityLevel:"strict"});
-</script>
 </body>
 </html>

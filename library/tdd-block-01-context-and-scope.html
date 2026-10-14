@@ -2,22 +2,22 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; font-src 'self'; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Block 1: Context and scope | Learn DCSA</title>
 <meta name="description" content="Block 1 — DCSA context and scope: dual-track boundary, neighbors, CMMC vs FCL vs ATO.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="../assets/icons/icon-192.png" type="image/png">
 <link rel="stylesheet" href="library.css">
 <script>try{var p=JSON.parse(localStorage.getItem("appPalette"))||"github",m=JSON.parse(localStorage.getItem("appMode"))||"dark";document.documentElement.setAttribute("data-theme",p+"-"+m);}catch(e){document.documentElement.setAttribute("data-theme","github-dark");}</script>
 </head>
 <body>
 <header class="topbar">
   <a href="../index.html" class="home">&larr; Learn DCSA</a>
-  <span class="crumb">Library Â· TDD day blocks</span>
+  <span class="crumb">Library · TDD day blocks</span>
   <a href="index.html" class="home">All pages</a>
 </header>
 <main class="doc">
+  <aside class="corrections" role="note"><b>Archived study note. Corrections as of Oct 13 2026:</b> industry now initiates and reviews SF-86 cases (eApp) in DISS, and NBIS Agency turns off Nov 30 2026 (<a href="https://www.dcsa.mil/About-Us/News/Article/Article/4563691/industry-transition-to-diss-for-initiate-and-review-ir-functionality/">DCSA, Aug 4 2026</a>). The FCL handbook sets no fixed day count for the second deadline: it is the due date in DCSA’s investigation email. Cleared contractors follow the DAAG via NISP eMASS (<a href="https://www.dcsa.mil/Industrial-Security/NISP-Cybersecurity-Office-NCSO/">DCSA NCSO</a>). A GCA or a currently cleared contractor may sponsor (<a href="https://www.ecfr.gov/current/title-32/subtitle-A/chapter-I/subchapter-D/part-117/section-117.9">32 CFR 117.9(a)(10)</a>). The pre-2025 SF 328 threshold and “foreign proceeds” wording are unverified and were removed. The <a href="../index.html#/refs">source ledger</a> wins over this note.</aside>
   <div class="kicker">TDD day blocks</div>
   <h1 class="doctitle">Block 1: Context and scope</h1>
   <p class="lead">Block 1 — DCSA context and scope: dual-track boundary, neighbors, CMMC vs FCL vs ATO.</p>
@@ -27,10 +27,10 @@
 <h2>Focus from mind map</h2>
 <ul>
 <li><strong>What it is:</strong> DoD agency administering the NISP for most cleared industry, plus personnel vetting / continuous vetting and related CI mission elements.</li>
-<li><strong>Central thesis:</strong> Two interlocking tracks — <strong>FCL</strong> and <strong>PCL</strong> — plus IS authorization (DAAPM/RMF) and counterintelligence. Neither track is sufficient alone.</li>
+<li><strong>Central thesis:</strong> Two interlocking tracks — <strong>FCL</strong> and <strong>PCL</strong> — plus IS authorization (DAAG/RMF) and counterintelligence. Neither track is sufficient alone.</li>
 <li><strong>Out of scope for this day:</strong> Full CMMC memorization; SAP/SCI deep dive; building a classified enclave from scratch.</li>
-<li><strong>Cannot self-sponsor</strong> — sponsorship via NISS by GCA or cleared prime. [<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/fc/DCSA%20FCL_Orientation_Handbook_20260828.pdf" target="_blank" rel="noopener" title="DCSA FCL Orientation Handbook (2026)">S2</a>][<a class="cite" href="https://www.youtube.com/watch?v=Jf-SDX2WE8k" target="_blank" rel="noopener" title="How to Get a Facility Clearance (Bennett FSO talk)">S10</a>]</li>
-<li><strong>SF 328 2025:</strong> Q7(b) foreign proceeds threshold <strong>15%</strong> (was 30%); NISS deploy 12 May 2025. [<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4180585/dcsa-announces-approval-of-the-updated-form-328-certificate-pertaining-to-forei/" target="_blank" rel="noopener" title="DCSA SF 328 update announcement May 2025">S3</a>][<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/FOCI/Updated%20SF328%20-%20Industry%20Information%20Paper%20(final).pdf" target="_blank" rel="noopener" title="DCSA SF 328 Industry Information Paper May 2025">S4</a>]</li>
+<li><strong>Cannot self-sponsor</strong> — sponsorship via NISS by GCA or currently cleared contractor. [<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/fc/DCSA%20FCL_Orientation_Handbook_20260828.pdf" target="_blank" rel="noopener" title="DCSA FCL Orientation Handbook (2026)">S2</a>][<a class="cite" href="https://www.youtube.com/watch?v=Jf-SDX2WE8k" target="_blank" rel="noopener" title="How to Get a Facility Clearance (Bennett FSO talk)">S10</a>]</li>
+<li><strong>SF 328 2025:</strong> Q7(b) reporting threshold <strong>15%</strong>; NISS deploy 12 May 2025. [<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4180585/dcsa-announces-approval-of-the-updated-form-328-certificate-pertaining-to-forei/" target="_blank" rel="noopener" title="DCSA SF 328 update announcement May 2025">S3</a>][<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/FOCI/Updated%20SF328%20-%20Industry%20Information%20Paper%20(final).pdf" target="_blank" rel="noopener" title="DCSA SF 328 Industry Information Paper May 2025">S4</a>]</li>
 </ul>
 <h2>Sources</h2>
 <ul>
@@ -42,8 +42,8 @@
 </ul>
 <h2>Actions (tied to views)</h2>
 <ul>
-<li class="task"><input type="checkbox" disabled> Write a <strong>two-sentence definition</strong> of the DCSA dual-track model and a <strong>one-line boundary</strong> (in: NISP FCL/PCL/FOCI/DAAPM/CI; out: CMMC cram, SAP/SCI build).</li>
-<li class="task"><input type="checkbox" disabled> List <strong>≥5 neighbor systems/regimes</strong> on the boundary: NISS, NBIS/e-QIP, personnel SoR, STEPP, eMASS, plus CMMC/FedRAMP as <em>adjacent, not inside</em>.</li>
+<li class="task"><input type="checkbox" disabled> Write a <strong>two-sentence definition</strong> of the DCSA dual-track model and a <strong>one-line boundary</strong> (in: NISP FCL/PCL/FOCI/DAAG/CI; out: CMMC cram, SAP/SCI build).</li>
+<li class="task"><input type="checkbox" disabled> List <strong>≥5 neighbor systems/regimes</strong> on the boundary: NISS, eApp (DISS), personnel SoR, STEPP, eMASS, plus CMMC/FedRAMP as <em>adjacent, not inside</em>.</li>
 <li class="task"><input type="checkbox" disabled> Sketch the <strong>four domains</strong> (NISP, vetting, IS auth, CI) on one page before opening <a href="tdd-view-01-conceptual.html">01 - Conceptual View</a>.</li>
 <li class="task"><input type="checkbox" disabled> Tag each <a href="source-ledger.html">ledger</a> row to the view it feeds (conceptual / logical / physical / integration).</li>
 <li class="task"><input type="checkbox" disabled> Write the <strong>decision rule</strong>: CMMC floor ≠ FCL ≠ classified ATO — one sentence each.</li>
@@ -51,21 +51,16 @@
 <h2>Retrieval check</h2>
 <div class="callout question" markdown="0"><div class="callout-title">Question</div><p>Where exactly is the boundary of this DCSA deep dive, and what sits just outside it?</p></div>
 
-<div class="callout success" markdown="0"><div class="callout-title">Answer cues</div><p><strong>In:</strong> NISP facility eligibility, personnel vetting/adjudication/CV, FOCI (SF 328), DAAPM/RMF for contractor classified systems, CI reporting culture. <strong>Sponsorship only by GCA or cleared prime — no self-sponsor.</strong> <strong>Outside:</strong> CMMC control memorization, FedRAMP/GCC High as if they were FCLs, SAP/SCI enclave engineering, commercial GRC product tours. Neighbors: NISS, NBIS/e-QIP, DISS-class personnel SoR <strong>[verify]</strong>, STEPP, eMASS, DD 254 contracting, cloud hosts.</p></div>
+<div class="callout success" markdown="0"><div class="callout-title">Answer cues</div><p><strong>In:</strong> NISP facility eligibility, personnel vetting/adjudication/CV, FOCI (SF 328), DAAG/RMF for contractor classified systems, CI reporting culture. <strong>Sponsorship only by GCA or currently cleared contractor — no self-sponsor.</strong> <strong>Outside:</strong> CMMC control memorization, FedRAMP/GCC High as if they were FCLs, SAP/SCI enclave engineering, commercial GRC product tours. Neighbors: NISS, eApp (DISS), DISS-class personnel SoR <strong>[verify]</strong>, STEPP, eMASS, DD 254 contracting, cloud hosts.</p></div>
 
 <h2>Exit criteria</h2>
 <ul>
 <li class="task"><input type="checkbox" disabled> Boundary statement written; neighbor list has at least five systems; CMMC/FCL/ATO distinction written in affirmative language.</li>
 </ul></article>
   <footer class="docfoot">
-    Rendered from <code>Learning\tech-deep-dive\dcsa\blocks\01-context-and-scope.md</code>. The Obsidian vault is the source of truth. Study material only. Citations <span class="cite">S#</span> link to the DCSA source ledger [S1]â€“[S14].
+    Rendered from <code>Learning\tech-deep-dive\dcsa\blocks\01-context-and-scope.md</code>. The Obsidian vault is the source of truth. Study material only. Citations <span class="cite">S#</span> link to the DCSA source ledger [S1]–[S14].
     <div class="prevnext"><span></span><a href="tdd-block-02-conceptual-view.html">Next &rarr;</a></div>
   </footer>
 </main>
-<script type="module">
-import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
-const dark=(document.documentElement.getAttribute("data-theme")||"").endsWith("dark");
-mermaid.initialize({startOnLoad:true,theme:dark?"dark":"default",securityLevel:"strict"});
-</script>
 </body>
 </html>

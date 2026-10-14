@@ -119,3 +119,21 @@ ul.pagelist{list-style:none;margin:.4rem 0 1rem} ul.pagelist li{padding:.35rem 0
 .docfoot{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--border-color);font-size:.78rem;color:var(--text-dim)}
 .prevnext{display:flex;justify-content:space-between;margin-top:1rem;font-size:.9rem}
 @media print{.topbar,.prevnext{display:none} body{background:#fff;color:#000}}
+/* Mermaid sources render as readable text (no CDN renderer). */
+pre.mermaid{text-align:left;white-space:pre-wrap;font:.8rem/1.5 ui-monospace,monospace;padding:.8rem 1rem;border:1px solid var(--border-color);border-radius:10px;overflow-x:auto}
+.corrections{background:var(--card-bg2);border:1px solid var(--border-color);border-left:4px solid #F3EE6E;border-radius:0 10px 10px 0;padding:.8rem 1.1rem;margin:0 0 1.2rem;font-size:.86rem;line-height:1.5}
+
+/* House style (black / white / signal yellow #F3EE6E / gray #8A8A8A) overrides every legacy palette above. */
+:root,[data-theme$="-dark"]{
+  --bg-color:#000000; --sidebar-bg:#0a0a0a; --card-bg:#141414; --card-bg2:#0f0f0f;
+  --text-primary:#ffffff; --text-secondary:#c8c8c8; --text-dim:#8A8A8A;
+  --accent-color:#F3EE6E; --accent-glow:rgba(243,238,110,0.18); --hover-bg:rgba(243,238,110,0.1);
+  --border-color:#2a2a2a; --r200:#F3EE6E;
+}
+[data-theme$="-light"]{
+  --bg-color:#ffffff; --sidebar-bg:#f7f7f7; --card-bg:#ffffff; --card-bg2:#f4f4f4;
+  --text-primary:#000000; --text-secondary:#3d3d3d; --text-dim:#6B6B6B;
+  --accent-color:#000000; --accent-glow:rgba(243,238,110,0.45); --hover-bg:rgba(243,238,110,0.25);
+  --border-color:#e2e2e2; --r200:#000000;
+}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
