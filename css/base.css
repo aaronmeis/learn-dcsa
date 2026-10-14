@@ -451,3 +451,8 @@
   .sidebar-sub, .sidebar-foot, .pill, .fc-hint, .fc-meta, .ref-sources, .vidlist .meta, .thumbs .tagpill, .nav-group-label, .muted {
     font-size: max(12px, 0.75rem);
   }
+  .ea-p{color:var(--text-secondary);font-size:.9rem;line-height:1.6;margin:.4rem 0}
+  .ea-steps{padding-left:1.3rem;margin-top:.6rem;color:var(--text-secondary);font-size:.88rem;line-height:1.6}
+  .ea-steps li{margin-bottom:.6rem}.ea-steps li::marker{color:var(--accent-color);font-weight:700}
+  .ea-yn{margin:.25rem 0 0 .2rem}
+  .ea-table{display:block;overflow-x:auto}

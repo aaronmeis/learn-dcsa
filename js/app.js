@@ -420,10 +420,13 @@ function renderEA(){
   const el=$("#v-ea");
   const tab=LS.get(KEY+"eaTab","all"), E=DATA.eaFrameworks;
   const box=(head,sub,items,color)=>`<div class="ea-box"><h4>${esc(head)}</h4><div style="font-weight:600;font-size:.8rem;color:${color||"var(--accent-color)"};margin-bottom:.4rem">${esc(sub)}</div><ul>${(items||[]).map(i=>`<li>${ec(i)}</li>`).join("")}</ul></div>`;
-  const tabs=[["all","All"],["conceptual","Conceptual"],["logical","Logical"],["physical","Physical"],["integration","Integration"],["trust","Trust"],["alt","Altitude"],["table","Cross-walk"]];
+  const tabs=[["all","All"],["example","Worked example"],["decide","Decide"],["conceptual","Conceptual"],["logical","Logical"],["physical","Physical"],["integration","Integration"],["trust","Trust"],["alt","Altitude"],["table","Cross-walk"]];
   let h=`<h2 class="vh">EA mapping</h2>
   <p class="lead">${esc(E.note||"")} ${lib("nblm-tdd-crosswalk","EA crosswalk")} · ${lib("tdd-view-01-conceptual","Conceptual view")}</p>
   <div class="ea-subnav">${tabs.map(([k,l])=>`<button class="ea-tab-btn ${tab===k?"active":""}" data-eatab="${k}">${l}</button>`).join("")}</div>`;
+  if(tab==="all") h+=`<div class="ea-card"><h3>How to read this map</h3>${(E.intro||[]).map(p=>`<p class="ea-p">${ec(p)}</p>`).join("")}</div>`;
+  if((tab==="all"||tab==="example")&&E.example) h+=`<div class="ea-card"><h3>${esc(E.example.title)}</h3><p class="ea-p">Fictional company; every step cites the rule it rests on.</p><ol class="ea-steps">${E.example.steps.map(x=>`<li>${ec(x)}</li>`).join("")}</ol></div>`;
+  if((tab==="all"||tab==="decide")&&E.decide) h+=`<div class="ea-card"><h3>Decision steps</h3><p class="ea-p">Answer in order. Each answer points to the rule that applies.</p><ol class="ea-steps">${E.decide.map(d=>`<li><b>${esc(d.q)}</b><div class="ea-yn"><span class="pill">Yes</span> ${ec(d.y)}</div><div class="ea-yn"><span class="pill">No</span> ${ec(d.n)}</div></li>`).join("")}</ol></div>`;
   if(tab==="all"||tab==="conceptual") h+=`<div class="ea-card"><h3>Conceptual</h3><div class="ea-grid">${(E.conceptual||[]).map(t=>box(t.phase,t.t,t.items)).join("")}</div></div>`;
   if(tab==="all"||tab==="logical") h+=`<div class="ea-card"><h3>Logical</h3><div class="ea-grid">${(E.logical||[]).map(t=>box(t.phase,t.t,t.items)).join("")}</div></div>`;
   if(tab==="all"||tab==="physical") h+=`<div class="ea-card"><h3>Physical</h3><div class="ea-grid">${(E.physical||[]).map(t=>box(t.phase,t.t,t.items,"var(--r300)")).join("")}</div></div>`;
@@ -431,7 +434,14 @@ function renderEA(){
   if(tab==="all"||tab==="trust") h+=`<div class="ea-card"><h3>Trust</h3><div class="ea-grid">${(E.trust||[]).map(t=>box(t.phase,t.t,t.items,"var(--warn)")).join("")}</div></div>`;
   if(tab==="all"||tab==="alt") h+=`<div class="ea-card"><h3>Altitude rules</h3><table class="ea-table"><thead><tr><th>View</th><th>Question</th><th>Allowed</th><th>Not allowed</th><th>Note</th></tr></thead><tbody>${(E.altitudes||[]).map(a=>`<tr><td><b>${esc(a.name)}</b></td><td>${esc(a.q)}</td><td>${esc(a.allowed)}</td><td>${esc(a.forbidden)}</td><td>${lib(a.lib,"Open")}</td></tr>`).join("")}</tbody></table></div>`;
   if(tab==="all"||tab==="table"){const table=E.table||[];h+=`<div class="ea-card"><h3>Cross-walk</h3><table class="ea-table"><thead><tr>${(table[0]||[]).map(c=>`<th>${esc(c)}</th>`).join("")}</tr></thead><tbody>${table.slice(1).map(r=>`<tr>${r.map((c,i)=>`<td>${i?esc(c):"<b>"+esc(c)+"</b>"}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;}
+  if(tab==="all"&&E.related){const R=E.related, slug=t=>t.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+    h+=`<div class="ea-card"><h3>Related on this site</h3>
+      <p class="ea-p"><b>Glossary map:</b> ${R.glossary.map(t=>`<a href="#/glossary/map/${slug(t)}">${esc(t)}</a>`).join(" · ")}</p>
+      <p class="ea-p"><b>Curriculum blocks:</b> ${R.blocks.map(n=>{const w=DATA.weeks.find(x=>x.n===n);return w?`<a href="#/curriculum">Block ${n}: ${esc(w.title)}</a>`:"";}).filter(Boolean).join(" · ")}</p>
+      <p class="ea-p"><b>Quiz sections:</b> ${R.quiz.map(n=>`<a href="#/quiz" data-qsec="${n}">${esc(DATA.quizSections[n])}</a>`).join(" · ")}</p>
+      <p class="ea-p"><b>Sources:</b> <a href="#/refs">Source ledger</a> (S1, S2, S4, S9, S13, S15–S26).</p></div>`;}
   el.innerHTML=h;
+  $$("[data-qsec]",el).forEach(a=>a.addEventListener("click",()=>LS.set(KEY+"quizSec",+a.dataset.qsec)));
   $$(".ea-tab-btn",el).forEach(b=>b.onclick=()=>{LS.set(KEY+"eaTab",b.dataset.eatab);renderEA();});
 }
 

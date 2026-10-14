@@ -357,8 +357,8 @@ const DATA = {
   views:{
     conceptual:{rule:"Capabilities without product logos. Dual-track + four domains. CMMC is adjacent CUI floor.",lib:"tdd-view-01-conceptual",img:["01-conceptual-1.png"],
       tables:[{caption:"Three walls",headers:["Wall","Decides"],rows:[["CMMC","FCI/CUI on unclassified systems (32 CFR 170)"],["FCL","Entity eligibility under 32 CFR 117"],["Classified IS authorization","RMF under the DAAG via NISP eMASS"]]}]},
-    logical:{rule:"Components realize capabilities: NISS, NBIS, STEPP, eMASS, FOCI casework.",lib:"tdd-view-02-logical",img:["02-logical-1.png"],
-      tables:[{caption:"Capability → component",headers:["Capability","Logical component"],rows:[["Sponsorship intake","NISS case"],["Personnel eligibility","NBIS / investigation + SEAD 4"],["Training","STEPP / CDSE"],["Classified IS auth","DAAG / NISP eMASS"]]}]},
+    logical:{rule:"Components realize capabilities: NISS, DISS, STEPP, NISP eMASS, FOCI casework.",lib:"tdd-view-02-logical",img:["02-logical-1.png"],
+      tables:[{caption:"Capability → component",headers:["Capability","Logical component"],rows:[["Sponsorship intake","NISS case"],["Personnel eligibility","DISS (eApp initiate/review) + SEAD 4"],["Training","STEPP / CDSE"],["Classified IS auth","DAAG / NISP eMASS"]]}]},
     physical:{rule:"Physical services and forms that host the logical model.",lib:"tdd-view-03-physical",img:["03-physical-1.png"],
       tables:[{caption:"Physical cues",headers:["Item","Role"],rows:[["NISS web package","FCL package submission"],["SF-86 via eApp (DISS initiate/review)","PCL investigation"],["SWFT","Fingerprints"],["DD 441 / SF 328","Agreement + FOCI disclosure"],["eMASS","RMF package for classified IS"]]}]},
     integration:{rule:"Externals and AI boundary. Default-deny investigative PII.",lib:"tdd-view-04-integration-ai",img:["04-integration-ai-1.png"],
@@ -367,23 +367,81 @@ const DATA = {
       tables:[{caption:"Support ≠ confer",headers:["Claim heard","Correct reading"],rows:[["GCC High = cleared","Cloud support for CUI / gov workloads"],["CMMC L2 = FCL","CUI floor only"],["FedRAMP High = Secret ATO","Separate from DAAG/RMF classified authorization"]]}]}
   },
   eaFrameworks:{
-    note:"DCSA dual-track as an enterprise operating model. Use TOGAF/DoDAF language in the TDD crosswalk report; keep the phone view short.",
+    note:"DCSA's dual-track process laid out as an enterprise architecture: what each layer decides, which system or form carries it, and where the trust boundaries sit. Every row carries a ledger chip; where a fact is not in a primary source it is marked unverified.",
+    intro:[
+      "Read top to bottom. Conceptual says what must be true (capabilities, no product names). Logical names the components that realize each capability. Physical names the actual systems and forms. Integration shows where data crosses between systems. Trust shows who decides and what must never leak.",
+      "The spine is the dual-track lock: an entity eligibility determination (FCL) under 32 CFR 117 and personnel eligibility (PCL) for its key management personnel, joined by the KMP list [S1][S2]. Three neighbours sit outside that spine and never substitute for it: CMMC (FCI/CUI on unclassified systems), classified IS authorization (RMF under the DAAG), and cloud authorizations [S13][S18]."
+    ],
     conceptual:[
-      {phase:"C1",t:"Sponsorship",items:["GCA or currently cleared contractor sponsors in NISS.","No self-sponsor."]},
-      {phase:"C2",t:"Dual-track lock",items:["FCL needs cleared KMPs.","PCL pipeline needs eligible facility context."]},
-      {phase:"C3",t:"Adjacent floors",items:["CMMC = FCI/CUI cybersecurity.","Classified IS = DAAG/RMF."]}
+      {phase:"C1",t:"Sponsorship",items:["A GCA or a currently cleared contractor may sponsor; a contractor cannot apply for its own entity eligibility determination [S15].","Sponsorship can happen at any point in the contracting life cycle where classified access is needed, including solicitation [S15].","The handbook also lists a foreign government as a possible sponsor [S2]."]},
+      {phase:"C2",t:"Dual-track lock",items:["SMO, FSO and ITPSO must be investigated and found eligible at the FCL level and be on the KMP list [S1].","FCL needs cleared KMPs; a PCL needs an eligible facility context and need-to-know [S2]."]},
+      {phase:"C3",t:"Foreign influence",items:["An entity is under FOCI when a foreign interest can direct or decide matters in a way that could lead to unauthorized access or harm classified performance [S24].","An entity found under FOCI while in process is ineligible until security measures are in place [S24]."]},
+      {phase:"C4",t:"Personnel vetting",items:["SEAD 4: thirteen adjudicative guidelines, whole-person concept [S22].","Continuous vetting replaces periodic reinvestigation for NISP contractor national security personnel [S9]."]},
+      {phase:"C5",t:"Ongoing duties",items:["Report events affecting eligibility, insider-threat indicators, safeguarding problems, and loss or compromise (117.8, SEAD 3) [S20][S21]."]},
+      {phase:"C6",t:"Adjacent floors (not eligibility)",items:["CMMC = FCI/CUI on unclassified contractor systems (32 CFR 170) [S18].","Classified IS = RMF under the DAAG [S13]."]}
     ],
     logical:[
-      {phase:"L1",t:"Case systems",items:["NISS for FCL.","NBIS for PCL."]},
-      {phase:"L2",t:"Adjudication",items:["SEAD 4 whole person.","Continuous vetting after grant."]},
-      {phase:"L3",t:"IS authorization",items:["DAAG guides RMF.","NISP eMASS hosts packages."]}
+      {phase:"L1",t:"Facility case",items:["NISS: sponsorship, the initial FCL package, the Welcome email (Day 1) [S2].","20-day package deadline; two chances to fix discrepancies, then discontinuation [S2]."]},
+      {phase:"L2",t:"Personnel case",items:["DISS: industry Initiate/Review of eApp cases since Jul 31 2026 [S16].","DISS also holds the PVQ Date used to time five-year PVQ submissions [S9]."]},
+      {phase:"L3",t:"Adjudication",items:["SEAD 4 whole-person adjudication [S22].","Continuous vetting after eligibility; organizations submit PVQs to PSMO-I [S9]."]},
+      {phase:"L4",t:"FOCI evaluation",items:["SF 328 answers feed the FOCI determination [S4][S24].","May 2025 SF 328: nine questions, 15% Q7b threshold [S4]."]},
+      {phase:"L5",t:"IS authorization",items:["Cleared contractors follow the DAAG to complete RMF [S13].","The DAAG is downloaded in NISP eMASS [S13]."]},
+      {phase:"L6",t:"Oversight",items:["ISR for most cleared facilities; the NAESOC for select access-elsewhere facilities [S23]."]}
     ],
     physical:[
-      {phase:"P1",t:"Forms and clocks",items:["Day 20 package artifacts.","KMP SF-86 (eApp) and SWFT prints by DCSA due date."]},
-      {phase:"P2",t:"Training",items:["STEPP courses IS140/IS142/CS250.","IS020.CU for non-possessing FSO."]},
-      {phase:"P3",t:"FOCI artifacts",items:["SF 328 May 2025.","Mitigation instruments as schedule risk."]}
-    ]
+      {phase:"P1",t:"Forms and clocks",items:["Day 20 package artifacts in NISS [S2].","KMP SF-86 in eApp and fingerprints via SWFT by the due date in DCSA's email [S2][S25]."]},
+      {phase:"P2",t:"Systems of record",items:["NISS (facility), DISS (personnel), NISP eMASS (IS authorization) [S2][S16][S13].","NBIS Agency: no new initiations after Sep 30 2026; turned off Nov 30 2026 [S16]."]},
+      {phase:"P3",t:"FOCI artifacts",items:["SF 328 (approved May 1 2025; required from May 12 2025) [S3][S4].","Mitigation instruments as schedule risk."]},
+      {phase:"P4",t:"Training",items:["STEPP courses IS140/IS142/CS250 [S5][S6][S14].","IS020.CU for non-possessing FSO [S7]."]}
+    ],
+    integration:[
+      {phase:"I1",t:"Facility ↔ personnel",items:["The KMP list from the NISS package drives which KMP investigations DCSA initiates [S2].","For an upgrade, the FSO initiates instead [S2]."]},
+      {phase:"I2",t:"Contract ↔ facility",items:["DD 254 from the GCA or prime states classified requirements; sponsorship rests on that need [S2][S15]."]},
+      {phase:"I3",t:"Personnel ↔ biometrics",items:["eApp case in DISS + SWFT fingerprints must both land for the investigation to proceed [S2][S16][S25]."]},
+      {phase:"I4",t:"Facility ↔ IS",items:["An FCL does not authorize a system; a possessing site needs RMF authorization under the DAAG before processing classified [S13]."]},
+      {phase:"I5",t:"Post-grant loop",items:["Changed conditions and 117.8 reports flow back to DCSA; PVQ Dates in DISS drive five-year resubmission [S20][S9]."]}
+    ],
+    trust:[
+      {phase:"T1",t:"Who decides",items:["DCSA makes the entity eligibility determination; the contractor cannot sponsor itself [S15].","Adjudication follows SEAD 4 [S22]."]},
+      {phase:"T2",t:"What never leaks",items:["SF-86 and FOCI data are investigative/PII: keep them out of consumer AI tools (site house rule).","Human FSO owns submissions."]},
+      {phase:"T3",t:"Support ≠ confer",items:["CMMC, GCC High and FedRAMP support unclassified workloads; none confers an FCL or classified authorization [S18][S13]."]},
+      {phase:"T4",t:"Unverified on purpose",items:["DAAG version/date, 'DCSA is the AO', and any July 2026 SF 328 revision are not stated here because no primary source was found."]}
+    ],
+    altitudes:[
+      {name:"Conceptual",q:"What must be true?",allowed:"Capabilities, rules, owners (GCA, DCSA, contractor)",forbidden:"System names, form numbers",lib:"tdd-view-01-conceptual"},
+      {name:"Logical",q:"Which component realizes each capability?",allowed:"NISS, DISS, NISP eMASS, adjudication, FOCI evaluation",forbidden:"Screens, file formats, vendors",lib:"tdd-view-02-logical"},
+      {name:"Physical",q:"What actually carries it?",allowed:"Forms (SF-86, SF 328, DD 441, DD 254), eApp, SWFT, STEPP",forbidden:"Policy debates",lib:"tdd-view-03-physical"},
+      {name:"Integration",q:"Where does data cross a boundary?",allowed:"Hand-offs, triggers, AI boundary",forbidden:"Re-arguing capabilities",lib:"tdd-view-04-integration-ai"}
+    ],
+    table:[
+      ["Capability","Rule (primary)","Logical component","Physical carrier","Ledger"],
+      ["Sponsorship","GCA or currently cleared contractor; no self-application","NISS case","Sponsorship request in NISS","S15, S2"],
+      ["Facility package","20 days from Welcome email; two chances","NISS case","Initial FCL package (§4.2 checklist)","S2"],
+      ["KMP eligibility","SMO/FSO/ITPSO cleared at FCL level","DISS + adjudication","SF-86 in eApp, SWFT prints","S1, S16, S25"],
+      ["FOCI","Under FOCI → ineligible until mitigated","FOCI evaluation","SF 328 (May 2025)","S24, S4"],
+      ["Continuous vetting","PVQ every 5 years by DISS PVQ Date","DISS + PSMO-I","PVQ / SF-86 in eApp","S9"],
+      ["Reporting","117.8 + SEAD 3","FSO program","Reports to DCSA / FBI as required","S20, S21"],
+      ["Classified IS","RMF under the DAAG","NISP eMASS","RMF package","S13"],
+      ["Unclassified FCI/CUI","CMMC (32 CFR 170); DFARS eff. Nov 10 2025","Contract clause","SPRS / assessment","S18, S19"]
+    ],
+    example:{title:"Worked example: a fictional 40-person lab gets sponsored",steps:[
+      "A cleared prime needs the lab on a classified subcontract and sponsors it in NISS (allowed: a currently cleared contractor may sponsor) [S15].",
+      "The Welcome email arrives: that is Day 1. The FSO has 20 days to submit the initial FCL package, including the SF 328 [S2].",
+      "The SF 328 shows a foreign university grant. The team checks Q7b against the 15% threshold and flags it for FOCI review [S4][S24].",
+      "DCSA asks for a missing operating agreement. That is chance one of two; a second miss would end the process even before Day 20 [S2].",
+      "DCSA initiates investigations for the uncleared SMO and ITPSO. Each completes the SF-86 in eApp and submits SWFT prints by the due date in DCSA's email [S2][S16][S25].",
+      "The lab is non-possessing, so no classified IS is needed; it may be assigned to the NAESOC rather than an ISR [S23].",
+      "After the grant: 117.8 reporting starts, and each cleared employee's PVQ Date in DISS sets the next five-year PVQ [S20][S9].",
+      "Wrong turn to avoid: the lab's CMMC Level 2 status does not shorten any of this [S18]."]},
+    decide:[
+      {q:"Does the company need classified access to perform?",y:"Find a sponsor (GCA or currently cleared contractor). The company cannot apply itself [S15].",n:"No FCL path. If it handles FCI/CUI, CMMC applies instead [S18]."},
+      {q:"Will it store or process classified on site?",y:"Possessing: plan RMF under the DAAG in NISP eMASS for any classified IS [S13].",n:"Non-possessing: still needs KMPs, FSO, ITPSO; may be overseen by the NAESOC [S1][S23]."},
+      {q:"Any foreign ownership, control or influence?",y:"Expect FOCI review; ineligible until security measures are in place [S24].",n:"Still answer the SF 328 fully [S4]."},
+      {q:"Are all essential KMPs cleared at the FCL level?",y:"Package review continues.",n:"DCSA initiates (initial FCL) or the FSO initiates (upgrade) in DISS; eApp + SWFT by the due date [S2][S16]."}
+    ],
+    related:{glossary:["Sponsorship","KMP","FOCI","SF-328","eApp","DISS","PVQ","DAAG","NAESOC","Reporting","FCI","CMMC (contrast)"],blocks:[1,3,9,10,11,14],quiz:[1,3,4]}
   },
+
   cut:{
     open:"This is a study cut on DCSA dual-track industrial security: facility clearance and personnel clearance as one operating model.",
     recap:"Remember the three walls: CMMC floor, FCL, classified ATO. Support does not confer.",
