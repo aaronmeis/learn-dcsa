@@ -29,7 +29,7 @@ const NEW_CONTENT = [
   {label:"Start here: Block 0, introductory basics",href:"#/curriculum/0",sub:"Learn · what DCSA is, its history, why we vet",kw:"block 0 start here intro introduction basics history dis dss nbib eo 12829 eo 13869 why socratic orientation beginner"},
   {label:"Example project plan: the DCSA journey",href:"library/project-plan.html",sub:"Plan · sponsorship to grant to ongoing vetting",kw:"plan project plan journey roadmap steps timeline sponsorship fcl eapp diss daag emass example"},
   {label:"Videos and resources",href:"library/video-resources.html",sub:"Resources · DCSA, CDSE and YouTube",kw:"video videos youtube resources links training cdse dcsa official watch"},
-  {label:"Deck and deep-dive cut (video)",href:"#/deck",sub:"Learn · silent captioned deck video",kw:"deck video slides cut remotion watch deep dive"},
+  {label:"DCSA deep dive: the dual-track clearance, with questions to think about (video)",href:"#/deck",sub:"Learn · narrated deck video (AI-generated narration)",kw:"deck video slides cut remotion watch deep dive narrated questions dual-track"},
   {label:"EA mapping (expanded)",href:"#/ea",sub:"Reference · layers, capabilities, worked example",kw:"ea enterprise architecture mapping layers capability daag emass diss eapp"},
   {label:"Curriculum Block 14: 2026 rules and post-grant duties",href:"#/curriculum",sub:"Learn · eApp in DISS, CV, CMMC, FOCI, reporting",kw:"block 14 curriculum 2026 eapp diss continuous vetting cmmc foci reporting naesoc"},
   {label:"Journey infographic",href:"assets/diagrams/journey-infographic.svg",sub:"Infographic · the DCSA journey on one page",kw:"infographic journey diagram plan steps"},
@@ -390,7 +390,7 @@ window.renderShorts = function(){
       <div class="sx-player" id="sxPlayer"></div>
       <div class="sx-info">
         <div class="sx-meta"><span class="pill">${esc(it.pillar||"")}</span> <span>${fmtDur(it.duration)}</span> <span>· ${shortI+1} / ${shortItems.length}</span></div>
-        <h3 class="sx-title">${esc(it.title)}</h3>
+        <h3 class="sx-title">${esc(it.title)}</h3>${it.description?`<p class="sx-desc">${esc(it.description)}</p>`:""}
         <div class="sx-meta">${esc(it.tag||"")}</div>
         <div class="btnrow">
           <button type="button" class="b" id="sxPrev" aria-keyshortcuts="K">← Prev</button>
@@ -446,7 +446,7 @@ function renderFeed(el){
       <div class="sx-host"></div>
       <button type="button" class="sx-sound" aria-label="Turn sound on">Tap for sound</button>
       <div class="sx-overlay">
-        <div class="sx-cap"><span class="pill">${esc(it.pillar||"")}</span> <span>${fmtDur(it.duration)}</span>${w?` <span class="sx-wbadge">✓ watched</span>`:""}<h3>${esc(it.title)}</h3></div>
+        <div class="sx-cap"><span class="pill">${esc(it.pillar||"")}</span> <span>${fmtDur(it.duration)}</span>${w?` <span class="sx-wbadge">✓ watched</span>`:""}<h3>${esc(it.title)}</h3>${it.description?`<p class="sx-desc">${esc(it.description)}</p>`:""}</div>
         <div class="sx-actions">
           <button type="button" data-act="check" aria-label="Check yourself"><span aria-hidden="true">?</span><small>Quiz me</small></button>
           <button type="button" data-act="grid" aria-label="Browse all Shorts"><span aria-hidden="true">▦</span><small>All</small></button>
@@ -655,7 +655,7 @@ $("#sheetBody").addEventListener("click",e=>{
 let palIndex=[], palSel=0, palItems=[];
 function buildPaletteIndex(){
   palIndex=NEW_CONTENT.map(x=>({kind:"New",label:x.label,sub:x.sub,kw:x.kw,go:()=>{if(x.href[0]==="#")location.hash=x.href;else location.href=x.href;}})).concat(Object.keys(VIEWS).map(v=>({kind:"View",label:VIEWS[v],sub:(GROUP_OF[v]||"").replace(/^./,c=>c.toUpperCase()),go:()=>go(v)})))
-    .concat(shortItems.map(s=>({kind:"Short",label:s.title,sub:s.pillar+" · "+fmtDur(s.duration),go:()=>{location.hash="#/shorts/"+encodeURIComponent(s.id);}})))
+    .concat(shortItems.map(s=>({kind:"Short",label:s.title,sub:s.pillar+" · "+fmtDur(s.duration),kw:(s.short_title||"")+" "+(s.description||"")+" "+(s.keywords||[]).join(" "),go:()=>{location.hash="#/shorts/"+encodeURIComponent(s.id);}})))
     .concat(DATA.glossary.map(g=>({kind:"Term",label:g.term,sub:g.category,go:()=>{LS.set(KEY+"gq",g.term);LS.set(KEY+"gcat","all");renderGlossary();go("glossary");}})))
     .concat(DATA.checklist.map((c,i)=>({kind:"Failure",label:c.title,sub:c.view,go:()=>{LS.set(KEY+"cl-open:"+i,true);LS.set(KEY+"fmView","all");renderCounsel();go("failures");}})))
     .concat((window.LIBRARY||[]).map(p=>({kind:"Note",label:p.title,sub:p.section,go:()=>{location.href="library/"+p.slug+".html";}})))
