@@ -265,11 +265,25 @@ const DATA = {
     ]
   },
   cut:{
+    open:"This is a study cut on DCSA dual-track industrial security: facility clearance and personnel clearance as one operating model.",
+    recap:"Remember the three walls: CMMC floor, FCL, classified ATO. Support does not confer.",
     labels:["Title","Dual-track","Sponsorship","Day 20","Day 45","Package","SF 328 15%","SEAD 4","Tiers","Possessing","Three walls","DAAPM","CDSE map","Failure modes","Decision"],
     slides:[
-      "assets/slides/slide-01.jpg","assets/slides/slide-02.jpg","assets/slides/slide-03.jpg","assets/slides/slide-04.jpg","assets/slides/slide-05.jpg",
-      "assets/slides/slide-06.jpg","assets/slides/slide-07.jpg","assets/slides/slide-08.jpg","assets/slides/slide-09.jpg","assets/slides/slide-10.jpg",
-      "assets/slides/slide-11.jpg","assets/slides/slide-12.jpg","assets/slides/slide-13.jpg","assets/slides/slide-14.jpg","assets/slides/slide-15.jpg"
+      "DCSA dual-track: facility clearance and personnel clearance unlock each other.",
+      "No useful PCL pipeline without an eligible facility; no usable FCL without cleared KMPs.",
+      "A company cannot self-sponsor. A GCA or cleared prime opens NISS.",
+      "Welcome email is Day 1. Day 20 is the governance and forms package.",
+      "Day 45: KMP investigation requests and fingerprints.",
+      "Package: formation docs, ownership chart, DD 441, SF 328, KMP list.",
+      "May 2025 SF 328: Q7b foreign proceeds threshold is 15 percent.",
+      "SEAD 4: thirteen adjudicative guidelines under a whole-person concept.",
+      "Tier 3 supports Secret or Confidential. Tier 5 supports Top Secret.",
+      "Possessing stores classified on site. Non-possessing still needs KMPs and an FSO.",
+      "Three walls: CMMC floor, FCL eligibility, classified ATO. Support does not confer.",
+      "DAAPM overlays NIST RMF for contractor classified information systems.",
+      "CDSE on STEPP: IS140, IS142, IS020.CU, CS250.",
+      "Critical failure: treating CMMC or GCC High as an FCL or Secret ATO.",
+      "Decision: plan the dual-track, refuse self-sponsor myths, measure Day-20 completeness."
     ],
     cards:[
       {question:"Who may sponsor an FCL?",detail:"GCA or cleared prime in NISS.",why:"Self-sponsor is the falsifier.",example:"Applicant company cannot open its own case."},

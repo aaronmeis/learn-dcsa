@@ -67,7 +67,7 @@ function renderDashboard(){
     <div class="statcard"><div class="num">${selfSolid}/${totalRungs}</div><div class="lbl">ladder rungs self-rated "solid"</div></div>
     <div class="statcard"><div class="num">${fmDone}/${DATA.checklist.length}</div><div class="lbl">failure modes reviewed</div></div>
   </div>
-  <div class="note"><b>Mission.</b> By the end you can walk the facility-clearance track and the personnel-clearance track, and say what does not count as either. ${lib("mission","Mission note")} · ${lib("day-plan","Timed day plan")} · ${lib("deep-dive","Deep dive")}</div>
+  <div class="note"><b>Mission.</b> By the end you can walk the facility-clearance track and the personnel-clearance track, and say what does not count as either. ${lib("odm-mission","Mission note")} · ${lib("odm-day-plan","Timed day plan")} · ${lib("tdd-mission","TDD mission")}</div>
   <div class="grid">
     <div class="card"><h3>Curriculum</h3><p style="color:var(--text-secondary);font-size:.86rem">${DATA.weeks.length} blocks from the one-day mastery and tech deep-dive packs.</p><div class="btnrow" style="margin:.8rem 0 0"><button class="b" onclick="go('curriculum')">Open curriculum →</button></div></div>
     <div class="card"><h3>Views</h3><p style="color:var(--text-secondary);font-size:.86rem">Conceptual, logical, and physical views for the two tracks.</p><div class="btnrow" style="margin:.8rem 0 0"><button class="b" onclick="go('views')">Open views →</button></div></div>
@@ -93,7 +93,7 @@ function allModules(){let a=[];DATA.weeks.forEach(w=>w.mods.forEach((m,i)=>a.pus
 function renderCurriculum(){
   const el=$("#v-curriculum");
   let h=`<h2 class="vh">${DATA.weeks.length}-block curriculum</h2>
-  <p class="lead">${DATA.weeks.length} blocks from the packs. Each block has an action and a reason. ${lib("day-plan","Timed day plan")}</p>
+  <p class="lead">${DATA.weeks.length} blocks from the packs. Each block has an action and a reason. ${lib("odm-day-plan","Timed day plan")}</p>
   <div class="timeline" style="margin-bottom:1.2rem">${DATA.weeks.map(w=>`<span class="t">Block ${w.n}</span><span class="b">${esc(w.title)}</span><span class="m">${esc(w.time)}</span>`).join("")}</div>
   <details class="look-box" style="margin:0 0 1.4rem"><summary>Scope mind map</summary><p style="font-size:.8rem;color:var(--text-dim)">${lib("mindmap","Mind map as text")} · ${lib("intake-record","Intake record")}</p></details>`;
   DATA.weeks.forEach(w=>{
@@ -263,15 +263,17 @@ function renderDeck(){
   const el=$("#v-deck"), C=DATA.cut||{};
   const labels=C.labels||[], slides=C.slides||[], cards=C.cards||[];
   const n=labels.length||slides.length;
+  const deepFile=(DEEP.file||"").trim();
   const video=DEEP.youtube
     ?`<iframe class="wide-player" src="${ytSrc(DEEP.youtube)}" title="DCSA deep dive cut" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen loading="lazy" style="border:0"></iframe>`
-    :`<video class="wide-player" controls preload="metadata" poster="assets/slides/slide-01.jpg" src="${esc(DEEP.file||"media/deep-dive-cut.mp4")}"></video>`;
+    :(deepFile?`<video class="wide-player" controls preload="metadata" poster="assets/slides/slide-01.jpg" src="${esc(deepFile)}"></video>`
+      :`<div class="note"><b>Deep-dive cut.</b> Long-form MP4 is not on the site yet. Study the slide deck and question cards below. ${lib("media-cut-script","Cut script")}</div>`);
   let h=`<h2 class="vh">Deck and deep-dive cut</h2>
   <p class="lead">NotebookLM slides and the narrated cut. Each slide has its narration line and the question the cut asks before it. Amber outlines mark claims the source ledger does not support.</p>
   ${video}
-  ${DEEP.youtube?`<p class="obj" style="margin-top:.4rem"><a href="https://www.youtube.com/watch?v=${DEEP.youtube}" target="_blank" rel="noopener">Open the deep-dive cut on YouTube ↗</a></p>`:`<p class="obj" style="margin-top:.4rem">The cut plays from this site. ${lib("media-cut-script","Cut script")}</p>`}
+  ${DEEP.youtube?`<p class="obj" style="margin-top:.4rem"><a href="https://www.youtube.com/watch?v=${DEEP.youtube}" target="_blank" rel="noopener">Open the deep-dive cut on YouTube ↗</a></p>`:(deepFile?`<p class="obj" style="margin-top:.4rem">The cut plays from this site. ${lib("media-cut-script","Cut script")}</p>`:"")}
   <div class="note" style="margin-top:1rem"><b>Opening line.</b> ${esc(C.open||"")}<br><b>Recap.</b> ${esc(C.recap||"")}</div>
-  <p class="obj" style="margin-top:1rem"><b>Downloads:</b> Blueprint and deck files land in <code>assets/downloads/</code> with the pack. ${lib("media-cut-script","Cut script: narration and question cards")} · ${lib("media-shorts-plan","Shorts plan")} · ${lib("deep-dive","Technical deep dive")}</p>
+  <p class="obj" style="margin-top:1rem"><b>Downloads:</b> Blueprint and deck files land in <code>assets/downloads/</code> with the pack. ${lib("media-cut-script","Cut script: narration and question cards")} · ${lib("media-shorts-plan","Shorts plan")} · ${lib("tdd-view-01-conceptual","Conceptual view")}</p>
   <h3 style="margin:1.6rem 0 .6rem;font-size:1.05rem">Slides</h3>
   <div class="deckrows">`;
   for(let i=1;i<=n;i++){
@@ -401,7 +403,7 @@ function renderEA(){
   const box=(head,sub,items,color)=>`<div class="ea-box"><h4>${esc(head)}</h4><div style="font-weight:600;font-size:.8rem;color:${color||"var(--accent-color)"};margin-bottom:.4rem">${esc(sub)}</div><ul>${(items||[]).map(i=>`<li>${ec(i)}</li>`).join("")}</ul></div>`;
   const tabs=[["all","All"],["conceptual","Conceptual"],["logical","Logical"],["physical","Physical"],["integration","Integration"],["trust","Trust"],["alt","Altitude"],["table","Cross-walk"]];
   let h=`<h2 class="vh">EA mapping</h2>
-  <p class="lead">${esc(E.note||"")} ${lib("competitors","Competitors and closed lab")} · ${lib("deep-dive","Deep dive")}</p>
+  <p class="lead">${esc(E.note||"")} ${lib("nblm-tdd-crosswalk","EA crosswalk")} · ${lib("tdd-view-01-conceptual","Conceptual view")}</p>
   <div class="ea-subnav">${tabs.map(([k,l])=>`<button class="ea-tab-btn ${tab===k?"active":""}" data-eatab="${k}">${l}</button>`).join("")}</div>`;
   if(tab==="all"||tab==="conceptual") h+=`<div class="ea-card"><h3>Conceptual</h3><div class="ea-grid">${(E.conceptual||[]).map(t=>box(t.phase,t.t,t.items)).join("")}</div></div>`;
   if(tab==="all"||tab==="logical") h+=`<div class="ea-card"><h3>Logical</h3><div class="ea-grid">${(E.logical||[]).map(t=>box(t.phase,t.t,t.items)).join("")}</div></div>`;
