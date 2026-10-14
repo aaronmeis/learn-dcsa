@@ -1,10 +1,10 @@
 /* Offline support for the study console (pattern from learn-ai-law).
    Pages, scripts and data: network first, cache as fallback.
    Images: cache first. Video and audio are never cached. */
-const CACHE = "learn-dcsa-v16";
+const CACHE = "learn-dcsa-v17";
 const SHELL = [
   "./", "index.html", "css/base.css", "css/enhance.css", "css/termmap.css",
-  "js/data.js", "js/source-notes.js", "js/block0.js", "js/controls.js", "js/arch.js", "js/decision.js", "js/app.js", "js/termmap.js", "js/enhance.js",
+  "js/data.js", "js/source-notes.js", "js/prompts.js", "js/block0.js", "js/controls.js", "js/arch.js", "js/decision.js", "js/app.js", "js/termmap.js", "js/enhance.js",
   "shorts-catalog.js", "shorts-catalog.json",
   "library/manifest.js", "library/library.css",
   "manifest.webmanifest", "assets/mark.svg",
