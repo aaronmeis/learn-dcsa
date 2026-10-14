@@ -2,19 +2,19 @@
 
 **Site:** `C:\projects\claude\learn-dcsa`  
 **Live (after Pages):** https://aaronmeis.github.io/learn-dcsa/  
-**Prefix:** `ldc:` · **SW cache:** `learn-dcsa-v2`  
+**Prefix:** `ldc:` · **SW cache:** `learn-dcsa-v5`  
 **Packs (source of truth):**  
 - `Learning/one-day-mastery/dcsa/` (odm-dcsa)  
 - `Learning/tech-deep-dive/dcsa/` (tdd-dcsa)
 
 Vault wins over NotebookLM. Do not teach self-sponsorship. Do not treat GCC High / CMMC / FedRAMP as FCL or Secret/TS ATO (`support ≠ confer`).
 
-## What is already done (v1 publish)
+## What is already done (v1 publish + v5 study banks)
 
 | Piece | Status |
 |---|---|
-| Shell forked from learn-duckdb; titles / `ldc:` / `learn-dcsa-v2` | Done |
-| `js/data.js` curated from ODM+TDD (11 curriculum blocks, glossary, quiz, debates, cut labels/slides/cards, checklist, prompts, views, EA) | Done |
+| Shell forked from learn-duckdb; titles / `ldc:` / `learn-dcsa-v5` | Done |
+| `js/data.js` curated from ODM+TDD + NLM reports (**13** curriculum blocks, **52** glossary/flashcards, **27** quiz items, debates, cut cards, checklist, prompts, views, EA) | Done (2026-10-13 refresh) |
 | 15 deck slides in `assets/slides/slide-01.jpg`… | Done |
 | 8 architecture diagram PNGs in `assets/diagrams/` | Done |
 | 6 ODM shorts MP4 + posters in `media/shorts/` and `media/posters/` | Done |

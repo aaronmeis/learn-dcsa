@@ -220,7 +220,7 @@
     "slug": "glossary",
     "title": "GLOSSARY \u2014 DCSA (Defense Counterintelligence and Security Agency)",
     "section": "Reference",
-    "desc": "Glossary for DCSA dual-track FCL/PCL fluency.",
+    "desc": "Glossary for DCSA dual-track FCL/PCL fluency \u2014 expanded from pack + NotebookLM reports.",
     "nblm": false
   },
   {
@@ -234,14 +234,14 @@
     "slug": "quiz-bank",
     "title": "ODM quiz bank",
     "section": "Reference",
-    "desc": "Closed-book quiz bank for DCSA dual-track spaced review.",
+    "desc": "Closed-book quiz bank for DCSA dual-track spaced review \u2014 expanded from pack + NLM reports.",
     "nblm": false
   },
   {
     "slug": "tdd-quiz-bank",
     "title": "TDD quiz bank",
     "section": "Reference",
-    "desc": "Retrieval items for DCSA blocks 6\u20138 and design review.",
+    "desc": "Retrieval items for DCSA blocks 6\u20138 and design review \u2014 aligned to site quiz.",
     "nblm": false
   },
   {
