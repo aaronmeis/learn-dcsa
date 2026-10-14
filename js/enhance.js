@@ -267,39 +267,32 @@ function relatedFor(it){
 
 /* ---------- Players (MP4 or unlisted YouTube) ---------- */
 const players = new Set();
-let ytReady=null;
-function loadYT(){
-  if(ytReady) return ytReady;
-  ytReady=new Promise((res,rej)=>{
-    if(window.YT&&window.YT.Player) return res();
-    const prev=window.onYouTubeIframeAPIReady;
-    window.onYouTubeIframeAPIReady=()=>{if(prev)prev();res();};
-    const s=document.createElement("script"); s.src="https://www.youtube.com/iframe_api";
-    s.onerror=()=>{ytReady=null;rej(new Error("YouTube player script blocked"));};
-    setTimeout(()=>{ if(!(window.YT&&window.YT.Player)){ytReady=null;rej(new Error("YouTube player script timed out"));} },8000);
-    document.head.appendChild(s);
-  });
-  return ytReady;
+/* YouTube runs as a click-to-play facade: no YouTube script or iframe loads until the viewer clicks.
+   The embed uses youtube-nocookie.com. "Play the MP4 here" keeps the self-hosted file as a fallback. */
+const ytEmbed=(id,auto)=>`https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?rel=0&playsinline=1&modestbranding=1${auto?"&autoplay=1":""}`;
+function ytFacade(host,o){
+  const box=document.createElement("div"); box.className="yt-facade"+(o.vertical?" vert":"");
+  const poster=o.poster||`https://i.ytimg.com/vi/${encodeURIComponent(o.id)}/hqdefault.jpg`;
+  box.innerHTML=`<button type="button" class="yt-play" aria-label="Play ${esc(o.title)} (loads YouTube)"><img src="${esc(poster)}" alt="" loading="lazy" decoding="async"><span class="yt-btn" aria-hidden="true">▶</span><span class="yt-note">Plays from YouTube (privacy-enhanced)</span></button>${o.file?`<button type="button" class="yt-mp4">Play the MP4 here instead</button>`:""}`;
+  host.appendChild(box);
+  const play=()=>{ if(box.dataset.on) return; box.dataset.on="1";
+    box.innerHTML=`<iframe src="${ytEmbed(o.id,true)}" title="${esc(o.title)}" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" style="border:0"></iframe>`;
+    if(o.onPlay) o.onPlay(); };
+  box.querySelector(".yt-play").onclick=play;
+  const m=box.querySelector(".yt-mp4"); if(m&&o.onMp4) m.onclick=()=>o.onMp4();
+  return {box,play};
 }
+window.ytFacade=ytFacade;
 function mountPlayer(host,it,opts){
   opts=opts||{};
   const done=()=>{ if(Store.markWatched(it.id)){ refreshWatchedUI(); } if(opts.onEnded) opts.onEnded(); };
   let api={destroy(){},pause(){},play(){},el:null};
   if(it.youtube){
-    const div=document.createElement("div"); host.appendChild(div);
-    let yp=null, dead=false;
-    const fallback=why=>{
-      console.warn("[shorts] YouTube could not play "+it.id+" ("+it.youtube+"): "+why);
-      if(dead) return; dead=true; try{yp&&yp.destroy();}catch(x){} host.innerHTML="";
-      if(it.file){ const fb=mountPlayer(host,Object.assign({},it,{youtube:""}),opts); api.pause=fb.pause; api.play=fb.play; api.el=fb.el; const d0=api.destroy; api.destroy=()=>{fb.destroy();d0();}; }
-      else host.innerHTML='<p style="color:#fff;padding:1rem;text-align:center">This video is not available on YouTube.</p>';
-    };
-    loadYT().then(()=>{ if(dead) return;
-      yp=new YT.Player(div,{host:"https://www.youtube-nocookie.com",videoId:it.youtube,width:"100%",height:"100%",
-        playerVars:{playsinline:1,rel:0,modestbranding:1,autoplay:opts.autoplay?1:0,mute:opts.muted?1:0},
-        events:{onStateChange:e=>{ if(e.data===0) done(); }, onError:e=>fallback("error "+e.data)}});
-    }).catch(err=>fallback(err.message));
-    api={destroy(){dead=true;try{yp&&yp.destroy();}catch(e){} host.innerHTML="";},pause(){try{yp&&yp.pauseVideo();}catch(e){}},play(){try{yp&&yp.playVideo();}catch(e){}},el:div};
+    let dead=false;
+    const f=ytFacade(host,{id:it.youtube,title:it.title,poster:it.poster,file:it.file,vertical:true,
+      onPlay:()=>{ if(Store.markWatched(it.id)) refreshWatchedUI(); },
+      onMp4:()=>{ if(dead) return; host.innerHTML=""; const fb=mountPlayer(host,Object.assign({},it,{youtube:""}),Object.assign({},opts,{autoplay:true,controls:true})); api.pause=fb.pause; api.play=fb.play; api.el=fb.el; const d0=api.destroy; api.destroy=()=>{fb.destroy();d0();}; }});
+    api={destroy(){dead=true;host.innerHTML="";},pause(){const fr=f.box.querySelector("iframe"); if(fr){ f.box.removeAttribute("data-on"); host.innerHTML=""; ytFacade(host,{id:it.youtube,title:it.title,poster:it.poster}); }},play(){},el:f.box};
   }else{
     const v=document.createElement("video");
     v.src=it.file; v.poster=it.poster||""; v.playsInline=true; v.setAttribute("playsinline",""); v.setAttribute("webkit-playsinline","");
