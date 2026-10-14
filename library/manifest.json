@@ -1,14 +1,14 @@
 [
   {
     "slug": "odm-hub",
-    "title": "ODM hub \u00e2\u20ac\u201d DCSA dual-track",
+    "title": "ODM hub \u2014 DCSA dual-track",
     "section": "Plan",
     "desc": "One-day mastery hub for DCSA dual-track FCL/PCL fluency.",
     "nblm": false
   },
   {
     "slug": "tdd-hub",
-    "title": "TDD hub \u00e2\u20ac\u201d DCSA architecture day",
+    "title": "TDD hub \u2014 DCSA architecture day",
     "section": "Plan",
     "desc": "Technical deep dive hub for the DCSA dual-track (FCL + PCL) operating model.",
     "nblm": false
@@ -66,7 +66,7 @@
     "slug": "tdd-claims-debates",
     "title": "TDD claims and debates",
     "section": "Plan",
-    "desc": "Live debates for DCSA dual-track literacy \u00e2\u20ac\u201d FCL clocks, FOCI/SF-328, and whole-person adjudication.",
+    "desc": "Live debates for DCSA dual-track literacy \u2014 FCL clocks, FOCI/SF-328, and whole-person adjudication.",
     "nblm": false
   },
   {
@@ -437,7 +437,7 @@
     "slug": "media-slides",
     "title": "Presentation slides",
     "section": "Media",
-    "desc": "Slide image gallery for DCSA (Defense Counterintelligence and Security Agency) NotebookLM deck. JPG only; PPTX stays under C:\\output.",
+    "desc": "Slide image gallery for DCSA (Defense Counterintelligence and Security Agency) NotebookLM deck. JPG only; PPTX is stored outside the repo.",
     "nblm": false
   },
   {
