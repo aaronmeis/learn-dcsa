@@ -20,7 +20,9 @@ Vault wins over NotebookLM. Do not teach self-sponsorship. Do not treat GCC High
 | 6 ODM shorts MP4 + posters in `media/shorts/` and `media/posters/` | Done |
 | `shorts-catalog.js` / `.json` (pillars NISP / Personnel / Systems / CI) | Done |
 | Library HTML: ~69 pages + `library/manifest.js` via private `C:\projects\grok\one_day_mastery\learn_console\build_library.py` | Done |
-| GitHub Pages repo `aaronmeis/learn-dcsa` | Done in this pass (or create if missing) |
+| GitHub Pages repo `aaronmeis/learn-dcsa` | Done — https://aaronmeis.github.io/learn-dcsa/ |
+| Deck empty-file guard (no 404 on missing deep-dive MP4) | Done (`learn-dcsa-v4`) |
+| View diagram paths + DCSA shorts caveat (no DuckDB 10x line) | Done |
 
 ## Remaining holes (finish in this order)
 
