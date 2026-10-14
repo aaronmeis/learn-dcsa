@@ -18,5 +18,14 @@ window.SOURCE_NOTES = {
   17:"DCSA FIN 23-02 on the transition to NBIS eApp: e-QIP was retired on Oct 1, 2023 and replaced by eApp.",
   18:"32 CFR Part 170, the CMMC Program rule: the cybersecurity floor for contractors handling FCI and CUI. It is separate from a facility clearance.",
   20:"32 CFR 117.8, reporting requirements for cleared contractors.",
-  25:"DCSA resources for Secure Web Fingerprint Transmission (SWFT), the system that sends electronic fingerprints to DCSA."
+  25:"DCSA resources for Secure Web Fingerprint Transmission (SWFT), the system that sends electronic fingerprints to DCSA.",
+  27:"NIST's catalog of security and privacy controls, grouped in families such as AC (access control), AU (audit), IA (identification and authentication), SC (system and communications protection) and SR (supply chain). Rev 5 withdrew SA-12 and moved supply chain controls into the new SR family.",
+  28:"NIST's Risk Management Framework: prepare, categorize, select, implement, assess, authorize and monitor. The DAAG applies RMF to cleared contractor classified systems.",
+  29:"DoD's Cloud Computing SRG defines cloud Impact Levels. Level 6 is for classified information up to SECRET, and the SRG says off-premises contractor classified systems at Level 6 are assessed in conjunction with the NISP.",
+  30:"The government-wide program for authorizing cloud services, with Low, Moderate and High baselines built on NIST SP 800-53. The DoD SRG builds its higher levels on FedRAMP baselines plus DoD controls.",
+  31:"NIST standard for cryptographic modules. The Cryptographic Module Validation Program tests modules against it.",
+  32:"FAR clause implementing Section 889 of the FY2019 NDAA: it prohibits providing or using covered telecommunications and video surveillance equipment or services in federal contracts.",
+  33:"DISA's Security Technical Implementation Guides: configuration baselines for operating systems, network devices and applications used in DoD systems.",
+  34:"NIST guidance on media sanitization (clear, purge, destroy), which supports the MP-6 media sanitization control.",
+  35:"NIST's definition of zero trust architecture: no implicit trust based on network location, with per-request authentication and authorization."
 };
