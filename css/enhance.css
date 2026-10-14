@@ -334,3 +334,47 @@ a.nav-item:hover{text-decoration:none}
 .tco-kpis span,.tco-kpis em{font-size:.72rem;color:var(--text-dim);font-style:normal}.tco-kpis b{font-size:1.1rem}
 .tco-legend{display:flex;gap:1rem;font-size:.78rem;color:var(--text-secondary)}.tco-legend i{display:inline-block;width:22px;height:0;vertical-align:middle;margin-right:.35rem}
 .lg-solid{border-top:3px solid var(--text-primary)}.lg-dash{border-top:3px dashed var(--accent-color)}
+
+/* Selected states, both themes. Light mode used to fill with --accent-color (#000) and hid the label.
+   Light: yellow fill #F3EE6E with #000 text and a #000 border (about 17:1). Dark: yellow fill with #000 text. */
+:root{--sel-bg:#F3EE6E;--sel-fg:#000;--sel-bd:#F3EE6E}
+[data-theme$="-light"]{--sel-bd:#000}
+.ax-toggle .b.on,.ax-toggle .b[aria-checked="true"],
+[data-theme$="-light"] button.b.on,[data-theme$="-light"] .deck-btn.active,[data-theme$="-light"] .ea-tab-btn.active,
+[data-theme$="-light"] .chip.on,[data-theme$="-light"] .gmode a.b.on,[data-theme$="-light"] .rung .self button.on{
+  background:var(--sel-bg)!important;color:var(--sel-fg)!important;border:1px solid var(--sel-bd)!important;font-weight:700}
+[data-theme$="-light"] .schip:hover,[data-theme$="-light"] .schip:focus-visible,[data-theme$="-light"] .schip[aria-expanded="true"]{background:var(--sel-bg);color:#000;border-color:#000}
+[data-theme$="-light"] .schip{border-color:#000}
+[data-theme$="-light"] .nav-item.active{box-shadow:inset 3px 0 0 var(--sel-bg);color:#000}
+[data-theme$="-light"] .sheet-list a.active,[data-theme$="-light"] .m-tabbar .active{color:#000;text-decoration:underline;text-decoration-color:#c9c200;text-decoration-thickness:3px;text-underline-offset:4px}
+[data-theme$="-light"] .est-banner{border-color:#000;background:#FFFBD1;color:#000}
+[data-theme$="-light"] .ax-node.is-sel rect{fill:#FFFBD1;stroke:#000}
+.skip-link{color:#000;background:var(--sel-bg)}
+button.b:focus-visible,.ea-tab-btn:focus-visible,.deck-btn:focus-visible,.ax-node:focus-visible rect{outline:3px solid var(--text-primary);outline-offset:2px}
+/* Decision tables */
+.ax-matrix caption{caption-side:top;text-align:left;font-weight:700;padding:.2rem 0 .5rem;font-size:.86rem}
+.ax-matrix .num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.tco-sub{display:block;font-size:.76rem;color:var(--text-dim);font-weight:400;margin-top:.15rem;white-space:normal}
+.tco-grp th{background:var(--card-bg2);text-transform:uppercase;font-size:.72rem;letter-spacing:.05em;border-left:4px solid var(--sel-bg)}
+[data-theme$="-light"] .tco-grp th{border-left-color:#000}
+.tco-tot td{font-weight:700;background:var(--card-bg2)}
+.dsec .tblwrap+.tblwrap{margin-top:.6rem}
+@media (max-width:600px){.ax-matrix .num{text-align:left}.ax-matrix td[colspan]{display:block}.tco-grp th{display:block}
+ .ax-matrix tbody tr:not(.tco-grp){display:block;border:1px solid var(--border-color);border-radius:8px;margin:.5rem 0;background:var(--card-bg)}}
+
+/* Named items as chips; compact simulator like the original layout */
+.tco-items{display:flex;flex-wrap:wrap;gap:.25rem;margin-top:.3rem}
+.tco-item{font-size:.74rem;border:1px solid var(--border-color);border-radius:999px;padding:.05rem .45rem;background:var(--card-bg2);color:var(--text-primary)}
+.tco-sim{border:1px solid var(--border-color);border-radius:10px;padding:.6rem;background:var(--card-bg2)}
+.tco-sim .tco-ctl{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1rem}
+.tco-sim .ax-toggle{margin:0}.tco-sim .ax-toggle .b{min-height:34px;padding:.3rem .7rem;font-size:.8rem}
+.tco-sim .tco-sl{display:flex;align-items:center;gap:.5rem;font-size:.8rem;flex:1 1 180px}.tco-sim .tco-sl span{white-space:nowrap}
+.tco-sim .tco-sl input{flex:1;min-height:28px}
+.tco-body{display:grid;grid-template-columns:minmax(0,1fr) 190px;gap:.6rem;margin-top:.5rem;align-items:start}
+.tco-sim .tco-kpis{grid-template-columns:1fr;margin:0;gap:.35rem}.tco-sim .tco-kpis div{padding:.35rem .5rem}.tco-sim .tco-kpis b{font-size:.98rem}
+@media (max-width:700px){.tco-body{grid-template-columns:1fr}.tco-sim .tco-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.tl{margin:.7rem 0 .2rem;font-size:.78rem}.tl-row{display:grid;grid-template-columns:130px 1fr;align-items:center;gap:.5rem;margin:.35rem 0}
+.tl-bar{position:relative;height:22px;background:var(--card-bg2);border:1px solid var(--border-color);border-radius:6px}
+.tl-bar i{position:absolute;top:2px;bottom:2px;background:var(--sel-bg);border:1px solid var(--sel-bd);border-radius:4px}
+.tl-bar em{position:absolute;top:2px;font-style:normal;font-weight:700;color:#000;padding-left:.35rem;line-height:18px;font-size:.72rem}
+.tl-axis{position:relative;height:16px;margin-left:138px;color:var(--text-dim);font-size:.68rem}.tl-axis span{position:absolute;transform:translateX(-50%)}
