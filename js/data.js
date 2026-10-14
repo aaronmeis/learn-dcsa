@@ -38,7 +38,11 @@ const SOURCES = [
   {n:37,g:"Primary",t:"DCSA, History",u:"https://www.dcsa.mil/About-Us/History/",type:"primary",trust:"high",b:"0"},
   {n:38,g:"Primary",t:"EO 13869 (Apr 24 2019): Transferring Responsibility for Background Investigations to the Department of Defense",u:"https://www.federalregister.gov/documents/2019/04/29/2019-08797/transferring-responsibility-for-background-investigations-to-the-department-of-defense",type:"primary",trust:"high",b:"0"},
   {n:39,g:"Primary",t:"EO 12829 (Jan 6 1993): National Industrial Security Program",u:"https://www.archives.gov/files/isoo/policy-documents/eo-12829.html",type:"primary",trust:"high",b:"0"},
-  {n:40,g:"Primary",t:"DCSA, About Adjudication and Vetting Services (formerly DoD CAF)",u:"https://www.dcsa.mil/Personnel-Security/Adjudications/About-Adjudication-and-Vetting-Services-AVS/",type:"primary",trust:"high",b:"0"}
+  {n:40,g:"Primary",t:"DCSA, About Adjudication and Vetting Services (formerly DoD CAF)",u:"https://www.dcsa.mil/Personnel-Security/Adjudications/About-Adjudication-and-Vetting-Services-AVS/",type:"primary",trust:"high",b:"0"},
+  {n:41,g:"Primary",t:"eCFR 32 CFR 117.7 Procedures (security officials, insider threat program, security reviews)",u:"https://www.ecfr.gov/current/title-32/subtitle-A/chapter-I/subchapter-D/part-117/section-117.7",type:"primary",trust:"high",b:"1,2,10"},
+  {n:42,g:"Primary",t:"eCFR 32 CFR 117.10 Eligibility for access to classified information for contractor employees",u:"https://www.ecfr.gov/current/title-32/subtitle-A/chapter-I/subchapter-D/part-117/section-117.10",type:"primary",trust:"high",b:"1,2,10"},
+  {n:43,g:"Primary",t:"eCFR 32 CFR 117.12 Security training and briefings",u:"https://www.ecfr.gov/current/title-32/subtitle-A/chapter-I/subchapter-D/part-117/section-117.12",type:"primary",trust:"high",b:"1,2,10"},
+  {n:44,g:"Primary",t:"eCFR 32 CFR 117.18 Information system security",u:"https://www.ecfr.gov/current/title-32/subtitle-A/chapter-I/subchapter-D/part-117/section-117.18",type:"primary",trust:"high",b:"1,2,10"}
 ];
 
 /* Quotes credited to the FCL Orientation Handbook [S2] were checked against a mirrored copy whose PDF metadata reads
@@ -325,6 +329,16 @@ const DATA = {
     {section:5,question:"Draw (or narrate) the dual-track swimlane: where does the KMP roster connect FCL to PCL?",answer:"FCL package produces the KMP roster → each KMP initiates PCL investigation → KMP eligibility feeds back into FCL grant.",src:"S2",explanation:"The two tracks unlock each other: the FCL names the KMPs, and their personnel clearances feed back into the FCL grant. [S2]"}
   ],
   glossary:[
+    {category:"Study guide",term:"AI prompts",rung:100,definition:"The site's library of 46 scenario prompts for AI assistants, in ten groups from sponsorship to incident reporting. Each prompt uses Role, Context, Task and Output, asks the AI to cite 32 CFR 117 or official DCSA pages, and comes with a privacy warning: never paste classified, CUI, PII, SF-86 or FOCI data into public AI tools.",source:"site",link:{href:"#/prompts",label:"Open AI prompts"}},
+    {category:"Personnel",term:"SEAD 3",rung:200,definition:"Security Executive Agent Directive 3: ODNI's reporting requirements for people with clearances (foreign travel, contacts and other life events). 32 CFR 117.8 points to it. [S21][S20]",source:"ledger"},
+    {category:"Facility",term:"Insider threat program",rung:200,definition:"A program every cleared contractor must run under 32 CFR 117.7(d), led by the ITPSO, to detect, deter and report insider threats. Training is in 117.12(g). [S41][S43]",source:"ledger"},
+    {category:"Facility",term:"Self-inspection",rung:200,definition:"The contractor's own security review under 32 CFR 117.7(h), checking classified activity and the security program, with results reported to leadership. [S41]",source:"ledger"},
+    {category:"Facility",term:"CSA",rung:200,definition:"Cognizant security agency: the agency that oversees a contractor's security under 32 CFR 117. For DoD and most other agencies' contractors, DCSA does this. [S1][S36]",source:"ledger"},
+    {category:"ATO",term:"SSP",rung:300,definition:"System security plan: the document that describes how a classified system meets its security controls. Under 32 CFR 117.18 the contractor certifies the SSP is implemented. [S44][S13]",source:"ledger"},
+    {category:"FOCI",term:"TCP",rung:300,definition:"Technology control plan: a FOCI mitigation procedure under 32 CFR 117.11(h) that controls foreign access to export-controlled and classified information. [S24]",source:"ledger"},
+    {category:"FOCI",term:"ECP",rung:300,definition:"Electronic communications plan: a FOCI mitigation procedure under 32 CFR 117.11(h) covering how the cleared company and its foreign affiliates communicate electronically. [S24]",source:"ledger"},
+    {category:"FOCI",term:"GSC",rung:300,definition:"Government security committee: trustees, proxy holders or outside directors who oversee FOCI mitigation, with the FSO as principal advisor (32 CFR 117.11(g)). [S24]",source:"ledger"},
+    {category:"FOCI",term:"CFIUS",rung:300,definition:"Committee on Foreign Investment in the United States: a Treasury-chaired interagency committee that reviews foreign transactions. 32 CFR 117.11(j) covers how its reviews connect to FOCI. [S24]",source:"ledger"},
     {category:"Agency",term:"DIS / DSS (former names)",rung:100,definition:"DCSA's earlier names: the Defense Investigative Service (DIS, from 1971) and the Defense Security Service (DSS, from 1999). EO 13869 directed the rename of DSS to DCSA in 2019. [S37][S38]",source:"ledger"},
     {category:"Agency",term:"NBIB",rung:200,definition:"National Background Investigations Bureau. Set up under OPM in 2016, it moved to DoD and into DCSA effective Oct 1 2019 under EO 13869. [S37][S38]",source:"ledger"},
     {category:"Agency",term:"EO 12829",rung:100,definition:"The 1993 executive order that created the National Industrial Security Program to safeguard classified information released to contractors, licensees and grantees. [S39]",source:"ledger"},
@@ -631,7 +645,7 @@ DATA.debates = [
 
 /* Glossary map links: aliases catch spelling variants; related pairs are curated study links (not official relationships). */
 DATA.glossaryLinks = {
-  aliases:{"SF-328":["SF 328"],"DD-441":["DD 441"],"DD-254":["DD 254"],"NISPOM":["32 CFR 117","32 CFR Part 117","NISPOM Rule"],"SF-86":["SF 86"],"Continuous vetting":["CV"],"Possessing FCL":["possessing"],"SEAD 4":["SEAD-4"],"Reporting":["117.8","SEAD 3"]},
+  aliases:{"SF-328":["SF 328"],"DD-441":["DD 441"],"DD-254":["DD 254"],"NISPOM":["32 CFR 117","32 CFR Part 117","NISPOM Rule"],"SF-86":["SF 86"],"Continuous vetting":["CV"],"Possessing FCL":["possessing"],"SEAD 4":["SEAD-4"],"Reporting":["117.8"]},
   related:{
     "NISPOM":["NISP","FCL","Sponsorship","Reporting"],
     "Clock vs quality":["Day 20","Five-Pack","Second deadline"],

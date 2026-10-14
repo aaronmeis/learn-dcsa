@@ -32,5 +32,9 @@ window.SOURCE_NOTES = {
   37:"DCSA's history: the Defense Investigative Service (1971), industrial security joining DIS (1980), NISP by EO 12829 (1993), the rename to DSS (1999), investigations moving to OPM (2005), NBIB (2016), and EO 13869 moving NBIB to DoD effective Oct 1 2019.",
   38:"EO 13869 amended EO 13467. It directed the Secretary of Defense to rename DSS as DCSA and made DCSA the primary federal provider of background investigations.",
   39:"EO 12829 created the National Industrial Security Program to safeguard classified information released to contractors, licensees and grantees, protected in a manner equivalent to inside the executive branch.",
-  40:"DCSA page on Adjudication and Vetting Services, formerly the DoD CAF. The DoD CAF transfer to DCSA was completed on Oct 1 2019; select DISA and DMDC functions were directed to follow by Oct 1 2020."
+  40:"DCSA page on Adjudication and Vetting Services, formerly the DoD CAF. The DoD CAF transfer to DCSA was completed on Oct 1 2019; select DISA and DMDC functions were directed to follow by Oct 1 2020.",
+  41:"32 CFR 117.7 sets contractor procedures: the SMO, FSO and ITPSO roles, the insider threat program (117.7(d)), training, and security reviews and self-inspections (117.7(h)).",
+  42:"32 CFR 117.10 covers personnel eligibility: access must be essential to the work, investigative requirements, the SF 86, fingerprints, reciprocity and temporary eligibility.",
+  43:"32 CFR 117.12 lists required security training and briefings: initial briefings, FSO training, insider threat training, derivative classification, refresher training and debriefings.",
+  44:"32 CFR 117.18 sets information system security duties: the contractor's program, the ISSM, SSP certification, user monitoring, and RMF for classified systems."
 };

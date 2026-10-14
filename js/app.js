@@ -404,21 +404,52 @@ function bindSourceChips(root){
 /* ---- Prompts ---- */
 function renderPrompts(){
   const el=$("#v-prompts");
+  const P=window.PROMPTS||[], CATS=window.PROMPT_CATS||[];
   const pl=(window.LIBRARY||[]).filter(p=>p.section==="Prompts");
-  let h=`<h2 class="vh">Prompt library</h2>
-  <p class="lead">Study prompts for any LLM, plus the NotebookLM prompts that generated this pack's reports and media.</p>
-  <div class="note danger"><b>Data hygiene.</b> No secrets, credentials, classified information, or private data in any model. Use public DCSA and CDSE material and synthetic examples.</div>`;
-  DATA.prompts.forEach((p,pi)=>{
-    h+=`<div class="promptcat"><h3>${esc(p.cat)} <span class="pill">${esc(p.model)}</span></h3>
-      <div class="obj" style="margin:.15rem 0 .4rem">${esc(p.desc)}</div>
-      <div style="font-size:.8rem;color:var(--text-dim);margin-bottom:.4rem">Variants: ${p.items.map(esc).join(" · ")}</div>
-      <details class="promptbox" data-pi="${pi}"><summary>Flagship prompt</summary>${promptBody(p.flagship,pi)}</details></div>`;
-  });
-  h+=`<h3 style="margin:1.8rem 0 .6rem;font-size:1rem">NotebookLM prompt notes</h3><div class="libgrid">${pl.map(p=>`<a class="libcard" href="library/${p.slug}.html"><b>${esc(p.title)}</b><span>${esc(p.desc)}</span></a>`).join("")}</div>`;
-  el.innerHTML=h;
-  bindSourceChips(el);
-  $$(".copybtn",el).forEach(b=>b.onclick=()=>{const box=b.closest(".promptbox"),inc=$(".incsrc",box);const txt=promptCopyText(decodeURIComponent(b.dataset.c),inc&&inc.checked);const pv=$(".copyprev",box);if(pv){pv.textContent=txt;pv.hidden=false;}const ok=()=>{b.textContent="Copied";b.classList.add("copied");setTimeout(()=>{b.textContent="Copy";b.classList.remove("copied");},1200);};const fail=()=>{if(pv){pv.hidden=false;const r=document.createRange();r.selectNodeContents(pv);const sel=getSelection();sel.removeAllRanges();sel.addRange(r);}b.textContent="Select and copy";setTimeout(()=>{b.textContent="Copy";},2000);};try{const pr=navigator.clipboard&&navigator.clipboard.writeText(txt);if(pr&&pr.then)pr.then(ok,fail);else fail();}catch(e){fail();}});
+  const f=LS.get(KEY+"pf",-1), ws=LS.get(KEY+"pwsrc",false);
+  el.innerHTML=`<h2 class="vh">AI prompts</h2>
+  <p class="lead">${P.length} scenario prompts for any AI assistant. Each one uses Role, Context, Task and Output, with [placeholders] for you to fill in. Every prompt tells the AI to cite 32 CFR Part 117 or official DCSA pages and to flag what it isn't sure of. Tap an S# chip for a source summary, or a term chip for its glossary note.</p>
+  <div class="note danger" role="note"><b>Before you paste anything.</b> ${esc(window.PROMPT_WARN||"")} This warning is added to every prompt you copy.</div>
+  <div class="pfilter"><label for="pq" class="pf-lab">Search prompts</label><input id="pq" class="search" type="search" placeholder="e.g. SF 328, insider threat, suspicious contact" value="${esc(LS.get(KEY+"pq",""))}">
+   <div class="pf-groups" role="group" aria-label="Prompt groups"><button type="button" class="b ${f<0?"on":""}" aria-pressed="${f<0}" data-pf="-1">All (${P.length})</button>${CATS.map((c,k)=>`<button type="button" class="b ${f===k?"on":""}" aria-pressed="${f===k}" data-pf="${k}">${esc(c)} (${P.filter(p=>p.c===k).length})</button>`).join("")}</div>
+   <label class="tgl"><input type="checkbox" id="pwsrc" ${ws?"checked":""}> Include source summaries when copying</label></div>
+  <p class="pcount" id="pcount" role="status"></p><div id="plist"></div>
+  <h3 style="margin:1.8rem 0 .6rem;font-size:1rem">NotebookLM prompt notes</h3><div class="libgrid">${pl.map(p=>`<a class="libcard" href="library/${p.slug}.html"><b>${esc(p.title)}</b><span>${esc(p.desc)}</span></a>`).join("")}</div>`;
+  const paint=()=>{const q=(LS.get(KEY+"pq","")||"").toLowerCase(), f=LS.get(KEY+"pf",-1);
+    const list=P.map((p,i)=>[p,i]).filter(([p])=>(f<0||p.c===f)&&(!q||(p.t+" "+p.p+" "+CATS[p.c]).toLowerCase().includes(q)));
+    $("#pcount").textContent=`${list.length} of ${P.length} shown`;
+    $("#plist").innerHTML=list.map(([p,i])=>promptCard(p,i)).join("")||`<div class="note">No prompts match. Try a different word or pick All.</div>`;
+    bindSourceChips($("#plist"));
+    $$("[data-gterm]",$("#plist")).forEach(a=>a.onclick=e=>{e.preventDefault();LS.set(KEY+"gq",a.dataset.gterm);LS.set(KEY+"gcat","all");go("glossary");});
+    $$("[data-pcopy]",$("#plist")).forEach(b=>b.onclick=()=>{const p=P[+b.dataset.pcopy],txt=aiPromptText(p,$("#pwsrc").checked),st=$("#pcs"+b.dataset.pcopy);
+      const ok=()=>{st.textContent="Copied, with the privacy warning at the top.";setTimeout(()=>st.textContent="",2500);};
+      const fail=()=>{const pre=b.closest(".aip").querySelector("pre");const r=document.createRange();r.selectNodeContents(pre);const sel=getSelection();sel.removeAllRanges();sel.addRange(r);st.textContent="Copy blocked by the browser. The prompt is selected: press Ctrl+C (the privacy warning isn't included this way).";};
+      try{const pr=navigator.clipboard&&navigator.clipboard.writeText(txt);if(pr&&pr.then)pr.then(ok,fail);else fail();}catch(e){fail();}});
+  };
+  $$("[data-pf]",el).forEach(b=>b.onclick=()=>{LS.set(KEY+"pf",+b.dataset.pf);$$("[data-pf]",el).forEach(x=>{const on=x===b;x.classList.toggle("on",on);x.setAttribute("aria-pressed",on);});paint();});
+  $("#pq").oninput=e=>{LS.set(KEY+"pq",e.target.value);paint();};
+  $("#pwsrc").onchange=e=>LS.set(KEY+"pwsrc",e.target.checked);
+  paint();
 }
+/* Glossary terms that appear in a prompt, shown as tappable term chips. */
+function promptTerms(t){
+  const out=[],al=(DATA.glossaryLinks&&DATA.glossaryLinks.aliases)||{};
+  DATA.glossary.forEach(g=>{if(g.term.length>14||!/[A-Z0-9]{2}/.test(g.term))return;
+    const names=[g.term].concat(al[g.term]||[]).map(x=>x.replace(/ \(.*\)$/,""));
+    if(names.some(n=>new RegExp("(^|[^A-Za-z0-9-])"+n.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"([^A-Za-z0-9-]|$)").test(t)))out.push(g);});
+  return out;
+}
+function termChip(g,id){const d=g.definition.replace(/\s*\[S\d+\](\[S\d+\])*/g,"").trim();
+  return `<span class="schip-wrap"><button type="button" class="schip term" aria-expanded="false" aria-controls="${id}" aria-label="${esc(g.term)}: glossary note">${esc(g.term)}</button><span class="stip" id="${id}" role="tooltip" hidden><b>${esc(g.term)}</b>${esc(d)}<br><a href="#/glossary" data-gterm="${esc(g.term)}">Open in the glossary →</a></span></span>`;}
+function srcChip(n,id){const s=SRC[n];if(!s)return "";
+  return `<span class="schip-wrap"><button type="button" class="schip" aria-expanded="false" aria-controls="${id}" aria-label="Source S${n}: ${esc(s.t)}. Show summary">S${n}</button><span class="stip" id="${id}" role="tooltip" hidden><b>S${n} · ${esc(s.t)}</b>${esc(srcNote(n))}<br><a href="${esc(s.u)}" target="_blank" rel="noopener">Open source ↗</a></span></span>`;}
+function promptCard(p,i){const CATS=window.PROMPT_CATS||[],full=p.p+"\n\n"+(window.PROMPT_RULE||""),terms=promptTerms(p.p);
+  return `<article class="aip card" aria-labelledby="aiph${i}"><div class="aip-main"><span class="pill">${esc(CATS[p.c]||"")}</span><h3 id="aiph${i}">${esc(p.t)}</h3><pre>${esc(full)}</pre>
+   ${terms.length?`<div class="aip-terms"><span class="aip-lab">Terms</span> ${terms.map((g,k)=>termChip(g,`pt-${i}-${k}`)).join(" ")}</div>`:""}
+   <div class="copyrow"><button type="button" class="b on" data-pcopy="${i}">Copy prompt</button><span class="pcs" id="pcs${i}" role="status" aria-live="polite"></span></div></div>
+   <aside class="aip-src" aria-label="Sources cited"><h4>Sources cited</h4>${p.s.map((n,k)=>`<div class="psrow">${srcChip(n,`ps-${i}-${k}`)} <span>${esc(srcNote(n)||(SRC[n]||{}).t||"")}</span></div>`).join("")}</aside></article>`;}
+function aiPromptText(p,withSrc){let t=(window.PROMPT_WARN||"")+"\n\n"+p.p+"\n\n"+(window.PROMPT_RULE||"");
+  if(withSrc)t+="\n\nSources to ground your answer:\n"+p.s.map(n=>`S${n}: ${SRC[n].t} (${SRC[n].u})${srcNote(n)?" - "+srcNote(n):""}`).join("\n");return t;}
 
 /* ---- Failure modes (practice checklist) ---- */
 function renderCounsel(){

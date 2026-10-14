@@ -16,7 +16,7 @@ const APP_URL="https://aaronmeis.github.io/learn-dcsa/";
 /* ---------- Views and groups ---------- */
 const VIEWS = {
   today:"Today", curriculum:"Curriculum", views:"Architecture", shorts:"Shorts", deck:"Deck and deep-dive cut", library:"Library",
-  flash:"Flashcards", quiz:"Quiz", failures:"Failure modes", prompts:"Prompts",
+  flash:"Flashcards", quiz:"Quiz", failures:"Failure modes", prompts:"AI prompts",
   cheat:"Decision rules", map:"Progress map", glossary:"Glossary", ea:"EA mapping", debates:"Debates", refs:"Source ledger", dashboard:"Overview"
 };
 const GROUPS = {
@@ -26,6 +26,7 @@ const GROUPS = {
 };
 /* New content that lives in the Library, surfaced in nav, sheets, home and search. */
 const NEW_CONTENT = [
+  {label:"AI prompts: 46 DCSA scenario prompts",href:"#/prompts",sub:"Practice · sponsorship, SF 328, FOCI, SEAD 4, reporting, RMF, careers",kw:"ai prompts prompt library chatgpt llm scenario sponsorship foci sf 328 sead 4 reporting insider threat rmf daag fso interview"},
   {label:"Start here: Block 0, introductory basics",href:"#/curriculum/0",sub:"Learn · what DCSA is, its history, why we vet",kw:"block 0 start here intro introduction basics history dis dss nbib eo 12829 eo 13869 why socratic orientation beginner"},
   {label:"Example project plan: the DCSA journey",href:"library/project-plan.html",sub:"Plan · sponsorship to grant to ongoing vetting",kw:"plan project plan journey roadmap steps timeline sponsorship fcl eapp diss daag emass example"},
   {label:"Videos and resources",href:"library/video-resources.html",sub:"Resources · DCSA, CDSE and YouTube",kw:"video videos youtube resources links training cdse dcsa official watch"},
@@ -656,6 +657,7 @@ $("#sheetBody").addEventListener("click",e=>{
 let palIndex=[], palSel=0, palItems=[];
 function buildPaletteIndex(){
   palIndex=NEW_CONTENT.map(x=>({kind:"New",label:x.label,sub:x.sub,kw:x.kw,go:()=>{if(x.href[0]==="#")location.hash=x.href;else location.href=x.href;}})).concat(Object.keys(VIEWS).map(v=>({kind:"View",label:VIEWS[v],sub:(GROUP_OF[v]||"").replace(/^./,c=>c.toUpperCase()),go:()=>go(v)})))
+    .concat((window.PROMPTS||[]).map(p=>({kind:"Prompt",label:p.t,sub:"AI prompts · "+(window.PROMPT_CATS||[])[p.c],kw:p.p.slice(0,400),go:()=>{LS.set(KEY+"pq",p.t);LS.set(KEY+"pf",-1);location.hash="#/prompts";if(typeof renderPrompts==="function")renderPrompts();}})))
     .concat(shortItems.map(s=>({kind:"Short",label:s.title,sub:s.pillar+" · "+fmtDur(s.duration),kw:(s.short_title||"")+" "+(s.description||"")+" "+(s.keywords||[]).join(" "),go:()=>{location.hash="#/shorts/"+encodeURIComponent(s.id);}})))
     .concat(DATA.glossary.map(g=>({kind:"Term",label:g.term,sub:g.category,go:()=>{LS.set(KEY+"gq",g.term);LS.set(KEY+"gcat","all");renderGlossary();go("glossary");}})))
     .concat(DATA.checklist.map((c,i)=>({kind:"Failure",label:c.title,sub:c.view,go:()=>{LS.set(KEY+"cl-open:"+i,true);LS.set(KEY+"fmView","all");renderCounsel();go("failures");}})))
