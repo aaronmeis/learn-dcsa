@@ -299,3 +299,38 @@ a.nav-item:hover{text-decoration:none}
 .copyrow{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem;padding:0 1rem .9rem}.copyrow .copybtn{margin:0}
 .copyrow label{font-size:.78rem;color:var(--text-secondary);display:flex;align-items:center;gap:.35rem;min-height:32px;cursor:pointer}
 .copyprev{margin:0 1rem .9rem;white-space:pre-wrap;font-size:.74rem;border:1px dashed var(--border-color);border-radius:8px;padding:.5rem .7rem}
+
+/* Architecture explorer and decision area (Learn black/white/yellow, theme vars only) */
+.ax{border:1px solid var(--border-color);border-radius:12px;padding:1rem;background:var(--card-bg);margin:.6rem 0 1rem}
+.ax h3{margin:0 0 .3rem}.ax-h{margin:1.2rem 0 .5rem;font-size:1.05rem}
+.ax-toggle{display:flex;flex-wrap:wrap;gap:.4rem;margin:.6rem 0}.ax-toggle .b{min-height:40px}
+.ax-toggle .b.on{background:var(--accent-color);color:#000;border-color:var(--accent-color)}
+.ax-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:1rem}
+@media (max-width:860px){.ax-grid{grid-template-columns:1fr}}
+.ax-svg,.ax-fig svg,.tco-chart svg{width:100%;height:auto;display:block}
+.ax-node rect{fill:var(--card-bg2);stroke:var(--border-color);stroke-width:1.2}
+.ax-node text{fill:var(--text-primary)}.ax-node .ax-ctl{fill:var(--text-dim)}
+.ax-node{cursor:pointer;outline:none}.ax-node:hover rect,.ax-node:focus-visible rect{stroke:var(--accent-color);stroke-width:2.4}
+.ax-node.is-sel rect{stroke:var(--accent-color);stroke-width:3}.ax-node.is-dim{opacity:.45}
+.ax-edge.is-on{stroke:var(--accent-color);stroke-width:2.2}
+.ax-detail{border:1px solid var(--border-color);border-radius:10px;padding:.8rem;background:var(--card-bg2)}
+.ax-detail h4{margin:.15rem 0 .4rem}.ax-tier,.ax-lab{font-size:.72rem;letter-spacing:.04em;text-transform:uppercase;color:var(--text-dim)}
+.ax-chips{display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:.5rem}.ax-spec{margin:.5rem 0}.ax-spec p{margin:.2rem 0;font-size:.88rem}
+.ax-note{font-size:.78rem;color:var(--text-dim)}
+.ax-fig{margin:1rem 0;border:1px solid var(--border-color);border-radius:10px;padding:.7rem;background:var(--card-bg)}
+.ax-fig figcaption{font-size:.8rem;color:var(--text-secondary);margin-top:.4rem}
+.tblwrap{overflow-x:auto}.ax-matrix,.ax-cmp{width:100%;border-collapse:collapse;font-size:.86rem}
+.ax-matrix th,.ax-matrix td,.ax-cmp th,.ax-cmp td{border:1px solid var(--border-color);padding:.5rem .6rem;text-align:left;vertical-align:top}
+.ax-matrix thead th,.ax-cmp thead th{background:var(--card-bg2)}
+@media (max-width:600px){.ax-matrix thead{display:none}.ax-matrix tr{display:block;border:1px solid var(--border-color);border-radius:8px;margin:.5rem 0}
+ .ax-matrix th,.ax-matrix td{display:block;border:0;border-top:1px solid var(--border-color)}.ax-matrix th[scope=row]{border-top:0;background:var(--card-bg2)}
+ .ax-matrix td::before{content:attr(data-l);display:block;font-size:.7rem;text-transform:uppercase;color:var(--text-dim)}}
+.est-banner{border:2px dashed var(--accent-color);border-radius:8px;padding:.45rem .7rem;margin:.5rem 0;font-size:.82rem;background:var(--card-bg2)}
+.dsec{border:1px solid var(--border-color);border-radius:12px;padding:.8rem 1rem;margin:.8rem 0;background:var(--card-bg)}.dsec h4{margin:0 0 .3rem}
+.tco-ctl{display:grid;gap:.6rem}.tco-sl{display:grid;gap:.25rem;font-size:.86rem}.tco-sl input{width:100%;accent-color:var(--accent-color);min-height:32px}
+.tco-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.5rem;margin:.7rem 0}
+@media (max-width:700px){.tco-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.tco-kpis div{border:1px solid var(--border-color);border-radius:9px;padding:.5rem .6rem;background:var(--card-bg2);display:flex;flex-direction:column}
+.tco-kpis span,.tco-kpis em{font-size:.72rem;color:var(--text-dim);font-style:normal}.tco-kpis b{font-size:1.1rem}
+.tco-legend{display:flex;gap:1rem;font-size:.78rem;color:var(--text-secondary)}.tco-legend i{display:inline-block;width:22px;height:0;vertical-align:middle;margin-right:.35rem}
+.lg-solid{border-top:3px solid var(--text-primary)}.lg-dash{border-top:3px dashed var(--accent-color)}

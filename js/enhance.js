@@ -15,7 +15,7 @@ const APP_URL="https://aaronmeis.github.io/learn-dcsa/";
 
 /* ---------- Views and groups ---------- */
 const VIEWS = {
-  today:"Today", curriculum:"Curriculum", views:"Architecture views", shorts:"Shorts", deck:"Deck and deep-dive cut", library:"Library",
+  today:"Today", curriculum:"Curriculum", views:"Architecture", shorts:"Shorts", deck:"Deck and deep-dive cut", library:"Library",
   flash:"Flashcards", quiz:"Quiz", failures:"Failure modes", prompts:"Prompts",
   cheat:"Decision rules", map:"Progress map", glossary:"Glossary", ea:"EA mapping", debates:"Debates", refs:"Source ledger", dashboard:"Overview"
 };

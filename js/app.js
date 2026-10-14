@@ -133,12 +133,19 @@ function cell(c){
 function tableHTML(t){const cols=t.cols||t.headers||[];const title=t.h||t.caption||"";return `<h3 style="margin:1.2rem 0 .3rem;font-size:1rem">${esc(title)}</h3><table class="tbl"><thead><tr>${cols.map(c=>`<th>${esc(c)}</th>`).join("")}</tr></thead><tbody>${t.rows.map(r=>`<tr>${r.map(cell).join("")}</tr>`).join("")}</tbody></table>`;}
 function renderViews(){
   const el=$("#v-views");
-  const tabs=[["conceptual","Conceptual"],["logical","Logical"],["physical","Physical"],["integration","Integration & AI"],["govcloud","Closed lab vs cloud"]];
-  const tab=LS.get(KEY+"viewTab","conceptual");
-  const V=DATA.views[tab];
-  let h=`<h2 class="vh">Architecture views</h2>
-  <p class="lead">The views from the tech deep dive, each at its own altitude. Click any diagram to enlarge. The full notes are in the Library.</p>
-  <div class="ea-subnav">${tabs.map(([k,l])=>`<button class="ea-tab-btn ${tab===k?"active":""}" data-vt="${k}">${l}</button>`).join("")}</div>`;
+  const tabs=[["decision","Decision"],["overview","Overview"],["c","1.1 Conceptual"],["l","1.2 Logical"],["p","1.3 Physical"],["i","1.4 Integration & AI"],["matrix","2 Enclosed vs cloud"],["golden","3 Golden 4"],["flags","To verify"]];
+  const legacy={c:"conceptual",l:"logical",p:"physical",i:"integration",matrix:"govcloud"};
+  let tab=LS.get(KEY+"viewTab","overview"); if(!tabs.some(t=>t[0]===tab)) tab=({conceptual:"c",logical:"l",physical:"p",integration:"i",govcloud:"matrix"})[tab]||"overview";
+  const V=DATA.views[legacy[tab]];
+  let h=`<h2 class="vh">Architecture</h2>
+  <p class="lead">Start with the decision and the explorer, then go down one altitude at a time: conceptual, logical, physical, integration and AI. Click any diagram to enlarge. The full notes are in the Library.</p>
+  <div class="ea-subnav" role="tablist" aria-label="Architecture sections">${tabs.map(([k,l])=>`<button role="tab" aria-selected="${tab===k}" class="ea-tab-btn ${tab===k?"active":""}" data-vt="${k}">${l}</button>`).join("")}</div>`;
+  if(tab==="decision"||tab==="overview"||tab==="golden"||tab==="flags"||!V){
+    h+=tab==="decision"?renderDecision():archBlueprintHTML(tab);
+    el.innerHTML=h; $$("[data-vt]",el).forEach(b=>b.onclick=()=>{LS.set(KEY+"viewTab",b.dataset.vt);renderViews();});
+    bindArch(el); if(tab==="decision") bindDecision(el); return;
+  }
+  h+=archBlueprintHTML(tab)+`<h3 class="ax-h">From the tech deep dive pack</h3>`;
   if(!V){
     h+=`<div class="note">Architecture views load with the pack.</div>`;
     el.innerHTML=h;
@@ -146,12 +153,13 @@ function renderViews(){
     return;
   }
   h+=`<div class="note"><b>Altitude rule.</b> ${ec(V.rule)} ${lib(V.lib,"Full view note")}</div>`;
-  if(tab==="govcloud") h+=`<div class="note good"><b>Not an authorization.</b> ${ec("This study console is not permission to process classified information. A facility clearance and a system authorization are different decisions.")}</div>`;
+  if(tab==="matrix") h+=`<div class="note good"><b>Not an authorization.</b> ${ec("This study console is not permission to process classified information. A facility clearance and a system authorization are different decisions.")}</div>`;
   V.img.forEach(f=>h+=`<img class="diagram" src="assets/diagrams/${f}" alt="${esc(f)}" loading="lazy">`);
   V.tables.forEach(t=>h+=tableHTML(t));
-  if(tab==="integration") h+=`<div class="note"><b>Integration note.</b> ${ec("Name the system boundary before you name a tool. An integration is not a clearance and not an authorization.")}</div>`;
+  if(tab==="i") h+=`<div class="note"><b>Integration note.</b> ${ec("Name the system boundary before you name a tool. An integration is not a clearance and not an authorization.")}</div>`;
   el.innerHTML=h;
   $$("[data-vt]",el).forEach(b=>b.onclick=()=>{LS.set(KEY+"viewTab",b.dataset.vt);renderViews();});
+  bindArch(el);
 }
 
 /* ---- Progress map ---- */

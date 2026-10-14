@@ -24,7 +24,16 @@ const SOURCES = [
   {n:23,g:"Primary",t:"DCSA National Access Elsewhere Security Oversight Center (NAESOC)",u:"https://www.dcsa.mil/Industrial-Security/The-National-Access-Elsewhere-Security-Oversight-Center-NAESOC/",type:"primary",trust:"high",b:"2,7"},
   {n:24,g:"Primary regs",t:"eCFR 32 CFR 117.11 Foreign Ownership, Control, or Influence (FOCI)",u:"https://www.ecfr.gov/current/title-32/subtitle-A/chapter-I/subchapter-D/part-117/section-117.11",type:"primary-reg",trust:"high",b:"1,5"},
   {n:25,g:"Primary",t:"DCSA Secure Web Fingerprint Transmission (SWFT) resources",u:"https://www.dcsa.mil/is/swft/swftresources/",type:"primary",trust:"high",b:"3"},
-  {n:26,g:"Manuals",t:"DAAPM v2.2, 31 Aug 2020 (historical; DCSA now points contractors to the DAAG)",u:"https://www.dcsa.mil/Portals/128/Documents/IS/DCSA%20Assessment%20and%20Authorization%20Process%20Manual%20Version%202.2.pdf",type:"manual",trust:"historical",b:"5"}
+  {n:26,g:"Manuals",t:"DAAPM v2.2, 31 Aug 2020 (historical; DCSA now points contractors to the DAAG)",u:"https://www.dcsa.mil/Portals/128/Documents/IS/DCSA%20Assessment%20and%20Authorization%20Process%20Manual%20Version%202.2.pdf",type:"manual",trust:"historical",b:"5"},
+  {n:27,g:"Primary standards",t:"NIST SP 800-53 Rev 5: Security and Privacy Controls for Information Systems and Organizations",u:"https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final",type:"primary-std",trust:"high",b:"8-11"},
+  {n:28,g:"Primary standards",t:"NIST SP 800-37 Rev 2: Risk Management Framework (RMF)",u:"https://csrc.nist.gov/pubs/sp/800/37/r2/final",type:"primary-std",trust:"high",b:"8-11"},
+  {n:29,g:"Primary",t:"DoD Cloud Computing Security Requirements Guide (SRG), DoD Cyber Exchange",u:"https://public.cyber.mil/dccs/dccs-documents/",type:"primary",trust:"high",b:"10,11"},
+  {n:30,g:"Primary",t:"FedRAMP (Federal Risk and Authorization Management Program)",u:"https://www.fedramp.gov/",type:"primary",trust:"high",b:"10,11"},
+  {n:31,g:"Primary standards",t:"FIPS 140-3: Security Requirements for Cryptographic Modules (NIST)",u:"https://csrc.nist.gov/pubs/fips/140-3/final",type:"primary-std",trust:"high",b:"10"},
+  {n:32,g:"Primary regs",t:"FAR 52.204-25: Prohibition on contracting for certain telecommunications and video surveillance services or equipment (Section 889, FY2019 NDAA)",u:"https://www.acquisition.gov/far/52.204-25",type:"primary-reg",trust:"high",b:"10"},
+  {n:33,g:"Primary",t:"DISA Security Technical Implementation Guides (STIGs), DoD Cyber Exchange",u:"https://public.cyber.mil/stigs/",type:"primary",trust:"high",b:"10"},
+  {n:34,g:"Primary standards",t:"NIST SP 800-88 Rev 1: Guidelines for Media Sanitization",u:"https://csrc.nist.gov/pubs/sp/800/88/r1/final",type:"primary-std",trust:"high",b:"10"},
+  {n:35,g:"Primary standards",t:"NIST SP 800-207: Zero Trust Architecture",u:"https://csrc.nist.gov/pubs/sp/800/207/final",type:"primary-std",trust:"high",b:"9,11"}
 ];
 
 /* Quotes credited to the FCL Orientation Handbook [S2] were checked against a mirrored copy whose PDF metadata reads
