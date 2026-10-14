@@ -105,7 +105,7 @@ function renderArchOverview(){
    <div class="ax-toggle" role="radiogroup" aria-label="Deployment posture">${Object.keys(lbl).map(k=>`<button type="button" role="radio" aria-checked="${mode===k}" class="b ${mode===k?"on":""}" data-axm="${k}">${lbl[k]}</button>`).join("")}</div>
    <div class="ax-grid"><div class="ax-canvas">${archSVG("explorer")}</div>
    <div class="ax-detail" aria-live="polite"><span class="ax-tier">${esc(d.tier)}</span><h4>${esc(d.title)}</h4>
-    <div class="ax-chips" aria-label="NIST SP 800-53 Rev 5 controls">${d.controls.map(c=>`<span class="pill">${c}</span>`).join("")}</div>${spec}
+    <div class="ax-chips" aria-label="NIST SP 800-53 Rev 5 controls">${d.controls.map(c=>window.ctlChip?ctlChip(c):`<span class="pill">${c}</span>`).join(" ")}</div>${spec}
     <div class="ax-spec"><span class="ax-lab">RMF context</span><p>${chipsInline(d.rmf)}</p></div>
     <p class="ax-note">Products named are examples, not requirements.</p></div></div></section>`;
 }
@@ -131,5 +131,5 @@ function archBlueprintHTML(tab){
   return "";
 }
 /* S# chips inside architecture text, reusing the prompt chip markup */
-function chipsInline(t){let k=0;return esc(t).replace(/\[(S\d+(?:\s*,\s*S\d+)*)\]/g,(m,inner)=>"["+inner.replace(/S(\d+)/g,(x,n)=>{const s=SRC[+n];if(!s)return x;const id=`axtip-${n}-${k++}-${Math.random().toString(36).slice(2,6)}`;
+function chipsInline(t){let k=0;return (window.ctlInline?ctlInline(esc(t)):esc(t)).replace(/\[(S\d+(?:\s*,\s*S\d+)*)\]/g,(m,inner)=>"["+inner.replace(/S(\d+)/g,(x,n)=>{const s=SRC[+n];if(!s)return x;const id=`axtip-${n}-${k++}-${Math.random().toString(36).slice(2,6)}`;
   return `<span class="schip-wrap"><button type="button" class="schip" aria-expanded="false" aria-controls="${id}" aria-label="Source S${n}: ${esc(s.t)}. Show summary">S${n}</button><span class="stip" id="${id}" role="tooltip" hidden><b>S${n} · ${esc(s.t)}</b>${esc(srcNote(n))}<br><a href="${esc(s.u)}" target="_blank" rel="noopener">Open source ↗</a></span></span>`;})+"]");}

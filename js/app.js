@@ -73,7 +73,7 @@ function renderDashboard(){
     <div class="card"><h3>Views</h3><p style="color:var(--text-secondary);font-size:.86rem">Conceptual, logical, and physical views for the two tracks.</p><div class="btnrow" style="margin:.8rem 0 0"><button class="b" onclick="go('views')">Open views →</button></div></div>
     <div class="card"><h3>Progress map</h3><p style="color:var(--text-secondary);font-size:.86rem">The 100 / 200 / 300 ladder across the packs.</p><div class="btnrow" style="margin:.8rem 0 0"><button class="b" onclick="go('map')">Open map →</button></div></div>
     <div class="card"><h3>Flashcards and quiz</h3><p style="color:var(--text-secondary);font-size:.86rem">${DATA.glossary.length} spaced-repetition cards and the ${DATA.quiz.length}-question quiz bank.</p><div class="btnrow" style="margin:.8rem 0 0"><button class="b" onclick="go('flash')">Flashcards →</button><button class="b" onclick="go('quiz')">Quiz →</button></div></div>
-    <div class="card"><h3>Shorts and media</h3><p style="color:var(--text-secondary);font-size:.86rem">NotebookLM shorts and the narrated deep-dive cut, when the media is on this site.</p><div class="btnrow" style="margin:.8rem 0 0"><button class="b" onclick="go('shorts')">Open media →</button><button class="b" onclick="go('deck')">Slide deck →</button></div></div>
+    <div class="card"><h3>Shorts and media</h3><p style="color:var(--text-secondary);font-size:.86rem">NotebookLM shorts and the narrated deep-dive video (AI-generated narration).</p><div class="btnrow" style="margin:.8rem 0 0"><button class="b" onclick="go('shorts')">Open media →</button><button class="b" onclick="go('deck')">Slide deck →</button></div></div>
     <div class="card"><h3>Failure modes</h3><p style="color:var(--text-secondary);font-size:.86rem">${DATA.checklist.length} failure modes: the tell, the fix, and the source.</p><div class="btnrow" style="margin:.8rem 0 0"><button class="b" onclick="go('failures')">Failure modes →</button><button class="b" onclick="go('cheat')">Decision rules →</button></div></div>
     <div class="card"><h3>Neighbors</h3><p style="color:var(--text-secondary);font-size:.86rem">What sits beside FCL and PCL, and what does not replace them.</p><div class="btnrow" style="margin:.8rem 0 0"><button class="b" onclick="go('ea')">Open the map →</button></div></div>
     <div class="card"><h3>On the phone</h3><p style="color:var(--text-secondary);font-size:.86rem">Talks and the O'Reilly shelf, above the source ledger.</p><div class="btnrow" style="margin:.8rem 0 0"><button class="b" onclick="go('refs')">Open references →</button></div></div>
@@ -280,9 +280,9 @@ function renderDeck(){
     :(deepFile?`<video class="wide-player" controls preload="metadata" poster="assets/slides/slide-01.jpg" src="${esc(deepFile)}"></video>`
       :`<div class="note"><b>Deep-dive cut.</b> Long-form MP4 is not on the site yet. Study the slide deck and question cards below. ${lib("media-cut-script","Cut script")}</div>`);
   let h=`<h2 class="vh">Deck and deep-dive cut</h2>
-  <p class="lead">NotebookLM slides and a silent, captioned cut of them. Each slide has its narration line and the question the cut asks before it. Amber outlines mark claims the source ledger does not support.</p>
+  <p class="lead">NotebookLM slides and a narrated video of them (the narration is AI-generated). Each slide has its narration line and the question the cut asks before it. Amber outlines mark claims the source ledger does not support.</p>
   ${video}
-  ${DEEP.youtube?`<p class="obj" style="margin-top:.4rem">Narrated cut of the deck with question cards between slides. Narration is AI-generated. <a href="https://www.youtube.com/watch?v=${esc(DEEP.youtube)}" target="_blank" rel="noopener">Open on YouTube ↗</a> ${lib("media-cut-script","Cut script")}</p>`:(deepFile?`<p class="obj" style="margin-top:.4rem">Silent 2:26 cut of the 15 slides, with on-screen captions. Yellow strips correct slides that show older terms (Day 45, DAAPM, NBIS/e-QIP). ${lib("media-cut-script","Cut script")}</p>`:"")}
+  ${DEEP.youtube?`<h3 style="margin-top:.6rem;font-size:1rem">${esc(DEEP.title||"Deep-dive cut")}</h3><p class="obj" style="margin-top:.2rem">${esc(DEEP.description||"Narration is AI-generated.")} The MP4 fallback ("Play the MP4 here instead") is the earlier silent, captioned 2:26 cut. <a href="https://www.youtube.com/watch?v=${esc(DEEP.youtube)}" target="_blank" rel="noopener">Open “${esc(DEEP.title||"the deep-dive cut")}” on YouTube ↗</a> ${lib("media-cut-script","Cut script")}</p>`:(deepFile?`<p class="obj" style="margin-top:.4rem">Silent 2:26 cut of the 15 slides, with on-screen captions. Yellow strips correct slides that show older terms (Day 45, DAAPM, NBIS/e-QIP). ${lib("media-cut-script","Cut script")}</p>`:"")}
   <div class="note" style="margin-top:1rem"><b>Opening line.</b> ${esc(C.open||"")}<br><b>Recap.</b> ${esc(C.recap||"")}</div>
   <p class="obj" style="margin-top:1rem"><b>Downloads:</b> Blueprint and deck files land in <code>assets/downloads/</code> with the pack. ${lib("media-cut-script","Cut script: narration and question cards")} · ${lib("media-shorts-plan","Shorts plan")} · ${lib("project-plan","Example journey plan")} · ${lib("video-resources","Videos and resources")} · ${lib("tdd-view-01-conceptual","Conceptual view")}</p>
   <h3 style="margin:1.6rem 0 .6rem;font-size:1.05rem">Slides</h3>
@@ -300,7 +300,7 @@ function renderDeck(){
   }
   el.innerHTML=h+`</div>`;
   const yh=document.getElementById("deep-yt");
-  if(yh&&typeof ytFacade==="function") ytFacade(yh,{id:DEEP.youtube,title:"DCSA deep-dive cut",poster:"assets/slides/slide-01.jpg",file:deepFile,
+  if(yh&&typeof ytFacade==="function") ytFacade(yh,{id:DEEP.youtube,title:DEEP.title||"DCSA deep-dive cut",poster:"assets/slides/slide-01.jpg",file:deepFile,
     onMp4:()=>{yh.outerHTML=`<video class="wide-player" controls autoplay preload="metadata" poster="assets/slides/slide-01.jpg" src="${esc(deepFile)}"></video>`;}});
   if(!window._deepYtStop){window._deepYtStop=1;window.addEventListener("hashchange",()=>{ if(!/^#\/deck/.test(location.hash)){ const d=document.getElementById("v-deck"); if(d&&d.querySelector("#deep-yt iframe, video.wide-player")) renderDeck(); } });}
 }
@@ -351,7 +351,7 @@ function renderGlossary(){
     const items=DATA.glossary.filter(g=>g.category===c&&(!q||(g.term+g.definition+(g.see_also||"")).toLowerCase().includes(q)));
     if(!items.length)return;
     h+=`<h3 style="margin:1.1rem 0 .5rem;font-size:.95rem">${esc(c)} <span style="color:var(--text-dim);font-weight:400">· ${items.length}</span></h3>`;
-    items.forEach(g=>h+=`<div class="gterm"><h4>${esc(g.term)} <span class="pill r${g.rung}">${g.rung}</span> ${g.essential?'<span class="pill r100">Essential</span>':''} ${g.source==="nblm-gap"?'<span class="pill" title="Drafted by a NotebookLM data table, checked against the source ledger">gap pass</span>':''}</h4><p>${ec(g.definition)}</p>${g.link?`<div class="glink"><a href="${esc(g.link.href)}">${esc(g.link.label)} →</a></div>`:""}${g.see_also?`<div class="sa">see also: ${esc(g.see_also)}</div>`:""}</div>`);
+    items.forEach(g=>h+=`<div class="gterm"><h4>${esc(g.term)} <span class="pill r${g.rung}">${g.rung}</span> ${g.essential?'<span class="pill r100">Essential</span>':''} ${g.source==="nblm-gap"?'<span class="pill" title="Drafted by a NotebookLM data table, checked against the source ledger">gap pass</span>':''}</h4><p>${ec(g.definition)}</p>${g.link?`<div class="glink"><a href="${esc(g.link.href)}"${/^https?:/.test(g.link.href)?' target="_blank" rel="noopener"':""}>${esc(g.link.label)} →</a></div>`:""}${g.see_also?`<div class="sa">see also: ${esc(g.see_also)}</div>`:""}</div>`);
   });
   el.innerHTML=h;
   const s=$("#gSearch");
@@ -369,7 +369,7 @@ function renderGlossaryMap(el,head,slug){
     listFirst:window.matchMedia&&window.matchMedia("(max-width:599px)").matches,
     items:DATA.glossary.map(g=>({id:TermMap.slugify(g.term),label:g.term,group:g.category,weight:g.essential?3:(g.rung>=300?1:2),
       aliases:L.aliases[g.term]||[],related:L.related[g.term]||[],
-      body:`<p>${ec(g.definition)}</p>${g.link?`<div class="glink"><a href="${esc(g.link.href)}">${esc(g.link.label)} →</a></div>`:""}<p style="margin-top:.5rem"><span class="pill r${g.rung}">${g.rung}</span>${g.essential?' <span class="pill r100">Essential</span>':''}</p>`})),
+      body:`<p>${ec(g.definition)}</p>${g.link?`<div class="glink"><a href="${esc(g.link.href)}"${/^https?:/.test(g.link.href)?' target="_blank" rel="noopener"':""}>${esc(g.link.label)} →</a></div>`:""}<p style="margin-top:.5rem"><span class="pill r${g.rung}">${g.rung}</span>${g.essential?' <span class="pill r100">Essential</span>':''}</p>`})),
     slug:slug,
     onFocus:id=>{const h=id?"#/glossary/map/"+encodeURIComponent(id):"#/glossary/map"; if(location.hash!==h) history.replaceState(null,"",h); window.GLOSS_SUB=h.replace("#/glossary/","");}});
 }

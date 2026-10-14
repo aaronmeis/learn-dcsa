@@ -1,87 +1,135 @@
 {
   "notebook_alias": "odm-dcsa",
   "title": "Learn DCSA - NotebookLM shorts",
-  "deep_dive": { "file": "media/deep-dive-cut.mp4", "youtube": "Qx7Cdx2aha4" },
+  "deep_dive": {
+    "file": "media/deep-dive-cut.mp4",
+    "youtube": "Qx7Cdx2aha4",
+    "title": "DCSA deep dive: the dual-track clearance, with questions to think about",
+    "description": "A longer walk through the Learn DCSA deck. Between slides, question cards ask \"why does it work this way?\", and the next slide answers them. Narration is AI-generated. This is study material, not official DCSA guidance.",
+    "fallback_note": "The MP4 fallback is the earlier silent, captioned 2:26 cut."
+  },
   "total": 6,
   "ready": 6,
   "items": [
     {
       "id": "01-dual-track-lock",
       "name": "01-dual-track-lock",
-      "title": "Dual-track lock",
+      "title": "Why your company and your people get cleared together | DCSA dual-track",
       "tag": "Block 1",
       "pillar": "NISP",
-      "keywords": ["dual-track", "FCL", "PCL", "KMP"],
+      "keywords": [
+        "dual-track",
+        "FCL",
+        "PCL",
+        "KMP"
+      ],
       "duration": 81,
       "poster": "media/posters/01-dual-track-lock.jpg",
       "file": "media/shorts/01-dual-track-lock.mp4",
       "youtube": "rJ_I-xyzOtw",
-      "status": "ready"
+      "status": "ready",
+      "short_title": "Dual-track lock",
+      "description": "A company can't get its facility clearance until its key managers get theirs, and those managers wait on the company. Here's how that lock works. Narration is AI-generated (NotebookLM). Study material, not official DCSA guidance."
     },
     {
       "id": "02-no-self-sponsor",
       "name": "02-no-self-sponsor",
-      "title": "No self-sponsor",
+      "title": "You can't sponsor yourself for a facility clearance",
       "tag": "Block 1",
       "pillar": "NISP",
-      "keywords": ["sponsor", "GCA", "NISS", "self-sponsor"],
+      "keywords": [
+        "sponsor",
+        "GCA",
+        "NISS",
+        "self-sponsor"
+      ],
       "duration": 76,
       "poster": "media/posters/02-no-self-sponsor.jpg",
       "file": "media/shorts/02-no-self-sponsor.mp4",
       "youtube": "2Lr79by5A_A",
-      "status": "ready"
+      "status": "ready",
+      "short_title": "No self-sponsor",
+      "description": "A facility clearance starts with a sponsor: a government customer or a cleared prime with a real classified need. This short explains why you can't apply on your own. Narration is AI-generated (NotebookLM). Study material, not official DCSA guidance."
     },
     {
       "id": "03-day-20-clock",
       "name": "03-day-20-clock",
-      "title": "The Day 20 clock and the KMP due date",
+      "title": "The Day 20 clock: why facility clearances stall early",
       "tag": "Block 3",
       "pillar": "NISP",
-      "keywords": ["Day 20", "KMP due date", "package", "clock"],
+      "keywords": [
+        "Day 20",
+        "KMP due date",
+        "package",
+        "clock"
+      ],
       "duration": 78,
       "poster": "media/posters/03-day-20-clock.jpg",
       "file": "media/shorts/03-day-20-clock.mp4",
       "youtube": "raRS4QbwfGI",
-      "status": "ready"
+      "status": "ready",
+      "short_title": "The Day 20 clock and the KMP due date",
+      "description": "Once you're sponsored, the clock starts on your package and your key managers' paperwork. Miss it, and the request can stall before it really begins. Narration is AI-generated (NotebookLM). Study material, not official DCSA guidance."
     },
     {
       "id": "04-package-quality",
       "name": "04-package-quality",
-      "title": "Package quality choke point",
+      "title": "The paperwork choke point in a DCSA facility clearance",
       "tag": "Block 3",
       "pillar": "NISP",
-      "keywords": ["DD 441", "SF 328", "ownership", "incomplete"],
+      "keywords": [
+        "DD 441",
+        "SF 328",
+        "ownership",
+        "incomplete"
+      ],
       "duration": 72,
       "poster": "media/posters/04-package-quality.jpg",
       "file": "media/shorts/04-package-quality.mp4",
       "youtube": "MK6iVKnU6_0",
-      "status": "ready"
+      "status": "ready",
+      "short_title": "Package quality choke point",
+      "description": "Incomplete ownership records, a DD 441 that doesn't match, or a sloppy SF 328 are the usual reasons a package bounces. Get these right the first time. Narration is AI-generated (NotebookLM). Study material, not official DCSA guidance."
     },
     {
       "id": "05-sf328-fifteen",
       "name": "05-sf328-fifteen",
-      "title": "SF 328 fifteen percent",
+      "title": "The 15% line on the SF 328 (foreign ownership)",
       "tag": "Block 5",
       "pillar": "Systems",
-      "keywords": ["FOCI", "15%", "SF 328", "Q7b"],
+      "keywords": [
+        "FOCI",
+        "15%",
+        "SF 328",
+        "Q7b"
+      ],
       "duration": 67,
       "poster": "media/posters/05-sf328-fifteen.jpg",
       "file": "media/shorts/05-sf328-fifteen.mp4",
       "youtube": "4Lyox8vU3Iw",
-      "status": "ready"
+      "status": "ready",
+      "short_title": "SF 328 fifteen percent",
+      "description": "Foreign ownership questions on the SF 328 changed in 2025. This short covers what the 15% threshold means and why it matters for FOCI. Narration is AI-generated (NotebookLM). Study material, not official DCSA guidance."
     },
     {
       "id": "06-sead4-whole-person",
       "name": "06-sead4-whole-person",
-      "title": "SEAD 4 whole person",
+      "title": "The \"whole person\" rule in clearance decisions (SEAD 4)",
       "tag": "Block 2",
       "pillar": "Personnel",
-      "keywords": ["SEAD 4", "thirteen", "whole person", "PVQ"],
+      "keywords": [
+        "SEAD 4",
+        "thirteen",
+        "whole person",
+        "PVQ"
+      ],
       "duration": 78,
       "poster": "media/posters/06-sead4-whole-person.jpg",
       "file": "media/shorts/06-sead4-whole-person.mp4",
       "youtube": "kPi1MEZBTag",
-      "status": "ready"
+      "status": "ready",
+      "short_title": "SEAD 4 whole person",
+      "description": "Personnel clearances weigh 13 guidelines across a person's whole life, not one bad moment. This short explains how SEAD 4 frames that judgment. Narration is AI-generated (NotebookLM). Study material, not official DCSA guidance."
     }
   ]
 }
