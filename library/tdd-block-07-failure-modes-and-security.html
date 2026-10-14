@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Block 7: Failure modes and security | Learn DCSA</title>
+<meta name="description" content="Block 7 — failure modes across four views: package clocks, FOCI, cloud≠FCL, KMP, HR traps, AI oversharing.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="library.css">
+<script>try{var p=JSON.parse(localStorage.getItem("appPalette"))||"github",m=JSON.parse(localStorage.getItem("appMode"))||"dark";document.documentElement.setAttribute("data-theme",p+"-"+m);}catch(e){document.documentElement.setAttribute("data-theme","github-dark");}</script>
+</head>
+<body>
+<header class="topbar">
+  <a href="../index.html" class="home">&larr; Learn DCSA</a>
+  <span class="crumb">Library Â· TDD day blocks</span>
+  <a href="index.html" class="home">All pages</a>
+</header>
+<main class="doc">
+  <div class="kicker">TDD day blocks</div>
+  <h1 class="doctitle">Block 7: Failure modes and security</h1>
+  <p class="lead">Block 7 — failure modes across four views: package clocks, FOCI, cloud≠FCL, KMP, HR traps, AI oversharing.</p>
+  
+  <article>
+<p><strong>Time:</strong> 45 minutes · <strong>Goal:</strong> What breaks, what leaks, and which control catches each tell</p>
+<h2>Focus from mind map</h2>
+<ul>
+<li>Incomplete first package / burn resubmits before Day 20</li>
+<li>Undisclosed FOCI or late SF 328 material-change reporting</li>
+<li>Confusing cloud IL / CMMC with FCL or classified ATO</li>
+<li>Wrong KMP list</li>
+<li>Adverse information trapped in HR</li>
+<li>International partnerships under old 30% mindset</li>
+<li>Continuous vetting gaps after grant</li>
+<li>AI oversharing of SF-86/FOCI PII</li>
+</ul>
+<h2>Sources</h2>
+<ul>
+<li>[<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/fc/DCSA%20FCL_Orientation_Handbook_20260828.pdf" target="_blank" rel="noopener" title="DCSA FCL Orientation Handbook (2026)">S2</a>][<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4180585/dcsa-announces-approval-of-the-updated-form-328-certificate-pertaining-to-forei/" target="_blank" rel="noopener" title="DCSA SF 328 update announcement May 2025">S3</a>][<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/FOCI/Updated%20SF328%20-%20Industry%20Information%20Paper%20(final).pdf" target="_blank" rel="noopener" title="DCSA SF 328 Industry Information Paper May 2025">S4</a>][<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4496039/dcsa-updates-nisp-contractor-continuous-vetting-process/" target="_blank" rel="noopener" title="DCSA Continuous Vetting update May 2026">S9</a>][<a class="cite" href="https://www.youtube.com/watch?v=Jf-SDX2WE8k" target="_blank" rel="noopener" title="How to Get a Facility Clearance (Bennett FSO talk)">S10</a>][<a class="cite" href="https://www.youtube.com/watch?v=CrifvnX3o5M" target="_blank" rel="noopener" title="FOCI and Supply Chain Risk Management webinar">S12</a>] · <a href="tdd-view-04-integration-ai.html">04 - Integration and AI Elements</a> failure table</li>
+</ul>
+<h2>Actions (tied to views)</h2>
+<ul>
+<li class="task"><input type="checkbox" disabled> Build a <strong>failure-mode table</strong> with columns: View · Failure · First tell · Control — covering conceptual, logical, physical, integration.</li>
+<li class="task"><input type="checkbox" disabled> For each mind-map failure above, cite the <strong>view artifact</strong> that should have caught it (e.g., Day-20 clock → logical; 15% threshold → physical SF 328).</li>
+<li class="task"><input type="checkbox" disabled> Add <strong>AI oversharing</strong> and <strong>third-party connector</strong> (fingerprint delay, HRIS stall) explicitly.</li>
+<li class="task"><input type="checkbox" disabled> Affirm the <strong>post-2025</strong> FOCI tell: teams still planning to the <strong>30%</strong> threshold.</li>
+</ul>
+<h2>Failure-mode seed table</h2>
+<table>
+<thead>
+<tr>
+<th>View</th>
+<th>Failure</th>
+<th>First tell</th>
+<th>Control</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Conceptual</td>
+<td>Treating one track as enough</td>
+<td>“We have clearances” with no FCL (or reverse)</td>
+<td>Dual-track OV-1 teach-back</td>
+</tr>
+<tr>
+<td>Logical</td>
+<td>Miss Day 20 / Day 45</td>
+<td>Welcome email + empty package tracker</td>
+<td>Clock owner + limited-resubmit discipline [<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/fc/DCSA%20FCL_Orientation_Handbook_20260828.pdf" target="_blank" rel="noopener" title="DCSA FCL Orientation Handbook (2026)">S2</a>]</td>
+</tr>
+<tr>
+<td>Logical</td>
+<td>FOCI treated as checkbox</td>
+<td>SF 328 filed, no mitigation branch planned</td>
+<td>FOCI analyzer branch [<a class="cite" href="https://www.youtube.com/watch?v=CrifvnX3o5M" target="_blank" rel="noopener" title="FOCI and Supply Chain Risk Management webinar">S12</a>]</td>
+</tr>
+<tr>
+<td>Physical</td>
+<td>Old 30% foreign-proceeds model</td>
+<td>Finance reports “under 30%” after May 2025</td>
+<td>Q7(b) <strong>15%</strong> monitoring [<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/FOCI/Updated%20SF328%20-%20Industry%20Information%20Paper%20(final).pdf" target="_blank" rel="noopener" title="DCSA SF 328 Industry Information Paper May 2025">S4</a>]</td>
+</tr>
+<tr>
+<td>Physical</td>
+<td>Cloud IL / CMMC sold as FCL</td>
+<td>Slide equates GCCH to “cleared facility”</td>
+<td>Decision table in view 3</td>
+</tr>
+<tr>
+<td>Physical</td>
+<td>Wrong KMP</td>
+<td>Officer with security authority omitted</td>
+<td>Security-affecting authority test [<a class="cite" href="https://www.youtube.com/watch?v=Jf-SDX2WE8k" target="_blank" rel="noopener" title="How to Get a Facility Clearance (Bennett FSO talk)">S10</a>]</td>
+</tr>
+<tr>
+<td>Integration</td>
+<td>HR traps adverse info</td>
+<td>Employee issue known to HR, invisible to FSO</td>
+<td>Audited HR→FSO handoff [<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4496039/dcsa-updates-nisp-contractor-continuous-vetting-process/" target="_blank" rel="noopener" title="DCSA Continuous Vetting update May 2026">S9</a>]</td>
+</tr>
+<tr>
+<td>Integration</td>
+<td>AI paste of SF-86</td>
+<td>Prompt logs contain questionnaire text</td>
+<td>Default-deny AI boundary (view 4)</td>
+</tr>
+<tr>
+<td>Integration</td>
+<td>Fingerprint lag</td>
+<td>Day 45 expires, KMP not initiated</td>
+<td>Early channeler scheduling [<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/fc/DCSA%20FCL_Orientation_Handbook_20260828.pdf" target="_blank" rel="noopener" title="DCSA FCL Orientation Handbook (2026)">S2</a>]</td>
+</tr>
+</tbody>
+</table>
+<h2>Retrieval check</h2>
+<div class="callout question" markdown="0"><div class="callout-title">Question</div><p>What is the most likely failure in a real FCL pursuit, and what is its first visible tell?</p></div>
+
+<div class="callout success" markdown="0"><div class="callout-title">Answer cues</div><p>Highest-frequency teachable failure: <strong>incomplete Day-20 package / burned completeness cycles</strong>, tell = deficiency letters stacking while the clock runs. [<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/fc/DCSA%20FCL_Orientation_Handbook_20260828.pdf" target="_blank" rel="noopener" title="DCSA FCL Orientation Handbook (2026)">S2</a>][<a class="cite" href="https://www.youtube.com/watch?v=Jf-SDX2WE8k" target="_blank" rel="noopener" title="How to Get a Facility Clearance (Bennett FSO talk)">S10</a>] Close rivals: <strong>wrong KMP list</strong> and <strong>FOCI under-disclosure</strong> (especially post-15% threshold). Cloud≠FCL is the most common <em>architectural</em> confusion in design reviews.</p></div>
+
+<h2>Exit criteria</h2>
+<ul>
+<li class="task"><input type="checkbox" disabled> Failure-mode table covers all four views; AI and HR traps included; 15% vs 30% called out.</li>
+</ul></article>
+  <footer class="docfoot">
+    Rendered from <code>Learning\tech-deep-dive\dcsa\blocks\07-failure-modes-and-security.md</code>. The Obsidian vault is the source of truth. Study material only. Citations <span class="cite">S#</span> link to the DCSA source ledger [S1]â€“[S14].
+    <div class="prevnext"><a href="tdd-block-06-hands-on-lab.html">&larr; Previous</a><a href="tdd-block-08-design-review.html">Next &rarr;</a></div>
+  </footer>
+</main>
+<script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+const dark=(document.documentElement.getAttribute("data-theme")||"").endsWith("dark");
+mermaid.initialize({startOnLoad:true,theme:dark?"dark":"default",securityLevel:"strict"});
+</script>
+</body>
+</html>

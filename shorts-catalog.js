@@ -1,0 +1,87 @@
+window.SHORTS = {
+  "notebook_alias": "odm-dcsa",
+  "title": "Learn DCSA - NotebookLM shorts",
+  "deep_dive": { "file": "", "youtube": "" },
+  "total": 6,
+  "ready": 6,
+  "items": [
+    {
+      "id": "01-dual-track-lock",
+      "name": "01-dual-track-lock",
+      "title": "Dual-track lock",
+      "tag": "Block 1",
+      "pillar": "NISP",
+      "keywords": ["dual-track", "FCL", "PCL", "KMP"],
+      "duration": 81,
+      "poster": "media/posters/01-dual-track-lock.jpg",
+      "file": "media/shorts/01-dual-track-lock.mp4",
+      "youtube": "",
+      "status": "ready"
+    },
+    {
+      "id": "02-no-self-sponsor",
+      "name": "02-no-self-sponsor",
+      "title": "No self-sponsor",
+      "tag": "Block 1",
+      "pillar": "NISP",
+      "keywords": ["sponsor", "GCA", "NISS", "self-sponsor"],
+      "duration": 76,
+      "poster": "media/posters/02-no-self-sponsor.jpg",
+      "file": "media/shorts/02-no-self-sponsor.mp4",
+      "youtube": "",
+      "status": "ready"
+    },
+    {
+      "id": "03-day-20-45",
+      "name": "03-day-20-45",
+      "title": "Day 20 and Day 45 clocks",
+      "tag": "Block 3",
+      "pillar": "NISP",
+      "keywords": ["Day 20", "Day 45", "package", "clock"],
+      "duration": 78,
+      "poster": "media/posters/03-day-20-45.jpg",
+      "file": "media/shorts/03-day-20-45.mp4",
+      "youtube": "",
+      "status": "ready"
+    },
+    {
+      "id": "04-package-quality",
+      "name": "04-package-quality",
+      "title": "Package quality choke point",
+      "tag": "Block 3",
+      "pillar": "NISP",
+      "keywords": ["DD 441", "SF 328", "ownership", "incomplete"],
+      "duration": 72,
+      "poster": "media/posters/04-package-quality.jpg",
+      "file": "media/shorts/04-package-quality.mp4",
+      "youtube": "",
+      "status": "ready"
+    },
+    {
+      "id": "05-sf328-fifteen",
+      "name": "05-sf328-fifteen",
+      "title": "SF 328 fifteen percent",
+      "tag": "Block 5",
+      "pillar": "Systems",
+      "keywords": ["FOCI", "15%", "SF 328", "Q7b"],
+      "duration": 67,
+      "poster": "media/posters/05-sf328-fifteen.jpg",
+      "file": "media/shorts/05-sf328-fifteen.mp4",
+      "youtube": "",
+      "status": "ready"
+    },
+    {
+      "id": "06-sead4-whole-person",
+      "name": "06-sead4-whole-person",
+      "title": "SEAD 4 whole person",
+      "tag": "Block 2",
+      "pillar": "Personnel",
+      "keywords": ["SEAD 4", "thirteen", "whole person", "PVQ"],
+      "duration": 78,
+      "poster": "media/posters/06-sead4-whole-person.jpg",
+      "file": "media/shorts/06-sead4-whole-person.mp4",
+      "youtube": "",
+      "status": "ready"
+    }
+  ]
+};

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Block 2: Mental models | Learn DCSA</title>
+<meta name="description" content="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="library.css">
+<script>try{var p=JSON.parse(localStorage.getItem("appPalette"))||"github",m=JSON.parse(localStorage.getItem("appMode"))||"dark";document.documentElement.setAttribute("data-theme",p+"-"+m);}catch(e){document.documentElement.setAttribute("data-theme","github-dark");}</script>
+</head>
+<body>
+<header class="topbar">
+  <a href="../index.html" class="home">&larr; Learn DCSA</a>
+  <span class="crumb">Library Â· ODM day blocks</span>
+  <a href="index.html" class="home">All pages</a>
+</header>
+<main class="doc">
+  <div class="kicker">ODM day blocks</div>
+  <h1 class="doctitle">Block 2: Mental models</h1>
+  
+  
+  <article>
+<p><strong>Time:</strong> 45 minutes<br />
+<strong>Goal:</strong> How experts chunk the domain<br />
+<strong>Pack:</strong> DCSA (Defense Counterintelligence and Security Agency) (<code>dcsa</code>)</p>
+<h2>Focus from mind map</h2>
+<ul>
+<li><strong>Dual-track lock</strong> — FCL and PCL feed each other</li>
+<li><strong>Clock vs quality</strong> — Day 20/45 punish incomplete packages harder than slow complete ones</li>
+<li><strong>FOCI as schedule risk</strong> — mitigation (SCA/SSA/Proxy, etc.) can add months; 15% SF 328 threshold expands who must explain foreign revenue</li>
+<li><strong>Whole person vs checklist</strong> — SEAD 4 is cumulative/contextual</li>
+<li><strong>CMMC ≠ FCL</strong> — uncleared CUI floor ≠ NISP classified ATO (cross-link sibling pack)</li>
+<li>Four domains as the operating-model layer cake</li>
+</ul>
+<h2>Sources</h2>
+<ul>
+<li>[<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/fc/DCSA%20FCL_Orientation_Handbook_20260828.pdf" target="_blank" rel="noopener" title="DCSA FCL Orientation Handbook (2026)">S2</a>] FCL Orientation Handbook — clocks + package quality</li>
+<li>[<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/FOCI/Updated%20SF328%20-%20Industry%20Information%20Paper%20(final).pdf" target="_blank" rel="noopener" title="DCSA SF 328 Industry Information Paper May 2025">S4</a>] SF 328 Industry Information Paper — Q7b 15%</li>
+<li>[<a class="cite" href="https://www.cdse.edu/Training/eLearning/IS140/" target="_blank" rel="noopener" title="CDSE Facility Clearances in the NISP IS140.16">S5</a>][<a class="cite" href="https://www.cdse.edu/Training/eLearning/IS142-resources/" target="_blank" rel="noopener" title="CDSE Personnel Clearances in the NISP IS142.16">S6</a>] CDSE IS140 / IS142</li>
+<li>[<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4496039/dcsa-updates-nisp-contractor-continuous-vetting-process/" target="_blank" rel="noopener" title="DCSA Continuous Vetting update May 2026">S9</a>] Continuous vetting update (PVQ every 5 years; PR eliminated for NISP contractors)</li>
+<li>[<a class="cite" href="https://rmf.org/wp-content/uploads/2022/02/DCSA-Assessment-and-Authorization-Process-Manual-Version-2.2.pdf" target="_blank" rel="noopener" title="DAAPM v2.2 (RMF for NISP contractors)">S13</a>] DAAPM v2.2 — IS authorization under RMF</li>
+<li><a href="odm-mission.html">CMMC sibling mission</a> (contrast only)</li>
+</ul>
+<h2>Actions</h2>
+<ol>
+<li>Capture these five named models in a table: When to use / How / Failure mode.
+   | Model | When | How | Failure mode |
+   |-------|------|-----|--------------|
+   | Dual-track lock | Any “how do we get cleared?” ask | Map FCL sponsor → KMP PCLs → usable facility | Treating badge chase as independent of FCL |
+   | Clock vs quality | Post–welcome-email planning | Day 20 package complete; Day 45 KMP fingerprints queued | Incomplete first package → return cycle |
+   | FOCI as schedule risk | Foreign ownership, revenue, partnerships | SF 328 disclosure + mitigation path | “No FOCI forever” or ignoring 15% Q7b |
+   | Whole person (SEAD 4) | Adjudication / self-assessment prep | Thirteen guidelines, contextual | Checklist yes/no theater |
+   | Two walls (CMMC ≠ FCL) | Cloud / CUI / GCC High confusion | CMMC floor vs NISP/DAAPM wall | Equating GCC High with Secret FCL |</li>
+<li>Sketch how the four domains hang off DCSA (one box each).</li>
+<li>One sentence: why a non-possessing FCL still needs the dual-track lock.</li>
+</ol>
+<h2>Retrieval check</h2>
+<div class="callout question" markdown="0"><div class="callout-title">Question</div><p>Which mental model do you reach for first when a lab says “we’ll just get GCC High and then we’re cleared”? Why?</p></div>
+
+<p>%% fold answer after attempt %%</p>
+<div class="callout success" markdown="0"><div class="callout-title">Answer cues</div><p>Two walls / CMMC ≠ FCL: GCC High may support CUI architectures; it does not confer FCL or authorize Secret/TS. Then dual-track lock: FCL still needs GCA/prime sponsorship in NISS + cleared KMPs.</p></div>
+
+<h2>Exit criteria</h2>
+<ul>
+<li class="task"><input type="checkbox" disabled> Five models captured with when/how/fail</li>
+<li class="task"><input type="checkbox" disabled> Four-domain sketch done</li>
+<li class="task"><input type="checkbox" disabled> Non-possessing one-liner written</li>
+</ul></article>
+  <footer class="docfoot">
+    Rendered from <code>Learning\one-day-mastery\dcsa\blocks\02-mental-models.md</code>. The Obsidian vault is the source of truth. Study material only. Citations <span class="cite">S#</span> link to the DCSA source ledger [S1]â€“[S14].
+    <div class="prevnext"><a href="odm-block-01-core-concepts.html">&larr; Previous</a><a href="odm-block-03-active-practice.html">Next &rarr;</a></div>
+  </footer>
+</main>
+<script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+const dark=(document.documentElement.getAttribute("data-theme")||"").endsWith("dark");
+mermaid.initialize({startOnLoad:true,theme:dark?"dark":"default",securityLevel:"strict"});
+</script>
+</body>
+</html>

@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Integration and AI Elements — DCSA (Defense Counterintelligence and Security Agency) | Learn DCSA</title>
+<meta name="description" content="Integration and AI elements for DCSA dual-track: third-party inventory with gov-cloud column; assistive-only AI boundary for SF-86/FOCI PII.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="library.css">
+<script>try{var p=JSON.parse(localStorage.getItem("appPalette"))||"github",m=JSON.parse(localStorage.getItem("appMode"))||"dark";document.documentElement.setAttribute("data-theme",p+"-"+m);}catch(e){document.documentElement.setAttribute("data-theme","github-dark");}</script>
+</head>
+<body>
+<header class="topbar">
+  <a href="../index.html" class="home">&larr; Learn DCSA</a>
+  <span class="crumb">Library Â· Architecture views</span>
+  <a href="index.html" class="home">All pages</a>
+</header>
+<main class="doc">
+  <div class="kicker">Architecture views</div>
+  <h1 class="doctitle">Integration and AI Elements — DCSA (Defense Counterintelligence and Security Agency)</h1>
+  <p class="lead">Integration and AI elements for DCSA dual-track: third-party inventory with gov-cloud column; assistive-only AI boundary for SF-86/FOCI PII.</p>
+  
+  <article>
+<p>Pack: <a href="odm-hub.html">00 - DCSA (Defense Counterintelligence and Security Agency) Hub</a> · Block: <a href="tdd-block-05-integration-and-ai.html">Block 5</a> · Prev: <a href="tdd-view-03-physical.html">Physical</a></p>
+<h2>Third-party and external systems</h2>
+<div class="callout important" markdown="0"><div class="callout-title">Required section</div><p>Every system outside the company FSO/ISSM boundary that sends data in, receives data out, or governs eligibility. Government endpoints are named. Commercial GRC/AI vendors are categories with <strong><em>silence</em></strong> where no product was researched. <strong>Gov-cloud support</strong> answers whether the integration is valid in a government-controlled cloud posture — and whether people confuse that posture with an FCL.</p></div>
+
+<table>
+<thead>
+<tr>
+<th>System</th>
+<th>Vendor</th>
+<th>Direction (in/out/bi)</th>
+<th>Mechanism</th>
+<th>Data exchanged</th>
+<th>Auth</th>
+<th>Owner</th>
+<th>Gov-cloud support</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NISS</td>
+<td>DCSA (USG)</td>
+<td>bi</td>
+<td>Web workflow; package upload</td>
+<td>Sponsorship, facility package, SF 328, FCL status</td>
+<td>Industry / sponsor accounts</td>
+<td>FSO + sponsor</td>
+<td>n/a (government) [<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/fc/DCSA%20FCL_Orientation_Handbook_20260828.pdf" target="_blank" rel="noopener" title="DCSA FCL Orientation Handbook (2026)">S2</a>]</td>
+</tr>
+<tr>
+<td>NBIS / e-QIP</td>
+<td>DCSA / vetting enterprise (USG)</td>
+<td>bi</td>
+<td>Investigation initiation UI</td>
+<td>SF-86-class questionnaire, prints status</td>
+<td>Subject + FSO</td>
+<td>FSO / subject</td>
+<td>n/a (government) [<a class="cite" href="https://www.cdse.edu/Training/eLearning/IS142-resources/" target="_blank" rel="noopener" title="CDSE Personnel Clearances in the NISP IS142.16">S6</a>]</td>
+</tr>
+<tr>
+<td>Personnel eligibility SoR (DISS historically)</td>
+<td>DCSA / DoD (USG)</td>
+<td>bi</td>
+<td>Eligibility inquiry / reporting</td>
+<td>PCL status, incident flags</td>
+<td>Cleared-company security roles</td>
+<td>FSO</td>
+<td>n/a (government) <strong>[verify]</strong> name [<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4496039/dcsa-updates-nisp-contractor-continuous-vetting-process/" target="_blank" rel="noopener" title="DCSA Continuous Vetting update May 2026">S9</a>]</td>
+</tr>
+<tr>
+<td>STEPP / CDSE</td>
+<td>DCSA CDSE (USG)</td>
+<td>in</td>
+<td>LMS</td>
+<td>Training completions (IS140, IS142, IS020, CS250, …)</td>
+<td>STEPP account</td>
+<td>FSO / workforce</td>
+<td>n/a (government) [<a class="cite" href="https://www.cdse.edu/Training/eLearning/IS140/" target="_blank" rel="noopener" title="CDSE Facility Clearances in the NISP IS140.16">S5</a>]–[<a class="cite" href="https://www.cdse.edu/Training/Toolkits/FSO-Toolkit/" target="_blank" rel="noopener" title="CDSE FSO Toolkit">S8</a>][<a class="cite" href="https://www.cdse.edu/Training/eLearning/CS250/" target="_blank" rel="noopener" title="CDSE Applying A&amp;A in the NISP CS250.16">S14</a>]</td>
+</tr>
+<tr>
+<td>eMASS (or A&amp;A repository)</td>
+<td>DoD / DCSA path (USG)</td>
+<td>bi</td>
+<td>RMF package workflow</td>
+<td>Control implementations, ATO artifacts</td>
+<td>ISSM roles</td>
+<td>ISSM</td>
+<td>n/a (government) [<a class="cite" href="https://rmf.org/wp-content/uploads/2022/02/DCSA-Assessment-and-Authorization-Process-Manual-Version-2.2.pdf" target="_blank" rel="noopener" title="DAAPM v2.2 (RMF for NISP contractors)">S13</a>]</td>
+</tr>
+<tr>
+<td>Fingerprint collection provider</td>
+<td>Varies (channeler)</td>
+<td>out→USG</td>
+<td>Electronic fingerprint submission</td>
+<td>Biometrics for investigation</td>
+<td>Provider enrollment</td>
+<td>FSO</td>
+<td><em>Silence</em> on named channelers</td>
+</tr>
+<tr>
+<td>GCA program office</td>
+<td>DoD / USG component</td>
+<td>in</td>
+<td>Sponsorship; DD 254</td>
+<td>Need, classification guidance</td>
+<td>Contract channel</td>
+<td>Contracts / FSO</td>
+<td>n/a (government) [<a class="cite" href="https://www.youtube.com/watch?v=Jf-SDX2WE8k" target="_blank" rel="noopener" title="How to Get a Facility Clearance (Bennett FSO talk)">S10</a>][<a class="cite" href="https://www.youtube.com/watch?v=Y5t5sV9GQy0" target="_blank" rel="noopener" title="DON OSBP Small Business Webinar — DCSA">S11</a>]</td>
+</tr>
+<tr>
+<td>Cleared prime (sponsor)</td>
+<td>Industry</td>
+<td>in</td>
+<td>NISS sponsorship of sub</td>
+<td>Sub need, flow-down security</td>
+<td>Prime FSO</td>
+<td>Prime / sub FSO</td>
+<td>n/a for NISS; company IT may be commercial</td>
+</tr>
+<tr>
+<td>Contracting / procurement</td>
+<td>Company + USG</td>
+<td>in</td>
+<td>DD 254, contract mods</td>
+<td>Access need, periods of performance</td>
+<td>Contract systems</td>
+<td>Contracts</td>
+<td>Varies</td>
+</tr>
+<tr>
+<td>HRIS / HR case tools</td>
+<td><em>Silence</em> (category)</td>
+<td>in</td>
+<td>Adverse-info handoff to FSO</td>
+<td>Reportable HR events</td>
+<td>HR roles → FSO</td>
+<td>HR / FSO</td>
+<td><em>Silence</em> — must not host SF-86</td>
+</tr>
+<tr>
+<td>Corporate legal / cap table tools</td>
+<td><em>Silence</em> (category)</td>
+<td>in</td>
+<td>Ownership and FOCI evidence</td>
+<td>Ledgers, board minutes, foreign proceeds</td>
+<td>Legal</td>
+<td>Legal / FSO</td>
+<td><em>Silence</em></td>
+</tr>
+<tr>
+<td>Cloud / hosting vendor (CUI or classified processing)</td>
+<td>Varies</td>
+<td>bi</td>
+<td>Hosting + shared-responsibility evidence</td>
+<td>System boundary data for A&A; <strong>not</strong> an FCL</td>
+<td>Cloud IAM</td>
+<td>ISSM / IT</td>
+<td><strong>GCC / GCCH / IL as applicable support hosting — still ≠ FCL</strong></td>
+</tr>
+<tr>
+<td>Commercial GRC / SSP tools</td>
+<td><em>Silence</em> (category)</td>
+<td>bi</td>
+<td>Control tracking</td>
+<td>CMMC/SSP artifacts</td>
+<td>SaaS IAM</td>
+<td>Compliance</td>
+<td><em>Silence</em>; often commercial-only</td>
+</tr>
+<tr>
+<td>Insider-threat / UEBA tools</td>
+<td><em>Silence</em> (category)</td>
+<td>in</td>
+<td>Alerts to FSO/CI</td>
+<td>Behavioral signals</td>
+<td>SOC roles</td>
+<td>Security</td>
+<td><em>Silence</em></td>
+</tr>
+<tr>
+<td>Academic partner systems</td>
+<td>University / lab IT</td>
+<td>bi</td>
+<td>Research collaboration</td>
+<td>Unclassified research; foreign-grant metadata for FOCI review</td>
+<td>Federated / local</td>
+<td>PI + FSO</td>
+<td>Often commercial; FOCI lens still applies [<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/FOCI/Updated%20SF328%20-%20Industry%20Information%20Paper%20(final).pdf" target="_blank" rel="noopener" title="DCSA SF 328 Industry Information Paper May 2025">S4</a>]</td>
+</tr>
+<tr>
+<td>AI assistive tooling (docs, checklist Q&amp;A)</td>
+<td><em>Silence</em> (category)</td>
+<td>in</td>
+<td>Chat / summarization</td>
+<td><strong>Non-PII</strong> package checklists only if allowed</td>
+<td>Corporate AI policy</td>
+<td>FSO (governed)</td>
+<td>Prefer gov-cloud or air-gapped; <strong>default deny SF-86/FOCI PII</strong></td>
+</tr>
+</tbody>
+</table>
+<h3>Context diagram (platform boundary)</h3>
+<pre class="mermaid">flowchart LR
+  subgraph Co[&quot;Cleared company boundary&quot;]
+    FSO[&quot;FSO / ISSM workflows&quot;]
+    HR[&quot;HR adverse-info&quot;]
+    LEG[&quot;Legal / ownership&quot;]
+  end
+  GCA[&quot;GCA or cleared prime&quot;] --&gt;|&quot;sponsorship + DD254&quot;| NISS[&quot;NISS&quot;]
+  FSO &lt;--&gt; NISS
+  FSO &lt;--&gt; NBIS[&quot;NBIS / e-QIP&quot;]
+  NBIS --&gt; DISS[&quot;Personnel eligibility SoR&quot;]
+  NISS --&gt; DISS
+  FSO --&gt; STEPP[&quot;STEPP / CDSE&quot;]
+  FSO --&gt; EMASS[&quot;eMASS / A&amp;A&quot;]
+  HR --&gt; FSO
+  LEG --&gt; FSO
+  CLOUD[&quot;Cloud / hosting vendor&quot;] &lt;--&gt; FSO
+  AI[&quot;Assistive AI\nnon-PII only&quot;] -.policy-gated.-&gt; FSO
+</pre>
+
+<!-- tech_deep_dive:diagram-embed -->
+<p><a href="../assets/diagrams/04-integration-ai-1.png" target="_blank"><img class="embed" src="../assets/diagrams/04-integration-ai-1.png" alt="04-integration-ai-1.png"></a></p>
+<h2>APIs and extensibility</h2>
+<table>
+<thead>
+<tr>
+<th>API / SDK / connector framework</th>
+<th>Purpose</th>
+<th>Auth model</th>
+<th>Rate limits / quotas</th>
+<th>Gov-cloud endpoint</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NISS industry workflows</td>
+<td>Sponsorship, package, SF 328</td>
+<td>USG-issued industry accounts</td>
+<td><em>Silence</em></td>
+<td>Government system</td>
+</tr>
+<tr>
+<td>NBIS / e-QIP subject workflows</td>
+<td>Investigation initiation</td>
+<td>Subject credentials + FSO oversight</td>
+<td><em>Silence</em></td>
+<td>Government system</td>
+</tr>
+<tr>
+<td>STEPP enrollment APIs / portal</td>
+<td>Training assignment and proof</td>
+<td>STEPP account</td>
+<td><em>Silence</em></td>
+<td>Government training</td>
+</tr>
+<tr>
+<td>eMASS package interfaces</td>
+<td>RMF artifact exchange</td>
+<td>ISSM / AO roles</td>
+<td><em>Silence</em></td>
+<td>Government A&amp;A</td>
+</tr>
+<tr>
+<td>HR → FSO handoff</td>
+<td>Adverse information</td>
+<td>Internal IAM; audited</td>
+<td>n/a</td>
+<td>Company-controlled</td>
+</tr>
+<tr>
+<td>Official public AI/automation APIs for adjudication</td>
+<td><strong>None for industry substitution</strong></td>
+<td>n/a</td>
+<td>n/a</td>
+<td><em>Silence</em> — do not invent</td>
+</tr>
+</tbody>
+</table>
+<h2>Identity and access</h2>
+<ul>
+<li>Sponsor, FSO, ISSM, KMP subjects, and adjudicators hold <strong>distinct</strong> roles; sponsorship credentials are not company self-service admin rights. [<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/fc/DCSA%20FCL_Orientation_Handbook_20260828.pdf" target="_blank" rel="noopener" title="DCSA FCL Orientation Handbook (2026)">S2</a>]</li>
+<li>SF-86-class and FOCI datasets require <strong>need-to-know inside the company</strong> before any tool integration.</li>
+<li>Cloud IAM (including GCC High) authorizes <strong>hosting</strong>, not NISP eligibility.</li>
+<li><em>Silence:</em> exact NISS role matrix beyond FSO/sponsor patterns taught in CDSE courses.</li>
+</ul>
+<h2>Event and data flows across the boundary</h2>
+<table>
+<thead>
+<tr>
+<th>Flow</th>
+<th>Source</th>
+<th>Destination</th>
+<th>Data</th>
+<th>Frequency</th>
+<th>Classification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sponsorship</td>
+<td>GCA / cleared prime</td>
+<td>NISS</td>
+<td>Need, level, company identity</td>
+<td>Per pursuit</td>
+<td>Business + controlled</td>
+</tr>
+<tr>
+<td>Day-20 package</td>
+<td>Company FSO</td>
+<td>NISS</td>
+<td>SF 328, DD 441, ownership, KMP</td>
+<td>Once per case + updates</td>
+<td>Sensitive business</td>
+</tr>
+<tr>
+<td>KMP investigation</td>
+<td>Subject / FSO</td>
+<td>NBIS / e-QIP</td>
+<td>SF-86-class, fingerprints</td>
+<td>Per KMP / employee</td>
+<td>Highly sensitive PII</td>
+</tr>
+<tr>
+<td>Eligibility status</td>
+<td>Personnel SoR</td>
+<td>FSO</td>
+<td>PCL / incident flags</td>
+<td>Ongoing</td>
+<td>Sensitive</td>
+</tr>
+<tr>
+<td>Training proof</td>
+<td>STEPP</td>
+<td>FSO records</td>
+<td>Completions</td>
+<td>Continuous</td>
+<td>Internal</td>
+</tr>
+<tr>
+<td>DD 254 guidance</td>
+<td>Contracting</td>
+<td>FSO / ISSM</td>
+<td>Classification guidance</td>
+<td>Per contract</td>
+<td>Contract-controlled</td>
+</tr>
+<tr>
+<td>Adverse info</td>
+<td>HR / self</td>
+<td>FSO → personnel path</td>
+<td>Reportable facts</td>
+<td>Event</td>
+<td>Sensitive</td>
+</tr>
+<tr>
+<td>A&amp;A package</td>
+<td>ISSM</td>
+<td>eMASS / AO path</td>
+<td>RMF artifacts</td>
+<td>Per system</td>
+<td>System-high as applicable</td>
+</tr>
+<tr>
+<td>FOCI material change</td>
+<td>Legal / finance</td>
+<td>NISS / SF 328 update</td>
+<td>Proceeds, gifts, affiliations</td>
+<td>On change + periodic</td>
+<td>Sensitive business [<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4180585/dcsa-announces-approval-of-the-updated-form-328-certificate-pertaining-to-forei/" target="_blank" rel="noopener" title="DCSA SF 328 update announcement May 2025">S3</a>][<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/FOCI/Updated%20SF328%20-%20Industry%20Information%20Paper%20(final).pdf" target="_blank" rel="noopener" title="DCSA SF 328 Industry Information Paper May 2025">S4</a>]</td>
+</tr>
+</tbody>
+</table>
+<h2>AI elements</h2>
+<div class="callout warning" markdown="0"><div class="callout-title">AI boundary (affirmative)</div><p>AI <strong>assists</strong> FSO workflows (checklists, training Q&amp;A, document triage on <strong>non-PII</strong>). AI <strong>does not</strong> replace sponsorship, adjudication, or FOCI determination. SF-86-class and FOCI PII stay out of consumer AI tools unless a written gov-approved pattern exists. Official DCSA AI tooling inventory: <strong><em>silence</em></strong>.</p></div>
+
+<table>
+<thead>
+<tr>
+<th>AI feature</th>
+<th>What it does</th>
+<th>Data it reads</th>
+<th>Data it writes or emits</th>
+<th>Controls that govern it</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Package checklist assistant</td>
+<td>Reminds Day-20 artifact list</td>
+<td>Public handbook checklists</td>
+<td>Task lists</td>
+<td>Human FSO owns submission; no SF-86 paste</td>
+<td>[<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/fc/DCSA%20FCL_Orientation_Handbook_20260828.pdf" target="_blank" rel="noopener" title="DCSA FCL Orientation Handbook (2026)">S2</a>] inference</td>
+</tr>
+<tr>
+<td>Training Q&amp;A on CDSE topics</td>
+<td>Explains IS140/IS142 concepts</td>
+<td>Public course outlines</td>
+<td>Study notes</td>
+<td>No case data in prompts</td>
+<td>[<a class="cite" href="https://www.cdse.edu/Training/eLearning/IS140/" target="_blank" rel="noopener" title="CDSE Facility Clearances in the NISP IS140.16">S5</a>][<a class="cite" href="https://www.cdse.edu/Training/eLearning/IS142-resources/" target="_blank" rel="noopener" title="CDSE Personnel Clearances in the NISP IS142.16">S6</a>]</td>
+</tr>
+<tr>
+<td>Ownership-chart drafting aid</td>
+<td>Helps draw entity trees from <strong>already-approved</strong> internal summaries</td>
+<td>Redacted structure only</td>
+<td>Draft diagrams</td>
+<td>Legal review; no raw cap-table dump to public LLM</td>
+<td>inference</td>
+</tr>
+<tr>
+<td>FOCI threshold calculator (local)</td>
+<td>Flags Q7(b) near <strong>15%</strong> foreign proceeds</td>
+<td>Aggregated finance metrics</td>
+<td>Warning flags</td>
+<td>Runs local/spreadsheet; output reviewed by counsel</td>
+<td>[<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/FOCI/Updated%20SF328%20-%20Industry%20Information%20Paper%20(final).pdf" target="_blank" rel="noopener" title="DCSA SF 328 Industry Information Paper May 2025">S4</a>]</td>
+</tr>
+<tr>
+<td>Adjudication or sponsorship bot</td>
+<td><strong>Out of bounds</strong></td>
+<td>—</td>
+<td>—</td>
+<td>Forbidden as a substitute control</td>
+<td>Mission boundary</td>
+</tr>
+<tr>
+<td><em>Silence:</em> vendor “clearance copilot” SaaS</td>
+<td>Not researched</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3>AI data path</h3>
+<pre class="mermaid">flowchart LR
+  DOC[&quot;Non-PII checklist / public handbook text&quot;] --&gt; AI[&quot;Assistive AI&quot;]
+  AI --&gt; DRAFT[&quot;Draft reminder or study aid&quot;]
+  DRAFT --&gt; HUM{&quot;FSO / counsel review&quot;}
+  HUM --&gt;|&quot;approved&quot;| WORK[&quot;Company workflow&quot;]
+  HUM --&gt;|&quot;reject&quot;| DROP[&quot;Discard&quot;]
+  PII[&quot;SF-86 / FOCI PII&quot;] --&gt; BLOCK[&quot;Hard block — no consumer AI&quot;]
+  BLOCK --&gt; USG[&quot;USG systems only\nNISS NBIS personnel SoR&quot;]
+</pre>
+
+<!-- tech_deep_dive:diagram-embed -->
+<p><a href="../assets/diagrams/04-integration-ai-2.png" target="_blank"><img class="embed" src="../assets/diagrams/04-integration-ai-2.png" alt="04-integration-ai-2.png"></a></p>
+<h2>Integration risks</h2>
+<table>
+<thead>
+<tr>
+<th>Risk</th>
+<th>Where</th>
+<th>Mitigation</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Treating FedRAMP/GCC High/CMMC as FCL</td>
+<td>Cloud + compliance teams</td>
+<td>Explicit decision table: hosting ≠ sponsorship ≠ ATO</td>
+<td>Views 1–3</td>
+</tr>
+<tr>
+<td>SF-86 pasted into public AI</td>
+<td>Assistive tooling</td>
+<td>DLP + written AI policy; default deny</td>
+<td>AI boundary</td>
+</tr>
+<tr>
+<td>HR traps adverse info</td>
+<td>HRIS → FSO</td>
+<td>Audited handoff SLA; FSO owns NISP reporting</td>
+<td>[<a class="cite" href="https://www.cdse.edu/Training/eLearning/IS142-resources/" target="_blank" rel="noopener" title="CDSE Personnel Clearances in the NISP IS142.16">S6</a>][<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4496039/dcsa-updates-nisp-contractor-continuous-vetting-process/" target="_blank" rel="noopener" title="DCSA Continuous Vetting update May 2026">S9</a>]</td>
+</tr>
+<tr>
+<td>Late SF 328 material-change reporting after 15% threshold</td>
+<td>Legal / finance ↔ NISS</td>
+<td>Monitor foreign proceeds continuously under new Q7(b)</td>
+<td>[<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4180585/dcsa-announces-approval-of-the-updated-form-328-certificate-pertaining-to-forei/" target="_blank" rel="noopener" title="DCSA SF 328 update announcement May 2025">S3</a>][<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/FOCI/Updated%20SF328%20-%20Industry%20Information%20Paper%20(final).pdf" target="_blank" rel="noopener" title="DCSA SF 328 Industry Information Paper May 2025">S4</a>]</td>
+</tr>
+<tr>
+<td>Wrong KMP list</td>
+<td>Cap table / bylaws ↔ NISS</td>
+<td>Security-affecting authority test, not title-only</td>
+<td>[<a class="cite" href="https://www.youtube.com/watch?v=Jf-SDX2WE8k" target="_blank" rel="noopener" title="How to Get a Facility Clearance (Bennett FSO talk)">S10</a>]</td>
+</tr>
+<tr>
+<td>Fingerprint vendor delay burns Day 45</td>
+<td>Channeler → NBIS</td>
+<td>Schedule prints early in the 45-day window</td>
+<td>[<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/fc/DCSA%20FCL_Orientation_Handbook_20260828.pdf" target="_blank" rel="noopener" title="DCSA FCL Orientation Handbook (2026)">S2</a>]</td>
+</tr>
+<tr>
+<td>Academic foreign grants ignored as “research only”</td>
+<td>University partnerships</td>
+<td>Apply SF 328 2025 gifts/tuition/endowment lens</td>
+<td>[<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/FOCI/Updated%20SF328%20-%20Industry%20Information%20Paper%20(final).pdf" target="_blank" rel="noopener" title="DCSA SF 328 Industry Information Paper May 2025">S4</a>]</td>
+</tr>
+<tr>
+<td>No official AI product list</td>
+<td>Integration planning</td>
+<td>Mark silence; do not invent DCSA AI services</td>
+<td><em>Silence</em></td>
+</tr>
+</tbody>
+</table>
+<h2>Framework lens</h2>
+<table>
+<thead>
+<tr>
+<th>Framework</th>
+<th>Maps to</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TOGAF</td>
+<td>Phase C Application interfaces · Phase D Technology · Architecture Governance for AI</td>
+</tr>
+<tr>
+<td>DoDAF</td>
+<td>SV-1/SV-2 external interfaces · SV-6 Systems Resource Flow Matrix · OV-3 Operational Resource Flow Matrix · StdV-1 for API/protocol standards</td>
+</tr>
+<tr>
+<td>Altitude</td>
+<td>Crosses conceptual (who we trust), logical (interfaces), physical (named systems and connectors)</td>
+</tr>
+</tbody>
+</table></article>
+  <footer class="docfoot">
+    Rendered from <code>Learning\tech-deep-dive\dcsa\views\04 - Integration and AI Elements.md</code>. The Obsidian vault is the source of truth. Study material only. Citations <span class="cite">S#</span> link to the DCSA source ledger [S1]â€“[S14].
+    <div class="prevnext"><a href="tdd-view-03-physical.html">&larr; Previous</a><a href="diagram-index.html">Next &rarr;</a></div>
+  </footer>
+</main>
+<script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+const dark=(document.documentElement.getAttribute("data-theme")||"").endsWith("dark");
+mermaid.initialize({startOnLoad:true,theme:dark?"dark":"default",securityLevel:"strict"});
+</script>
+</body>
+</html>

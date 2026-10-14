@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Block 8: Design review and teach-back | Learn DCSA</title>
+<meta name="description" content="Block 8 — design review teach-back: dual-track swimlane, FOCI gate, DAAPM/RMF, CMMC≠FCL≠ATO.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="library.css">
+<script>try{var p=JSON.parse(localStorage.getItem("appPalette"))||"github",m=JSON.parse(localStorage.getItem("appMode"))||"dark";document.documentElement.setAttribute("data-theme",p+"-"+m);}catch(e){document.documentElement.setAttribute("data-theme","github-dark");}</script>
+</head>
+<body>
+<header class="topbar">
+  <a href="../index.html" class="home">&larr; Learn DCSA</a>
+  <span class="crumb">Library Â· TDD day blocks</span>
+  <a href="index.html" class="home">All pages</a>
+</header>
+<main class="doc">
+  <div class="kicker">TDD day blocks</div>
+  <h1 class="doctitle">Block 8: Design review and teach-back</h1>
+  <p class="lead">Block 8 — design review teach-back: dual-track swimlane, FOCI gate, DAAPM/RMF, CMMC≠FCL≠ATO.</p>
+  
+  <article>
+<p><strong>Time:</strong> 30 minutes · <strong>Goal:</strong> Defend the dual-track architecture to a skeptical architect</p>
+<h2>Focus from mind map</h2>
+<ul>
+<li>Whiteboard: dual-track swimlane + FOCI branch + IS authorization branch</li>
+<li>Output: one-page “lab with foreign partners” decision brief under SF 328 (2025)</li>
+<li>Question list of remaining <strong>[verify]</strong> / <em>silence</em> items</li>
+</ul>
+<h2>Sources</h2>
+<ul>
+<li>All views · <a href="odm-mission.html">MISSION</a> success criteria · <a href="quiz-bank.html">quiz-bank</a> · <a href="cheatsheet.html">cheatsheet</a></li>
+</ul>
+<h2>Actions (tied to views)</h2>
+<ul>
+<li class="task"><input type="checkbox" disabled> <strong>10-minute teach-back:</strong> Draw dual-track swimlane (FCL ↔ PCL), FOCI branch, DAAPM/RMF branch — from <a href="tdd-view-01-conceptual.html">conceptual</a> altitude first, then name systems only if challenged.</li>
+<li class="task"><input type="checkbox" disabled> Deliver the <strong>one-page brief</strong>: fictional lab with foreign partners — sponsorship path, SF 328 Q7(b) 15% test, whether possessing FCL is required, AI tooling ban on PII.</li>
+<li class="task"><input type="checkbox" disabled> State three <strong>design decisions you defend</strong>: (1) no self-sponsor; (2) FOCI is a branch; (3) CMMC ≠ FCL ≠ ATO.</li>
+<li class="task"><input type="checkbox" disabled> State <strong>one decision you would not defend</strong> without more primary text (e.g., exact resubmit counts; DISS product name).</li>
+<li class="task"><input type="checkbox" disabled> Answer <a href="quiz-bank.html">quiz-bank</a> <strong>without notes</strong>.</li>
+<li class="task"><input type="checkbox" disabled> Read remaining <strong>[verify]</strong> / <em>silence</em> list aloud (DISS stack; Day-20 attempt count; official DCSA AI inventory; handbook resubmit language).</li>
+</ul>
+<h2>Retrieval check</h2>
+<div class="callout question" markdown="0"><div class="callout-title">Question</div><p>If an architect challenged your physical view, which assumption would fall first?</p></div>
+
+<div class="callout success" markdown="0"><div class="callout-title">Answer cues</div><p><strong>DISS as the current personnel eligibility system of record</strong> is explicitly <strong>[verify]</strong> — challenge that name first and fall back to “personnel eligibility SoR in the DCSA/DoD vetting stack.” Second fragile assumption: exact <strong>Day-20 resubmit attempt limits</strong> without quoting the current FCL Orientation Handbook [<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/fc/DCSA%20FCL_Orientation_Handbook_20260828.pdf" target="_blank" rel="noopener" title="DCSA FCL Orientation Handbook (2026)">S2</a>]. Strong assumptions that should survive: NISS for facility/SF 328; NBIS/e-QIP for investigation initiation; STEPP for training; DAAPM overlay for contractor classified IS; SF 328 May 2025 <strong>15%</strong> threshold. [<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4180585/dcsa-announces-approval-of-the-updated-form-328-certificate-pertaining-to-forei/" target="_blank" rel="noopener" title="DCSA SF 328 update announcement May 2025">S3</a>][<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/FOCI/Updated%20SF328%20-%20Industry%20Information%20Paper%20(final).pdf" target="_blank" rel="noopener" title="DCSA SF 328 Industry Information Paper May 2025">S4</a>][<a class="cite" href="https://rmf.org/wp-content/uploads/2022/02/DCSA-Assessment-and-Authorization-Process-Manual-Version-2.2.pdf" target="_blank" rel="noopener" title="DAAPM v2.2 (RMF for NISP contractors)">S13</a>]</p></div>
+
+<h2>Exit criteria</h2>
+<ul>
+<li class="task"><input type="checkbox" disabled> Teach-back delivered; one-page brief written; quiz answered without notes; verify/silence list recorded in <em>Progress Log</em>.</li>
+</ul></article>
+  <footer class="docfoot">
+    Rendered from <code>Learning\tech-deep-dive\dcsa\blocks\08-design-review.md</code>. The Obsidian vault is the source of truth. Study material only. Citations <span class="cite">S#</span> link to the DCSA source ledger [S1]â€“[S14].
+    <div class="prevnext"><a href="tdd-block-07-failure-modes-and-security.html">&larr; Previous</a><span></span></div>
+  </footer>
+</main>
+<script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+const dark=(document.documentElement.getAttribute("data-theme")||"").endsWith("dark");
+mermaid.initialize({startOnLoad:true,theme:dark?"dark":"default",securityLevel:"strict"});
+</script>
+</body>
+</html>

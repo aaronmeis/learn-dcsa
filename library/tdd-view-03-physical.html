@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Physical View — DCSA (Defense Counterintelligence and Security Agency) | Learn DCSA</title>
+<meta name="description" content="Physical view of DCSA systems of record (NISS, NBIS/e-QIP, DISS, STEPP, eMASS), forms, possessing vs non-possessing, SF 328 2025 change.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="library.css">
+<script>try{var p=JSON.parse(localStorage.getItem("appPalette"))||"github",m=JSON.parse(localStorage.getItem("appMode"))||"dark";document.documentElement.setAttribute("data-theme",p+"-"+m);}catch(e){document.documentElement.setAttribute("data-theme","github-dark");}</script>
+</head>
+<body>
+<header class="topbar">
+  <a href="../index.html" class="home">&larr; Learn DCSA</a>
+  <span class="crumb">Library Â· Architecture views</span>
+  <a href="index.html" class="home">All pages</a>
+</header>
+<main class="doc">
+  <div class="kicker">Architecture views</div>
+  <h1 class="doctitle">Physical View — DCSA (Defense Counterintelligence and Security Agency)</h1>
+  <p class="lead">Physical view of DCSA systems of record (NISS, NBIS/e-QIP, DISS, STEPP, eMASS), forms, possessing vs non-possessing, SF 328 2025 change.</p>
+  
+  <article>
+<p>Pack: <a href="odm-hub.html">00 - DCSA (Defense Counterintelligence and Security Agency) Hub</a> · Block: <a href="tdd-block-04-physical-view.html">Block 4</a> · Prev: <a href="tdd-view-02-logical.html">Logical</a> · Next: <a href="tdd-view-04-integration-ai.html">Integration and AI</a></p>
+<div class="callout info" markdown="0"><div class="callout-title">Altitude rule</div><p>Physical means <strong>what is actually deployed and where</strong>. Name the portals, forms, and facility types. Every row traces back to a logical component.</p></div>
+
+<div class="callout warning" markdown="0"><div class="callout-title">Stack names move. DISS as the personnel eligibility system of record is marked **[verify]** against the current DCSA stack announcement before you brief executives.</div></div>
+
+<h2>Logical → physical mapping</h2>
+<table>
+<thead>
+<tr>
+<th>Logical component</th>
+<th>Physical realization (service / artifact)</th>
+<th>Where it runs</th>
+<th>License / SKU</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sponsorship gate</td>
+<td><strong>NISS</strong> sponsorship workflow (GCA or cleared prime)</td>
+<td>DCSA-operated NISS</td>
+<td>Government system; industry account</td>
+<td>[<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/fc/DCSA%20FCL_Orientation_Handbook_20260828.pdf" target="_blank" rel="noopener" title="DCSA FCL Orientation Handbook (2026)">S2</a>][<a class="cite" href="https://www.youtube.com/watch?v=Jf-SDX2WE8k" target="_blank" rel="noopener" title="How to Get a Facility Clearance (Bennett FSO talk)">S10</a>]</td>
+</tr>
+<tr>
+<td>Facility package assembler</td>
+<td>NISS facility package upload + local document set</td>
+<td>NISS + company controlled repository</td>
+<td>n/a</td>
+<td>[<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/fc/DCSA%20FCL_Orientation_Handbook_20260828.pdf" target="_blank" rel="noopener" title="DCSA FCL Orientation Handbook (2026)">S2</a>]</td>
+</tr>
+<tr>
+<td>Completeness reviewer</td>
+<td>DCSA package completeness cycles in NISS</td>
+<td>DCSA</td>
+<td>n/a</td>
+<td>[<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/fc/DCSA%20FCL_Orientation_Handbook_20260828.pdf" target="_blank" rel="noopener" title="DCSA FCL Orientation Handbook (2026)">S2</a>]</td>
+</tr>
+<tr>
+<td>FOCI analyzer + SF 328</td>
+<td><strong>SF 328</strong> (May 2025 revision) in NISS</td>
+<td>NISS (deployed <strong>12 May 2025</strong>)</td>
+<td>Form / system</td>
+<td>[<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4180585/dcsa-announces-approval-of-the-updated-form-328-certificate-pertaining-to-forei/" target="_blank" rel="noopener" title="DCSA SF 328 update announcement May 2025">S3</a>][<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/FOCI/Updated%20SF328%20-%20Industry%20Information%20Paper%20(final).pdf" target="_blank" rel="noopener" title="DCSA SF 328 Industry Information Paper May 2025">S4</a>]</td>
+</tr>
+<tr>
+<td>Mitigation instrument manager</td>
+<td>Signed FOCI instruments filed to the facility record</td>
+<td>Legal + NISS artifacts</td>
+<td>Counsel-driven</td>
+<td>[<a class="cite" href="https://www.youtube.com/watch?v=CrifvnX3o5M" target="_blank" rel="noopener" title="FOCI and Supply Chain Risk Management webinar">S12</a>]</td>
+</tr>
+<tr>
+<td>KMP initiation</td>
+<td><strong>NBIS / e-QIP</strong> investigation initiation + fingerprints</td>
+<td>Vetting enterprise systems</td>
+<td>Subject + FSO accounts</td>
+<td>[<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/fc/DCSA%20FCL_Orientation_Handbook_20260828.pdf" target="_blank" rel="noopener" title="DCSA FCL Orientation Handbook (2026)">S2</a>][<a class="cite" href="https://www.cdse.edu/Training/eLearning/IS142-resources/" target="_blank" rel="noopener" title="CDSE Personnel Clearances in the NISP IS142.16">S6</a>]</td>
+</tr>
+<tr>
+<td>Facility eligibility authority</td>
+<td>FCL decision recorded on NISS facility record; ISR oversight</td>
+<td>NISS + field</td>
+<td>n/a</td>
+<td>[<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/fc/DCSA%20FCL_Orientation_Handbook_20260828.pdf" target="_blank" rel="noopener" title="DCSA FCL Orientation Handbook (2026)">S2</a>][<a class="cite" href="https://www.cdse.edu/Training/eLearning/IS140/" target="_blank" rel="noopener" title="CDSE Facility Clearances in the NISP IS140.16">S5</a>]</td>
+</tr>
+<tr>
+<td>Investigation / adjudication records</td>
+<td>Personnel eligibility system of record (<strong>DISS</strong> historically)</td>
+<td>DCSA / DoD personnel security stack</td>
+<td><strong>[verify]</strong> current product name</td>
+<td>[<a class="cite" href="https://www.cdse.edu/Training/eLearning/IS142-resources/" target="_blank" rel="noopener" title="CDSE Personnel Clearances in the NISP IS142.16">S6</a>][<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4496039/dcsa-updates-nisp-contractor-continuous-vetting-process/" target="_blank" rel="noopener" title="DCSA Continuous Vetting update May 2026">S9</a>]</td>
+</tr>
+<tr>
+<td>Continuous vetting</td>
+<td>NISP contractor CV process (PVQ cadence per May 2026 update)</td>
+<td>Vetting enterprise</td>
+<td>n/a</td>
+<td>[<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4496039/dcsa-updates-nisp-contractor-continuous-vetting-process/" target="_blank" rel="noopener" title="DCSA Continuous Vetting update May 2026">S9</a>]</td>
+</tr>
+<tr>
+<td>Training completion</td>
+<td><strong>STEPP</strong> / CDSE courses (IS140, IS142, IS020.CU, CS250, …)</td>
+<td>cdse.edu / STEPP</td>
+<td>Free for eligible industry</td>
+<td>[<a class="cite" href="https://www.cdse.edu/Training/eLearning/IS140/" target="_blank" rel="noopener" title="CDSE Facility Clearances in the NISP IS140.16">S5</a>]–[<a class="cite" href="https://www.cdse.edu/Training/Toolkits/FSO-Toolkit/" target="_blank" rel="noopener" title="CDSE FSO Toolkit">S8</a>][<a class="cite" href="https://www.cdse.edu/Training/eLearning/CS250/" target="_blank" rel="noopener" title="CDSE Applying A&amp;A in the NISP CS250.16">S14</a>]</td>
+</tr>
+<tr>
+<td>IS authorization package</td>
+<td><strong>DAAPM</strong> process artifacts; often tracked in <strong>eMASS</strong> (or successor A&amp;A repository)</td>
+<td>Contractor + DCSA A&amp;A path</td>
+<td>RMF tooling</td>
+<td>[<a class="cite" href="https://rmf.org/wp-content/uploads/2022/02/DCSA-Assessment-and-Authorization-Process-Manual-Version-2.2.pdf" target="_blank" rel="noopener" title="DAAPM v2.2 (RMF for NISP contractors)">S13</a>][<a class="cite" href="https://www.cdse.edu/Training/eLearning/CS250/" target="_blank" rel="noopener" title="CDSE Applying A&amp;A in the NISP CS250.16">S14</a>]</td>
+</tr>
+<tr>
+<td>Contract access need</td>
+<td><strong>DD Form 254</strong> (contract security classification specification)</td>
+<td>Contracting office ↔ FSO</td>
+<td>Contract artifact</td>
+<td>[<a class="cite" href="https://www.youtube.com/watch?v=Jf-SDX2WE8k" target="_blank" rel="noopener" title="How to Get a Facility Clearance (Bennett FSO talk)">S10</a>][<a class="cite" href="https://www.youtube.com/watch?v=Y5t5sV9GQy0" target="_blank" rel="noopener" title="DON OSBP Small Business Webinar — DCSA">S11</a>]</td>
+</tr>
+<tr>
+<td>Security agreement</td>
+<td><strong>DD Form 441</strong></td>
+<td>Executed with FCL package</td>
+<td>Form</td>
+<td>[<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/fc/DCSA%20FCL_Orientation_Handbook_20260828.pdf" target="_blank" rel="noopener" title="DCSA FCL Orientation Handbook (2026)">S2</a>]</td>
+</tr>
+</tbody>
+</table>
+<h2>Deployment topology</h2>
+<pre class="mermaid">flowchart TB
+  subgraph USG[&quot;USG / DCSA plane&quot;]
+    NISS[&quot;NISS — facility sponsorship and FCL record&quot;]
+    NBIS[&quot;NBIS / e-QIP — investigations&quot;]
+    DISS[&quot;Personnel eligibility SoR\n(DISS — verify current)&quot;]
+    STEPP[&quot;STEPP / CDSE training&quot;]
+    EMASS[&quot;eMASS / A&amp;A repository&quot;]
+    ISR[&quot;ISR field oversight&quot;]
+  end
+  subgraph Co[&quot;Cleared company estate&quot;]
+    FSO[&quot;FSO workstation and vault&quot;]
+    HR[&quot;HR adverse-info channel&quot;]
+    ISSM[&quot;ISSM / classified IS&quot;]
+    SITE[&quot;Possessing site controls\nor non-possessing access path&quot;]
+  end
+  subgraph Sponsor[&quot;Sponsor&quot;]
+    GCA[&quot;GCA or cleared prime&quot;]
+  end
+  GCA --&gt;|&quot;sponsorship&quot;| NISS
+  FSO --&gt; NISS
+  FSO --&gt; NBIS
+  NBIS --&gt; DISS
+  NISS --&gt; DISS
+  FSO --&gt; STEPP
+  ISSM --&gt; EMASS
+  ISR --&gt; NISS
+  HR --&gt; FSO
+  SITE --&gt; FSO
+</pre>
+
+<!-- tech_deep_dive:diagram-embed -->
+<p><a href="../assets/diagrams/03-physical-1.png" target="_blank"><img class="embed" src="../assets/diagrams/03-physical-1.png" alt="03-physical-1.png"></a></p>
+<h2>Facility types (possessing vs non-possessing)</h2>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>What exists on site</th>
+<th>Typical physical controls</th>
+<th>FSO curriculum cue</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Possessing</strong> FCL</td>
+<td>Classified storage and/or processing at the company location</td>
+<td>Containers, closed areas, visitor control, classified processing rooms</td>
+<td>Broader physical-security obligations [<a class="cite" href="https://www.cdse.edu/Training/eLearning/IS140/" target="_blank" rel="noopener" title="CDSE Facility Clearances in the NISP IS140.16">S5</a>][<a class="cite" href="https://www.cdse.edu/Training/Curricula/IS020/" target="_blank" rel="noopener" title="CDSE FSO Orientation Non-Possessing IS020.CU">S7</a>]</td>
+</tr>
+<tr>
+<td><strong>Non-possessing</strong> FCL</td>
+<td>No classified storage/processing on company premises; access under another facility’s control</td>
+<td>Visitor/access procedures without local classified holdings</td>
+<td>IS020.CU non-possessing orientation path [<a class="cite" href="https://www.cdse.edu/Training/Curricula/IS020/" target="_blank" rel="noopener" title="CDSE FSO Orientation Non-Possessing IS020.CU">S7</a>]</td>
+</tr>
+</tbody>
+</table>
+<h2>Cloud and tenant variants (adapted: accreditation ≠ FCL)</h2>
+<p>The commercial cloud-SKU table does not fit NISP. The architect-relevant variants are <strong>which accreditation people confuse with FCL/ATO</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Environment / claim</th>
+<th>Available as FCL substitute?</th>
+<th>Feature gaps</th>
+<th>Data residency</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CMMC Level (CUI)</td>
+<td><strong>No</strong> — CUI floor only</td>
+<td>Does not create NISP facility eligibility</td>
+<td>CUI handling rules</td>
+<td>Mind map / design review</td>
+</tr>
+<tr>
+<td>FedRAMP / GCC / GCC High</td>
+<td><strong>No</strong> — cloud support posture</td>
+<td>Supports CUI/cloud patterns; does not sponsor into NISS</td>
+<td>Gov-cloud boundaries</td>
+<td>Integration view</td>
+</tr>
+<tr>
+<td>DoD IL / classified cloud offerings</td>
+<td>Support <strong>processing</strong>, still need FCL + system ATO path</td>
+<td>Confusing IL with FCL is a top failure mode</td>
+<td>Classified enclaves</td>
+<td>[<a class="cite" href="https://rmf.org/wp-content/uploads/2022/02/DCSA-Assessment-and-Authorization-Process-Manual-Version-2.2.pdf" target="_blank" rel="noopener" title="DAAPM v2.2 (RMF for NISP contractors)">S13</a>]</td>
+</tr>
+<tr>
+<td>NISS industry account</td>
+<td>Required for FCL workflow</td>
+<td>Not a cloud tenant SKU</td>
+<td>USG system</td>
+<td>[<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/fc/DCSA%20FCL_Orientation_Handbook_20260828.pdf" target="_blank" rel="noopener" title="DCSA FCL Orientation Handbook (2026)">S2</a>]</td>
+</tr>
+<tr>
+<td>eMASS (or A&amp;A tool) workspace</td>
+<td>Required for many authorization packages</td>
+<td>Not interchangeable with NISS</td>
+<td>USG / contractor as configured</td>
+<td>[<a class="cite" href="https://rmf.org/wp-content/uploads/2022/02/DCSA-Assessment-and-Authorization-Process-Manual-Version-2.2.pdf" target="_blank" rel="noopener" title="DAAPM v2.2 (RMF for NISP contractors)">S13</a>][<a class="cite" href="https://www.cdse.edu/Training/eLearning/CS250/" target="_blank" rel="noopener" title="CDSE Applying A&amp;A in the NISP CS250.16">S14</a>]</td>
+</tr>
+</tbody>
+</table>
+<h2>SF 328 May 2025 physical change</h2>
+<table>
+<thead>
+<tr>
+<th>Change</th>
+<th>Detail</th>
+<th>Effective cue</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Form approval</td>
+<td>Updated SF 328 Certificate Pertaining to Foreign Interests</td>
+<td>Approved <strong>1 May 2025</strong></td>
+<td>[<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4180585/dcsa-announces-approval-of-the-updated-form-328-certificate-pertaining-to-forei/" target="_blank" rel="noopener" title="DCSA SF 328 update announcement May 2025">S3</a>]</td>
+</tr>
+<tr>
+<td>NISS deployment</td>
+<td>Updated form live in NISS</td>
+<td><strong>12 May 2025</strong></td>
+<td>[<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4180585/dcsa-announces-approval-of-the-updated-form-328-certificate-pertaining-to-forei/" target="_blank" rel="noopener" title="DCSA SF 328 update announcement May 2025">S3</a>]</td>
+</tr>
+<tr>
+<td>Q7(b) threshold</td>
+<td>Aggregate foreign proceeds threshold lowered <strong>30% → 15%</strong></td>
+<td>Industry information paper</td>
+<td>[<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/FOCI/Updated%20SF328%20-%20Industry%20Information%20Paper%20(final).pdf" target="_blank" rel="noopener" title="DCSA SF 328 Industry Information Paper May 2025">S4</a>]</td>
+</tr>
+<tr>
+<td>Expanded disclosure</td>
+<td>Gifts / tuition / endowments coverage expanded</td>
+<td>Same revision</td>
+<td>[<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/FOCI/Updated%20SF328%20-%20Industry%20Information%20Paper%20(final).pdf" target="_blank" rel="noopener" title="DCSA SF 328 Industry Information Paper May 2025">S4</a>]</td>
+</tr>
+<tr>
+<td>Foreign employment of management</td>
+<td>Statement of Full Disclosure of Foreign Affiliations</td>
+<td>Same revision</td>
+<td>[<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/FOCI/Updated%20SF328%20-%20Industry%20Information%20Paper%20(final).pdf" target="_blank" rel="noopener" title="DCSA SF 328 Industry Information Paper May 2025">S4</a>]</td>
+</tr>
+</tbody>
+</table>
+<h2>Physical data model and storage</h2>
+<table>
+<thead>
+<tr>
+<th>Store</th>
+<th>Holds</th>
+<th>Retention</th>
+<th>Encryption / keys</th>
+<th>Region</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NISS facility record</td>
+<td>Sponsorship, package artifacts, FCL status, SF 328</td>
+<td>Per DCSA / NISP record rules (<em>silence</em> on exact years)</td>
+<td>USG system controls</td>
+<td>USG</td>
+</tr>
+<tr>
+<td>NBIS / e-QIP case</td>
+<td>SF-86-class answers, investigation workflow</td>
+<td>Vetting retention rules</td>
+<td>USG</td>
+<td>USG</td>
+</tr>
+<tr>
+<td>Personnel eligibility SoR</td>
+<td>Eligibility decisions, incident flags</td>
+<td>Personnel security retention</td>
+<td>USG</td>
+<td>USG <strong>[verify]</strong> DISS</td>
+</tr>
+<tr>
+<td>Company FOCI / ownership vault</td>
+<td>Stock ledgers, board minutes, instruments</td>
+<td>Corporate + NISP inspection needs</td>
+<td>Company-controlled; protect as sensitive</td>
+<td>Company</td>
+</tr>
+<tr>
+<td>STEPP transcript</td>
+<td>Course completions</td>
+<td>Training record life</td>
+<td>CDSE</td>
+<td>USG training</td>
+</tr>
+<tr>
+<td>eMASS / A&amp;A package</td>
+<td>RMF artifacts for contractor IS</td>
+<td>Authorization cycle</td>
+<td>USG / contractor</td>
+<td>Per system</td>
+</tr>
+<tr>
+<td>On-site classified holdings (possessing)</td>
+<td>Media, documents, processing systems</td>
+<td>NISPOM retention / destruction</td>
+<td>Classified controls</td>
+<td>Facility</td>
+</tr>
+</tbody>
+</table>
+<h2>Forms and artifacts checklist (Day-20 oriented)</h2>
+<table>
+<thead>
+<tr>
+<th>Artifact</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DD 441</td>
+<td>Security agreement</td>
+</tr>
+<tr>
+<td>SF 328 (May 2025)</td>
+<td>FOCI certificate</td>
+</tr>
+<tr>
+<td>Ownership / org chart</td>
+<td>Explains control</td>
+</tr>
+<tr>
+<td>Formation docs, board minutes, stock ledgers</td>
+<td>Legal entity proof</td>
+</tr>
+<tr>
+<td>KMP roster</td>
+<td>Who must enter PCL track</td>
+</tr>
+<tr>
+<td>Fingerprints + e-QIP initiation</td>
+<td>Day-45 KMP</td>
+</tr>
+<tr>
+<td>DD 254</td>
+<td>Contractual access need (sponsor side)</td>
+</tr>
+</tbody>
+</table>
+<h2>Standards and protocols (StdV-1)</h2>
+<table>
+<thead>
+<tr>
+<th>Standard / protocol</th>
+<th>Used for</th>
+<th>Required or optional</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>32 CFR Part 117 (NISPOM)</td>
+<td>Governing industrial security rule</td>
+<td>Required [<a class="cite" href="https://www.ecfr.gov/current/title-32/subtitle-A/chapter-I/subchapter-D/part-117" target="_blank" rel="noopener" title="eCFR 32 CFR Part 117 NISPOM">S1</a>]</td>
+</tr>
+<tr>
+<td>SEAD 4</td>
+<td>Personnel adjudication guidelines</td>
+<td>Required [<a class="cite" href="https://www.cdse.edu/Training/eLearning/IS142-resources/" target="_blank" rel="noopener" title="CDSE Personnel Clearances in the NISP IS142.16">S6</a>]</td>
+</tr>
+<tr>
+<td>DAAPM + NIST RMF</td>
+<td>Contractor classified IS authorization</td>
+<td>Required when processing classified [<a class="cite" href="https://rmf.org/wp-content/uploads/2022/02/DCSA-Assessment-and-Authorization-Process-Manual-Version-2.2.pdf" target="_blank" rel="noopener" title="DAAPM v2.2 (RMF for NISP contractors)">S13</a>][<a class="cite" href="https://www.cdse.edu/Training/eLearning/CS250/" target="_blank" rel="noopener" title="CDSE Applying A&amp;A in the NISP CS250.16">S14</a>]</td>
+</tr>
+<tr>
+<td>SF 328 / DD 441 / DD 254 / SF-86 family</td>
+<td>Package and vetting artifacts</td>
+<td>Required as applicable</td>
+</tr>
+<tr>
+<td>CMMC / FedRAMP</td>
+<td>Adjacent CUI/cloud regimes</td>
+<td><strong>Not</strong> FCL substitutes</td>
+</tr>
+</tbody>
+</table>
+<h2>Framework lens</h2>
+<table>
+<thead>
+<tr>
+<th>Framework</th>
+<th>Maps to</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TOGAF</td>
+<td>Technology Architecture (Phase D) · Opportunities and Solutions (Phase E)</td>
+</tr>
+<tr>
+<td>DoDAF</td>
+<td>SV-1/SV-2 Systems Interface and Resource Flow · SV-4 Systems Functionality · DIV-3 Physical Data Model · StdV-1 Standards Profile</td>
+</tr>
+<tr>
+<td>Altitude</td>
+<td>Physical: named systems, forms, facility types, deployment dates</td>
+</tr>
+</tbody>
+</table></article>
+  <footer class="docfoot">
+    Rendered from <code>Learning\tech-deep-dive\dcsa\views\03 - Physical View.md</code>. The Obsidian vault is the source of truth. Study material only. Citations <span class="cite">S#</span> link to the DCSA source ledger [S1]â€“[S14].
+    <div class="prevnext"><a href="tdd-view-02-logical.html">&larr; Previous</a><a href="tdd-view-04-integration-ai.html">Next &rarr;</a></div>
+  </footer>
+</main>
+<script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+const dark=(document.documentElement.getAttribute("data-theme")||"").endsWith("dark");
+mermaid.initialize({startOnLoad:true,theme:dark?"dark":"default",securityLevel:"strict"});
+</script>
+</body>
+</html>

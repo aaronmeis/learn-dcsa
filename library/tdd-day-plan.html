@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TDD day plan | Learn DCSA</title>
+<meta name="description" content="Timed schedule for the eight deep-dive blocks.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="library.css">
+<script>try{var p=JSON.parse(localStorage.getItem("appPalette"))||"github",m=JSON.parse(localStorage.getItem("appMode"))||"dark";document.documentElement.setAttribute("data-theme",p+"-"+m);}catch(e){document.documentElement.setAttribute("data-theme","github-dark");}</script>
+</head>
+<body>
+<header class="topbar">
+  <a href="../index.html" class="home">&larr; Learn DCSA</a>
+  <span class="crumb">Library Â· Plan</span>
+  <a href="index.html" class="home">All pages</a>
+</header>
+<main class="doc">
+  <div class="kicker">Plan</div>
+  <h1 class="doctitle">TDD day plan</h1>
+  <p class="lead">Timed schedule for the eight deep-dive blocks.</p>
+  
+  <article><h1>Day plan — DCSA (Defense Counterintelligence and Security Agency)</h1>
+<p><strong>Focus:</strong> 420 minutes (~7h) plus breaks · finishes about 16:15.</p>
+<div class="callout warning" markdown="0"><div class="callout-title">Human gate</div><p>Review this plan and the four view stubs before W8 and video spend.</p></div>
+
+<table>
+<thead>
+<tr>
+<th>Time</th>
+<th>#</th>
+<th>Block</th>
+<th>Min</th>
+<th>Exit criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>08:30–09:15</td>
+<td>1</td>
+<td><a href="tdd-block-01-context-and-scope.html">Context and scope</a></td>
+<td>45</td>
+<td>Boundary statement written; neighbor list has at least five systems.</td>
+</tr>
+<tr>
+<td>09:15–10:15</td>
+<td>2</td>
+<td><a href="tdd-block-02-conceptual-view.html">Conceptual view</a></td>
+<td>60</td>
+<td>Conceptual view complete with no product names.</td>
+</tr>
+<tr>
+<td>10:15–11:15</td>
+<td>3</td>
+<td><a href="tdd-block-03-logical-view.html">Logical view</a></td>
+<td>60</td>
+<td>Every capability has at least one logical component; data model drawn.</td>
+</tr>
+<tr>
+<td>11:15–11:30</td>
+<td>—</td>
+<td>Break</td>
+<td>15</td>
+<td>15m</td>
+</tr>
+<tr>
+<td>11:30–12:30</td>
+<td>4</td>
+<td><a href="tdd-block-04-physical-view.html">Physical view</a></td>
+<td>60</td>
+<td>Every logical component maps to a physical realization or is marked as a gap.</td>
+</tr>
+<tr>
+<td>12:30–13:30</td>
+<td>5</td>
+<td><a href="tdd-block-05-integration-and-ai.html">Integration and AI elements</a></td>
+<td>60</td>
+<td>Third-party inventory has every known external system; AI data path drawn.</td>
+</tr>
+<tr>
+<td>13:30–13:50</td>
+<td>—</td>
+<td>Break</td>
+<td>20</td>
+<td>20m (lunch)</td>
+</tr>
+<tr>
+<td>13:50–14:50</td>
+<td>6</td>
+<td><a href="tdd-block-06-hands-on-lab.html">Hands-on lab</a></td>
+<td>60</td>
+<td>One flow configured or traced with evidence saved.</td>
+</tr>
+<tr>
+<td>14:50–15:00</td>
+<td>—</td>
+<td>Break</td>
+<td>10</td>
+<td>10m</td>
+</tr>
+<tr>
+<td>15:00–15:45</td>
+<td>7</td>
+<td><a href="tdd-block-07-failure-modes-and-security.html">Failure modes and security</a></td>
+<td>45</td>
+<td>Failure-mode table covers all four views.</td>
+</tr>
+<tr>
+<td>15:45–16:15</td>
+<td>8</td>
+<td><a href="tdd-block-08-design-review.html">Design review and teach-back</a></td>
+<td>30</td>
+<td>Teach-back delivered; quiz answered without notes.</td>
+</tr>
+</tbody>
+</table>
+<h2>Views filled during the day</h2>
+<ul>
+<li><a href="tdd-view-01-conceptual.html">Conceptual View</a> (block 2)</li>
+<li><a href="tdd-view-02-logical.html">Logical View</a> (block 3)</li>
+<li><a href="tdd-view-03-physical.html">Physical View</a> (block 4)</li>
+<li><a href="tdd-view-04-integration-ai.html">Integration and AI Elements</a> (block 5)</li>
+</ul></article>
+  <footer class="docfoot">
+    Rendered from <code>Learning\tech-deep-dive\dcsa\day-plan.md</code>. The Obsidian vault is the source of truth. Study material only. Citations <span class="cite">S#</span> link to the DCSA source ledger [S1]â€“[S14].
+    <div class="prevnext"><a href="odm-day-plan.html">&larr; Previous</a><a href="odm-mindmap.html">Next &rarr;</a></div>
+  </footer>
+</main>
+<script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+const dark=(document.documentElement.getAttribute("data-theme")||"").endsWith("dark");
+mermaid.initialize({startOnLoad:true,theme:dark?"dark":"default",securityLevel:"strict"});
+</script>
+</body>
+</html>

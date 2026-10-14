@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TDD mind map | Learn DCSA</title>
+<meta name="description" content="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="library.css">
+<script>try{var p=JSON.parse(localStorage.getItem("appPalette"))||"github",m=JSON.parse(localStorage.getItem("appMode"))||"dark";document.documentElement.setAttribute("data-theme",p+"-"+m);}catch(e){document.documentElement.setAttribute("data-theme","github-dark");}</script>
+</head>
+<body>
+<header class="topbar">
+  <a href="../index.html" class="home">&larr; Learn DCSA</a>
+  <span class="crumb">Library Â· Plan</span>
+  <a href="index.html" class="home">All pages</a>
+</header>
+<main class="doc">
+  <div class="kicker">Plan</div>
+  <h1 class="doctitle">TDD mind map</h1>
+  
+  
+  <article><h1>Mind map — DCSA (tech deep dive)</h1>
+<blockquote>
+<p>Mode A from user dual-track brief. Architecture lens: conceptual / logical / physical / integration. Nodes tagged <strong>[verify]</strong> need primary-doc confirmation.</p>
+</blockquote>
+<h2>DCSA — Defense Counterintelligence and Security Agency</h2>
+<ul>
+<li><strong>What it is:</strong> DoD agency administering the National Industrial Security Program (NISP) for most cleared industry, plus personnel vetting / continuous vetting and related CI mission elements.</li>
+<li><strong>Central thesis:</strong> Two interlocking tracks — <strong>facility eligibility (FCL)</strong> and <strong>personnel eligibility (PCL)</strong> — plus IS authorization (DAAPM/RMF) and counterintelligence. The tracks feed each other; neither is sufficient alone.</li>
+<li><strong>Out of scope for this day:</strong> Full CMMC control memorization; SAP/SCI special-access deep dive; building a classified enclave from scratch (point to sibling packs).</li>
+</ul>
+<h3>Block 1 — Context and scope</h3>
+<ul>
+<li>Stakeholders: GCA, cleared prime, uncleared applicant company, FSO/ISSM, KMP, ISR (Industrial Security Representative), adjudicators, CDSE trainers</li>
+<li>Need: legitimate need for classified access; US organization; integrity record (32 CFR 117.9 eligibility themes)</li>
+<li>Cannot self-sponsor into NISP — sponsorship via NISS by GCA or cleared prime</li>
+<li>Adjacent regimes: CMMC (CUI floor), FedRAMP/GCC High (cloud support ≠ FCL), JSIG/ICD for SCI spaces</li>
+</ul>
+<h3>Block 2 — Conceptual view (capabilities &amp; actors)</h3>
+<ul>
+<li><strong>Capabilities:</strong> sponsor → package → FOCI assess → investigate KMPs → grant/maintain FCL; initiate PCL → investigate → adjudicate (SEAD 4) → continuous vetting; authorize contractor IS; CI/insider-threat reporting culture</li>
+<li><strong>Actors &amp; trust boundaries:</strong> USG sponsor | contractor legal entity | foreign interest (FOCI) | cleared individual | uncleared staff | academic partner</li>
+<li><strong>Four domains:</strong>
+  1. Industrial security / NISP
+  2. Personnel vetting
+  3. IS authorization (DAAPM + RMF)
+  4. Counterintelligence</li>
+<li>Layer cake under each: governing regs → DCSA handbooks → CDSE courses → hands-on practice</li>
+</ul>
+<h3>Block 3 — Logical view (process &amp; data)</h3>
+<ul>
+<li><strong>FCL lifecycle:</strong> Sponsorship accepted (welcome email Day 1) → Day 20 package → DCSA completeness cycles (limited resubmit attempts) → Day 45 KMP e-QIP/fingerprints → FOCI determination / mitigation → FCL issued → recurring ISR review + self-inspection</li>
+<li><strong>Data entities:</strong> NISS facility record, DD 441 agreement, SF 328 certificate, ownership chart, KMP roster, PCL case (SF-86), adjudication record, FOCI mitigation instrument, system authorization package</li>
+<li><strong>PCL tiers:</strong> Tier 3 (Secret/Confidential) vs Tier 5 (Top Secret) — scope of investigation and history windows</li>
+<li><strong>SEAD 4:</strong> thirteen adjudicative guidelines; whole-person concept</li>
+<li><strong>Clocks:</strong> Day 20 / Day 45 hard gates; FOCI mitigation adds months</li>
+</ul>
+<h3>Block 4 — Physical view (systems &amp; artifacts)</h3>
+<ul>
+<li><strong>Systems of record:</strong> NISS (facility), NBIS / e-QIP (investigations), DISS (personnel eligibility records — confirm current stack) <strong>[verify]</strong>, STEPP (training)</li>
+<li><strong>Forms &amp; artifacts:</strong> DD 441, SF 328 (May 2025 revision), SF-86, fingerprints, formation docs, board minutes, stock ledgers</li>
+<li><strong>SF 328 2025 physical change:</strong> Q7(b) aggregate foreign proceeds threshold <strong>15%</strong> (was 30%); expanded gifts/tuition/endowments; Statement of Full Disclosure of Foreign Affiliations for foreign employment of management; NISS deployed <strong>12 May 2025</strong></li>
+<li><strong>On-site:</strong> possessing vs non-possessing FCL; storage containers; classified processing rooms; visitor control</li>
+<li><strong>IS path:</strong> DAAPM overlays RMF for NISP contractor systems — ATO artifacts, ISSM/ISSO roles</li>
+</ul>
+<h3>Block 5 — Integration and AI elements</h3>
+<ul>
+<li><strong>External parties:</strong> GCA program offices, primes/subs, DCSA field (ISR), adjudication community, CDSE, fingerprint providers, cloud/hosting vendors (when CUI or classified processing involved)</li>
+<li><strong>Integrations:</strong> contract DD Form 254 → access need; HR ↔ FSO adverse-info handoff; legal/ownership ↔ FOCI; ISSM ↔ FSO for system boundaries</li>
+<li><strong>AI elements (honest boundary):</strong> AI may assist FSO workflows (triage docs, training Q&amp;A, package checklists) but <strong>does not</strong> replace sponsorship, adjudication, or FOCI determination. Mark gov-cloud / data-handling limits for any AI tooling touching SF-86-class PII or FOCI data. <em>Silence:</em> official DCSA AI tooling inventory.</li>
+</ul>
+<h3>Block 6 — Hands-on lab (docs / tabletop)</h3>
+<ul>
+<li>Reconstruct a Day-20 package checklist for a fictional LLC seeking Secret FCL via prime sponsorship</li>
+<li>Map SF 328 Q7 for a university lab with foreign grants near the 15% line</li>
+<li>Sort three scenarios: CMMC-only feeder system vs NISP possessing facility vs visiting researcher under sponsor FCL</li>
+<li>Draft a SEAD 4 “whole person” mini-adjudication tabletop (open-source vignette only)</li>
+<li>Build a CDSE course map: IS011, IS140, IS142, IS065, IS130 → domains</li>
+</ul>
+<h3>Block 7 — Failure modes and security</h3>
+<ul>
+<li>Incomplete first package / burn through resubmit attempts before Day 20</li>
+<li>Undisclosed FOCI or late SF 328 material-change reporting</li>
+<li>Confusing cloud IL / CMMC attestations with FCL or classified ATO</li>
+<li>KMP list wrong (officers with security-affecting authority omitted)</li>
+<li>Adverse information trapped in HR, never reaching FSO / DISS reporting</li>
+<li>International partnerships treated as “research only” under old 30% revenue mindset</li>
+<li>Continuous vetting gaps after grant</li>
+</ul>
+<h3>Block 8 — Design review / teach-back</h3>
+<ul>
+<li>Whiteboard: dual-track swimlane + FOCI branch + IS authorization branch</li>
+<li>Output: one-page “lab with foreign partners” decision brief under SF 328 (2025)</li>
+<li>Question list of remaining [verify] / <em>silence</em> items</li>
+</ul>
+<h2>Research questions</h2>
+<ol>
+<li>Exact Day-20 / Day-45 language and resubmit rules in the current FCL Orientation Handbook</li>
+<li>Official SF 328 May 2025 text for Q7 threshold and implementation dates</li>
+<li>Current CDSE curricula hours and which courses map to FCL vs PCL</li>
+<li>DAAPM current version and how it binds RMF for NISP systems</li>
+<li>Named video / webinar sources (DCSA, CDSE, NCMS) for ledger</li>
+</ol></article>
+  <footer class="docfoot">
+    Rendered from <code>Learning\tech-deep-dive\dcsa\intake\mindmap.md</code>. The Obsidian vault is the source of truth. Study material only. Citations <span class="cite">S#</span> link to the DCSA source ledger [S1]â€“[S14].
+    <div class="prevnext"><a href="odm-mindmap.html">&larr; Previous</a><a href="claims-debates.html">Next &rarr;</a></div>
+  </footer>
+</main>
+<script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+const dark=(document.documentElement.getAttribute("data-theme")||"").endsWith("dark");
+mermaid.initialize({startOnLoad:true,theme:dark?"dark":"default",securityLevel:"strict"});
+</script>
+</body>
+</html>

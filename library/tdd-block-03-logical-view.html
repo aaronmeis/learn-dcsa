@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Block 3: Logical view | Learn DCSA</title>
+<meta name="description" content="Block 3 — logical view: FCL/PCL flows, entities (NISS record, DD441, SF328, SF-86, FOCI instrument), Day 20/45.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="library.css">
+<script>try{var p=JSON.parse(localStorage.getItem("appPalette"))||"github",m=JSON.parse(localStorage.getItem("appMode"))||"dark";document.documentElement.setAttribute("data-theme",p+"-"+m);}catch(e){document.documentElement.setAttribute("data-theme","github-dark");}</script>
+</head>
+<body>
+<header class="topbar">
+  <a href="../index.html" class="home">&larr; Learn DCSA</a>
+  <span class="crumb">Library Â· TDD day blocks</span>
+  <a href="index.html" class="home">All pages</a>
+</header>
+<main class="doc">
+  <div class="kicker">TDD day blocks</div>
+  <h1 class="doctitle">Block 3: Logical view</h1>
+  <p class="lead">Block 3 — logical view: FCL/PCL flows, entities (NISS record, DD441, SF328, SF-86, FOCI instrument), Day 20/45.</p>
+  
+  <article>
+<p><strong>Time:</strong> 60 minutes · <strong>Goal:</strong> Components, data entities, and logical flows — Day 20 / Day 45 hard gates</p>
+<p><strong>Work in:</strong> <a href="tdd-view-02-logical.html">Logical View</a></p>
+<h2>Focus from mind map</h2>
+<ul>
+<li>FCL lifecycle: sponsorship Day 1 → Day 20 package → completeness cycles → Day 45 KMP initiation → FOCI → FCL → ISR / self-inspection</li>
+<li>Entities: facility record, DD 441, SF 328, ownership chart, KMP roster, PCL case (SF-86), adjudication, FOCI instrument, system auth package</li>
+<li>SEAD 4: thirteen guidelines; whole-person</li>
+<li>Clocks: Day 20 / Day 45; FOCI mitigation adds months</li>
+</ul>
+<h2>Sources</h2>
+<ul>
+<li>[<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/fc/DCSA%20FCL_Orientation_Handbook_20260828.pdf" target="_blank" rel="noopener" title="DCSA FCL Orientation Handbook (2026)">S2</a>] FCL Orientation Handbook · [<a class="cite" href="https://www.ecfr.gov/current/title-32/subtitle-A/chapter-I/subchapter-D/part-117" target="_blank" rel="noopener" title="eCFR 32 CFR Part 117 NISPOM">S1</a>] 32 CFR 117 · [<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4180585/dcsa-announces-approval-of-the-updated-form-328-certificate-pertaining-to-forei/" target="_blank" rel="noopener" title="DCSA SF 328 update announcement May 2025">S3</a>][<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/FOCI/Updated%20SF328%20-%20Industry%20Information%20Paper%20(final).pdf" target="_blank" rel="noopener" title="DCSA SF 328 Industry Information Paper May 2025">S4</a>] SF 328 · [<a class="cite" href="https://www.cdse.edu/Training/eLearning/IS142-resources/" target="_blank" rel="noopener" title="CDSE Personnel Clearances in the NISP IS142.16">S6</a>] IS142 · [<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4496039/dcsa-updates-nisp-contractor-continuous-vetting-process/" target="_blank" rel="noopener" title="DCSA Continuous Vetting update May 2026">S9</a>] CV update · [<a class="cite" href="https://rmf.org/wp-content/uploads/2022/02/DCSA-Assessment-and-Authorization-Process-Manual-Version-2.2.pdf" target="_blank" rel="noopener" title="DAAPM v2.2 (RMF for NISP contractors)">S13</a>] DAAPM</li>
+</ul>
+<h2>Actions (tied to view)</h2>
+<ul>
+<li class="task"><input type="checkbox" disabled> Walk each <strong>logical component</strong> in <a href="tdd-view-02-logical.html">02 - Logical View</a> and name the capability (C#) it realizes.</li>
+<li class="task"><input type="checkbox" disabled> Reproduce the <strong>ER diagram</strong> entities from memory: facility record, DD441, SF328, KMP → PCL → SF86 → adjudication, FOCI instrument, sys auth package.</li>
+<li class="task"><input type="checkbox" disabled> Draw the <strong>FCL swimlane</strong> with Day 20 and Day 45 labeled; mark FOCI as a branch that can add months.</li>
+<li class="task"><input type="checkbox" disabled> Draw the <strong>PCL swimlane</strong> (questionnaire → Tier 3/5 investigation → SEAD 4 → CV) and show the KMP interlock.</li>
+<li class="task"><input type="checkbox" disabled> Write three <strong>design decisions</strong> you will defend in block 8 (sponsorship gate; FOCI branch; DAAPM ≠ CMMC).</li>
+</ul>
+<h2>Retrieval check</h2>
+<div class="callout question" markdown="0"><div class="callout-title">Question</div><p>Which logical component realizes facility package assembly, and what data entities does it own by Day 20?</p></div>
+
+<div class="callout success" markdown="0"><div class="callout-title">Answer cues</div><p><strong>Facility package assembler (C2)</strong> owns the Day-20 bundle: <strong>SF 328</strong>, <strong>DD 441</strong>, <strong>ownership chart</strong>, and <strong>KMP roster</strong> attached to the facility record. Completeness reviewer cycles deficiencies with limited resubmits <strong>[verify count in S2]</strong>. Day 45 is owned by the <strong>KMP initiation engine</strong>, not the Day-20 assembler.</p></div>
+
+<h2>Exit criteria</h2>
+<ul>
+<li class="task"><input type="checkbox" disabled> Every capability has ≥1 logical component; ER + both swimlanes drawn; clocks memorized.</li>
+</ul></article>
+  <footer class="docfoot">
+    Rendered from <code>Learning\tech-deep-dive\dcsa\blocks\03-logical-view.md</code>. The Obsidian vault is the source of truth. Study material only. Citations <span class="cite">S#</span> link to the DCSA source ledger [S1]â€“[S14].
+    <div class="prevnext"><a href="tdd-block-02-conceptual-view.html">&larr; Previous</a><a href="tdd-block-04-physical-view.html">Next &rarr;</a></div>
+  </footer>
+</main>
+<script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+const dark=(document.documentElement.getAttribute("data-theme")||"").endsWith("dark");
+mermaid.initialize({startOnLoad:true,theme:dark?"dark":"default",securityLevel:"strict"});
+</script>
+</body>
+</html>

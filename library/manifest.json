@@ -1,0 +1,485 @@
+[
+  {
+    "slug": "odm-hub",
+    "title": "ODM hub \u00e2\u20ac\u201d DCSA dual-track",
+    "section": "Plan",
+    "desc": "One-day mastery hub for DCSA dual-track FCL/PCL fluency.",
+    "nblm": false
+  },
+  {
+    "slug": "tdd-hub",
+    "title": "TDD hub \u00e2\u20ac\u201d DCSA architecture day",
+    "section": "Plan",
+    "desc": "Technical deep dive hub for the DCSA dual-track (FCL + PCL) operating model.",
+    "nblm": false
+  },
+  {
+    "slug": "odm-mission",
+    "title": "ODM mission",
+    "section": "Plan",
+    "desc": "Mission for one-day mastery of DCSA dual-track FCL/PCL fluency.",
+    "nblm": false
+  },
+  {
+    "slug": "tdd-mission",
+    "title": "TDD mission",
+    "section": "Plan",
+    "desc": "Architect-day mission for the DCSA dual-track (FCL + PCL) operating model deep dive.",
+    "nblm": false
+  },
+  {
+    "slug": "odm-day-plan",
+    "title": "ODM day plan",
+    "section": "Plan",
+    "desc": "Timed schedule for the seven pedagogy blocks.",
+    "nblm": false
+  },
+  {
+    "slug": "tdd-day-plan",
+    "title": "TDD day plan",
+    "section": "Plan",
+    "desc": "Timed schedule for the eight deep-dive blocks.",
+    "nblm": false
+  },
+  {
+    "slug": "odm-mindmap",
+    "title": "ODM mind map",
+    "section": "Plan",
+    "desc": "",
+    "nblm": false
+  },
+  {
+    "slug": "tdd-mindmap",
+    "title": "TDD mind map",
+    "section": "Plan",
+    "desc": "",
+    "nblm": false
+  },
+  {
+    "slug": "claims-debates",
+    "title": "Claims and debates",
+    "section": "Plan",
+    "desc": "Live debates for DCSA dual-track literacy \u2014 FCL clocks, FOCI/SF-328, and whole-person adjudication.",
+    "nblm": false
+  },
+  {
+    "slug": "tdd-claims-debates",
+    "title": "TDD claims and debates",
+    "section": "Plan",
+    "desc": "Live debates for DCSA dual-track literacy \u00e2\u20ac\u201d FCL clocks, FOCI/SF-328, and whole-person adjudication.",
+    "nblm": false
+  },
+  {
+    "slug": "odm-block-01-core-concepts",
+    "title": "Block 1: Core concepts",
+    "section": "ODM day blocks",
+    "desc": "",
+    "nblm": false
+  },
+  {
+    "slug": "odm-block-02-mental-models",
+    "title": "Block 2: Mental models",
+    "section": "ODM day blocks",
+    "desc": "",
+    "nblm": false
+  },
+  {
+    "slug": "odm-block-03-active-practice",
+    "title": "Block 3: Active practice",
+    "section": "ODM day blocks",
+    "desc": "",
+    "nblm": false
+  },
+  {
+    "slug": "odm-block-04-teach-it",
+    "title": "Block 4: Teach it",
+    "section": "ODM day blocks",
+    "desc": "",
+    "nblm": false
+  },
+  {
+    "slug": "odm-block-05-edge-cases",
+    "title": "Block 5: Edge cases",
+    "section": "ODM day blocks",
+    "desc": "",
+    "nblm": false
+  },
+  {
+    "slug": "odm-block-06-spaced-review",
+    "title": "Block 6: Spaced review",
+    "section": "ODM day blocks",
+    "desc": "",
+    "nblm": false
+  },
+  {
+    "slug": "odm-block-07-application",
+    "title": "Block 7: Application",
+    "section": "ODM day blocks",
+    "desc": "",
+    "nblm": false
+  },
+  {
+    "slug": "tdd-block-01-context-and-scope",
+    "title": "Block 1: Context and scope",
+    "section": "TDD day blocks",
+    "desc": "Block 1 \u2014 DCSA context and scope: dual-track boundary, neighbors, CMMC vs FCL vs ATO.",
+    "nblm": false
+  },
+  {
+    "slug": "tdd-block-02-conceptual-view",
+    "title": "Block 2: Conceptual view",
+    "section": "TDD day blocks",
+    "desc": "Block 2 \u2014 conceptual view: four domains, actors, capabilities, OV-1 dual-track (no product names).",
+    "nblm": false
+  },
+  {
+    "slug": "tdd-block-03-logical-view",
+    "title": "Block 3: Logical view",
+    "section": "TDD day blocks",
+    "desc": "Block 3 \u2014 logical view: FCL/PCL flows, entities (NISS record, DD441, SF328, SF-86, FOCI instrument), Day 20/45.",
+    "nblm": false
+  },
+  {
+    "slug": "tdd-block-04-physical-view",
+    "title": "Block 4: Physical view",
+    "section": "TDD day blocks",
+    "desc": "Block 4 \u2014 physical view: NISS, NBIS/e-QIP, DISS, STEPP, eMASS; possessing vs non-possessing; SF 328 2025.",
+    "nblm": false
+  },
+  {
+    "slug": "tdd-block-05-integration-and-ai",
+    "title": "Block 5: Integration and AI elements",
+    "section": "TDD day blocks",
+    "desc": "Block 5 \u2014 integration inventory with gov-cloud column; AI assistive-only boundary for SF-86/FOCI PII.",
+    "nblm": false
+  },
+  {
+    "slug": "tdd-block-06-hands-on-lab",
+    "title": "Block 6: Hands-on lab",
+    "section": "TDD day blocks",
+    "desc": "Block 6 \u2014 hands-on tabletop lab: Day-20 package, SF 328 Q7 near 15%, scenario sort, SEAD 4 mini, CDSE map.",
+    "nblm": false
+  },
+  {
+    "slug": "tdd-block-07-failure-modes-and-security",
+    "title": "Block 7: Failure modes and security",
+    "section": "TDD day blocks",
+    "desc": "Block 7 \u2014 failure modes across four views: package clocks, FOCI, cloud\u2260FCL, KMP, HR traps, AI oversharing.",
+    "nblm": false
+  },
+  {
+    "slug": "tdd-block-08-design-review",
+    "title": "Block 8: Design review and teach-back",
+    "section": "TDD day blocks",
+    "desc": "Block 8 \u2014 design review teach-back: dual-track swimlane, FOCI gate, DAAPM/RMF, CMMC\u2260FCL\u2260ATO.",
+    "nblm": false
+  },
+  {
+    "slug": "tdd-view-01-conceptual",
+    "title": "Conceptual View \u2014 DCSA (Defense Counterintelligence and Security Agency)",
+    "section": "Architecture views",
+    "desc": "Conceptual view of DCSA: four domains, dual FCL/PCL tracks, capabilities and actors only \u2014 no product names.",
+    "nblm": false
+  },
+  {
+    "slug": "tdd-view-02-logical",
+    "title": "Logical View \u2014 DCSA (Defense Counterintelligence and Security Agency)",
+    "section": "Architecture views",
+    "desc": "Logical view of DCSA dual-track: FCL/PCL process flows, data entities, Day 20/45 clocks \u2014 still vendor-neutral on hosting.",
+    "nblm": false
+  },
+  {
+    "slug": "tdd-view-03-physical",
+    "title": "Physical View \u2014 DCSA (Defense Counterintelligence and Security Agency)",
+    "section": "Architecture views",
+    "desc": "Physical view of DCSA systems of record (NISS, NBIS/e-QIP, DISS, STEPP, eMASS), forms, possessing vs non-possessing, SF 328 2025 change.",
+    "nblm": false
+  },
+  {
+    "slug": "tdd-view-04-integration-ai",
+    "title": "Integration and AI Elements \u2014 DCSA (Defense Counterintelligence and Security Agency)",
+    "section": "Architecture views",
+    "desc": "Integration and AI elements for DCSA dual-track: third-party inventory with gov-cloud column; assistive-only AI boundary for SF-86/FOCI PII.",
+    "nblm": false
+  },
+  {
+    "slug": "diagram-index",
+    "title": "Diagram index",
+    "section": "Architecture views",
+    "desc": "Diagram index for DCSA (Defense Counterintelligence and Security Agency) \u2014 click any thumbnail to view it full size.",
+    "nblm": false
+  },
+  {
+    "slug": "diagram-sources",
+    "title": "Diagram sources (draw.io and Mermaid)",
+    "section": "Architecture views",
+    "desc": "Rendered diagrams with their editable draw.io and Mermaid sources.",
+    "nblm": false
+  },
+  {
+    "slug": "glossary",
+    "title": "GLOSSARY \u2014 DCSA (Defense Counterintelligence and Security Agency)",
+    "section": "Reference",
+    "desc": "Glossary for DCSA dual-track FCL/PCL fluency.",
+    "nblm": false
+  },
+  {
+    "slug": "cheatsheet",
+    "title": "Cheatsheet \u2014 DCSA dual-track (FCL / PCL)",
+    "section": "Reference",
+    "desc": "One-page cheatsheet \u2014 clocks, package, SEAD 4, SF 328 15%, CDSE map.",
+    "nblm": false
+  },
+  {
+    "slug": "quiz-bank",
+    "title": "ODM quiz bank",
+    "section": "Reference",
+    "desc": "Closed-book quiz bank for DCSA dual-track spaced review.",
+    "nblm": false
+  },
+  {
+    "slug": "tdd-quiz-bank",
+    "title": "TDD quiz bank",
+    "section": "Reference",
+    "desc": "Retrieval items for DCSA blocks 6\u20138 and design review.",
+    "nblm": false
+  },
+  {
+    "slug": "source-ledger",
+    "title": "Source ledger \u2014 DCSA (Defense Counterintelligence and Security Agency)",
+    "section": "Reference",
+    "desc": "Source ledger \u2014 minimum 3 high-trust URLs before W8.",
+    "nblm": false
+  },
+  {
+    "slug": "resources",
+    "title": "ODM resources",
+    "section": "Reference",
+    "desc": "High-trust sources for DCSA dual-track one-day pack.",
+    "nblm": false
+  },
+  {
+    "slug": "tdd-resources",
+    "title": "TDD resources",
+    "section": "Reference",
+    "desc": "High-trust primary sources for the DCSA dual-track deep dive.",
+    "nblm": false
+  },
+  {
+    "slug": "elicit",
+    "title": "Elicit light research",
+    "section": "Reference",
+    "desc": "Elicit light hits for DCSA/NISP/FOCI \u2014 mostly historical; primary value is practitioner docs S1\u2013S14.",
+    "nblm": false
+  },
+  {
+    "slug": "prompt-library",
+    "title": "Prompt library \u2014 DCSA (Defense Counterintelligence and Security Agency)",
+    "section": "Prompts",
+    "desc": "Prompt library index for DCSA (Defense Counterintelligence and Security Agency).",
+    "nblm": false
+  },
+  {
+    "slug": "prompts-notebooklm-set",
+    "title": "NotebookLM Prompt Set \u2014 DCSA (Defense Counterintelligence and Security Agency)",
+    "section": "Prompts",
+    "desc": "",
+    "nblm": false
+  },
+  {
+    "slug": "prompts-decision-packet",
+    "title": "Room-craft decision packet \u2014 DCSA (Defense Counterintelligence and Security Agency)",
+    "section": "Prompts",
+    "desc": "Room-craft Executive Decision Packet Create-Your-Own prompt for DCSA (Defense Counterintelligence and Security Agency).",
+    "nblm": false
+  },
+  {
+    "slug": "nblm-odm-study-guide",
+    "title": "ODM study guide",
+    "section": "NotebookLM ODM",
+    "desc": "",
+    "nblm": true
+  },
+  {
+    "slug": "nblm-odm-decision-packet",
+    "title": "ODM executive decision packet",
+    "section": "NotebookLM ODM",
+    "desc": "",
+    "nblm": true
+  },
+  {
+    "slug": "nblm-odm-playbook",
+    "title": "ODM practice playbook",
+    "section": "NotebookLM ODM",
+    "desc": "",
+    "nblm": true
+  },
+  {
+    "slug": "nblm-odm-briefing",
+    "title": "ODM executive briefing",
+    "section": "NotebookLM ODM",
+    "desc": "",
+    "nblm": true
+  },
+  {
+    "slug": "nblm-odm-working-brief",
+    "title": "ODM working briefing",
+    "section": "NotebookLM ODM",
+    "desc": "",
+    "nblm": true
+  },
+  {
+    "slug": "nblm-odm-mental-models",
+    "title": "ODM mental models",
+    "section": "NotebookLM ODM",
+    "desc": "",
+    "nblm": true
+  },
+  {
+    "slug": "nblm-odm-edge-cases",
+    "title": "ODM edge cases catalog",
+    "section": "NotebookLM ODM",
+    "desc": "",
+    "nblm": true
+  },
+  {
+    "slug": "nblm-odm-claims-csv",
+    "title": "ODM claims analysis CSV",
+    "section": "NotebookLM ODM",
+    "desc": "",
+    "nblm": true
+  },
+  {
+    "slug": "nblm-odm-mindmap",
+    "title": "ODM NotebookLM mind map",
+    "section": "NotebookLM ODM",
+    "desc": "",
+    "nblm": true
+  },
+  {
+    "slug": "nblm-tdd-conceptual",
+    "title": "TDD conceptual architecture report",
+    "section": "NotebookLM TDD",
+    "desc": "",
+    "nblm": true
+  },
+  {
+    "slug": "nblm-tdd-logical",
+    "title": "TDD logical architecture report",
+    "section": "NotebookLM TDD",
+    "desc": "",
+    "nblm": true
+  },
+  {
+    "slug": "nblm-tdd-physical",
+    "title": "TDD physical architecture report",
+    "section": "NotebookLM TDD",
+    "desc": "",
+    "nblm": true
+  },
+  {
+    "slug": "nblm-tdd-ai-report",
+    "title": "TDD AI and integration report",
+    "section": "NotebookLM TDD",
+    "desc": "",
+    "nblm": true
+  },
+  {
+    "slug": "nblm-tdd-third-party",
+    "title": "TDD third-party inventory",
+    "section": "NotebookLM TDD",
+    "desc": "",
+    "nblm": true
+  },
+  {
+    "slug": "nblm-tdd-failure-modes",
+    "title": "TDD failure modes catalog",
+    "section": "NotebookLM TDD",
+    "desc": "",
+    "nblm": true
+  },
+  {
+    "slug": "nblm-tdd-crosswalk",
+    "title": "TDD TOGAF/DoDAF crosswalk",
+    "section": "NotebookLM TDD",
+    "desc": "",
+    "nblm": true
+  },
+  {
+    "slug": "nblm-tdd-decision-packet",
+    "title": "TDD executive decision packet",
+    "section": "NotebookLM TDD",
+    "desc": "",
+    "nblm": true
+  },
+  {
+    "slug": "nblm-tdd-study-guide",
+    "title": "TDD study guide",
+    "section": "NotebookLM TDD",
+    "desc": "",
+    "nblm": true
+  },
+  {
+    "slug": "nblm-tdd-briefing",
+    "title": "TDD briefing document",
+    "section": "NotebookLM TDD",
+    "desc": "",
+    "nblm": true
+  },
+  {
+    "slug": "nblm-tdd-claims-csv",
+    "title": "TDD claims CSV",
+    "section": "NotebookLM TDD",
+    "desc": "",
+    "nblm": true
+  },
+  {
+    "slug": "media-slides",
+    "title": "Presentation slides",
+    "section": "Media",
+    "desc": "Slide image gallery for DCSA (Defense Counterintelligence and Security Agency) NotebookLM deck. JPG only; PPTX stays under C:\\output.",
+    "nblm": false
+  },
+  {
+    "slug": "media-cut-script",
+    "title": "Deep dive cut script",
+    "section": "Media",
+    "desc": "Every narration line and question card from the deep-dive cut, with the slide it belongs to.",
+    "nblm": false
+  },
+  {
+    "slug": "media-shorts-plan",
+    "title": "Shorts plan",
+    "section": "Media",
+    "desc": "The six planned shorts with their one-job prompts, and the published videos.",
+    "nblm": false
+  },
+  {
+    "slug": "pipeline-odm-suite",
+    "title": "ODM NotebookLM suite",
+    "section": "Pipeline",
+    "desc": "NotebookLM W8 suite stub for DCSA (Defense Counterintelligence and Security Agency).",
+    "nblm": false
+  },
+  {
+    "slug": "pipeline-tdd-suite",
+    "title": "TDD NotebookLM suite",
+    "section": "Pipeline",
+    "desc": "NotebookLM W8 suite stub for DCSA (Defense Counterintelligence and Security Agency).",
+    "nblm": false
+  },
+  {
+    "slug": "pipeline-odm-inventory",
+    "title": "ODM download inventory",
+    "section": "Pipeline",
+    "desc": "Local download status for odm-dcsa NotebookLM suite.",
+    "nblm": false
+  },
+  {
+    "slug": "pipeline-tdd-inventory",
+    "title": "TDD download inventory",
+    "section": "Pipeline",
+    "desc": "Local download status for tdd-dcsa NotebookLM suite.",
+    "nblm": false
+  }
+]

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conceptual View — DCSA (Defense Counterintelligence and Security Agency) | Learn DCSA</title>
+<meta name="description" content="Conceptual view of DCSA: four domains, dual FCL/PCL tracks, capabilities and actors only — no product names.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="library.css">
+<script>try{var p=JSON.parse(localStorage.getItem("appPalette"))||"github",m=JSON.parse(localStorage.getItem("appMode"))||"dark";document.documentElement.setAttribute("data-theme",p+"-"+m);}catch(e){document.documentElement.setAttribute("data-theme","github-dark");}</script>
+</head>
+<body>
+<header class="topbar">
+  <a href="../index.html" class="home">&larr; Learn DCSA</a>
+  <span class="crumb">Library Â· Architecture views</span>
+  <a href="index.html" class="home">All pages</a>
+</header>
+<main class="doc">
+  <div class="kicker">Architecture views</div>
+  <h1 class="doctitle">Conceptual View — DCSA (Defense Counterintelligence and Security Agency)</h1>
+  <p class="lead">Conceptual view of DCSA: four domains, dual FCL/PCL tracks, capabilities and actors only — no product names.</p>
+  
+  <article>
+<p>Pack: <a href="odm-hub.html">00 - DCSA (Defense Counterintelligence and Security Agency) Hub</a> · Block: <a href="tdd-block-02-conceptual-view.html">Block 2</a> · Next: <a href="tdd-view-02-logical.html">Logical view</a></p>
+<div class="callout info" markdown="0"><div class="callout-title">Altitude rule</div><p>Conceptual means <strong>what and why</strong>, not how. Name capabilities and actors. Do not name products, portals, SKUs, or hostnames here. If a sentence needs a system name, it belongs in the physical view.</p></div>
+
+<div class="callout note" markdown="0"><div class="callout-title">Adaptation</div><p>DCSA is a <strong>government operating model and program</strong>, not a single commercial platform. The four view notes adapt: conceptual = mission capabilities across four domains; physical = named systems of record and forms. Sources are ledger tags <strong>[S#]</strong> in <a href="source-ledger.html">the source ledger</a>.</p></div>
+
+<h2>Problem and purpose</h2>
+<ul>
+<li>Cleared industry must protect classified information while remaining competitive. Without a single administrator of industrial security rules, each agency would invent its own facility and personnel eligibility process. [<a class="cite" href="https://www.ecfr.gov/current/title-32/subtitle-A/chapter-I/subchapter-D/part-117" target="_blank" rel="noopener" title="eCFR 32 CFR Part 117 NISPOM">S1</a>]</li>
+<li>The binding constraint is <strong>dual eligibility</strong>: a facility that is eligible to hold or access classified information, and people who are eligible to access it — neither alone is enough. [<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/fc/DCSA%20FCL_Orientation_Handbook_20260828.pdf" target="_blank" rel="noopener" title="DCSA FCL Orientation Handbook (2026)">S2</a>][<a class="cite" href="https://www.cdse.edu/Training/eLearning/IS140/" target="_blank" rel="noopener" title="CDSE Facility Clearances in the NISP IS140.16">S5</a>][<a class="cite" href="https://www.cdse.edu/Training/eLearning/IS142-resources/" target="_blank" rel="noopener" title="CDSE Personnel Clearances in the NISP IS142.16">S6</a>]</li>
+<li>Foreign ownership, control, or influence (FOCI) can make a otherwise-capable US organization ineligible until mitigated. [<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4180585/dcsa-announces-approval-of-the-updated-form-328-certificate-pertaining-to-forei/" target="_blank" rel="noopener" title="DCSA SF 328 update announcement May 2025">S3</a>][<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/FOCI/Updated%20SF328%20-%20Industry%20Information%20Paper%20(final).pdf" target="_blank" rel="noopener" title="DCSA SF 328 Industry Information Paper May 2025">S4</a>][<a class="cite" href="https://www.youtube.com/watch?v=CrifvnX3o5M" target="_blank" rel="noopener" title="FOCI and Supply Chain Risk Management webinar">S12</a>]</li>
+<li>Who loses what if it is absent: the Government Contracting Activity loses a trusted industrial base; the uncleared company loses access to classified work; the cleared individual loses livelihood and trust; the public loses assurance that classified material stays controlled.</li>
+</ul>
+<h2>Four domains</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Domain</th>
+<th>Outcome</th>
+<th>Layer cake</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>D1</td>
+<td>Industrial security / NISP</td>
+<td>Facility eligibility granted, maintained, and overseen under 32 CFR 117</td>
+<td>Rule → handbook → FSO curriculum → package practice [<a class="cite" href="https://www.ecfr.gov/current/title-32/subtitle-A/chapter-I/subchapter-D/part-117" target="_blank" rel="noopener" title="eCFR 32 CFR Part 117 NISPOM">S1</a>][<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/fc/DCSA%20FCL_Orientation_Handbook_20260828.pdf" target="_blank" rel="noopener" title="DCSA FCL Orientation Handbook (2026)">S2</a>][<a class="cite" href="https://www.cdse.edu/Training/eLearning/IS140/" target="_blank" rel="noopener" title="CDSE Facility Clearances in the NISP IS140.16">S5</a>][<a class="cite" href="https://www.cdse.edu/Training/Curricula/IS020/" target="_blank" rel="noopener" title="CDSE FSO Orientation Non-Possessing IS020.CU">S7</a>]</td>
+</tr>
+<tr>
+<td>D2</td>
+<td>Personnel vetting</td>
+<td>Individuals investigated, adjudicated, and continuously vetted</td>
+<td>Rule → SEAD 4 → PCL courses → case practice [<a class="cite" href="https://www.cdse.edu/Training/eLearning/IS142-resources/" target="_blank" rel="noopener" title="CDSE Personnel Clearances in the NISP IS142.16">S6</a>][<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4496039/dcsa-updates-nisp-contractor-continuous-vetting-process/" target="_blank" rel="noopener" title="DCSA Continuous Vetting update May 2026">S9</a>]</td>
+</tr>
+<tr>
+<td>D3</td>
+<td>IS authorization</td>
+<td>Contractor classified systems authorized under RMF with the agency assessment overlay</td>
+<td>DAAPM → RMF phases → A&amp;A course → package practice [<a class="cite" href="https://rmf.org/wp-content/uploads/2022/02/DCSA-Assessment-and-Authorization-Process-Manual-Version-2.2.pdf" target="_blank" rel="noopener" title="DAAPM v2.2 (RMF for NISP contractors)">S13</a>][<a class="cite" href="https://www.cdse.edu/Training/eLearning/CS250/" target="_blank" rel="noopener" title="CDSE Applying A&amp;A in the NISP CS250.16">S14</a>]</td>
+</tr>
+<tr>
+<td>D4</td>
+<td>Counterintelligence</td>
+<td>Insider-threat culture, reporting, and supply-chain awareness for cleared industry</td>
+<td>CI guidance → FSO toolkit → reporting drills [<a class="cite" href="https://www.cdse.edu/Training/Toolkits/FSO-Toolkit/" target="_blank" rel="noopener" title="CDSE FSO Toolkit">S8</a>][<a class="cite" href="https://www.youtube.com/watch?v=CrifvnX3o5M" target="_blank" rel="noopener" title="FOCI and Supply Chain Risk Management webinar">S12</a>]</td>
+</tr>
+</tbody>
+</table>
+<h2>Actors</h2>
+<table>
+<thead>
+<tr>
+<th>Actor</th>
+<th>Role</th>
+<th>Goal</th>
+<th>Trust level</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Government Contracting Activity (GCA)</td>
+<td>Mission owner that needs classified work done</td>
+<td>Sponsor a capable contractor into the NISP</td>
+<td>High (USG)</td>
+</tr>
+<tr>
+<td>Cleared prime contractor</td>
+<td>Already-eligible facility that needs a sub</td>
+<td>Sponsor a subcontractor with a legitimate need</td>
+<td>High within NISP; contract-bound</td>
+</tr>
+<tr>
+<td>Uncleared applicant company</td>
+<td>Seeks facility eligibility</td>
+<td>Enter the NISP for a real classified need</td>
+<td>Untrusted until sponsored and cleared</td>
+</tr>
+<tr>
+<td>Facility Security Officer (FSO)</td>
+<td>Company security lead for the facility program</td>
+<td>Deliver complete packages; maintain compliance</td>
+<td>High (internal cleared role)</td>
+</tr>
+<tr>
+<td>Information System Security Manager (ISSM)</td>
+<td>Company lead for classified systems</td>
+<td>Achieve and maintain system authorization</td>
+<td>High (internal)</td>
+</tr>
+<tr>
+<td>Key Management Personnel (KMP)</td>
+<td>Officers and others with security-affecting authority</td>
+<td>Complete personal vetting; disclose conflicts</td>
+<td>High scrutiny</td>
+</tr>
+<tr>
+<td>Industrial Security Representative (ISR)</td>
+<td>Field oversight for the facility</td>
+<td>Review, advise, and escalate</td>
+<td>High (USG field)</td>
+</tr>
+<tr>
+<td>Adjudicators</td>
+<td>Apply SEAD 4 whole-person concept</td>
+<td>Grant, deny, or suspend personnel eligibility</td>
+<td>High (USG)</td>
+</tr>
+<tr>
+<td>CDSE trainers</td>
+<td>Teach FSO and workforce curricula</td>
+<td>Build competent industry practitioners</td>
+<td>High (USG training)</td>
+</tr>
+<tr>
+<td>Foreign interest</td>
+<td>Ownership, proceeds, gifts, employment ties abroad</td>
+<td>Influence or benefit from the company</td>
+<td>Untrusted by default (FOCI lens)</td>
+</tr>
+<tr>
+<td>Uncleared staff and academic partners</td>
+<td>Work near but not inside classified boundaries</td>
+<td>Collaborate without unauthorized access</td>
+<td>Boundary-controlled</td>
+</tr>
+<tr>
+<td>Cleared individual</td>
+<td>Holds personnel eligibility</td>
+<td>Perform classified duties; report adverse info</td>
+<td>High with continuous vetting</td>
+</tr>
+</tbody>
+</table>
+<h2>Capabilities</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Capability</th>
+<th>Outcome it delivers</th>
+<th>Actors</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1</td>
+<td>Sponsorship intake</td>
+<td>Only GCA or cleared-prime need opens an FCL case; <strong>no self-sponsor</strong></td>
+<td>GCA, cleared prime, applicant</td>
+<td>[<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/fc/DCSA%20FCL_Orientation_Handbook_20260828.pdf" target="_blank" rel="noopener" title="DCSA FCL Orientation Handbook (2026)">S2</a>][<a class="cite" href="https://www.youtube.com/watch?v=Jf-SDX2WE8k" target="_blank" rel="noopener" title="How to Get a Facility Clearance (Bennett FSO talk)">S10</a>][<a class="cite" href="https://www.youtube.com/watch?v=Y5t5sV9GQy0" target="_blank" rel="noopener" title="DON OSBP Small Business Webinar — DCSA">S11</a>]</td>
+</tr>
+<tr>
+<td>C2</td>
+<td>Facility package assembly</td>
+<td>Ownership, legal entity, KMP roster, and FOCI certificate are complete on the Day-20 clock</td>
+<td>FSO, legal, KMP</td>
+<td>[<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/fc/DCSA%20FCL_Orientation_Handbook_20260828.pdf" target="_blank" rel="noopener" title="DCSA FCL Orientation Handbook (2026)">S2</a>][<a class="cite" href="https://www.cdse.edu/Training/eLearning/IS140/" target="_blank" rel="noopener" title="CDSE Facility Clearances in the NISP IS140.16">S5</a>]</td>
+</tr>
+<tr>
+<td>C3</td>
+<td>FOCI assessment and mitigation</td>
+<td>Foreign influence is disclosed, assessed, and either cleared or instrumented</td>
+<td>FSO, legal, FOCI analysts</td>
+<td>[<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4180585/dcsa-announces-approval-of-the-updated-form-328-certificate-pertaining-to-forei/" target="_blank" rel="noopener" title="DCSA SF 328 update announcement May 2025">S3</a>][<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/FOCI/Updated%20SF328%20-%20Industry%20Information%20Paper%20(final).pdf" target="_blank" rel="noopener" title="DCSA SF 328 Industry Information Paper May 2025">S4</a>][<a class="cite" href="https://www.youtube.com/watch?v=CrifvnX3o5M" target="_blank" rel="noopener" title="FOCI and Supply Chain Risk Management webinar">S12</a>]</td>
+</tr>
+<tr>
+<td>C4</td>
+<td>KMP personnel initiation</td>
+<td>Security-affecting leaders enter the personnel track on the Day-45 clock</td>
+<td>FSO, KMP, investigators</td>
+<td>[<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/fc/DCSA%20FCL_Orientation_Handbook_20260828.pdf" target="_blank" rel="noopener" title="DCSA FCL Orientation Handbook (2026)">S2</a>][<a class="cite" href="https://www.cdse.edu/Training/eLearning/IS142-resources/" target="_blank" rel="noopener" title="CDSE Personnel Clearances in the NISP IS142.16">S6</a>]</td>
+</tr>
+<tr>
+<td>C5</td>
+<td>Facility eligibility grant and sustainment</td>
+<td>FCL issued; ISR review and self-inspection keep it alive</td>
+<td>ISR, FSO</td>
+<td>[<a class="cite" href="https://www.ecfr.gov/current/title-32/subtitle-A/chapter-I/subchapter-D/part-117" target="_blank" rel="noopener" title="eCFR 32 CFR Part 117 NISPOM">S1</a>][<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/fc/DCSA%20FCL_Orientation_Handbook_20260828.pdf" target="_blank" rel="noopener" title="DCSA FCL Orientation Handbook (2026)">S2</a>][<a class="cite" href="https://www.cdse.edu/Training/eLearning/IS140/" target="_blank" rel="noopener" title="CDSE Facility Clearances in the NISP IS140.16">S5</a>]</td>
+</tr>
+<tr>
+<td>C6</td>
+<td>Personnel investigation</td>
+<td>Background investigation scoped to tier (Secret/Confidential vs Top Secret)</td>
+<td>Investigators, subject</td>
+<td>[<a class="cite" href="https://www.cdse.edu/Training/eLearning/IS142-resources/" target="_blank" rel="noopener" title="CDSE Personnel Clearances in the NISP IS142.16">S6</a>][<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4496039/dcsa-updates-nisp-contractor-continuous-vetting-process/" target="_blank" rel="noopener" title="DCSA Continuous Vetting update May 2026">S9</a>]</td>
+</tr>
+<tr>
+<td>C7</td>
+<td>Adjudication (SEAD 4)</td>
+<td>Whole-person decision across thirteen guidelines</td>
+<td>Adjudicators</td>
+<td>[<a class="cite" href="https://www.cdse.edu/Training/eLearning/IS142-resources/" target="_blank" rel="noopener" title="CDSE Personnel Clearances in the NISP IS142.16">S6</a>]</td>
+</tr>
+<tr>
+<td>C8</td>
+<td>Continuous vetting</td>
+<td>Ongoing eligibility without relying only on periodic reinvestigation</td>
+<td>Vetting enterprise, FSO, subject</td>
+<td>[<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4496039/dcsa-updates-nisp-contractor-continuous-vetting-process/" target="_blank" rel="noopener" title="DCSA Continuous Vetting update May 2026">S9</a>]</td>
+</tr>
+<tr>
+<td>C9</td>
+<td>Contractor IS authorization</td>
+<td>Classified systems authorized with RMF + agency assessment overlay</td>
+<td>ISSM, authorizing official path</td>
+<td>[<a class="cite" href="https://rmf.org/wp-content/uploads/2022/02/DCSA-Assessment-and-Authorization-Process-Manual-Version-2.2.pdf" target="_blank" rel="noopener" title="DAAPM v2.2 (RMF for NISP contractors)">S13</a>][<a class="cite" href="https://www.cdse.edu/Training/eLearning/CS250/" target="_blank" rel="noopener" title="CDSE Applying A&amp;A in the NISP CS250.16">S14</a>]</td>
+</tr>
+<tr>
+<td>C10</td>
+<td>CI and insider-threat reporting</td>
+<td>Adverse information and foreign-contact signals reach the right channel</td>
+<td>FSO, workforce, CI</td>
+<td>[<a class="cite" href="https://www.cdse.edu/Training/Toolkits/FSO-Toolkit/" target="_blank" rel="noopener" title="CDSE FSO Toolkit">S8</a>][<a class="cite" href="https://www.youtube.com/watch?v=CrifvnX3o5M" target="_blank" rel="noopener" title="FOCI and Supply Chain Risk Management webinar">S12</a>]</td>
+</tr>
+</tbody>
+</table>
+<h2>Key concepts (conceptual data)</h2>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Meaning</th>
+<th>Related to</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Facility clearance (FCL)</td>
+<td>Administrative determination that a facility is eligible for access to classified information at a stated level</td>
+<td>Sponsorship, FOCI, KMP [<a class="cite" href="https://www.ecfr.gov/current/title-32/subtitle-A/chapter-I/subchapter-D/part-117" target="_blank" rel="noopener" title="eCFR 32 CFR Part 117 NISPOM">S1</a>][<a class="cite" href="https://www.cdse.edu/Training/eLearning/IS140/" target="_blank" rel="noopener" title="CDSE Facility Clearances in the NISP IS140.16">S5</a>]</td>
+</tr>
+<tr>
+<td>Personnel clearance (PCL)</td>
+<td>Eligibility of a person for access at a stated level</td>
+<td>Investigation, SEAD 4, continuous vetting [<a class="cite" href="https://www.cdse.edu/Training/eLearning/IS142-resources/" target="_blank" rel="noopener" title="CDSE Personnel Clearances in the NISP IS142.16">S6</a>]</td>
+</tr>
+<tr>
+<td>Dual-track interlocking</td>
+<td>Facility work creates personnel cases for KMPs; personnel issues can stop or revoke facility eligibility</td>
+<td>C1–C8</td>
+</tr>
+<tr>
+<td>Sponsorship</td>
+<td>Formal USG or cleared-prime request that creates the legitimate need</td>
+<td>C1 — <strong>cannot self-sponsor</strong> [<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/fc/DCSA%20FCL_Orientation_Handbook_20260828.pdf" target="_blank" rel="noopener" title="DCSA FCL Orientation Handbook (2026)">S2</a>][<a class="cite" href="https://www.youtube.com/watch?v=Jf-SDX2WE8k" target="_blank" rel="noopener" title="How to Get a Facility Clearance (Bennett FSO talk)">S10</a>]</td>
+</tr>
+<tr>
+<td>FOCI</td>
+<td>Foreign ownership, control, or influence that may prevent an FCL</td>
+<td>SF 328 concept, mitigation instrument [<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4180585/dcsa-announces-approval-of-the-updated-form-328-certificate-pertaining-to-forei/" target="_blank" rel="noopener" title="DCSA SF 328 update announcement May 2025">S3</a>][<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/FOCI/Updated%20SF328%20-%20Industry%20Information%20Paper%20(final).pdf" target="_blank" rel="noopener" title="DCSA SF 328 Industry Information Paper May 2025">S4</a>]</td>
+</tr>
+<tr>
+<td>Day-20 / Day-45 clocks</td>
+<td>Hard package and KMP initiation gates after sponsorship welcome</td>
+<td>C2, C4 [<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/fc/DCSA%20FCL_Orientation_Handbook_20260828.pdf" target="_blank" rel="noopener" title="DCSA FCL Orientation Handbook (2026)">S2</a>][<a class="cite" href="https://www.youtube.com/watch?v=Jf-SDX2WE8k" target="_blank" rel="noopener" title="How to Get a Facility Clearance (Bennett FSO talk)">S10</a>]</td>
+</tr>
+<tr>
+<td>Possessing vs non-possessing</td>
+<td>Whether the facility stores/processes classified on site or only accesses under another facility’s control</td>
+<td>Physical view details later [<a class="cite" href="https://www.cdse.edu/Training/eLearning/IS140/" target="_blank" rel="noopener" title="CDSE Facility Clearances in the NISP IS140.16">S5</a>][<a class="cite" href="https://www.cdse.edu/Training/Curricula/IS020/" target="_blank" rel="noopener" title="CDSE FSO Orientation Non-Possessing IS020.CU">S7</a>]</td>
+</tr>
+<tr>
+<td>SEAD 4 whole-person</td>
+<td>Thirteen adjudicative guidelines applied as a whole, not a single disqualifier checklist</td>
+<td>C7</td>
+</tr>
+<tr>
+<td>CMMC floor vs FCL vs ATO</td>
+<td>CUI cybersecurity maturity ≠ facility eligibility ≠ classified system authorization</td>
+<td>Design-review tell</td>
+</tr>
+<tr>
+<td>Need-to-know + eligibility</td>
+<td>Access requires both personnel eligibility and a job-based need</td>
+<td>NISP basics [<a class="cite" href="https://www.ecfr.gov/current/title-32/subtitle-A/chapter-I/subchapter-D/part-117" target="_blank" rel="noopener" title="eCFR 32 CFR Part 117 NISPOM">S1</a>]</td>
+</tr>
+</tbody>
+</table>
+<h2>Operational concept (OV-1 style) — dual tracks</h2>
+<pre class="mermaid">flowchart TB
+  subgraph Need[&quot;Legitimate classified need&quot;]
+    GCA[&quot;GCA or cleared prime&quot;]
+  end
+  GCA --&gt;|&quot;sponsors&quot;| FCLTRACK[&quot;Facility track capabilities&quot;]
+  FCLTRACK --&gt;|&quot;KMP roster drives&quot;| PCLTRACK[&quot;Personnel track capabilities&quot;]
+  PCLTRACK --&gt;|&quot;KMP eligibility feeds&quot;| FCLTRACK
+  FCLTRACK --&gt; FOCI[&quot;FOCI assess and mitigate&quot;]
+  FOCI --&gt; FCL[&quot;Facility eligibility&quot;]
+  PCLTRACK --&gt; ADJ[&quot;Investigate and adjudicate&quot;]
+  ADJ --&gt; PCL[&quot;Personnel eligibility&quot;]
+  FCL --&gt; ACCESS[&quot;Controlled classified access&quot;]
+  PCL --&gt; ACCESS
+  ACCESS --&gt; ISAUTH[&quot;IS authorization when systems process classified&quot;]
+  ACCESS --&gt; CI[&quot;CI and insider-threat reporting&quot;]
+  FOREIGN[&quot;Foreign interest&quot;] -.disclosure and risk.-&gt; FOCI
+  UNCLEARED[&quot;Uncleared staff and partners&quot;] -.boundary.-&gt; ACCESS
+</pre>
+
+<!-- tech_deep_dive:diagram-embed -->
+<p><a href="../assets/diagrams/01-conceptual-1.png" target="_blank"><img class="embed" src="../assets/diagrams/01-conceptual-1.png" alt="01-conceptual-1.png"></a></p>
+<h2>Open questions</h2>
+<ul>
+<li>Exact resubmit-attempt language on the Day-20 package in the current FCL Orientation Handbook — confirm against [<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/fc/DCSA%20FCL_Orientation_Handbook_20260828.pdf" target="_blank" rel="noopener" title="DCSA FCL Orientation Handbook (2026)">S2</a>] <strong>[verify]</strong></li>
+<li>How continuous-vetting PVQ cadence interacts with FSO adverse-information duties after the May 2026 NISP CV update [<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4496039/dcsa-updates-nisp-contractor-continuous-vetting-process/" target="_blank" rel="noopener" title="DCSA Continuous Vetting update May 2026">S9</a>] <strong>[verify]</strong></li>
+<li>Boundary between academic foreign-grant FOCI disclosure and research-security regimes outside NISP — practice guidance thin in secondary literature (<em>silence</em> on a single authoritative crosswalk)</li>
+</ul>
+<h2>Framework lens</h2>
+<table>
+<thead>
+<tr>
+<th>Framework</th>
+<th>Maps to</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TOGAF</td>
+<td>Architecture Vision (Phase A) · Business Architecture (Phase B)</td>
+</tr>
+<tr>
+<td>DoDAF</td>
+<td>OV-1 High-Level Operational Concept · CV-2 Capability Taxonomy · DIV-1 Conceptual Data Model</td>
+</tr>
+<tr>
+<td>Altitude</td>
+<td>Conceptual: capabilities, actors, and concepts only — vendor-neutral</td>
+</tr>
+</tbody>
+</table></article>
+  <footer class="docfoot">
+    Rendered from <code>Learning\tech-deep-dive\dcsa\views\01 - Conceptual View.md</code>. The Obsidian vault is the source of truth. Study material only. Citations <span class="cite">S#</span> link to the DCSA source ledger [S1]â€“[S14].
+    <div class="prevnext"><span></span><a href="tdd-view-02-logical.html">Next &rarr;</a></div>
+  </footer>
+</main>
+<script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+const dark=(document.documentElement.getAttribute("data-theme")||"").endsWith("dark");
+mermaid.initialize({startOnLoad:true,theme:dark?"dark":"default",securityLevel:"strict"});
+</script>
+</body>
+</html>

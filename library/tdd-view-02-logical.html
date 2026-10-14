@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Logical View — DCSA (Defense Counterintelligence and Security Agency) | Learn DCSA</title>
+<meta name="description" content="Logical view of DCSA dual-track: FCL/PCL process flows, data entities, Day 20/45 clocks — still vendor-neutral on hosting.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="library.css">
+<script>try{var p=JSON.parse(localStorage.getItem("appPalette"))||"github",m=JSON.parse(localStorage.getItem("appMode"))||"dark";document.documentElement.setAttribute("data-theme",p+"-"+m);}catch(e){document.documentElement.setAttribute("data-theme","github-dark");}</script>
+</head>
+<body>
+<header class="topbar">
+  <a href="../index.html" class="home">&larr; Learn DCSA</a>
+  <span class="crumb">Library Â· Architecture views</span>
+  <a href="index.html" class="home">All pages</a>
+</header>
+<main class="doc">
+  <div class="kicker">Architecture views</div>
+  <h1 class="doctitle">Logical View — DCSA (Defense Counterintelligence and Security Agency)</h1>
+  <p class="lead">Logical view of DCSA dual-track: FCL/PCL process flows, data entities, Day 20/45 clocks — still vendor-neutral on hosting.</p>
+  
+  <article>
+<p>Pack: <a href="odm-hub.html">00 - DCSA (Defense Counterintelligence and Security Agency) Hub</a> · Block: <a href="tdd-block-03-logical-view.html">Block 3</a> · Prev: <a href="tdd-view-01-conceptual.html">Conceptual</a> · Next: <a href="tdd-view-03-physical.html">Physical</a></p>
+<div class="callout info" markdown="0"><div class="callout-title">Altitude rule</div><p>Logical means <strong>which parts and how they talk</strong>, independent of where they run. Components have responsibilities and interfaces. Data entities have attributes and relationships. Prefer process and record names over portal brand names; named systems of record appear in the physical view.</p></div>
+
+<h2>Logical components</h2>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Responsibility</th>
+<th>Realizes capability</th>
+<th>Inputs</th>
+<th>Outputs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sponsorship gate</td>
+<td>Accept only GCA or cleared-prime sponsorship; reject self-sponsor</td>
+<td>C1</td>
+<td>Need statement, contract context</td>
+<td>Sponsorship-accepted event (Day 1)</td>
+</tr>
+<tr>
+<td>Facility package assembler</td>
+<td>Collect entity docs, ownership chart, KMP roster, FOCI certificate</td>
+<td>C2</td>
+<td>Legal/finance artifacts</td>
+<td>Day-20 package</td>
+</tr>
+<tr>
+<td>Completeness reviewer</td>
+<td>Cycle incomplete packages with limited resubmits</td>
+<td>C2</td>
+<td>Package</td>
+<td>Accept or reject for completeness</td>
+</tr>
+<tr>
+<td>FOCI analyzer</td>
+<td>Score foreign ties; recommend clear / mitigate / deny path</td>
+<td>C3</td>
+<td>SF 328 answers, ownership</td>
+<td>FOCI determination</td>
+</tr>
+<tr>
+<td>Mitigation instrument manager</td>
+<td>Hold board resolution, voting trust, proxy, or other instrument</td>
+<td>C3</td>
+<td>Determination</td>
+<td>Binding mitigation record</td>
+</tr>
+<tr>
+<td>KMP initiation engine</td>
+<td>Drive Day-45 investigation initiation for security-affecting personnel</td>
+<td>C4</td>
+<td>KMP roster</td>
+<td>Investigation requests</td>
+</tr>
+<tr>
+<td>Facility eligibility authority</td>
+<td>Issue and maintain FCL; schedule oversight</td>
+<td>C5</td>
+<td>Complete package + FOCI + KMP status</td>
+<td>FCL decision</td>
+</tr>
+<tr>
+<td>Investigation case manager</td>
+<td>Run Tier 3 vs Tier 5 scoped investigations</td>
+<td>C6</td>
+<td>SF-86-class questionnaire, prints</td>
+<td>Investigation file</td>
+</tr>
+<tr>
+<td>Adjudication engine</td>
+<td>Apply SEAD 4 whole-person guidelines</td>
+<td>C7</td>
+<td>Investigation file</td>
+<td>Eligibility decision</td>
+</tr>
+<tr>
+<td>Continuous vetting monitor</td>
+<td>Ingest automated records and periodic questionnaires</td>
+<td>C8</td>
+<td>CV signals, PVQ</td>
+<td>Alerts to adjudicators / FSO</td>
+</tr>
+<tr>
+<td>IS authorization package manager</td>
+<td>Drive RMF steps under DAAPM overlay</td>
+<td>C9</td>
+<td>System boundary, controls</td>
+<td>Authorization decision package</td>
+</tr>
+<tr>
+<td>Adverse-info intake</td>
+<td>Move HR/security reports into the personnel record path</td>
+<td>C10</td>
+<td>Incident reports</td>
+<td>Reportable adverse information</td>
+</tr>
+</tbody>
+</table>
+<h2>Logical data model</h2>
+<table>
+<thead>
+<tr>
+<th>Entity</th>
+<th>Key attributes</th>
+<th>Relationships</th>
+<th>Classification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NISP facility record</td>
+<td>Legal name, CAGE/UEI, FCL level, possessing flag, status</td>
+<td>Owns KMP roster; linked to DD 441</td>
+<td>Controlled unclassified (business)</td>
+</tr>
+<tr>
+<td>DD 441 agreement</td>
+<td>Parties, effective dates, security agreement terms</td>
+<td>Binds facility to NISP obligations</td>
+<td>Business / contractual</td>
+</tr>
+<tr>
+<td>SF 328 certificate</td>
+<td>Q-series FOCI answers; Q7(b) foreign-proceeds flag</td>
+<td>Attached to facility record; drives FOCI case</td>
+<td>Sensitive business</td>
+</tr>
+<tr>
+<td>Ownership chart</td>
+<td>Nodes (persons/entities), % ownership, voting rights</td>
+<td>Explains SF 328; feeds FOCI</td>
+<td>Sensitive business</td>
+</tr>
+<tr>
+<td>KMP roster</td>
+<td>Role, security-affecting authority, PCL status</td>
+<td>Subset of personnel cases required for FCL</td>
+<td>Sensitive PII linkage</td>
+</tr>
+<tr>
+<td>PCL case</td>
+<td>Tier, questionnaire version, investigation ID</td>
+<td>Subject ↔ adjudication record</td>
+<td>Sensitive PII (SF-86 class)</td>
+</tr>
+<tr>
+<td>SF-86-class questionnaire</td>
+<td>Personal history windows by tier</td>
+<td>Input to investigation</td>
+<td>Highly sensitive PII</td>
+</tr>
+<tr>
+<td>Adjudication record</td>
+<td>Guidelines weighed, decision, date</td>
+<td>Closes or suspends PCL case</td>
+<td>Sensitive</td>
+</tr>
+<tr>
+<td>FOCI mitigation instrument</td>
+<td>Type, parties, effective controls</td>
+<td>Attached when FOCI present</td>
+<td>Sensitive business / legal</td>
+</tr>
+<tr>
+<td>System authorization package</td>
+<td>Boundary, controls, risk assessment, authorization status</td>
+<td>Required when facility processes classified on contractor systems</td>
+<td>Classified-system metadata (protect accordingly)</td>
+</tr>
+<tr>
+<td>Training completion record</td>
+<td>Course ID, person, date</td>
+<td>Supports FSO and workforce readiness</td>
+<td>Internal</td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid">erDiagram
+  FACILITY_RECORD ||--|| DD441 : &quot;bound by&quot;
+  FACILITY_RECORD ||--|| SF328 : &quot;certifies FOCI&quot;
+  FACILITY_RECORD ||--o{ OWNERSHIP_NODE : &quot;shows&quot;
+  FACILITY_RECORD ||--|{ KMP_SLOT : &quot;requires&quot;
+  KMP_SLOT ||--|| PCL_CASE : &quot;initiates&quot;
+  PCL_CASE ||--|| SF86 : &quot;contains&quot;
+  PCL_CASE ||--o| ADJUDICATION : &quot;results in&quot;
+  FACILITY_RECORD ||--o| FOCI_INSTRUMENT : &quot;mitigated by&quot;
+  FACILITY_RECORD ||--o{ SYS_AUTH_PKG : &quot;may require&quot;
+  PCL_CASE ||--o{ TRAINING_RECORD : &quot;supported by&quot;
+</pre>
+
+<!-- tech_deep_dive:diagram-embed -->
+<p><a href="../assets/diagrams/02-logical-1.png" target="_blank"><img class="embed" src="../assets/diagrams/02-logical-1.png" alt="02-logical-1.png"></a></p>
+<h2>Logical flows</h2>
+<h3>FCL lifecycle (with Day 20 / Day 45)</h3>
+<pre class="mermaid">flowchart LR
+  SPON[&quot;Sponsorship accepted\nDay 1&quot;] --&gt; D20[&quot;Day-20 package\nSF328 DD441 ownership KMP&quot;]
+  D20 --&gt; COMP{&quot;Completeness\ncycles&quot;}
+  COMP --&gt;|&quot;incomplete&quot;| D20
+  COMP --&gt;|&quot;complete&quot;| FOCI{&quot;FOCI\ndetermination&quot;}
+  FOCI --&gt;|&quot;mitigate&quot;| MIT[&quot;Mitigation instrument&quot;]
+  FOCI --&gt;|&quot;clear&quot;| D45
+  MIT --&gt; D45[&quot;Day-45 KMP\ninvestigation initiation&quot;]
+  D45 --&gt; GRANT[&quot;FCL issued&quot;]
+  GRANT --&gt; SUSTAIN[&quot;ISR review +\nself-inspection&quot;]
+</pre>
+
+<!-- tech_deep_dive:diagram-embed -->
+<p><a href="../assets/diagrams/02-logical-2.png" target="_blank"><img class="embed" src="../assets/diagrams/02-logical-2.png" alt="02-logical-2.png"></a></p>
+<h3>PCL lifecycle (interlocks with FCL at KMP)</h3>
+<pre class="mermaid">flowchart LR
+  NEED[&quot;Access need +\neligibility request&quot;] --&gt; Q[&quot;SF-86-class\nquestionnaire&quot;]
+  Q --&gt; INV[&quot;Investigation\nTier 3 or Tier 5&quot;]
+  INV --&gt; SEAD[&quot;SEAD 4\nadjudication&quot;]
+  SEAD --&gt; ELIG[&quot;Personnel eligibility&quot;]
+  ELIG --&gt; CV[&quot;Continuous vetting&quot;]
+  CV --&gt;|&quot;issue&quot;| SEAD
+</pre>
+
+<!-- tech_deep_dive:diagram-embed -->
+<p><a href="../assets/diagrams/02-logical-3.png" target="_blank"><img class="embed" src="../assets/diagrams/02-logical-3.png" alt="02-logical-3.png"></a></p>
+<table>
+<thead>
+<tr>
+<th>Flow</th>
+<th>From</th>
+<th>To</th>
+<th>Payload</th>
+<th>Trigger</th>
+<th>Sync/async</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sponsorship accept</td>
+<td>GCA / cleared prime</td>
+<td>Facility package assembler</td>
+<td>Need, level, contract cue</td>
+<td>Sponsor submits</td>
+<td>Async</td>
+</tr>
+<tr>
+<td>Day-20 package</td>
+<td>Facility package assembler</td>
+<td>Completeness reviewer</td>
+<td>SF 328, DD 441, ownership, KMP</td>
+<td>Clock from Day 1</td>
+<td>Async with hard deadline</td>
+</tr>
+<tr>
+<td>Completeness cycle</td>
+<td>Completeness reviewer</td>
+<td>Facility package assembler</td>
+<td>Deficiency list</td>
+<td>Incomplete package</td>
+<td>Async; <strong>limited attempts</strong> [<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/fc/DCSA%20FCL_Orientation_Handbook_20260828.pdf" target="_blank" rel="noopener" title="DCSA FCL Orientation Handbook (2026)">S2</a>] <strong>[verify count]</strong></td>
+</tr>
+<tr>
+<td>FOCI determination</td>
+<td>FOCI analyzer</td>
+<td>Facility eligibility / mitigation manager</td>
+<td>Determination</td>
+<td>Package complete</td>
+<td>Async; mitigation can add months [<a class="cite" href="https://www.youtube.com/watch?v=CrifvnX3o5M" target="_blank" rel="noopener" title="FOCI and Supply Chain Risk Management webinar">S12</a>]</td>
+</tr>
+<tr>
+<td>Day-45 KMP initiation</td>
+<td>KMP initiation engine</td>
+<td>Investigation case manager</td>
+<td>KMP identities + questionnaires</td>
+<td>Clock from Day 1</td>
+<td>Async with hard deadline</td>
+</tr>
+<tr>
+<td>Investigation → adjudication</td>
+<td>Investigation case manager</td>
+<td>Adjudication engine</td>
+<td>Investigation file</td>
+<td>Investigation complete</td>
+<td>Async</td>
+</tr>
+<tr>
+<td>Adverse info</td>
+<td>Adverse-info intake</td>
+<td>Continuous vetting / adjudication</td>
+<td>Reportable facts</td>
+<td>HR or self-report</td>
+<td>Async; must not stall in HR</td>
+</tr>
+<tr>
+<td>IS auth package</td>
+<td>ISSM path</td>
+<td>Authorizing official path</td>
+<td>RMF artifacts under DAAPM</td>
+<td>System needs classified processing</td>
+<td>Async</td>
+</tr>
+</tbody>
+</table>
+<h2>Clocks (architect must memorize)</h2>
+<table>
+<thead>
+<tr>
+<th>Clock</th>
+<th>Starts</th>
+<th>Must achieve</th>
+<th>Failure mode</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Day 20</td>
+<td>Sponsorship welcome (Day 1)</td>
+<td>Complete facility package</td>
+<td>Burn resubmits; restart sponsorship [<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/fc/DCSA%20FCL_Orientation_Handbook_20260828.pdf" target="_blank" rel="noopener" title="DCSA FCL Orientation Handbook (2026)">S2</a>][<a class="cite" href="https://www.youtube.com/watch?v=Jf-SDX2WE8k" target="_blank" rel="noopener" title="How to Get a Facility Clearance (Bennett FSO talk)">S10</a>]</td>
+</tr>
+<tr>
+<td>Day 45</td>
+<td>Sponsorship welcome (Day 1)</td>
+<td>KMP investigation initiation (questionnaire + fingerprints)</td>
+<td>FCL stalls; KMP gaps [<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/fc/DCSA%20FCL_Orientation_Handbook_20260828.pdf" target="_blank" rel="noopener" title="DCSA FCL Orientation Handbook (2026)">S2</a>][<a class="cite" href="https://www.youtube.com/watch?v=Jf-SDX2WE8k" target="_blank" rel="noopener" title="How to Get a Facility Clearance (Bennett FSO talk)">S10</a>]</td>
+</tr>
+<tr>
+<td>FOCI mitigation</td>
+<td>Determination that mitigation is required</td>
+<td>Signed instrument + compliance</td>
+<td>Months of delay [<a class="cite" href="https://www.youtube.com/watch?v=CrifvnX3o5M" target="_blank" rel="noopener" title="FOCI and Supply Chain Risk Management webinar">S12</a>]</td>
+</tr>
+<tr>
+<td>Continuous vetting / PVQ</td>
+<td>After eligibility grant</td>
+<td>Ongoing signals; PVQ cadence per current NISP CV rules</td>
+<td>Silent adverse info [<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4496039/dcsa-updates-nisp-contractor-continuous-vetting-process/" target="_blank" rel="noopener" title="DCSA Continuous Vetting update May 2026">S9</a>]</td>
+</tr>
+</tbody>
+</table>
+<h2>Design decisions at this level</h2>
+<ul>
+<li>Treat <strong>sponsorship</strong> as a hard gate: no facility record proceeds without GCA or cleared-prime need. [<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/fc/DCSA%20FCL_Orientation_Handbook_20260828.pdf" target="_blank" rel="noopener" title="DCSA FCL Orientation Handbook (2026)">S2</a>][<a class="cite" href="https://www.youtube.com/watch?v=Jf-SDX2WE8k" target="_blank" rel="noopener" title="How to Get a Facility Clearance (Bennett FSO talk)">S10</a>]</li>
+<li>Model <strong>FOCI as a branch</strong>, not a checkbox: determination can clear, mitigate, or deny. [<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4180585/dcsa-announces-approval-of-the-updated-form-328-certificate-pertaining-to-forei/" target="_blank" rel="noopener" title="DCSA SF 328 update announcement May 2025">S3</a>][<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/FOCI/Updated%20SF328%20-%20Industry%20Information%20Paper%20(final).pdf" target="_blank" rel="noopener" title="DCSA SF 328 Industry Information Paper May 2025">S4</a>]</li>
+<li>Keep <strong>KMP roster</strong> as a first-class entity — wrong officers omitted is a top failure mode. [<a class="cite" href="https://www.youtube.com/watch?v=Jf-SDX2WE8k" target="_blank" rel="noopener" title="How to Get a Facility Clearance (Bennett FSO talk)">S10</a>]</li>
+<li>Separate <strong>Tier 3 vs Tier 5</strong> investigation scope in the PCL case attributes. [<a class="cite" href="https://www.cdse.edu/Training/eLearning/IS142-resources/" target="_blank" rel="noopener" title="CDSE Personnel Clearances in the NISP IS142.16">S6</a>]</li>
+<li>Place <strong>DAAPM overlay</strong> on the IS authorization component so CMMC/FedRAMP language cannot substitute for classified ATO. [<a class="cite" href="https://rmf.org/wp-content/uploads/2022/02/DCSA-Assessment-and-Authorization-Process-Manual-Version-2.2.pdf" target="_blank" rel="noopener" title="DAAPM v2.2 (RMF for NISP contractors)">S13</a>][<a class="cite" href="https://www.cdse.edu/Training/eLearning/CS250/" target="_blank" rel="noopener" title="CDSE Applying A&amp;A in the NISP CS250.16">S14</a>]</li>
+<li>Affirm the May 2025 conceptual change: foreign-proceeds threshold for Q7(b) moves from 30% to <strong>15%</strong> (physical form change lands in view 3). [<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4180585/dcsa-announces-approval-of-the-updated-form-328-certificate-pertaining-to-forei/" target="_blank" rel="noopener" title="DCSA SF 328 update announcement May 2025">S3</a>][<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/FOCI/Updated%20SF328%20-%20Industry%20Information%20Paper%20(final).pdf" target="_blank" rel="noopener" title="DCSA SF 328 Industry Information Paper May 2025">S4</a>]</li>
+</ul>
+<h2>Framework lens</h2>
+<table>
+<thead>
+<tr>
+<th>Framework</th>
+<th>Maps to</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TOGAF</td>
+<td>Information Systems Architectures (Phase C: Data and Application)</td>
+</tr>
+<tr>
+<td>DoDAF</td>
+<td>OV-2 Operational Resource Flow · OV-5b Operational Activity Model · SV-1 (logical) · DIV-2 Logical Data Model</td>
+</tr>
+<tr>
+<td>Altitude</td>
+<td>Logical: components, entities, flows; hosting-neutral</td>
+</tr>
+</tbody>
+</table></article>
+  <footer class="docfoot">
+    Rendered from <code>Learning\tech-deep-dive\dcsa\views\02 - Logical View.md</code>. The Obsidian vault is the source of truth. Study material only. Citations <span class="cite">S#</span> link to the DCSA source ledger [S1]â€“[S14].
+    <div class="prevnext"><a href="tdd-view-01-conceptual.html">&larr; Previous</a><a href="tdd-view-03-physical.html">Next &rarr;</a></div>
+  </footer>
+</main>
+<script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+const dark=(document.documentElement.getAttribute("data-theme")||"").endsWith("dark");
+mermaid.initialize({startOnLoad:true,theme:dark?"dark":"default",securityLevel:"strict"});
+</script>
+</body>
+</html>

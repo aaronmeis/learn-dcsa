@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TDD mission | Learn DCSA</title>
+<meta name="description" content="Architect-day mission for the DCSA dual-track (FCL + PCL) operating model deep dive.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="library.css">
+<script>try{var p=JSON.parse(localStorage.getItem("appPalette"))||"github",m=JSON.parse(localStorage.getItem("appMode"))||"dark";document.documentElement.setAttribute("data-theme",p+"-"+m);}catch(e){document.documentElement.setAttribute("data-theme","github-dark");}</script>
+</head>
+<body>
+<header class="topbar">
+  <a href="../index.html" class="home">&larr; Learn DCSA</a>
+  <span class="crumb">Library Â· Plan</span>
+  <a href="index.html" class="home">All pages</a>
+</header>
+<main class="doc">
+  <div class="kicker">Plan</div>
+  <h1 class="doctitle">TDD mission</h1>
+  <p class="lead">Architect-day mission for the DCSA dual-track (FCL + PCL) operating model deep dive.</p>
+  
+  <article><h1>Mission — DCSA (Defense Counterintelligence and Security Agency)</h1>
+<h2>Why</h2>
+<p>One long, architecture-heavy day on the <strong>DCSA dual-track operating model</strong>: facility clearance (FCL) and personnel clearance (PCL) interlocking under the National Industrial Security Program (NISP), with FOCI, adjudication, IS authorization, and counterintelligence as the supporting domains. [<a class="cite" href="https://www.ecfr.gov/current/title-32/subtitle-A/chapter-I/subchapter-D/part-117" target="_blank" rel="noopener" title="eCFR 32 CFR Part 117 NISPOM">S1</a>][<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/fc/DCSA%20FCL_Orientation_Handbook_20260828.pdf" target="_blank" rel="noopener" title="DCSA FCL Orientation Handbook (2026)">S2</a>]</p>
+<h2>Success looks like</h2>
+<ul>
+<li class="task"><input type="checkbox" disabled> Can <strong>draw the dual-track swimlane</strong> (FCL ↔ PCL) from memory, including where the tracks feed each other</li>
+<li class="task"><input type="checkbox" disabled> Can <strong>map the FOCI gate</strong> (SF 328 → determination → mitigation instrument) and name the May 2025 threshold change [<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4180585/dcsa-announces-approval-of-the-updated-form-328-certificate-pertaining-to-forei/" target="_blank" rel="noopener" title="DCSA SF 328 update announcement May 2025">S3</a>][<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/FOCI/Updated%20SF328%20-%20Industry%20Information%20Paper%20(final).pdf" target="_blank" rel="noopener" title="DCSA SF 328 Industry Information Paper May 2025">S4</a>]</li>
+<li class="task"><input type="checkbox" disabled> Can <strong>place DAAPM/RMF</strong> on the IS-authorization branch and say how it overlays NIST RMF for contractor classified systems [<a class="cite" href="https://rmf.org/wp-content/uploads/2022/02/DCSA-Assessment-and-Authorization-Process-Manual-Version-2.2.pdf" target="_blank" rel="noopener" title="DAAPM v2.2 (RMF for NISP contractors)">S13</a>][<a class="cite" href="https://www.cdse.edu/Training/eLearning/CS250/" target="_blank" rel="noopener" title="CDSE Applying A&amp;A in the NISP CS250.16">S14</a>]</li>
+<li class="task"><input type="checkbox" disabled> Can <strong>distinguish the CMMC floor</strong> (CUI cybersecurity) from <strong>FCL eligibility</strong> and from a <strong>classified system ATO</strong></li>
+<li class="task"><input type="checkbox" disabled> Can list the third-party systems of record and how sponsorship, investigation, training, and A&amp;A connect</li>
+<li class="task"><input type="checkbox" disabled> Can state the AI boundary: assistive only; SF-86 / FOCI PII stays out of casual tooling</li>
+<li class="task"><input type="checkbox" disabled> Can place the model in TOGAF ADM phases and DoDAF viewpoints</li>
+<li class="task"><input type="checkbox" disabled> Survives the block 8 design review (whiteboard + one-page lab-with-foreign-partners brief)</li>
+</ul>
+<h2>Out of scope</h2>
+<ul>
+<li>Certification cramming (CISSP-style)</li>
+<li>Full CMMC control memorization</li>
+<li>SAP / SCI special-access deep dive</li>
+<li>Building a classified enclave from scratch</li>
+<li>Marketing-depth feature tours of commercial GRC tools</li>
+</ul>
+<h2>Constraints</h2>
+<ul>
+<li>Time box: 420 focused minutes</li>
+<li>Ground claims in <a href="resources.html">RESOURCES</a> and <a href="source-ledger.html">source-ledger</a> — cite <strong>[S#]</strong></li>
+<li>Affirmative language for verified facts; mark <strong>[verify]</strong> and <strong><em>silence</em></strong> where primary text was not re-read in this pass</li>
+<li>Do not invent credentials, case numbers, or classified details</li>
+</ul></article>
+  <footer class="docfoot">
+    Rendered from <code>Learning\tech-deep-dive\dcsa\MISSION.md</code>. The Obsidian vault is the source of truth. Study material only. Citations <span class="cite">S#</span> link to the DCSA source ledger [S1]â€“[S14].
+    <div class="prevnext"><a href="odm-mission.html">&larr; Previous</a><a href="odm-day-plan.html">Next &rarr;</a></div>
+  </footer>
+</main>
+<script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+const dark=(document.documentElement.getAttribute("data-theme")||"").endsWith("dark");
+mermaid.initialize({startOnLoad:true,theme:dark?"dark":"default",securityLevel:"strict"});
+</script>
+</body>
+</html>

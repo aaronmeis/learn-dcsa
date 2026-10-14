@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Block 5: Edge cases | Learn DCSA</title>
+<meta name="description" content="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="library.css">
+<script>try{var p=JSON.parse(localStorage.getItem("appPalette"))||"github",m=JSON.parse(localStorage.getItem("appMode"))||"dark";document.documentElement.setAttribute("data-theme",p+"-"+m);}catch(e){document.documentElement.setAttribute("data-theme","github-dark");}</script>
+</head>
+<body>
+<header class="topbar">
+  <a href="../index.html" class="home">&larr; Learn DCSA</a>
+  <span class="crumb">Library Â· ODM day blocks</span>
+  <a href="index.html" class="home">All pages</a>
+</header>
+<main class="doc">
+  <div class="kicker">ODM day blocks</div>
+  <h1 class="doctitle">Block 5: Edge cases</h1>
+  
+  
+  <article>
+<p><strong>Time:</strong> 45 minutes<br />
+<strong>Goal:</strong> Exceptions, traps, failure modes<br />
+<strong>Pack:</strong> DCSA (Defense Counterintelligence and Security Agency) (<code>dcsa</code>)</p>
+<h2>Focus from mind map</h2>
+<ul>
+<li>Self-sponsorship myths</li>
+<li>Confusing CMMC / GCC High / FedRAMP with Secret/TS FCL or system authorization</li>
+<li>SF 328 “no FOCI” treated as permanent — material changes require update</li>
+<li>International university partnerships / foreign students / foreign grants under SF 328 Q7 scope (15%)</li>
+<li>Non-possessing vs possessing FCL obligations</li>
+<li>FOCI mitigation timeline risk (SCA / SSA / Proxy, etc.)</li>
+<li>Continuous vetting vs old periodic reinvestigation mental model [<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4496039/dcsa-updates-nisp-contractor-continuous-vetting-process/" target="_blank" rel="noopener" title="DCSA Continuous Vetting update May 2026">S9</a>]</li>
+<li>Classified IS: DAAPM/RMF ≠ CMMC [<a class="cite" href="https://rmf.org/wp-content/uploads/2022/02/DCSA-Assessment-and-Authorization-Process-Manual-Version-2.2.pdf" target="_blank" rel="noopener" title="DAAPM v2.2 (RMF for NISP contractors)">S13</a>][<a class="cite" href="https://www.cdse.edu/Training/eLearning/CS250/" target="_blank" rel="noopener" title="CDSE Applying A&amp;A in the NISP CS250.16">S14</a>]</li>
+</ul>
+<h2>Sources</h2>
+<ul>
+<li>[<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4180585/dcsa-announces-approval-of-the-updated-form-328-certificate-pertaining-to-forei/" target="_blank" rel="noopener" title="DCSA SF 328 update announcement May 2025">S3</a>][<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/FOCI/Updated%20SF328%20-%20Industry%20Information%20Paper%20(final).pdf" target="_blank" rel="noopener" title="DCSA SF 328 Industry Information Paper May 2025">S4</a>] SF 328 May 2025 announcement + industry paper</li>
+<li>[<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4496039/dcsa-updates-nisp-contractor-continuous-vetting-process/" target="_blank" rel="noopener" title="DCSA Continuous Vetting update May 2026">S9</a>] DCSA continuous vetting update (May 2026)</li>
+<li>[<a class="cite" href="https://www.youtube.com/watch?v=CrifvnX3o5M" target="_blank" rel="noopener" title="FOCI and Supply Chain Risk Management webinar">S12</a>] FOCI and Supply Chain Risk Management webinar</li>
+<li>[<a class="cite" href="https://rmf.org/wp-content/uploads/2022/02/DCSA-Assessment-and-Authorization-Process-Manual-Version-2.2.pdf" target="_blank" rel="noopener" title="DAAPM v2.2 (RMF for NISP contractors)">S13</a>] DAAPM v2.2</li>
+<li>[<a class="cite" href="https://www.cdse.edu/Training/eLearning/CS250/" target="_blank" rel="noopener" title="CDSE Applying A&amp;A in the NISP CS250.16">S14</a>] CDSE CS250 — Applying A&amp;A in the NISP</li>
+<li>Sibling: <a href="cheatsheet.html">CMMC cheatsheet</a> (contrast)</li>
+</ul>
+<h2>Actions</h2>
+<ol>
+<li>Build a trap table (symptom → cause → fix) for at least these eight:</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Trap</th>
+<th>Symptom</th>
+<th>Cause</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Self-sponsor</td>
+<td>NISS filing with no GCA/prime</td>
+<td>Myth that company can initiate</td>
+<td>Get sponsorship from GCA or cleared prime</td>
+</tr>
+<tr>
+<td>Clock theater</td>
+<td>Fast incomplete package</td>
+<td>Clock vs quality inverted</td>
+<td>Complete Day 20 package; queue Day 45 KMPs</td>
+</tr>
+<tr>
+<td>CMMC = FCL</td>
+<td>“We’re L2 / on GCC High”</td>
+<td>Wrong wall</td>
+<td>Separate CUI floor from NISP FCL/ATO</td>
+</tr>
+<tr>
+<td>SF 328 stale</td>
+<td>Old “no FOCI” after new foreign revenue</td>
+<td>Threshold/material change ignored</td>
+<td>Re-file; note 15% Q7b [<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/FOCI/Updated%20SF328%20-%20Industry%20Information%20Paper%20(final).pdf" target="_blank" rel="noopener" title="DCSA SF 328 Industry Information Paper May 2025">S4</a>]</td>
+</tr>
+<tr>
+<td>University FOCI blind spot</td>
+<td>Foreign grants/students unexamined</td>
+<td>Research partnerships out of mind</td>
+<td>Map revenue + influence to SF 328 questions</td>
+</tr>
+<tr>
+<td>Non-possessing complacency</td>
+<td>“We don’t store classified, so light duties”</td>
+<td>Under-scoped FSO obligations</td>
+<td>Still need FCL governance + PCL pipeline</td>
+</tr>
+<tr>
+<td>Possessing without DAAPM</td>
+<td>CMMC cert waved at classified IS</td>
+<td>Equating cyber floors</td>
+<td>DAAPM/RMF A&amp;A for NISP systems</td>
+</tr>
+<tr>
+<td>CV lag</td>
+<td>Waiting for old PR cycle only</td>
+<td>Outdated reinvestigation model</td>
+<td>Continuous vetting + PVQ cadence [<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4496039/dcsa-updates-nisp-contractor-continuous-vetting-process/" target="_blank" rel="noopener" title="DCSA Continuous Vetting update May 2026">S9</a>]</td>
+</tr>
+</tbody>
+</table>
+<ol start="2">
+<li>Add the top three traps to <a href="cheatsheet.html">cheatsheet</a>.</li>
+<li>Write one paragraph: how a lab with foreign research revenue near 15% should brief leadership this quarter.</li>
+</ol>
+<h2>Retrieval check</h2>
+<div class="callout question" markdown="0"><div class="callout-title">Question</div><p>What edge case would break a naive “submit once and forget” approach to SF 328? What breaks “we have GCC High so we’re cleared”?</p></div>
+
+<p>%% fold answer after attempt %%</p>
+<div class="callout success" markdown="0"><div class="callout-title">Answer cues</div><p>Material change / foreign revenue crossing 15% (or new foreign ownership/control) requires update — SF 328 is not permanent [<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4180585/dcsa-announces-approval-of-the-updated-form-328-certificate-pertaining-to-forei/" target="_blank" rel="noopener" title="DCSA SF 328 update announcement May 2025">S3</a>][<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/FOCI/Updated%20SF328%20-%20Industry%20Information%20Paper%20(final).pdf" target="_blank" rel="noopener" title="DCSA SF 328 Industry Information Paper May 2025">S4</a>]. GCC High supports certain CUI architectures; it does not grant FCL or authorize Secret/TS — wrong wall / CMMC≠FCL.</p></div>
+
+<h2>Exit criteria</h2>
+<ul>
+<li class="task"><input type="checkbox" disabled> ≥8 traps with symptom/cause/fix</li>
+<li class="task"><input type="checkbox" disabled> Top three on cheatsheet</li>
+<li class="task"><input type="checkbox" disabled> FOCI leadership paragraph written</li>
+</ul></article>
+  <footer class="docfoot">
+    Rendered from <code>Learning\one-day-mastery\dcsa\blocks\05-edge-cases.md</code>. The Obsidian vault is the source of truth. Study material only. Citations <span class="cite">S#</span> link to the DCSA source ledger [S1]â€“[S14].
+    <div class="prevnext"><a href="odm-block-04-teach-it.html">&larr; Previous</a><a href="odm-block-06-spaced-review.html">Next &rarr;</a></div>
+  </footer>
+</main>
+<script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+const dark=(document.documentElement.getAttribute("data-theme")||"").endsWith("dark");
+mermaid.initialize({startOnLoad:true,theme:dark?"dark":"default",securityLevel:"strict"});
+</script>
+</body>
+</html>

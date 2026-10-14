@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Block 5: Integration and AI elements | Learn DCSA</title>
+<meta name="description" content="Block 5 — integration inventory with gov-cloud column; AI assistive-only boundary for SF-86/FOCI PII.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="library.css">
+<script>try{var p=JSON.parse(localStorage.getItem("appPalette"))||"github",m=JSON.parse(localStorage.getItem("appMode"))||"dark";document.documentElement.setAttribute("data-theme",p+"-"+m);}catch(e){document.documentElement.setAttribute("data-theme","github-dark");}</script>
+</head>
+<body>
+<header class="topbar">
+  <a href="../index.html" class="home">&larr; Learn DCSA</a>
+  <span class="crumb">Library Â· TDD day blocks</span>
+  <a href="index.html" class="home">All pages</a>
+</header>
+<main class="doc">
+  <div class="kicker">TDD day blocks</div>
+  <h1 class="doctitle">Block 5: Integration and AI elements</h1>
+  <p class="lead">Block 5 — integration inventory with gov-cloud column; AI assistive-only boundary for SF-86/FOCI PII.</p>
+  
+  <article>
+<p><strong>Time:</strong> 60 minutes · <strong>Goal:</strong> Third-party inventory, identity, and the AI data path with a hard PII boundary</p>
+<p><strong>Work in:</strong> <a href="tdd-view-04-integration-ai.html">Integration and AI Elements</a></p>
+<h2>Focus from mind map</h2>
+<ul>
+<li>External parties: GCA, primes/subs, ISR, adjudication, CDSE, fingerprint providers, cloud/hosting</li>
+<li>Integrations: DD 254 → access need; HR ↔ FSO adverse info; legal ↔ FOCI; ISSM ↔ FSO for system boundaries</li>
+<li>AI: assistive only; does <strong>not</strong> replace sponsorship, adjudication, or FOCI determination; SF-86/FOCI PII sensitivity; official DCSA AI inventory = <em>silence</em></li>
+</ul>
+<h2>Sources</h2>
+<ul>
+<li>[<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/fc/DCSA%20FCL_Orientation_Handbook_20260828.pdf" target="_blank" rel="noopener" title="DCSA FCL Orientation Handbook (2026)">S2</a>][<a class="cite" href="https://www.dcsa.mil/About-Us/News/Article/Article/4180585/dcsa-announces-approval-of-the-updated-form-328-certificate-pertaining-to-forei/" target="_blank" rel="noopener" title="DCSA SF 328 update announcement May 2025">S3</a>][<a class="cite" href="https://www.dcsa.mil/Portals/128/Documents/CTP/FOCI/Updated%20SF328%20-%20Industry%20Information%20Paper%20(final).pdf" target="_blank" rel="noopener" title="DCSA SF 328 Industry Information Paper May 2025">S4</a>][<a class="cite" href="https://www.cdse.edu/Training/Toolkits/FSO-Toolkit/" target="_blank" rel="noopener" title="CDSE FSO Toolkit">S8</a>][<a class="cite" href="https://www.youtube.com/watch?v=Jf-SDX2WE8k" target="_blank" rel="noopener" title="How to Get a Facility Clearance (Bennett FSO talk)">S10</a>][<a class="cite" href="https://www.youtube.com/watch?v=Y5t5sV9GQy0" target="_blank" rel="noopener" title="DON OSBP Small Business Webinar — DCSA">S11</a>][<a class="cite" href="https://rmf.org/wp-content/uploads/2022/02/DCSA-Assessment-and-Authorization-Process-Manual-Version-2.2.pdf" target="_blank" rel="noopener" title="DAAPM v2.2 (RMF for NISP contractors)">S13</a>] · <a href="tdd-view-04-integration-ai.html">04 - Integration and AI Elements</a></li>
+</ul>
+<h2>Actions (tied to view)</h2>
+<ul>
+<li class="task"><input type="checkbox" disabled> Read the <strong>third-party inventory</strong> end to end; ensure every row has a <strong>Gov-cloud support</strong> value (n/a government / <em>silence</em> / hosting≠FCL).</li>
+<li class="task"><input type="checkbox" disabled> Redraw the <strong>context diagram</strong> with the company boundary vs USG systems (NISS, NBIS, personnel SoR, STEPP, eMASS).</li>
+<li class="task"><input type="checkbox" disabled> Trace one <strong>AI data path</strong>: non-PII checklist → assistive AI → human FSO review → workflow; and the <strong>hard block</strong> path for SF-86/FOCI PII.</li>
+<li class="task"><input type="checkbox" disabled> Write the company <strong>AI rule</strong> in one affirmative sentence for the design review.</li>
+<li class="task"><input type="checkbox" disabled> List three integration risks you will teach in block 7 (cloud≠FCL; HR trap; 15% FOCI lag).</li>
+</ul>
+<h2>Retrieval check</h2>
+<div class="callout question" markdown="0"><div class="callout-title">Question</div><p>Name three external systems and the mechanism each uses. Which control governs the AI data path?</p></div>
+
+<div class="callout success" markdown="0"><div class="callout-title">Answer cues</div><p>Examples: <strong>NISS</strong> (web sponsorship/package/SF 328); <strong>NBIS/e-QIP</strong> (investigation initiation UI); <strong>STEPP/CDSE</strong> (LMS completions); <strong>eMASS</strong> (RMF package workflow); GCA via <strong>DD 254</strong>. AI control: <strong>default deny SF-86/FOCI PII into consumer AI</strong>; assistive use limited to non-PII checklists with <strong>human FSO/counsel approval</strong>; AI does not sponsor, adjudicate, or determine FOCI. Official DCSA AI tooling list remains <em>silence</em>.</p></div>
+
+<h2>Exit criteria</h2>
+<ul>
+<li class="task"><input type="checkbox" disabled> Third-party inventory complete with gov-cloud column; AI boundary stated affirmatively; context + AI path diagrams understood.</li>
+</ul></article>
+  <footer class="docfoot">
+    Rendered from <code>Learning\tech-deep-dive\dcsa\blocks\05-integration-and-ai.md</code>. The Obsidian vault is the source of truth. Study material only. Citations <span class="cite">S#</span> link to the DCSA source ledger [S1]â€“[S14].
+    <div class="prevnext"><a href="tdd-block-04-physical-view.html">&larr; Previous</a><a href="tdd-block-06-hands-on-lab.html">Next &rarr;</a></div>
+  </footer>
+</main>
+<script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+const dark=(document.documentElement.getAttribute("data-theme")||"").endsWith("dark");
+mermaid.initialize({startOnLoad:true,theme:dark?"dark":"default",securityLevel:"strict"});
+</script>
+</body>
+</html>
