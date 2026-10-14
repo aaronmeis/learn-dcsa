@@ -70,6 +70,13 @@
     "nblm": false
   },
   {
+    "slug": "project-plan",
+    "title": "Example DCSA journey plan",
+    "section": "Plan",
+    "desc": "Mock project plan: sponsorship to continuous vetting, with owners, durations, decision points and a gantt view.",
+    "nblm": false
+  },
+  {
     "slug": "odm-block-01-core-concepts",
     "title": "Block 1: Core concepts",
     "section": "ODM day blocks",
@@ -249,6 +256,13 @@
     "title": "Source ledger \u2014 DCSA (Defense Counterintelligence and Security Agency)",
     "section": "Reference",
     "desc": "Source ledger \u2014 minimum 3 high-trust URLs before W8.",
+    "nblm": false
+  },
+  {
+    "slug": "video-resources",
+    "title": "Videos and resources",
+    "section": "Reference",
+    "desc": "Official DCSA and CDSE resources plus checked YouTube explainers.",
     "nblm": false
   },
   {

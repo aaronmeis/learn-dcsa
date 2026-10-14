@@ -1,7 +1,7 @@
 window.SHORTS = {
   "notebook_alias": "odm-dcsa",
   "title": "Learn DCSA - NotebookLM shorts",
-  "deep_dive": { "file": "", "youtube": "" },
+  "deep_dive": { "file": "media/deep-dive-cut.mp4", "youtube": "" },
   "total": 6,
   "ready": 6,
   "items": [
